@@ -1,0 +1,21 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_driver: pdo_mysql
+    database_charset: utf8
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: symfony_ddp
+    database_user: travis
+    database_password: ~
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: null
+    mailer_password: null
+    locale: en
+    secret: e2894c470f51ab52a28818bbbd747c8db9036a4f
+    digital_dj_pool.configuration.root_path: %kernel.cache_dir%/../../../TestData/root_path
+    digital_dj_pool.credentials.login: your_login
+    digital_dj_pool.credentials.password: your_password
+
+    digital_dj_pool.session.class: DigitalDjPoolBundle\Tests\Lib\SessionMock
+    digital_dj_pool.session_subscriber.class: DigitalDjPoolBundle\Tests\Event\SessionSubscriberMock
