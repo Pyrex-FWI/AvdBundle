@@ -25,7 +25,6 @@
             <directory>./Entity</directory>
             <directory>./Command</directory>
             <directory>./Service</directory>
-            <directory>./Organizer</directory>
         </whitelist>
     </filter>
 </phpunit>
