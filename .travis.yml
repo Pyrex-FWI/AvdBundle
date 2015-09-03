@@ -1,0 +1,22 @@
+language: php
+php:
+  - 5.5
+  - 5.6
+
+before_script:
+  - composer self-update
+  - composer install --prefer-dist --no-interaction
+  - wget http://get.sensiolabs.org/php-cs-fixer.phar
+  - mkdir -p Tests/TestData/root_path
+  - rm -rf Tests/app/cache/*
+  - cat Tests/app/parameters_travis.yml > Tests/app/parameters.yml
+  - mysql -e 'create database IF NOT EXISTS symfony_ddp;' -u travis
+  - php Tests/app/console doctrine:s:create
+install:
+  #composer install
+script:
+  - phpunit -c phpunit.xml --debug --verbose
+  #- php php-cs-fixer.phar fix --no-interaction --dry-run --diff -vvv ./
+
+notifications:
+  mail: false

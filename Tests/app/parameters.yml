@@ -1,0 +1,23 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_driver: pdo_mysql
+    database_path: %kernel.root_dir%sqlite.db.cache
+    database_charset: utf8
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: symfony_ddp
+    database_user: testing
+    database_password: testing
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: null
+    mailer_password: null
+    locale: en
+    secret: e2894c470f51ab52a28818bbbd747c8db9036a4f
+    avd.configuration.root_path: %kernel.root_dir%/../TestData/root_path
+    avd.credentials.login: yemistikris@hotmail.fr
+    avd.credentials.password: xerypjd
+
+
+    avd.session.class: AvDistrictBundle\Tests\Lib\SessionMock
+    avd.session_subscriber.class: AvDistrictBundle\Tests\Event\SessionSubscriberMock
