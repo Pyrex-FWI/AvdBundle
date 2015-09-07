@@ -29,11 +29,21 @@ class Configuration implements ConfigurationInterface
                         ->append($this->getAvdConfigurationDefinition())
                     ->end()
                 ->end()
-                ->arrayNode(DeejayPoolBundle::PROVIDER_FP)
+                ->arrayNode(DeejayPoolBundle::PROVIDER_FPR_AUDIO)
                 ->addDefaultsIfNotSet()
                     ->children()
                         ->append($this->getCredentialsDefinition())
                         ->append($this->getFrpConfigurationDefinition())
+                    ->end()
+                ->end()
+                ->arrayNode(DeejayPoolBundle::PROVIDER_FPR_VIDEO)
+                ->addDefaultsIfNotSet()
+                    ->children()
+                        ->append($this->getCredentialsDefinition())
+                        ->append($this->getFrpConfigurationDefinition(
+                            'http://www.franchiserecordpool.com/video/list',
+                            'http://www.franchiserecordpool.com/download/video/'
+                        ))
                     ->end()
                 ->end()
             ->end();
@@ -162,32 +172,21 @@ class Configuration implements ConfigurationInterface
                         ->thenInvalid('%s is not a valid url, update yout download_keygen_url value.')
                     ->end()
                 ->end()
-                ->scalarNode('charts_url')
-                    ->info('Chart page')
-                    ->defaultValue('https://digitaldjpool.com/RecordPool.aspx/MoreMusic?keyword=&genre=&genreCustom=&isGenreCustomOn=false&version=&ascending=false&orderBy=Date&view=Charts&release=&_=1434313544223')
-                    ->cannotBeEmpty()
-                ->validate()
-                    ->ifTrue(function ($v) { return !$this->isValidurl($v); })
-                    ->thenInvalid('%s is not a valid url, update yout login_check value.')
-                    ->end()
-                ->end()
-                ->scalarNode('trend_url')
-                    ->info('Trend page')
-                    ->defaultValue('https://digitaldjpool.com/RecordPool.aspx/MoreMusic?keyword=&genre=&genreCustom=&isGenreCustomOn=false&version=&bpmFrom=50&bpmTo=150&ascending=false&orderBy=Date&view=Trending&release=')
-                    ->cannotBeEmpty()
-                ->validate()
-                    ->ifTrue(function ($v) { return !$this->isValidurl($v); })
-                    ->thenInvalid('%s is not a valid url, update yout login_check value.')
-                    ->end()
-                ->end()
             ->end();
         return $configurationDef;
     }
     /**
      * @return ArrayNodeDefinition
      */
-    public function getFrpConfigurationDefinition()
+    public function getFrpConfigurationDefinition($items_url = null, $dlUrl = null)
     {
+        if ($items_url == null) {
+            $items_url = 'http://www.franchiserecordpool.com/track/list';
+        }
+        if ($dlUrl == null) {
+            $dlUrl = 'http://www.franchiserecordpool.com/download/track/';
+        }
+
         $configurationDef = new ArrayNodeDefinition('configuration');
         $configurationDef
 
@@ -218,6 +217,11 @@ class Configuration implements ConfigurationInterface
                         ->thenInvalid('%s is not a valid url, update yout login_check value.')
                     ->end()
                 ->end()
+                ->scalarNode('login_success_redirect')
+                    ->info('Url when login is success')
+                    ->defaultValue('http://www.franchiserecordpool.com/view-category')
+                    ->cannotBeEmpty()
+                ->end()
             ->end();
         $configurationDef
             ->children()
@@ -231,9 +235,14 @@ class Configuration implements ConfigurationInterface
                     ->defaultValue('password')
                     ->cannotBeEmpty()
                 ->end()
+                ->integerNode('items_per_page')
+                    ->info('Items per page')
+                    ->defaultValue(10)
+                    ->cannotBeEmpty()
+                ->end()
                 ->scalarNode('items_url')
                     ->info('Items page')
-                    ->defaultValue('http://www.franchiserecordpool.com/track/list?_search=false&nd=1441613741936&rows=100&page=1&sidx=tracks.created&sord=desc')
+                    ->defaultValue($items_url)
                     ->cannotBeEmpty()
                     ->validate()
                         ->ifTrue(function ($v) { return !$this->isValidurl($v); })
@@ -242,38 +251,11 @@ class Configuration implements ConfigurationInterface
                 ->end()
                 ->scalarNode('download_url')
                     ->info('Download url')
-                    ->defaultValue('http://www.avdistrict.net/Handlers/DownloadHandler.ashx')
+                    ->defaultValue($dlUrl)
                     ->cannotBeEmpty()
                     ->validate()
                         ->ifTrue(function ($v) { return !$this->isValidurl($v); })
                         ->thenInvalid('%s is not a valid url, update yout download_url value.')
-                    ->end()
-                ->end()
-                ->scalarNode('donwload_keygen_url')
-                    ->info('Download keygen url')
-                    ->defaultValue('http://www.avdistrict.net/Videos/InitializeDownload')
-                    ->cannotBeEmpty()
-                    ->validate()
-                        ->ifTrue(function ($v) { return !$this->isValidurl($v); })
-                        ->thenInvalid('%s is not a valid url, update yout download_keygen_url value.')
-                    ->end()
-                ->end()
-                ->scalarNode('charts_url')
-                    ->info('Chart page')
-                    ->defaultValue('https://digitaldjpool.com/RecordPool.aspx/MoreMusic?keyword=&genre=&genreCustom=&isGenreCustomOn=false&version=&ascending=false&orderBy=Date&view=Charts&release=&_=1434313544223')
-                    ->cannotBeEmpty()
-                ->validate()
-                    ->ifTrue(function ($v) { return !$this->isValidurl($v); })
-                    ->thenInvalid('%s is not a valid url, update yout login_check value.')
-                    ->end()
-                ->end()
-                ->scalarNode('trend_url')
-                    ->info('Trend page')
-                    ->defaultValue('https://digitaldjpool.com/RecordPool.aspx/MoreMusic?keyword=&genre=&genreCustom=&isGenreCustomOn=false&version=&bpmFrom=50&bpmTo=150&ascending=false&orderBy=Date&view=Trending&release=')
-                    ->cannotBeEmpty()
-                ->validate()
-                    ->ifTrue(function ($v) { return !$this->isValidurl($v); })
-                    ->thenInvalid('%s is not a valid url, update yout login_check value.')
                     ->end()
                 ->end()
             ->end();

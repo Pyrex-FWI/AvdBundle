@@ -11,67 +11,17 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class AvdItem implements ProviderItemInterface
 {
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
     protected $artist;
-    /**
-     * @var int
-     *
-     * @ORM\Column(type="integer", nullable=true)
-     */
     protected $bpm;
-    /**
-     * @var bool
-     *
-     * @ORM\Column(type="boolean", nullable=false)
-     */
     protected $downloaded = false;
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="text", nullable=true)
-     */
     protected $downloadlink;
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="text", nullable=true)
-     */
     protected $fullPath;
-    /**
-     * @var ArrayCollection
-     */
     protected $relatedGenres;
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(type="datetime", nullable=true)
-     */
     protected $releaseDate;
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="string", length=255, nullable=false)
-     */
     protected $title;
-    /**
-     * @var int
-     *
-     * @ORM\Column(type="integer", nullable=false)
-     */
     protected $itemId;
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="string", length=40, nullable=true)
-     */
     protected $version;
-    /** @var  integer */
     protected $downloadId;
-    /** @var  bool */
     protected $isHD = false;
 
     public function __construct()

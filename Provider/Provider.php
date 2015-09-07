@@ -7,6 +7,7 @@
 namespace DeejayPoolBundle\Provider;
 
 
+use DeejayPoolBundle\DeejayPoolBundle;
 use DeejayPoolBundle\Event\ProviderEvents;
 use GuzzleHttp\Client;
 use GuzzleHttp\Cookie\CookieJar;
@@ -108,4 +109,5 @@ abstract class Provider extends ContainerAware
     {
         return $this->container->getParameter(sprintf('%s.configuration.%s', $this->getName(), $confParameter));
     }
+
 }

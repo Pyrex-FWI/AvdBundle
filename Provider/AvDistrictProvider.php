@@ -5,8 +5,8 @@ namespace DeejayPoolBundle\Provider;
 use DeejayPoolBundle\Entity\AvdItem;
 use DeejayPoolBundle\Entity\ProviderItemInterface;
 use DeejayPoolBundle\Event\ProviderEvents;
-use DeejayPoolBundle\Event\AvdItemDownloadEvent;
-use DeejayPoolBundle\Event\AvdPostItemsListEvent;
+use DeejayPoolBundle\Event\ItemDownloadEvent;
+use DeejayPoolBundle\Event\PostItemsListEvent;
 use DeejayPoolBundle\Serializer\Normalizer\AvItemNormalizer;
 use Psr\Log\NullLogger;
 use Symfony\Bridge\Monolog\Logger;
@@ -66,25 +66,25 @@ class AvDistrictProvider extends Provider implements PoolProviderInterface
             }
         }
         $this->logger->info(sprintf('Page %s fetched successfuly with %s items', $page, count($itemsArray)), [$itemsArray]);
-        $this->eventDispatcher->dispatch(ProviderEvents::ITEMS_POST_GETLIST, new AvdPostItemsListEvent($itemsArray));
+        $this->eventDispatcher->dispatch(ProviderEvents::ITEMS_POST_GETLIST, new PostItemsListEvent($itemsArray));
 
         return $itemsArray;
     }
 
     /**
-     * @param AvdItem $avItem
+     * @param AvdItem $item
      * @return bool
      */
-    public function downloadItem(ProviderItemInterface $avItem, $force = false)
+    public function downloadItem(ProviderItemInterface $item, $force = false)
     {
-        $this->eventDispatcher->dispatch(ProviderEvents::ITEM_PRE_DOWNLOAD, new AvdItemDownloadEvent($avItem));
+        $this->eventDispatcher->dispatch(ProviderEvents::ITEM_PRE_DOWNLOAD, new ItemDownloadEvent($item));
 
-        $tmpName = $this->getConfValue('root_path').DIRECTORY_SEPARATOR.$avItem->getItemId();
+        $tmpName = $this->getConfValue('root_path').DIRECTORY_SEPARATOR.$item->getItemId();
         $resource = fopen($tmpName, 'w');
-        $alreadyDownloaded = $avItem->getDownloadId() > 0 ? true : false;
-        $downloadKey = $this->getDownloadKey($avItem);
+        $alreadyDownloaded = $item->getDownloadId() > 0 ? true : false;
+        $downloadKey = $this->getDownloadKey($item);
         if ($downloadKey && (!$alreadyDownloaded || $force)) {
-            $avItem->setDownloadlink($this->getConfValue('download_url').'?key='.$downloadKey);
+            $item->setDownloadlink($this->getConfValue('download_url').'?key='.$downloadKey);
             $response = $this->client->get(
                 $this->getConfValue('download_url'),
                 [
@@ -109,19 +109,20 @@ class AvDistrictProvider extends Provider implements PoolProviderInterface
             if ($response->getStatusCode() === 200) {
                 $ctDisp = $response->getHeader('Content-Disposition')[0];
                 preg_match('/filename=(?P<filename>.+)/', $ctDisp, $matches);
-                $fileName = $matches['filename'] != '' ? $matches['filename'] : $avItem->getItemId();
-                $fileName = $this->getConfValue('root_path') . DIRECTORY_SEPARATOR .sprintf('%s_%s', $avItem->getItemId(), str_replace(' ', '_', $fileName));
+                $fileName = $matches['filename'] != '' ? $matches['filename'] : $item->getItemId();
+                $fileName = $this->getConfValue('root_path') . DIRECTORY_SEPARATOR .sprintf('%s_%s', $item->getItemId(), str_replace(' ', '_', $fileName));
                 rename($tmpName, $fileName);
-                $avItem->setFullPath($fileName);
-                $this->logger->info(sprintf('%s %s %s has succesfully downloaded', $avItem->getItemId(), $avItem->getArtist(), $avItem->getTitle()), [$avItem]);
-                $this->eventDispatcher->dispatch(ProviderEvents::ITEM_SUCCESS_DOWNLOAD, new AvdItemDownloadEvent($avItem, $fileName));
+                $item->setFullPath($fileName);
+                $item->setDownloaded(true);
+                $this->logger->info(sprintf('%s %s %s has succesfully downloaded', $item->getItemId(), $item->getArtist(), $item->getTitle()), [$item]);
+                $this->eventDispatcher->dispatch(ProviderEvents::ITEM_SUCCESS_DOWNLOAD, new ItemDownloadEvent($item, $fileName));
 
                 return true;
             }
         }
         unlink($tmpName);
-        $this->logger->info(sprintf('%s %s %s has download ERROR', $avItem->getItemId(), $avItem->getArtist(), $avItem->getTitle()), [$avItem, $this->getLastError()]);
-        $this->eventDispatcher->dispatch(ProviderEvents::ITEM_ERROR_DOWNLOAD, new AvdItemDownloadEvent($avItem, null, $this->getLastError()));
+        $this->logger->info(sprintf('%s %s %s has download ERROR', $item->getItemId(), $item->getArtist(), $item->getTitle()), [$item, $this->getLastError()]);
+        $this->eventDispatcher->dispatch(ProviderEvents::ITEM_ERROR_DOWNLOAD, new ItemDownloadEvent($item, null, $this->getLastError()));
 
         return false;
     }

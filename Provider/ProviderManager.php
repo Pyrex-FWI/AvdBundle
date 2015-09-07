@@ -7,8 +7,6 @@
 namespace DeejayPoolBundle\Provider;
 
 
-use Symfony\Component\Config\Definition\Exception\Exception;
-
 class ProviderManager
 {
     /** @var array PoolProviderInterface[] */

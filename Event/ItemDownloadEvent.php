@@ -7,9 +7,9 @@ use DeejayPoolBundle\Entity\AvdItem;
 use DeejayPoolBundle\Entity\ProviderItemInterface;
 use Symfony\Component\EventDispatcher\Event;
 
-class AvdItemDownloadEvent extends Event {
+class ItemDownloadEvent extends Event {
 
-    /** @var AvdItem  */
+    /** @var ProviderItemInterface  */
     protected $item;
     protected $fileName;
     protected $message;

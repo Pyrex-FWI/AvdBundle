@@ -9,7 +9,331 @@
 namespace DeejayPoolBundle\Entity;
 
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 class FranchisePoolItem implements ProviderItemInterface
 {
+    protected $artist;
+    protected $bpm;
+    protected $downloaded = false;
+    protected $downloadlink;
+    protected $fullPath;
+    protected $relatedGenres;
+    protected $releaseDate;
+    protected $title;
+    protected $itemId;
+    protected $version;
+    protected $downloadId;
+    protected $isVideo = false;
+    protected $isAudio = false;
+    protected $type;
+
+    public function __construct()
+    {
+        $this->relatedGenres = new ArrayCollection();
+    }
+
+    /**
+     * Get title.
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Set title.
+     *
+     * @param string $title
+     *
+     * @return AvdItem
+     */
+    public function setTitle($title)
+    {
+        $this->title = trim($title);
+
+        return $this;
+    }
+
+    /**
+     * Get trackId.
+     *
+     * @return int
+     */
+    public function getItemId()
+    {
+        return $this->itemId;
+    }
+
+    /**
+     * Set trackId.
+     *
+     * @return AvItem
+     */
+    public function setItemId($itemItd)
+    {
+        $this->itemId = $itemItd;
+
+        return $this;
+    }
+
+
+    /**
+     * Get artist.
+     *
+     * @return string
+     */
+    public function getArtist()
+    {
+        return $this->artist;
+    }
+
+    /**
+     * Set artist.
+     *
+     * @param string $artist
+     *
+     * @return AvdItem
+     */
+    public function setArtist($artist)
+    {
+        $this->artist = trim($artist);
+
+        return $this;
+    }
+
+    /**
+     * Get downloaded.
+     *
+     * @return bool
+     */
+    public function getDownloaded()
+    {
+        return $this->downloaded;
+    }
+
+    /**
+     * Set downloaded.
+     *
+     * @param bool $downloaded
+     *
+     * @return AvdItem
+     */
+    public function setDownloaded($downloaded)
+    {
+        $this->downloaded = $downloaded;
+
+        return $this;
+    }
+
+    /**
+     * Get version.
+     *
+     * @return string
+     */
+    public function getVersion()
+    {
+        return $this->version;
+    }
+
+    /**
+     * Set version.
+     *
+     * @param string $version
+     *
+     * @return AvdItem
+     */
+    public function setVersion($version)
+    {
+        $this->version = trim($version);
+
+        return $this;
+    }
+
+    /**
+     * Get downloadlink.
+     *
+     * @return string
+     */
+    public function getDownloadlink()
+    {
+        return $this->downloadlink;
+    }
+
+    /**
+     * Set downloadlink.
+     *
+     * @param string $downloadlink
+     *
+     * @return AvdItem
+     */
+    public function setDownloadlink($downloadlink)
+    {
+        $this->downloadlink = $downloadlink;
+
+        return $this;
+    }
+
+    /**
+     * Get bpm.
+     *
+     * @return int
+     */
+    public function getBpm()
+    {
+        return $this->bpm;
+    }
+
+    /**
+     * Set bpm.
+     *
+     * @param int $bpm
+     *
+     * @return AvdItem
+     */
+    public function setBpm($bpm)
+    {
+        $this->bpm = $bpm;
+
+        return $this;
+    }
+
+    /**
+     * Get releaseDate.
+     *
+     * @return \DateTime
+     */
+    public function getReleaseDate()
+    {
+        return $this->releaseDate;
+    }
+
+    /**
+     * Set releaseDate.
+     *
+     * @param \DateTime $releaseDate
+     *
+     * @return AvdItem
+     */
+    public function setReleaseDate($releaseDate)
+    {
+        $this->releaseDate = $releaseDate;
+
+        return $this;
+    }
+    /**
+     * @param AvdItem $avdItem
+     * @return $this
+     */
+    public function addRelatedGenre($genre)
+    {
+        if (!$this->relatedGenres->contains($genre)) {
+            $this->relatedGenres->add($genre);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param AvdItem $avdItem
+     * @return $this
+     */
+    public function removeRelatedGenre($genre)
+    {
+        if ($this->relatedGenres->contains($genre)) {
+            $this->relatedGenres->removeElement($genre);
+        }
+
+        return $this;
+    }
+
+
+    /**
+     * Get fullPath.
+     *
+     * @return string
+     */
+    public function getFullPath()
+    {
+        return $this->fullPath;
+    }
+
+    /**
+     * Set fullPath.
+     *
+     * @param string $fullPath
+     *
+     * @return AvdItem
+     */
+    public function setFullPath($fullPath)
+    {
+        $this->fullPath = $fullPath;
+
+        return $this;
+    }
+
+    /**
+     * Get relatedGenres.
+     *
+     * @return ArrayCollection
+     */
+    public function getRelatedGenres()
+    {
+        return $this->relatedGenres;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDownloadId()
+    {
+        return $this->downloadId;
+    }
+
+    /**
+     * @param mixed $downloadId
+     */
+    public function setDownloadId($downloadId)
+    {
+        $this->downloadId = $downloadId;
+    }
+
+    /**
+     * @param $true
+     * @return $this
+     */
+    public function setVideo($true)
+    {
+        $this->isVideo = $true;
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isVideo()
+    {
+        return $this->isVideo;
+    }
+
+    /**
+     * @param $true
+     * @return $this
+     */
+    public function setAudio($true)
+    {
+        $this->isAudio = $true;
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isAudio()
+    {
+        return $this->isAudio;
+    }
 
 }

@@ -13,9 +13,19 @@ parameters:
     mailer_password: null
     locale: en
     secret: e2894c470f51ab52a28818bbbd747c8db9036a4f
-    digital_dj_pool.configuration.root_path: %kernel.cache_dir%/../../../TestData/root_path
-    digital_dj_pool.credentials.login: your_login
-    digital_dj_pool.credentials.password: your_password
 
-    digital_dj_pool.session.class: DigitalDjPoolBundle\Tests\Lib\SessionMock
-    digital_dj_pool.session_subscriber.class: DigitalDjPoolBundle\Tests\Event\SessionSubscriberMock
+    av_district.configuration.root_path: %kernel.root_dir%/../TestData/root_path
+    av_district.credentials.login: xxx@mail.fr
+    av_district.credentials.password: xxx
+
+    av_district.provider.class: DeejayPoolBundle\Tests\Provider\AvDistrictProviderMock
+    av_district.session_subscriber.class: DeejayPoolBundle\Tests\Event\SessionSubscriberMock
+
+    franchise_pool.configuration.root_path: %kernel.root_dir%/../TestData/root_path
+    franchise_pool.credentials.login: xxxx
+    franchise_pool.credentials.password: tootto
+
+    franchise_pool.provider.class: DeejayPoolBundle\Tests\Provider\FranchiseProviderMock
+    franchise_pool.session_subscriber.class: DeejayPoolBundle\Tests\Event\SessionSubscriberMock
+
+    franchise_pool_video.provider.class: DeejayPoolBundle\Tests\Provider\FranchiseVideoProviderMock

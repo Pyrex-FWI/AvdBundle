@@ -26,7 +26,14 @@ deejay_pool:
 
         configuration:
             root_path: %av_district.configuration.root_path%
-    franchise_pool:
+    franchise_pool_audio:
+        credentials:
+            login:    %franchise_pool.credentials.login%
+            password: %franchise_pool.credentials.password%
+
+        configuration:
+            root_path: %franchise_pool.configuration.root_path%
+    franchise_pool_video:
         credentials:
             login:    %franchise_pool.credentials.login%
             password: %franchise_pool.credentials.password%

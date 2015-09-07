@@ -6,7 +6,7 @@ namespace DeejayPoolBundle\Event;
 use DeejayPoolBundle\Entity\AvdItem;
 use Symfony\Component\EventDispatcher\Event;
 
-class AvdPostItemsListEvent extends Event {
+class PostItemsListEvent extends Event {
 
     /** @var AvdItem[]  */
     protected $items;

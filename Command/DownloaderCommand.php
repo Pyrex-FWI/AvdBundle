@@ -5,7 +5,7 @@ namespace DeejayPoolBundle\Command;
 use DeejayPoolBundle\Entity\AvdItem;
 use DeejayPoolBundle\Event\FilterTrackDownloadEvent;
 use DeejayPoolBundle\Event\ProviderEvents;
-use DeejayPoolBundle\Event\AvdItemDownloadEvent;
+use DeejayPoolBundle\Event\ItemDownloadEvent;
 use DeejayPoolBundle\Provider\AvDistrictProvider;
 use DeejayPoolBundle\Provider\PoolProviderInterface;
 use DeejayPoolBundle\Provider\ProviderManager;
@@ -143,12 +143,12 @@ EOF
         $this->eventDispatcher->addListener(ProviderEvents::ITEM_ERROR_DOWNLOAD, [$this, 'incrementErrorDownloaded']);
     }
 
-    public function incrementSuccessDownloaded(AvdItemDownloadEvent $event)
+    public function incrementSuccessDownloaded(ItemDownloadEvent $event)
     {
         $this->downloadSuccess[] = $event->getItem();
     }
 
-    public function incrementErrorDownloaded(AvdItemDownloadEvent $event)
+    public function incrementErrorDownloaded(ItemDownloadEvent $event)
     {
         $this->downloadError[] = $event->getItem();
     }
