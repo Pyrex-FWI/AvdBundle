@@ -1,6 +1,6 @@
 <?php
 
-namespace AvDistrictBundle\Entity;
+namespace DeejayPoolBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * AvdItem.
  *
  */
-class AvdItem
+class AvdItem implements ProviderItemInterface
 {
     /**
      * @var string

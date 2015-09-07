@@ -1,17 +1,21 @@
 <?php
 
-namespace AvDistrictBundle\Command;
+namespace DeejayPoolBundle\Command;
 
-use AvDistrictBundle\Entity\AvdItem;
-use AvDistrictBundle\Event\FilterTrackDownloadEvent;
-use AvDistrictBundle\Event\SessionEvents;
-use AvDistrictBundle\Event\SessionItemDownloadEvent;
-use AvDistrictBundle\Lib\Session;
+use DeejayPoolBundle\Entity\AvdItem;
+use DeejayPoolBundle\Event\FilterTrackDownloadEvent;
+use DeejayPoolBundle\Event\ProviderEvents;
+use DeejayPoolBundle\Event\AvdItemDownloadEvent;
+use DeejayPoolBundle\Provider\AvDistrictProvider;
+use DeejayPoolBundle\Provider\PoolProviderInterface;
+use DeejayPoolBundle\Provider\ProviderManager;
+use DeejayPoolBundle\Tests\Provider\AvDistrictProviderMock;
 use Symfony\Bridge\Monolog\Logger;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Helper\TableHelper;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -20,8 +24,10 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
 class DownloaderCommand extends ContainerAwareCommand
 {
     protected $totalToDonwload;
-    /** @var  Session */
-    private $session;
+    /** @var  AvDistrictProvider */
+    private $manager;
+    /** @var  PoolProviderInterface */
+    private $provider;
     /** @var  AvdItem[] */
     private $downloadSuccess = [];
     /** @var  AvdItem[] */
@@ -44,12 +50,12 @@ class DownloaderCommand extends ContainerAwareCommand
     protected $end;
 
     public function __construct(
-        Session $session,
+        ProviderManager $manager,
         $eventDispatcher,
         Logger $logger = null)
     {
         $this->logger               = $logger ? $logger : new NullLogger();
-        $this->session              = $session;
+        $this->manager              = $manager;
         $this->eventDispatcher      = $eventDispatcher;
         parent::__construct();
     }
@@ -59,10 +65,12 @@ class DownloaderCommand extends ContainerAwareCommand
      */
     protected function configure()
     {
-        $this->setName('avd:download')->setDescription('Download files from AVDistrict')
+        $this->setName('deejay:pool:download')->setDescription('Download files from AVDistrict')
+            ->addArgument('provider', InputArgument::REQUIRED, 'Provider (like avd or ddp')
             ->addOption('force', 'f', InputOption::VALUE_NONE, 'Try force download')
             ->addOption('start', null, InputOption::VALUE_REQUIRED, 'Page Start', 1)
             ->addOption('end', null, InputOption::VALUE_OPTIONAL, 'Page end', 1)
+            ->addOption('sleep', null, InputOption::VALUE_OPTIONAL, 'millisec sleep after download', 0)
             ->setHelp(<<<EOF
 The <info>%command.name%</info> command download items from AVDistrict:
 
@@ -82,7 +90,7 @@ EOF
         $this->init($input, $output);
         $this->registerListerners();
 
-        if ($this->session->open()) {
+        if ($this->provider->open()) {
             /** @var AvdItem[] $items */
             $items = [];
             $this->initProgressBar($this->end - $this->start+1);
@@ -91,7 +99,7 @@ EOF
 
             do {
                 $this->progressBar->setMessage(sprintf('Read page %s', $this->start));
-                $items = array_merge($items, $this->session->getItems($this->start));
+                $items = array_merge($items, $this->provider->getItems($this->start));
                 $this->progressBar->advance();
                 $this->start++;
             } while($this->start <= $this->end);
@@ -114,8 +122,9 @@ EOF
                         $item->getTitle(),
                         $item->getVersion())
                 );
-                $this->session->downloadItem($item);
+                $this->provider->downloadItem($item);
                 $this->progressBar->advance();
+                usleep($this->input->getOption('sleep')*1000);
             }
 
             $this->progressBar->finish();
@@ -130,22 +139,22 @@ EOF
 
     private function registerListerners()
     {
-        $this->eventDispatcher->addListener(SessionEvents::ITEM_SUCCESS_DOWNLOAD, [$this, 'incrementSuccessDownloaded']);
-        $this->eventDispatcher->addListener(SessionEvents::ITEM_ERROR_DOWNLOAD, [$this, 'incrementErrorDownloaded']);
+        $this->eventDispatcher->addListener(ProviderEvents::ITEM_SUCCESS_DOWNLOAD, [$this, 'incrementSuccessDownloaded']);
+        $this->eventDispatcher->addListener(ProviderEvents::ITEM_ERROR_DOWNLOAD, [$this, 'incrementErrorDownloaded']);
     }
 
-    public function incrementSuccessDownloaded(SessionItemDownloadEvent $event)
+    public function incrementSuccessDownloaded(AvdItemDownloadEvent $event)
     {
         $this->downloadSuccess[] = $event->getItem();
     }
 
-    public function incrementErrorDownloaded(SessionItemDownloadEvent $event)
+    public function incrementErrorDownloaded(AvdItemDownloadEvent $event)
     {
         $this->downloadError[] = $event->getItem();
     }
 
     /**
-     * @return \AvDistrictBundle\Entity\AvdItem[]
+     * @return \DeejayPoolBundle\Entity\AvdItem[]
      */
     public function getDownloadSuccess()
     {
@@ -153,7 +162,7 @@ EOF
     }
 
     /**
-     * @return \AvDistrictBundle\Entity\AvdItem[]
+     * @return \DeejayPoolBundle\Entity\AvdItem[]
      */
     public function getDownloadError()
     {
@@ -170,6 +179,13 @@ EOF
         $this->output   = $output;
         $this->start    = abs(intval($this->input->getOption('start')));
         $this->end      = abs(intval($this->input->getOption('end')));
+        $contextProvider= $this->input->getArgument('provider');
+        try {
+            $this->provider = $this->manager->get($contextProvider);
+        } catch (\Exception $e) {
+            $this->output->writeln(sprintf('%s provider not exist', $contextProvider));
+            throw new \Exception($e->getMessage());
+        }
     }
 
     protected function initProgressBar($max)
@@ -217,6 +233,7 @@ EOF
         usort($downloadSuccess, function ($a, $b)  {
             return strcmp($a->getArtist(), $b->getArtist());
         });
+
         return $downloadSuccess;
     }
 }

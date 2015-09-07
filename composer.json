@@ -38,6 +38,6 @@
     "test": "composer doctrine:init && composer test:phpunit"
   },
     "autoload": {
-      "psr-4": { "AvDistrictBundle\\": "" }
+      "psr-4": { "DeejayPoolBundle\\": "" }
     }
 }

@@ -14,10 +14,17 @@ parameters:
     mailer_password: null
     locale: en
     secret: e2894c470f51ab52a28818bbbd747c8db9036a4f
-    avd.configuration.root_path: %kernel.root_dir%/../TestData/root_path
-    avd.credentials.login: yemistikris@hotmail.fr
-    avd.credentials.password: xerypjd
 
+    av_district.configuration.root_path: %kernel.root_dir%/../TestData/root_path
+    av_district.credentials.login: xxx@mail.fr
+    av_district.credentials.password: xxx
 
-    avd.session.class: AvDistrictBundle\Tests\Lib\SessionMock
-    avd.session_subscriber.class: AvDistrictBundle\Tests\Event\SessionSubscriberMock
+    av_district.session.class: DeejayPoolBundle\Tests\Provider\AvDistrictProviderMock
+    av_district.session_subscriber.class: DeejayPoolBundle\Tests\Event\SessionSubscriberMock
+
+    franchise_pool.configuration.root_path: %kernel.root_dir%/../TestData/root_path
+    franchise_pool.credentials.login: xxx@mail.fr
+    franchise_pool.credentials.password: xxx
+
+    franchise_pool.session.class: DeejayPoolBundle\Tests\Provider\FranchiseProviderMock
+    franchise_pool.session_subscriber.class: DeejayPoolBundle\Tests\Event\SessionSubscriberMock

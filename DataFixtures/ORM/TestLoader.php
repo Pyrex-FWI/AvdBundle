@@ -5,11 +5,11 @@
  * Time: 08:42
  */
 
-namespace AvDistrictBundle\DataFixtures\ORM;
+namespace DeejayPoolBundle\DataFixtures\ORM;
 
-use AvDistrictBundle\Entity\AvdItem;
-use AvDistrictBundle\Tests\Faker\Provider\TrackFakerProvider;
-use AvDistrictBundle\Traits\TagReader;
+use DeejayPoolBundle\Entity\AvdItem;
+use DeejayPoolBundle\Tests\Faker\Provider\TrackFakerProvider;
+use DeejayPoolBundle\Traits\TagReader;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Faker\Factory;

@@ -1,9 +1,9 @@
 <?php
 
-namespace AvDistrictBundle\Command;
+namespace DeejayPoolBundle\Command;
 
-use AvDistrictBundle\Event\FilterTrackDownloadEvent;
-use AvDistrictBundle\Lib\Session;
+use DeejayPoolBundle\Event\FilterTrackDownloadEvent;
+use DeejayPoolBundle\Provider\AvDistrictProvider;
 use Symfony\Bridge\Monolog\Logger;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
@@ -12,7 +12,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class StatusCommand extends ContainerAwareCommand
 {
-    /** @var  Session */
+    /** @var  AvDistrictProvider */
     private $session;
     /** @var InputInterface */
     private $input;
@@ -20,7 +20,7 @@ class StatusCommand extends ContainerAwareCommand
     private $output;
 
     public function __construct(
-        Session $session,
+        AvDistrictProvider $session,
         Logger $logger = null)
     {
         $this->logger               = $logger ? $logger : new NullLogger();

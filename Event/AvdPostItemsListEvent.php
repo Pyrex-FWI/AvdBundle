@@ -1,12 +1,12 @@
 <?php
 
-namespace AvDistrictBundle\Event;
+namespace DeejayPoolBundle\Event;
 
 
-use AvDistrictBundle\Entity\AvdItem;
+use DeejayPoolBundle\Entity\AvdItem;
 use Symfony\Component\EventDispatcher\Event;
 
-class SessionPostItemsListEvent extends Event {
+class AvdPostItemsListEvent extends Event {
 
     /** @var AvdItem[]  */
     protected $items;

@@ -1,6 +1,6 @@
 <?php
 
-namespace AvDistrictBundle\Tests;
+namespace DeejayPoolBundle\Tests;
 
 use Faker\Factory;
 use Faker\Provider\DateTime;

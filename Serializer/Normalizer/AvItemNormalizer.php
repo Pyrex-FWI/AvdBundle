@@ -6,10 +6,10 @@
  * Time: 18:45
  */
 
-namespace AvDistrictBundle\Serializer\Normalizer;
+namespace DeejayPoolBundle\Serializer\Normalizer;
 
 
-use AvDistrictBundle\Entity\AvdItem;
+use DeejayPoolBundle\Entity\AvdItem;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 
 class AvItemNormalizer extends AbstractNormalizer

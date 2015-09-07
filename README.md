@@ -18,7 +18,7 @@ Update your composer.json
 Update your AppKernel.php
 
 ```php
-new AvDistrictBundle\AvDistrictBundle()
+new DeejayPoolBundle\DeejayPoolBundle()
 ```
 
 Add your account information into config.yml

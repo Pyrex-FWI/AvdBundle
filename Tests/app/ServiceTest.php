@@ -1,7 +1,7 @@
 <?php
 
 
-namespace AvDistrictBundle\Tests;
+namespace DeejayPoolBundle\Tests;
 
 
 class ServiceTest extends \PHPUnit_Framework_TestCase
@@ -20,6 +20,6 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
     {
         $service = $this->container->get('avd.session');
 
-        $this->assertInstanceOf('AvDistrictBundle\Lib\Session', $service);
+        $this->assertInstanceOf('DeejayPoolBundle\Provider\AvDistrictProvider', $service);
     }
 }

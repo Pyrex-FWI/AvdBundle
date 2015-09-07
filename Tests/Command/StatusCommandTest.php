@@ -5,13 +5,13 @@
  * Time: 16:11
  */
 
-namespace AvDistrictBundle\Tests\Command;
+namespace DeejayPoolBundle\Tests\Command;
 
 use DigitalDjPool\Tests\BaseTest;
 use DigitalDjPoolBundle\Command\DownloaderCommand;
 use Symfony\Component\Console\Tester\CommandTester;
 
-class StatusCommandTest extends \AvDistrictBundle\Tests\BaseTest
+class StatusCommandTest extends \DeejayPoolBundle\Tests\BaseTest
 {
 
     public function testExecute()
@@ -19,9 +19,9 @@ class StatusCommandTest extends \AvDistrictBundle\Tests\BaseTest
         $kernel         = new \AppKernel('test', true);
         $application    = new \Symfony\Bundle\FrameworkBundle\Console\Application($kernel);
         $kernel->boot();
-        $application->add($this->container->get('avd.command.status'));
+        $application->add($this->container->get('deejaypool.command.status'));
 
-        /** @var \AvDistrictBundle\Command\DownloaderCommand $command */
+        /** @var \DeejayPoolBundle\Command\DownloaderCommand $command */
         $command        = $application->find('avd:status');
         $commandTester  = new CommandTester($command);
         $commandTester->execute([

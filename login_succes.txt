@@ -1,0 +1,2443 @@
+https://www.franchiserecordpool.com/signin
+
+POST /signin HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/welcome
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 34
+login=xxxx&password=xxxxx
+HTTP/1.1 302 Found
+Access-Control-Allow-Credentials: true
+Access-Control-Allow-Headers: X-Requested-With, X-Prototype-Version, Content-Type, Origin
+Access-Control-Allow-Methods: POST PUT DELETE GET OPTIONS
+Access-Control-Allow-Origin: http://localhost:9000
+Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+Content-Encoding: gzip
+Content-Type: text/html; charset=UTF-8
+Date: Mon, 07 Sep 2015 08:15:36 GMT
+Expires: Thu, 19 Nov 1981 08:52:00 GMT
+Location: http://www.franchiserecordpool.com/view-category
+Pragma: no-cache
+Server: nginx/1.2.7
+Vary: Accept-Encoding
+X-FRP-build: 3812:98d0c1b3f99e
+X-FRP-node: web1
+Content-Length: 26
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/view-category
+
+GET /view-category HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/welcome
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Access-Control-Allow-Credentials: true
+Access-Control-Allow-Headers: X-Requested-With, X-Prototype-Version, Content-Type, Origin
+Access-Control-Allow-Methods: POST PUT DELETE GET OPTIONS
+Access-Control-Allow-Origin: http://localhost:9000
+Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+Content-Encoding: gzip
+Content-Type: text/html; charset=UTF-8
+Date: Mon, 07 Sep 2015 08:15:37 GMT
+Expires: Thu, 19 Nov 1981 08:52:00 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+Vary: Accept-Encoding
+X-FRP-build: 3812:98d0c1b3f99e
+X-FRP-node: web1
+Transfer-Encoding: chunked
+Connection: keep-alive
+----------------------------------------------------------
+https://fonts.googleapis.com/css?family=Droid+Sans:400,700
+
+GET /css?family=Droid+Sans:400,700 HTTP/1.1
+Host: fonts.googleapis.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: text/css,*/*;q=0.1
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Connection: keep-alive
+
+HTTP/2.0 200 OK
+Access-Control-Allow-Origin: *
+Alt-Svc: quic=":443"; p="1"; ma=604800
+alternate-protocol: 443:quic,p=1
+Cache-Control: private, max-age=86400
+Content-Encoding: gzip
+Content-Length: 268
+Content-Type: text/css
+Date: Mon, 07 Sep 2015 08:15:38 GMT
+Expires: Mon, 07 Sep 2015 08:15:38 GMT
+Server: GSE
+Timing-Allow-Origin: *
+x-content-type-options: nosniff
+X-Frame-Options: SAMEORIGIN
+X-XSS-Protection: 1; mode=block
+X-Firefox-Spdy: h2
+----------------------------------------------------------
+http://www.franchiserecordpool.com/less/bootstrap.css
+
+GET /less/bootstrap.css HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: text/css,*/*;q=0.1
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Encoding: gzip
+Content-Type: text/css
+Date: Mon, 07 Sep 2015 08:15:38 GMT
+Last-Modified: Wed, 11 Jun 2014 16:17:38 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Transfer-Encoding: chunked
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/css/style.css
+
+GET /css/style.css HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: text/css,*/*;q=0.1
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Encoding: gzip
+Content-Type: text/css
+Date: Mon, 07 Sep 2015 08:15:38 GMT
+Last-Modified: Thu, 07 May 2015 08:16:27 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 5969
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/css/style_1.css
+
+GET /css/style_1.css HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: text/css,*/*;q=0.1
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Encoding: gzip
+Content-Type: text/css
+Date: Mon, 07 Sep 2015 08:15:38 GMT
+Last-Modified: Fri, 17 Apr 2015 10:16:02 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 2643
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/less/responsive.css
+
+GET /less/responsive.css HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: text/css,*/*;q=0.1
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Type: text/css
+Date: Mon, 07 Sep 2015 08:15:38 GMT
+Last-Modified: Tue, 05 Feb 2013 11:49:19 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 716
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/css/icons.css
+
+GET /css/icons.css HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: text/css,*/*;q=0.1
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Encoding: gzip
+Content-Type: text/css
+Date: Mon, 07 Sep 2015 08:15:38 GMT
+Last-Modified: Wed, 13 Feb 2013 14:31:05 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Transfer-Encoding: chunked
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/css/slider/sequencejs-theme.modern-slide-in.css
+
+GET /css/slider/sequencejs-theme.modern-slide-in.css HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: text/css,*/*;q=0.1
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Encoding: gzip
+Content-Type: text/css
+Date: Mon, 07 Sep 2015 08:15:38 GMT
+Last-Modified: Mon, 15 Jun 2015 07:35:23 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 2410
+Connection: keep-alive
+----------------------------------------------------------
+https://fonts.googleapis.com/css?family=Droid+Sans
+
+GET /css?family=Droid+Sans HTTP/1.1
+Host: fonts.googleapis.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: text/css,*/*;q=0.1
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/css/style_1.css
+Connection: keep-alive
+
+HTTP/2.0 200 OK
+Access-Control-Allow-Origin: *
+Alt-Svc: quic=":443"; p="1"; ma=604800
+alternate-protocol: 443:quic,p=1
+Cache-Control: private, max-age=86400
+Content-Length: 247
+Content-Type: text/css
+Date: Mon, 07 Sep 2015 08:15:39 GMT
+Expires: Mon, 07 Sep 2015 08:15:39 GMT
+Server: GSE
+Timing-Allow-Origin: *
+x-content-type-options: nosniff
+X-Frame-Options: SAMEORIGIN
+X-XSS-Protection: 1; mode=block
+X-Firefox-Spdy: h2
+----------------------------------------------------------
+https://fonts.googleapis.com/css?family=Open+Sans:400,300
+
+GET /css?family=Open+Sans:400,300 HTTP/1.1
+Host: fonts.googleapis.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: text/css,*/*;q=0.1
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/css/style_1.css
+Connection: keep-alive
+
+HTTP/2.0 200 OK
+Access-Control-Allow-Origin: *
+Alt-Svc: quic=":443"; p="1"; ma=604800
+alternate-protocol: 443:quic,p=1
+Cache-Control: private, max-age=86400
+Content-Encoding: gzip
+Content-Length: 265
+Content-Type: text/css
+Date: Mon, 07 Sep 2015 08:15:39 GMT
+Expires: Mon, 07 Sep 2015 08:15:39 GMT
+Server: GSE
+Timing-Allow-Origin: *
+x-content-type-options: nosniff
+X-Frame-Options: SAMEORIGIN
+X-XSS-Protection: 1; mode=block
+X-Firefox-Spdy: h2
+----------------------------------------------------------
+http://www.franchiserecordpool.com/css/jquery/jqgrid/ui.jqgrid.css
+
+GET /css/jquery/jqgrid/ui.jqgrid.css HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: text/css,*/*;q=0.1
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Encoding: gzip
+Content-Type: text/css
+Date: Mon, 07 Sep 2015 08:15:38 GMT
+Last-Modified: Tue, 25 Nov 2014 12:08:27 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 3130
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/css/modules/bin.css
+
+GET /css/modules/bin.css HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: text/css,*/*;q=0.1
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Encoding: gzip
+Content-Type: text/css
+Date: Mon, 07 Sep 2015 08:15:38 GMT
+Last-Modified: Tue, 02 Dec 2014 09:06:38 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 2544
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/css/jquery-ui/jquery-ui-1.9.1.custom.min.css
+
+GET /css/jquery-ui/jquery-ui-1.9.1.custom.min.css HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: text/css,*/*;q=0.1
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Encoding: gzip
+Content-Type: text/css
+Date: Mon, 07 Sep 2015 08:15:38 GMT
+Last-Modified: Tue, 10 Jun 2014 12:46:55 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 5462
+Connection: keep-alive
+----------------------------------------------------------
+http://www.google-analytics.com/urchin.js
+
+GET /urchin.js HTTP/1.1
+Host: www.google-analytics.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: */*
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Date: Wed, 02 Sep 2015 08:37:44 GMT
+Expires: Wed, 16 Sep 2015 08:37:44 GMT
+Last-Modified: Thu, 06 Aug 2015 18:26:56 GMT
+x-content-type-options: nosniff
+Content-Type: text/javascript
+Vary: Accept-Encoding
+Content-Encoding: gzip
+Server: Golfe2
+Content-Length: 6847
+Cache-Control: public, max-age=1209600
+Age: 430675
+----------------------------------------------------------
+http://www.franchiserecordpool.com/js/libs/jquery.min.js
+
+GET /js/libs/jquery.min.js HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: */*
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Encoding: gzip
+Content-Type: application/x-javascript
+Date: Mon, 07 Sep 2015 08:15:38 GMT
+Last-Modified: Tue, 05 Feb 2013 11:49:19 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Transfer-Encoding: chunked
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/js/libs/bootstrap.min.js
+
+GET /js/libs/bootstrap.min.js HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: */*
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Encoding: gzip
+Content-Type: application/x-javascript
+Date: Mon, 07 Sep 2015 08:15:38 GMT
+Last-Modified: Tue, 05 Feb 2013 11:49:19 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Transfer-Encoding: chunked
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/js/libs/bootstrap-custom.js
+
+GET /js/libs/bootstrap-custom.js HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: */*
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Type: application/x-javascript
+Date: Mon, 07 Sep 2015 08:15:38 GMT
+Last-Modified: Tue, 05 Feb 2013 11:49:19 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 972
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/js/frp.js
+
+GET /js/frp.js HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: */*
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Encoding: gzip
+Content-Type: application/x-javascript
+Date: Mon, 07 Sep 2015 08:15:38 GMT
+Last-Modified: Fri, 15 Feb 2013 12:53:01 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 2080
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/js/frp/frp.search.js
+
+GET /js/frp/frp.search.js HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: */*
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Encoding: gzip
+Content-Type: application/x-javascript
+Date: Mon, 07 Sep 2015 08:15:38 GMT
+Last-Modified: Tue, 02 Dec 2014 11:55:27 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 995
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/js/frp/utils/spinner.js
+
+GET /js/frp/utils/spinner.js HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: */*
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Type: application/x-javascript
+Date: Mon, 07 Sep 2015 08:15:38 GMT
+Last-Modified: Tue, 05 Feb 2013 11:49:19 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 356
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/js/jquery/jquery.blockUI.min.js
+
+GET /js/jquery/jquery.blockUI.min.js HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: */*
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Encoding: gzip
+Content-Type: application/x-javascript
+Date: Mon, 07 Sep 2015 08:15:38 GMT
+Last-Modified: Tue, 05 Feb 2013 11:49:19 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 3394
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/js/common.js
+
+GET /js/common.js HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: */*
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Encoding: gzip
+Content-Type: application/x-javascript
+Date: Mon, 07 Sep 2015 08:15:38 GMT
+Last-Modified: Tue, 05 Feb 2013 11:49:19 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 1086
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/js/frp/frp.notify.js
+
+GET /js/frp/frp.notify.js HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: */*
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Encoding: gzip
+Content-Type: application/x-javascript
+Date: Mon, 07 Sep 2015 08:15:38 GMT
+Last-Modified: Tue, 05 Feb 2013 11:49:19 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 575
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/js/frp/widgets/frp.sidebar.js
+
+GET /js/frp/widgets/frp.sidebar.js HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: */*
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Encoding: gzip
+Content-Type: application/x-javascript
+Date: Mon, 07 Sep 2015 08:15:38 GMT
+Last-Modified: Tue, 10 Jun 2014 14:09:37 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 1019
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/css/jquery-ui/jquery-ui.css
+
+GET /css/jquery-ui/jquery-ui.css HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: text/css,*/*;q=0.1
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Encoding: gzip
+Content-Type: text/css
+Date: Mon, 07 Sep 2015 08:15:38 GMT
+Last-Modified: Wed, 26 Nov 2014 07:50:09 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Transfer-Encoding: chunked
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/css/jquery-ui/jquery-ui-1.css
+
+GET /css/jquery-ui/jquery-ui-1.css HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: text/css,*/*;q=0.1
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Encoding: gzip
+Content-Type: text/css
+Date: Mon, 07 Sep 2015 08:15:38 GMT
+Last-Modified: Wed, 26 Nov 2014 07:46:50 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Transfer-Encoding: chunked
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/js/swfobject.js
+
+GET /js/swfobject.js HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: */*
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Encoding: gzip
+Content-Type: application/x-javascript
+Date: Mon, 07 Sep 2015 08:15:38 GMT
+Last-Modified: Tue, 05 Feb 2013 11:49:19 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 2481
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/js/jPlayer/jquery.jplayer.min.js?ver=1
+
+GET /js/jPlayer/jquery.jplayer.min.js?ver=1 HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: */*
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Encoding: gzip
+Content-Type: application/x-javascript
+Date: Mon, 07 Sep 2015 08:15:38 GMT
+Last-Modified: Tue, 05 Feb 2013 11:49:19 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Transfer-Encoding: chunked
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/js/slider/sequence.jquery-min.js
+
+GET /js/slider/sequence.jquery-min.js HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: */*
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Encoding: gzip
+Content-Type: application/x-javascript
+Date: Mon, 07 Sep 2015 08:15:38 GMT
+Last-Modified: Tue, 05 Feb 2013 11:49:19 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 7193
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/js/frp/components/slider.js
+
+GET /js/frp/components/slider.js HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: */*
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Encoding: gzip
+Content-Type: application/x-javascript
+Date: Mon, 07 Sep 2015 08:15:38 GMT
+Last-Modified: Tue, 10 Jun 2014 12:46:55 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 536
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/js/frp/components/player.simple.js?ver=1
+
+GET /js/frp/components/player.simple.js?ver=1 HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: */*
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Encoding: gzip
+Content-Type: application/x-javascript
+Date: Mon, 07 Sep 2015 08:15:38 GMT
+Last-Modified: Wed, 06 Feb 2013 11:03:33 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 813
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/js/jquery/jquery.scrollTo-min.js
+
+GET /js/jquery/jquery.scrollTo-min.js HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: */*
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Encoding: gzip
+Content-Type: application/x-javascript
+Date: Mon, 07 Sep 2015 08:15:38 GMT
+Last-Modified: Tue, 05 Feb 2013 11:49:19 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 1230
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/js/jquery/jqgrid/i18n/grid.locale-en.js
+
+GET /js/jquery/jqgrid/i18n/grid.locale-en.js HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: */*
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Encoding: gzip
+Content-Type: application/x-javascript
+Date: Mon, 07 Sep 2015 08:15:39 GMT
+Last-Modified: Tue, 05 Feb 2013 11:49:19 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 2386
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/js/jquery/jqgrid/jquery.jqGrid.min.js
+
+GET /js/jquery/jqgrid/jquery.jqGrid.min.js HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: */*
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Encoding: gzip
+Content-Type: application/x-javascript
+Date: Mon, 07 Sep 2015 08:15:39 GMT
+Last-Modified: Tue, 05 Feb 2013 11:49:19 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Transfer-Encoding: chunked
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/js/frp/pages/default/frp.label.js
+
+GET /js/frp/pages/default/frp.label.js HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: */*
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Encoding: gzip
+Content-Type: application/x-javascript
+Date: Mon, 07 Sep 2015 08:15:39 GMT
+Last-Modified: Tue, 10 Jun 2014 14:09:22 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 561
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/js/frp/advance-search.js
+
+GET /js/frp/advance-search.js HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: */*
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Encoding: gzip
+Content-Type: application/x-javascript
+Date: Mon, 07 Sep 2015 08:15:39 GMT
+Last-Modified: Mon, 18 May 2015 10:31:30 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Transfer-Encoding: chunked
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/js/frp/components/bin/similar.js
+
+GET /js/frp/components/bin/similar.js HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: */*
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Encoding: gzip
+Content-Type: application/x-javascript
+Date: Mon, 07 Sep 2015 08:15:39 GMT
+Last-Modified: Tue, 02 Dec 2014 09:20:16 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 1628
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/js/frp/frp.songbasket.js
+
+GET /js/frp/frp.songbasket.js HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: */*
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Encoding: gzip
+Content-Type: application/x-javascript
+Date: Mon, 07 Sep 2015 08:15:39 GMT
+Last-Modified: Mon, 18 Feb 2013 14:48:10 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 2267
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/js/frp/components/bin.js?ver=1
+
+GET /js/frp/components/bin.js?ver=1 HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: */*
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Encoding: gzip
+Content-Type: application/x-javascript
+Date: Mon, 07 Sep 2015 08:15:39 GMT
+Last-Modified: Thu, 08 Aug 2013 12:04:08 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 3164
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/js/frp/components/bin/rating.js
+
+GET /js/frp/components/bin/rating.js HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: */*
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Encoding: gzip
+Content-Type: application/x-javascript
+Date: Mon, 07 Sep 2015 08:15:39 GMT
+Last-Modified: Tue, 02 Dec 2014 06:38:49 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 1804
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/js/handlebars-1.0.rc.1.js
+
+GET /js/handlebars-1.0.rc.1.js HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: */*
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Encoding: gzip
+Content-Type: application/x-javascript
+Date: Mon, 07 Sep 2015 08:15:39 GMT
+Last-Modified: Tue, 05 Feb 2013 11:49:19 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Transfer-Encoding: chunked
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/js/frp/components/bin/player.js?ver=1
+
+GET /js/frp/components/bin/player.js?ver=1 HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: */*
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Encoding: gzip
+Content-Type: application/x-javascript
+Date: Mon, 07 Sep 2015 08:15:39 GMT
+Last-Modified: Tue, 05 Feb 2013 11:49:19 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 2112
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/css/advance-search.css
+
+GET /css/advance-search.css HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: text/css,*/*;q=0.1
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Encoding: gzip
+Content-Type: text/css
+Date: Mon, 07 Sep 2015 08:15:39 GMT
+Last-Modified: Wed, 08 Apr 2015 07:53:58 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Transfer-Encoding: chunked
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/js/jquery/jqgrid/i18n/grid.locale-en.js
+
+GET /js/jquery/jqgrid/i18n/grid.locale-en.js HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: */*
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Encoding: gzip
+Content-Type: application/x-javascript
+Date: Mon, 07 Sep 2015 08:15:39 GMT
+Last-Modified: Tue, 05 Feb 2013 11:49:19 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 2386
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/js/jquery/jqgrid/jquery.jqGrid.min.js
+
+GET /js/jquery/jqgrid/jquery.jqGrid.min.js HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: */*
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Encoding: gzip
+Content-Type: application/x-javascript
+Date: Mon, 07 Sep 2015 08:15:39 GMT
+Last-Modified: Tue, 05 Feb 2013 11:49:19 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Transfer-Encoding: chunked
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/img/logo.png
+
+GET /img/logo.png HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: image/png,image/*;q=0.8,*/*;q=0.5
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Type: image/png
+Date: Mon, 07 Sep 2015 08:15:39 GMT
+Last-Modified: Tue, 05 Feb 2013 11:49:19 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 21747
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/img/slider/bt-prev.png
+
+GET /img/slider/bt-prev.png HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: image/png,image/*;q=0.8,*/*;q=0.5
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Type: image/png
+Date: Mon, 07 Sep 2015 08:15:39 GMT
+Last-Modified: Tue, 05 Feb 2013 11:49:19 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 1443
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/img/slider/bt-next.png
+
+GET /img/slider/bt-next.png HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: image/png,image/*;q=0.8,*/*;q=0.5
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Type: image/png
+Date: Mon, 07 Sep 2015 08:15:39 GMT
+Last-Modified: Tue, 05 Feb 2013 11:49:19 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 1453
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/img/slider/Frp-banner_2.jpg
+
+GET /img/slider/Frp-banner_2.jpg HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: image/png,image/*;q=0.8,*/*;q=0.5
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Type: image/jpeg
+Date: Mon, 07 Sep 2015 08:15:39 GMT
+Last-Modified: Thu, 30 Apr 2015 08:43:10 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 316988
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/img/slider/frp-banner-hd_3.jpg
+
+GET /img/slider/frp-banner-hd_3.jpg HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: image/png,image/*;q=0.8,*/*;q=0.5
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Type: image/jpeg
+Date: Mon, 07 Sep 2015 08:15:39 GMT
+Last-Modified: Thu, 30 Apr 2015 08:43:10 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 265621
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/img/slider/Empower.png
+
+GET /img/slider/Empower.png HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: image/png,image/*;q=0.8,*/*;q=0.5
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Type: image/png
+Date: Mon, 07 Sep 2015 08:15:39 GMT
+Last-Modified: Tue, 05 May 2015 23:01:23 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 334761
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/img/slider/Control_Distribution.png
+
+GET /img/slider/Control_Distribution.png HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: image/png,image/*;q=0.8,*/*;q=0.5
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Type: image/png
+Date: Mon, 07 Sep 2015 08:15:40 GMT
+Last-Modified: Tue, 05 May 2015 23:01:09 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 394591
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/img/corners.png
+
+GET /img/corners.png HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: image/png,image/*;q=0.8,*/*;q=0.5
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/less/bootstrap.css
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Type: image/png
+Date: Mon, 07 Sep 2015 08:15:40 GMT
+Last-Modified: Tue, 05 Feb 2013 11:49:19 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 3035
+Connection: keep-alive
+----------------------------------------------------------
+http://www.trustlogo.com/trustlogo/javascript/cot.js
+
+GET /trustlogo/javascript/cot.js HTTP/1.1
+Host: www.trustlogo.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: */*
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Connection: keep-alive
+
+HTTP/1.1 301 Moved Permanently
+Server: nginx
+Date: Mon, 07 Sep 2015 08:15:40 GMT
+Content-Type: text/html
+Content-Length: 178
+Connection: keep-alive
+Keep-Alive: timeout=5
+Location: https://trustlogo.com/trustlogo/javascript/cot.js
+Strict-Transport-Security: max-age=15768000
+----------------------------------------------------------
+http://www.franchiserecordpool.com/img/Search-Icon_Grey.png
+
+GET /img/Search-Icon_Grey.png HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: image/png,image/*;q=0.8,*/*;q=0.5
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Type: image/png
+Date: Mon, 07 Sep 2015 08:15:40 GMT
+Last-Modified: Wed, 06 May 2015 15:16:08 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 5072
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/img/arrow.png
+
+GET /img/arrow.png HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: image/png,image/*;q=0.8,*/*;q=0.5
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/less/bootstrap.css
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Type: image/png
+Date: Mon, 07 Sep 2015 08:15:40 GMT
+Last-Modified: Tue, 05 Feb 2013 11:49:19 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 2847
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/img/slider/bg-slider.png
+
+GET /img/slider/bg-slider.png HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: image/png,image/*;q=0.8,*/*;q=0.5
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/css/slider/sequencejs-theme.modern-slide-in.css
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Type: image/png
+Date: Mon, 07 Sep 2015 08:15:40 GMT
+Last-Modified: Tue, 05 Feb 2013 11:49:19 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 2461
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/img/banners/banner_world.png
+
+GET /img/banners/banner_world.png HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: image/png,image/*;q=0.8,*/*;q=0.5
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Type: image/png
+Date: Mon, 07 Sep 2015 08:15:40 GMT
+Last-Modified: Tue, 05 Feb 2013 11:49:19 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 166721
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/img/banners/banner_rainysongs_digital.png
+
+GET /img/banners/banner_rainysongs_digital.png HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: image/png,image/*;q=0.8,*/*;q=0.5
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Type: image/png
+Date: Mon, 07 Sep 2015 08:15:40 GMT
+Last-Modified: Tue, 07 Apr 2015 17:02:47 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 10382
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/img/banners/banner_flex.png
+
+GET /img/banners/banner_flex.png HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: image/png,image/*;q=0.8,*/*;q=0.5
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Type: image/png
+Date: Mon, 07 Sep 2015 08:15:40 GMT
+Last-Modified: Tue, 05 Feb 2013 11:49:19 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 29247
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/img/labels/cast.png
+
+GET /img/labels/cast.png HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: image/png,image/*;q=0.8,*/*;q=0.5
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Type: image/png
+Date: Mon, 07 Sep 2015 08:15:40 GMT
+Last-Modified: Tue, 05 Feb 2013 11:49:19 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 9339
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/img/labels/tracker.png
+
+GET /img/labels/tracker.png HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: image/png,image/*;q=0.8,*/*;q=0.5
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Type: image/png
+Date: Mon, 07 Sep 2015 08:15:40 GMT
+Last-Modified: Tue, 05 Feb 2013 11:49:19 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 12966
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/img/labels/wcr.png
+
+GET /img/labels/wcr.png HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: image/png,image/*;q=0.8,*/*;q=0.5
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Type: image/png
+Date: Mon, 07 Sep 2015 08:15:40 GMT
+Last-Modified: Tue, 05 Feb 2013 11:49:19 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 4864
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/img/labels/dj.png
+
+GET /img/labels/dj.png HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: image/png,image/*;q=0.8,*/*;q=0.5
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Type: image/png
+Date: Mon, 07 Sep 2015 08:15:40 GMT
+Last-Modified: Tue, 05 Feb 2013 11:49:19 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 7389
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/img/labels/entertiment.png
+
+GET /img/labels/entertiment.png HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: image/png,image/*;q=0.8,*/*;q=0.5
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Type: image/png
+Date: Mon, 07 Sep 2015 08:15:40 GMT
+Last-Modified: Tue, 05 Feb 2013 11:49:19 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 11964
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/img/labels/event.png
+
+GET /img/labels/event.png HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: image/png,image/*;q=0.8,*/*;q=0.5
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Type: image/png
+Date: Mon, 07 Sep 2015 08:15:40 GMT
+Last-Modified: Tue, 05 Feb 2013 11:49:19 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 9333
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/img/labels/flex.png
+
+GET /img/labels/flex.png HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: image/png,image/*;q=0.8,*/*;q=0.5
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Type: image/png
+Date: Mon, 07 Sep 2015 08:15:40 GMT
+Last-Modified: Tue, 05 Feb 2013 11:49:19 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 8556
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/img/social-sprite.png
+
+GET /img/social-sprite.png HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: image/png,image/*;q=0.8,*/*;q=0.5
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/less/bootstrap.css
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Type: image/png
+Date: Mon, 07 Sep 2015 08:15:40 GMT
+Last-Modified: Tue, 05 Feb 2013 11:49:19 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 8392
+Connection: keep-alive
+----------------------------------------------------------
+https://trustlogo.com/trustlogo/javascript/cot.js
+
+GET /trustlogo/javascript/cot.js HTTP/1.1
+Host: trustlogo.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: */*
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Server: nginx
+Date: Mon, 07 Sep 2015 08:15:41 GMT
+Content-Type: application/x-javascript
+Last-Modified: Sat, 26 Jul 2014 01:25:07 GMT
+Transfer-Encoding: chunked
+Connection: keep-alive
+Keep-Alive: timeout=5
+Vary: Accept-Encoding
+Expires: Wed, 09 Sep 2015 08:15:41 GMT
+Cache-Control: max-age=172800
+Strict-Transport-Security: max-age=15768000
+Content-Encoding: gzip
+----------------------------------------------------------
+http://www.franchiserecordpool.com/img/controls-sprite.png
+
+GET /img/controls-sprite.png HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: image/png,image/*;q=0.8,*/*;q=0.5
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/less/bootstrap.css
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Type: image/png
+Date: Mon, 07 Sep 2015 08:15:40 GMT
+Last-Modified: Tue, 05 Feb 2013 11:49:19 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 3986
+Connection: keep-alive
+----------------------------------------------------------
+http://www.google-analytics.com/ga.js
+
+GET /ga.js HTTP/1.1
+Host: www.google-analytics.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: */*
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Date: Mon, 07 Sep 2015 07:57:37 GMT
+Expires: Mon, 07 Sep 2015 09:57:37 GMT
+Last-Modified: Thu, 06 Aug 2015 18:26:56 GMT
+x-content-type-options: nosniff
+Content-Type: text/javascript
+Vary: Accept-Encoding
+Content-Encoding: gzip
+Server: Golfe2
+Content-Length: 16102
+Age: 1084
+Cache-Control: public, max-age=7200
+----------------------------------------------------------
+http://www.google-analytics.com/__utm.gif?utmwv=1.4&utmn=2038722616&utmcs=UTF-8&utmsr=1920x1080&utmsc=24-bit&utmul=fr&utmje=0&utmfl=11.2%20r202&utmdt=All%20Music%20-%20Franchise%20Record%20Pool&utmhn=www.franchiserecordpool.com&utmhid=81801380&utmr=0&utmp=/view-category&utmac=UA-1941370-1&utmcc=__utma%3D128985947.580648032.1441613150.1441613150.1441613150.1%3B%2B__utmz%3D128985947.1441613150.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B%2B
+
+GET /__utm.gif?utmwv=1.4&utmn=2038722616&utmcs=UTF-8&utmsr=1920x1080&utmsc=24-bit&utmul=fr&utmje=0&utmfl=11.2%20r202&utmdt=All%20Music%20-%20Franchise%20Record%20Pool&utmhn=www.franchiserecordpool.com&utmhid=81801380&utmr=0&utmp=/view-category&utmac=UA-1941370-1&utmcc=__utma%3D128985947.580648032.1441613150.1441613150.1441613150.1%3B%2B__utmz%3D128985947.1441613150.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B%2B HTTP/1.1
+Host: www.google-analytics.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: image/png,image/*;q=0.8,*/*;q=0.5
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Pragma: no-cache
+Expires: Mon, 07 Aug 1995 23:30:00 GMT
+Access-Control-Allow-Origin: *
+Last-Modified: Sun, 17 May 1998 03:00:00 GMT
+x-content-type-options: nosniff
+Content-Type: image/gif
+Date: Mon, 31 Aug 2015 10:57:32 GMT
+Server: Golfe2
+Content-Length: 35
+Cache-Control: private, no-cache, no-cache=Set-Cookie, proxy-revalidate
+Age: 595089
+----------------------------------------------------------
+http://www.trustlogo.com/images/cot_bgf0.gif
+
+GET /images/cot_bgf0.gif HTTP/1.1
+Host: www.trustlogo.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Connection: keep-alive
+
+HTTP/1.1 301 Moved Permanently
+Server: nginx
+Date: Mon, 07 Sep 2015 08:15:41 GMT
+Content-Type: text/html
+Content-Length: 178
+Connection: keep-alive
+Keep-Alive: timeout=5
+Location: https://trustlogo.com/images/cot_bgf0.gif
+Strict-Transport-Security: max-age=15768000
+----------------------------------------------------------
+https://imgsrv.io/api/addonapi/domain
+
+GET /api/addonapi/domain HTTP/1.1
+Host: imgsrv.io
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+key: df04a0a6-631e-4e0c-ad98-8962c45fe964
+domain: franchiserecordpool.com
+Cookie: connect.sid=s%3AEajfRiEXeY1nwSTkXKdIlWkY.MFPfD1Qs3nIOF%2FMrSifK%2B%2BgVoFUw0iG4l0xVaASyv%2Bk
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Server: nginx/1.6.2
+Date: Mon, 07 Sep 2015 08:15:41 GMT
+Content-Type: text/html; charset=utf-8
+Transfer-Encoding: chunked
+Connection: close
+X-Powered-By: Express
+Vary: Accept-Encoding
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Methods: GET,POST,PUT,HEAD,DELETE,OPTIONS
+Access-Control-Allow-Headers: content-Type,x-requested-with
+Content-Encoding: gzip
+----------------------------------------------------------
+http://www.franchiserecordpool.com/js/jPlayer/Jplayer.swf
+
+GET /js/jPlayer/Jplayer.swf HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Type: application/x-shockwave-flash
+Date: Mon, 07 Sep 2015 08:15:41 GMT
+Last-Modified: Tue, 05 Feb 2013 11:49:19 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 8452
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/css/images/footer.jpg
+
+GET /css/images/footer.jpg HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: image/png,image/*;q=0.8,*/*;q=0.5
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/css/style_1.css
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 404 Not Found
+Access-Control-Allow-Credentials: true
+Access-Control-Allow-Headers: X-Requested-With, X-Prototype-Version, Content-Type, Origin
+Access-Control-Allow-Methods: POST PUT DELETE GET OPTIONS
+Access-Control-Allow-Origin: http://localhost:9000
+Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+Content-Encoding: gzip
+Content-Type: text/html; charset=UTF-8
+Date: Mon, 07 Sep 2015 08:15:41 GMT
+Expires: Thu, 19 Nov 1981 08:52:00 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+Vary: Accept-Encoding
+X-FRP-build: 3812:98d0c1b3f99e
+Transfer-Encoding: chunked
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/css/jquery-ui/images/ui-bg_flat_75_ffffff_40x100.png
+
+GET /css/jquery-ui/images/ui-bg_flat_75_ffffff_40x100.png HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: image/png,image/*;q=0.8,*/*;q=0.5
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/css/jquery-ui/jquery-ui-1.css
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Type: image/png
+Date: Mon, 07 Sep 2015 08:15:41 GMT
+Last-Modified: Tue, 05 Feb 2013 11:49:16 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 178
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/css/jquery-ui/images/ui-bg_flat_75_e6e6e6_40x100.png
+
+GET /css/jquery-ui/images/ui-bg_flat_75_e6e6e6_40x100.png HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: image/png,image/*;q=0.8,*/*;q=0.5
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/css/jquery-ui/jquery-ui-1.css
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Type: image/png
+Date: Mon, 07 Sep 2015 08:15:41 GMT
+Last-Modified: Tue, 05 Feb 2013 11:49:16 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 180
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/css/jquery-ui/images/ui-icons_888888_256x240.png
+
+GET /css/jquery-ui/images/ui-icons_888888_256x240.png HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: image/png,image/*;q=0.8,*/*;q=0.5
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/css/jquery-ui/jquery-ui-1.css
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Type: image/png
+Date: Mon, 07 Sep 2015 08:15:41 GMT
+Last-Modified: Tue, 05 Feb 2013 11:49:16 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 4369
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/css/jquery-ui/images/ui-icons_222222_256x240.png
+
+GET /css/jquery-ui/images/ui-icons_222222_256x240.png HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: image/png,image/*;q=0.8,*/*;q=0.5
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/css/jquery-ui/jquery-ui-1.css
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Type: image/png
+Date: Mon, 07 Sep 2015 08:15:41 GMT
+Last-Modified: Tue, 05 Feb 2013 11:49:16 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 4369
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/css/jquery-ui/images/ui-bg_flat_65_ffffff_40x100.png
+
+GET /css/jquery-ui/images/ui-bg_flat_65_ffffff_40x100.png HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: image/png,image/*;q=0.8,*/*;q=0.5
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/css/jquery-ui/jquery-ui-1.css
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947; perveiousurl=http://www.franchiserecordpool.com/view-category
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Type: image/png
+Date: Mon, 07 Sep 2015 08:15:41 GMT
+Last-Modified: Tue, 05 Feb 2013 11:49:16 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 178
+Connection: keep-alive
+----------------------------------------------------------
+http://www.google-analytics.com/__utm.gif?utmwv=5.6.6&utms=3&utmn=1706051127&utmhn=www.franchiserecordpool.com&utmcs=UTF-8&utmsr=1920x1080&utmvp=1907x651&utmsc=24-bit&utmul=fr&utmje=0&utmfl=11.2%20r202&utmdt=All%20Music%20-%20Franchise%20Record%20Pool&utmhid=81801380&utmr=0&utmp=%2Fview-category&utmht=1441613742228&utmac=UA-17372753-2&utmcc=__utma%3D128985947.580648032.1441613150.1441613150.1441613150.1%3B%2B__utmz%3D128985947.1441613150.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmjid=&utmu=qAAAAAAAAAAAAAAAAAAAAAAE~
+
+GET /__utm.gif?utmwv=5.6.6&utms=3&utmn=1706051127&utmhn=www.franchiserecordpool.com&utmcs=UTF-8&utmsr=1920x1080&utmvp=1907x651&utmsc=24-bit&utmul=fr&utmje=0&utmfl=11.2%20r202&utmdt=All%20Music%20-%20Franchise%20Record%20Pool&utmhid=81801380&utmr=0&utmp=%2Fview-category&utmht=1441613742228&utmac=UA-17372753-2&utmcc=__utma%3D128985947.580648032.1441613150.1441613150.1441613150.1%3B%2B__utmz%3D128985947.1441613150.1.1.utmcsr%3D(direct)%7Cutmccn%3D(direct)%7Cutmcmd%3D(none)%3B&utmjid=&utmu=qAAAAAAAAAAAAAAAAAAAAAAE~ HTTP/1.1
+Host: www.google-analytics.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: image/png,image/*;q=0.8,*/*;q=0.5
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Pragma: no-cache
+Expires: Mon, 07 Aug 1995 23:30:00 GMT
+Access-Control-Allow-Origin: *
+Last-Modified: Sun, 17 May 1998 03:00:00 GMT
+x-content-type-options: nosniff
+Content-Type: image/gif
+Date: Mon, 31 Aug 2015 10:57:32 GMT
+Server: Golfe2
+Content-Length: 35
+Cache-Control: private, no-cache, no-cache=Set-Cookie, proxy-revalidate
+Age: 595090
+----------------------------------------------------------
+http://www.franchiserecordpool.com/top-downloaded-indie
+
+POST /top-downloaded-indie HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: text/html, */*; q=0.01
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Content-Type: application/x-www-form-urlencoded; charset=UTF-8
+X-Requested-With: XMLHttpRequest
+Referer: http://www.franchiserecordpool.com/view-category
+Content-Length: 11
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+Pragma: no-cache
+Cache-Control: no-cache
+format=html
+HTTP/1.1 200 OK
+Access-Control-Allow-Credentials: true
+Access-Control-Allow-Headers: X-Requested-With, X-Prototype-Version, Content-Type, Origin
+Access-Control-Allow-Methods: POST PUT DELETE GET OPTIONS
+Access-Control-Allow-Origin: http://localhost:9000
+Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+Content-Encoding: gzip
+Content-Type: text/html; charset=UTF-8
+Date: Mon, 07 Sep 2015 08:15:41 GMT
+Expires: Thu, 19 Nov 1981 08:52:00 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+Vary: Accept-Encoding
+X-FRP-build: 3812:98d0c1b3f99e
+X-ssl: yes
+Content-Length: 708
+Connection: keep-alive
+----------------------------------------------------------
+https://franchiserecordpool.com/images/cot.gif
+
+GET /images/cot.gif HTTP/1.1
+Host: franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: image/png,image/*;q=0.8,*/*;q=0.5
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Server: nginx/1.2.7
+Date: Mon, 07 Sep 2015 08:15:41 GMT
+Content-Type: image/gif
+Content-Length: 20286
+Last-Modified: Tue, 05 Feb 2013 11:49:18 GMT
+Connection: keep-alive
+X-FRP-node: web1
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Pragma: no-cache
+Accept-Ranges: bytes
+----------------------------------------------------------
+http://www.franchiserecordpool.com/track/list?_search=false&nd=1441613741936&rows=100&page=1&sidx=tracks.created&sord=desc
+
+GET /track/list?_search=false&nd=1441613741936&rows=100&page=1&sidx=tracks.created&sord=desc HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: application/json, text/javascript, */*; q=0.01
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+X-Requested-With: XMLHttpRequest
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Access-Control-Allow-Credentials: true
+Access-Control-Allow-Headers: X-Requested-With, X-Prototype-Version, Content-Type, Origin
+Access-Control-Allow-Methods: POST PUT DELETE GET OPTIONS
+Access-Control-Allow-Origin: http://localhost:9000
+Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+Content-Encoding: gzip
+Content-Type: text/html; charset=UTF-8
+Date: Mon, 07 Sep 2015 08:15:41 GMT
+Expires: Thu, 19 Nov 1981 08:52:00 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+Vary: Accept-Encoding
+X-FRP-build: 3812:98d0c1b3f99e
+X-FRP-node: web1
+Content-Length: 3856
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/search/genres
+
+GET /search/genres HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: */*
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+X-Requested-With: XMLHttpRequest
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.2.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947; perveiousurl=http://www.franchiserecordpool.com/view-category
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Access-Control-Allow-Credentials: true
+Access-Control-Allow-Headers: X-Requested-With, X-Prototype-Version, Content-Type, Origin
+Access-Control-Allow-Methods: POST PUT DELETE GET OPTIONS
+Access-Control-Allow-Origin: http://localhost:9000
+Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+Content-Encoding: gzip
+Content-Type: application/json
+Date: Mon, 07 Sep 2015 08:15:42 GMT
+Expires: Thu, 19 Nov 1981 08:52:00 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+Vary: Accept-Encoding
+X-FRP-build: 3812:98d0c1b3f99e
+X-FRP-node: web1
+Content-Length: 494
+Connection: keep-alive
+----------------------------------------------------------
+https://trustlogo.com/images/cot_bgf0.gif
+
+GET /images/cot_bgf0.gif HTTP/1.1
+Host: trustlogo.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Server: nginx
+Date: Mon, 07 Sep 2015 08:15:42 GMT
+Content-Type: image/gif
+Content-Length: 43
+Last-Modified: Sat, 26 Jul 2014 01:25:05 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Expires: Wed, 09 Sep 2015 08:15:42 GMT
+Cache-Control: max-age=172800
+Strict-Transport-Security: max-age=15768000
+Accept-Ranges: bytes
+----------------------------------------------------------
+http://www.franchiserecordpool.com/img/bin/ui-icons_ffffff_256x240.png
+
+GET /img/bin/ui-icons_ffffff_256x240.png HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: image/png,image/*;q=0.8,*/*;q=0.5
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/css/modules/bin.css
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.3.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947; perveiousurl=http://www.franchiserecordpool.com/view-category
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Type: image/png
+Date: Mon, 07 Sep 2015 08:15:42 GMT
+Last-Modified: Mon, 25 Feb 2013 12:40:52 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 7978
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/img/version.png
+
+GET /img/version.png HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: image/png,image/*;q=0.8,*/*;q=0.5
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/less/bootstrap.css
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.3.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947; perveiousurl=http://www.franchiserecordpool.com/view-category
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Type: image/png
+Date: Mon, 07 Sep 2015 08:15:42 GMT
+Last-Modified: Sat, 16 Feb 2013 16:17:39 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 4243
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/top-downloaded-mixes
+
+POST /top-downloaded-mixes HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: text/html, */*; q=0.01
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Content-Type: application/x-www-form-urlencoded; charset=UTF-8
+X-Requested-With: XMLHttpRequest
+Referer: http://www.franchiserecordpool.com/view-category
+Content-Length: 11
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.3.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947; perveiousurl=http://www.franchiserecordpool.com/view-category
+Connection: keep-alive
+Pragma: no-cache
+Cache-Control: no-cache
+format=html
+HTTP/1.1 200 OK
+Access-Control-Allow-Credentials: true
+Access-Control-Allow-Headers: X-Requested-With, X-Prototype-Version, Content-Type, Origin
+Access-Control-Allow-Methods: POST PUT DELETE GET OPTIONS
+Access-Control-Allow-Origin: http://localhost:9000
+Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+Content-Encoding: gzip
+Content-Type: text/html; charset=UTF-8
+Date: Mon, 07 Sep 2015 08:15:42 GMT
+Expires: Thu, 19 Nov 1981 08:52:00 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+Vary: Accept-Encoding
+X-FRP-build: 3812:98d0c1b3f99e
+X-ssl: yes
+Content-Length: 820
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/img/preloader.gif
+
+GET /img/preloader.gif HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: image/png,image/*;q=0.8,*/*;q=0.5
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/css/style.css
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.3.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947; perveiousurl=http://www.franchiserecordpool.com/view-category
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Type: image/gif
+Date: Mon, 07 Sep 2015 08:15:42 GMT
+Last-Modified: Tue, 05 Feb 2013 11:49:19 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 11504
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/js/jPlayer/Jplayer.swf
+
+GET /js/jPlayer/Jplayer.swf HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.3.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947; perveiousurl=http://www.franchiserecordpool.com/view-category
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Type: application/x-shockwave-flash
+Date: Mon, 07 Sep 2015 08:15:42 GMT
+Last-Modified: Tue, 05 Feb 2013 11:49:19 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 8452
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/js/jPlayer/Jplayer.swf
+
+GET /js/jPlayer/Jplayer.swf HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/view-category
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.3.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947; perveiousurl=http://www.franchiserecordpool.com/view-category
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Type: application/x-shockwave-flash
+Date: Mon, 07 Sep 2015 08:15:42 GMT
+Last-Modified: Tue, 05 Feb 2013 11:49:19 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 8452
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/img/bin/player-sprite.png
+
+GET /img/bin/player-sprite.png HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: image/png,image/*;q=0.8,*/*;q=0.5
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://www.franchiserecordpool.com/css/modules/bin.css
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.3.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947; perveiousurl=http://www.franchiserecordpool.com/view-category
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Accept-Ranges: bytes
+Cache-Control: post-check=0, pre-check=0, no-store, no-cache, must-revalidate, max-age=0
+Content-Type: image/png
+Date: Mon, 07 Sep 2015 08:15:42 GMT
+Last-Modified: Tue, 05 Feb 2013 11:49:19 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+X-FRP-node: web1
+Content-Length: 1641
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/songbasket/gettotal
+
+POST /songbasket/gettotal HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: application/json, text/javascript, */*; q=0.01
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Content-Type: application/x-www-form-urlencoded; charset=UTF-8
+X-Requested-With: XMLHttpRequest
+Referer: http://www.franchiserecordpool.com/view-category
+Content-Length: 11
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.3.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947; perveiousurl=http://www.franchiserecordpool.com/view-category
+Connection: keep-alive
+Pragma: no-cache
+Cache-Control: no-cache
+format=json
+HTTP/1.1 200 OK
+Access-Control-Allow-Credentials: true
+Access-Control-Allow-Headers: X-Requested-With, X-Prototype-Version, Content-Type, Origin
+Access-Control-Allow-Methods: POST PUT DELETE GET OPTIONS
+Access-Control-Allow-Origin: http://localhost:9000
+Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+Content-Encoding: gzip
+Content-Type: application/json
+Date: Mon, 07 Sep 2015 08:15:42 GMT
+Expires: Thu, 19 Nov 1981 08:52:00 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+Vary: Accept-Encoding
+X-FRP-build: 3812:98d0c1b3f99e
+X-FRP-node: web1
+Content-Length: 79
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/top-downloaded
+
+POST /top-downloaded HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: text/html, */*; q=0.01
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Content-Type: application/x-www-form-urlencoded; charset=UTF-8
+X-Requested-With: XMLHttpRequest
+Referer: http://www.franchiserecordpool.com/view-category
+Content-Length: 11
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.3.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947; perveiousurl=http://www.franchiserecordpool.com/view-category
+Connection: keep-alive
+Pragma: no-cache
+Cache-Control: no-cache
+format=html
+HTTP/1.1 200 OK
+Access-Control-Allow-Credentials: true
+Access-Control-Allow-Headers: X-Requested-With, X-Prototype-Version, Content-Type, Origin
+Access-Control-Allow-Methods: POST PUT DELETE GET OPTIONS
+Access-Control-Allow-Origin: http://localhost:9000
+Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+Content-Encoding: gzip
+Content-Type: text/html; charset=UTF-8
+Date: Mon, 07 Sep 2015 08:15:43 GMT
+Expires: Thu, 19 Nov 1981 08:52:00 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+Vary: Accept-Encoding
+X-FRP-build: 3812:98d0c1b3f99e
+X-ssl: yes
+Content-Length: 735
+Connection: keep-alive
+----------------------------------------------------------
+http://www.franchiserecordpool.com/view-category
+
+GET /view-category HTTP/1.1
+Host: www.franchiserecordpool.com
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Cookie: AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E052362647245BE8F3DB53C520AC68E70B505132B3818B21155F0792BF12A7C3D9C4F0BF3D34526B4E7BF74B850B2453E; __utma=128985947.580648032.1441613150.1441613150.1441613150.1; __utmb=128985947.3.10.1441613151; __utmz=128985947.1441613150.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmt=1; PHPSESSID=do02b95a1n9adthvaj26iit3q4; __utmc=128985947; perveiousurl=http://www.franchiserecordpool.com/view-category
+Connection: keep-alive
+
+HTTP/1.1 200 OK
+Access-Control-Allow-Credentials: true
+Access-Control-Allow-Headers: X-Requested-With, X-Prototype-Version, Content-Type, Origin
+Access-Control-Allow-Methods: POST PUT DELETE GET OPTIONS
+Access-Control-Allow-Origin: http://localhost:9000
+Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+Content-Encoding: gzip
+Content-Type: text/html; charset=UTF-8
+Date: Mon, 07 Sep 2015 08:15:46 GMT
+Expires: Thu, 19 Nov 1981 08:52:00 GMT
+Pragma: no-cache
+Server: nginx/1.2.7
+Vary: Accept-Encoding
+X-FRP-build: 3812:98d0c1b3f99e
+X-FRP-node: web1
+Transfer-Encoding: chunked
+Connection: keep-alive
+----------------------------------------------------------

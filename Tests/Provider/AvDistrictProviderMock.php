@@ -1,14 +1,15 @@
 <?php
 
-namespace AvDistrictBundle\Tests\Lib;
+namespace DeejayPoolBundle\Tests\Provider;
 
-use AvDistrictBundle\Entity\AvdItem;
+use DeejayPoolBundle\Entity\AvdItem;
+use DeejayPoolBundle\Entity\ProviderItemInterface;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Client;
 
-class SessionMock extends \AvDistrictBundle\Lib\Session
+class AvDistrictProviderMock extends \DeejayPoolBundle\Provider\AvDistrictProvider
 {
 
     private $headers = [];
@@ -929,7 +930,7 @@ class SessionMock extends \AvDistrictBundle\Lib\Session
         return $result = parent::getItems($page);
     }
 
-    public function downloadItem(AvdItem $avdItem, $force = false, $mockSucces = true)
+    public function downloadItem(ProviderItemInterface $avdItem, $force = false, $mockSucces = true)
     {
         $mock = new MockHandler([
             new Response(

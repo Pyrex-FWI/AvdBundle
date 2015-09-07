@@ -18,13 +18,21 @@ doctrine:
         auto_generate_proxy_classes: "%kernel.debug%"
         auto_mapping: true
 
-av_district:
-    credentials:
-        login:    %avd.credentials.login%
-        password: %avd.credentials.password%
+deejay_pool:
+    av_district:
+        credentials:
+            login:    %av_district.credentials.login%
+            password: %av_district.credentials.password%
 
-    configuration:
-        root_path: %avd.configuration.root_path%
+        configuration:
+            root_path: %av_district.configuration.root_path%
+    franchise_pool:
+        credentials:
+            login:    %franchise_pool.credentials.login%
+            password: %franchise_pool.credentials.password%
+
+        configuration:
+            root_path: %franchise_pool.configuration.root_path%
 
 framework:
     router:

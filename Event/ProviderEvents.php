@@ -1,9 +1,9 @@
 <?php
 
-namespace AvDistrictBundle\Event;
+namespace DeejayPoolBundle\Event;
 
 
-final class SessionEvents {
+final class ProviderEvents {
 
 
     const SESSION_OPENED                = 'session.opened';

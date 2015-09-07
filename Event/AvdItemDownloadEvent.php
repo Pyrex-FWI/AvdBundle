@@ -1,12 +1,13 @@
 <?php
 
-namespace AvDistrictBundle\Event;
+namespace DeejayPoolBundle\Event;
 
 
-use AvDistrictBundle\Entity\AvdItem;
+use DeejayPoolBundle\Entity\AvdItem;
+use DeejayPoolBundle\Entity\ProviderItemInterface;
 use Symfony\Component\EventDispatcher\Event;
 
-class SessionItemDownloadEvent extends Event {
+class AvdItemDownloadEvent extends Event {
 
     /** @var AvdItem  */
     protected $item;
@@ -15,7 +16,7 @@ class SessionItemDownloadEvent extends Event {
     /**
      * @param AvdItem $item
      */
-    public function __construct($item, $fileName = null, $message = null)
+    public function __construct(ProviderItemInterface $item, $fileName = null, $message = null)
     {
         $this->setItem($item);
         $this->setFileName($fileName);
