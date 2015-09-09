@@ -30,4 +30,9 @@ class ProviderManager
 
         return $this->providers[$name];
     }
+
+    public function getProviers()
+    {
+        return $this->providers;
+    }
 }
