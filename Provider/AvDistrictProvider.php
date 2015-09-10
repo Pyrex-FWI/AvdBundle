@@ -66,9 +66,10 @@ class AvDistrictProvider extends Provider implements PoolProviderInterface
             }
         }
         $this->logger->info(sprintf('Page %s fetched successfuly with %s items', $page, count($itemsArray)), [$itemsArray]);
-        $this->eventDispatcher->dispatch(ProviderEvents::ITEMS_POST_GETLIST, new PostItemsListEvent($itemsArray));
+        $postItemsListEvent = new PostItemsListEvent($itemsArray);
+        $this->eventDispatcher->dispatch(ProviderEvents::ITEMS_POST_GETLIST, $postItemsListEvent);
 
-        return $itemsArray;
+        return $postItemsListEvent->getItems();
     }
 
     /**

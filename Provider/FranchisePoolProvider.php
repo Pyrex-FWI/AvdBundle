@@ -120,9 +120,10 @@ class FranchisePoolProvider extends Provider implements PoolProviderInterface
             }
         }
         $this->logger->info(sprintf('Page %s fetched successfuly with %s items', $page, count($itemsArray)), [$itemsArray]);
-        $this->eventDispatcher->dispatch(ProviderEvents::ITEMS_POST_GETLIST, new PostItemsListEvent($itemsArray));
+        $postItemsListEvent = new PostItemsListEvent($itemsArray);
+        $this->eventDispatcher->dispatch(ProviderEvents::ITEMS_POST_GETLIST, $postItemsListEvent);
 
-        return $itemsArray;
+        return $postItemsListEvent->getItems();
     }
 
     /**
@@ -185,6 +186,7 @@ class FranchisePoolProvider extends Provider implements PoolProviderInterface
             return true;
         }
         unlink($tmpName);
+
         $this->logger->info(sprintf('%s %s %s has download ERROR', $item->getItemId(), $item->getArtist(), $item->getTitle()), [$item, $this->getLastError()]);
         $this->eventDispatcher->dispatch(ProviderEvents::ITEM_ERROR_DOWNLOAD, new ItemDownloadEvent($item, null, $this->getLastError()));
 

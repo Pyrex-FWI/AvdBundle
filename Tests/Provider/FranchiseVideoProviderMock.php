@@ -375,29 +375,7 @@ class FranchiseVideoProviderMock extends FranchisePoolVideoProvider
    public function downloadItem(ProviderItemInterface $avdItem, $force = false, $mockSucces = true)
    {
       $mock = new MockHandler([
-          new Response(
-              302,
-              [
-                  'Access-Control-Allow-Headers'		=> 'X-Requested-With, X-Prototype-Version, Content-Type, Origin',
-                  'Access-Control-Allow-Methods'		=> 'POST PUT DELETE GET OPTIONS',
-                  'Access-Control-Allow-Origin'		=> 'http://localhost:9000',
-                  'Cache-Control'						=> 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0',
-                  'Content-Encoding'					=> 'gzip',
-                  'Content-Type'						=> 'text/html; charset=UTF-8',
-                  'Date'								=> 'Tue, 08 Sep 2015 11:39:27 GMT',
-                  'Expires'							=> 'Thu, 19 Nov 1981 08:52:00 GMT',
-                  'Location'							=> 'http://media.franchiserecordpool.com/audio/hiphop/Rick%20Ross%20-%20Foreclosures%20%28Clean%29.mp3?Expires=1441715967&Key-Pair-Id=APKAJNHBKLJXOJMHPAYQ&Signature=NlCnTJFV0SddvLxUpmtxExc6g7m99ccF0cKrABJh9w7r0pmlwZgsOnf5E~F2b8S9u3Wyqe80MOcLuXoCTBj7DuyWA-FJcetqecAIEcRMHaFv1VpgQ5ZdIlU4cQiBgv7iIxR9FFmV9cXKl8oPoL5vO-PE93K6h6CHjQpbeBc1LEo_',
-                  'Pragma'							=> 'no-cache',
-                  'Server'							=> 'nginx/1.2.7',
-                  'Vary'								=> 'Accept-Encoding',
-                  'X-FRP-build'						=> '3812:98d0c1b3f99e',
-                  'X-FRP-node'						=> 'web5',
-                  'X-Powered-By'						=> 'PHP/5.3.3',
-                  'Content-Length'					=> 26,
-                  'Connection'						=> 'keep-alive,'
-              ],
-              ''
-          ),
+
           new Response(
               $mockSucces ? 200 : 302,
               [
