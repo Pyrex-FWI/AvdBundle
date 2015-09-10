@@ -182,6 +182,7 @@ EOF
         $contextProvider= $this->input->getArgument('provider');
         try {
             $this->provider = $this->manager->get($contextProvider);
+            $this->provider->setDebug(true);
         } catch (\Exception $e) {
             $this->output->writeln(sprintf('%s provider not exist', $contextProvider));
             throw new \Exception($e->getMessage());
