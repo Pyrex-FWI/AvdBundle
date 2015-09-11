@@ -66,19 +66,22 @@ class FranchisePoolVideoProvider extends FranchisePoolProvider
             $item->getDownloadlink(),
             $requestParams
         );
+        try {
+            if ($response->getStatusCode() === 200) {
+                $ctDisp = $response->getHeader('Content-Disposition')[0];
+                preg_match('/filename="+(?P<filename>.+)"+/', $ctDisp, $matches);
+                $fileName = $matches['filename'] != '' ? $matches['filename'] : $item->getItemId();
+                $fileName = $this->getConfValue('root_path') . DIRECTORY_SEPARATOR . sprintf('%s_%s', $item->getItemId(), str_replace(' ', '_', $fileName));
+                rename($tmpName, $fileName);
+                $item->setFullPath($fileName);
+                $item->setDownloaded(true);
+                $this->logger->info(sprintf('%s %s %s has succesfully downloaded', $item->getItemId(), $item->getArtist(), $item->getTitle()), [$item]);
+                $this->eventDispatcher->dispatch(ProviderEvents::ITEM_SUCCESS_DOWNLOAD, new ItemDownloadEvent($item, $fileName));
 
-        if ($response->getStatusCode() === 200) {
-            $ctDisp = $response->getHeader('Content-Disposition')[0];
-            preg_match('/filename="+(?P<filename>.+)"+/', $ctDisp, $matches);
-            $fileName = $matches['filename'] != '' ? $matches['filename'] : $item->getItemId();
-            $fileName = $this->getConfValue('root_path') . DIRECTORY_SEPARATOR .sprintf('%s_%s', $item->getItemId(), str_replace(' ', '_', $fileName));
-            rename($tmpName, $fileName);
-            $item->setFullPath($fileName);
-            $item->setDownloaded(true);
-            $this->logger->info(sprintf('%s %s %s has succesfully downloaded', $item->getItemId(), $item->getArtist(), $item->getTitle()), [$item]);
-            $this->eventDispatcher->dispatch(ProviderEvents::ITEM_SUCCESS_DOWNLOAD, new ItemDownloadEvent($item, $fileName));
-
-            return true;
+                return true;
+            }
+        } catch (\Exception $e) {
+            $this->setLastError($e->getMessage());
         }
         unlink($tmpName);
         $this->logger->info(sprintf('%s %s %s has download ERROR', $item->getItemId(), $item->getArtist(), $item->getTitle()), [$item, $this->getLastError()]);

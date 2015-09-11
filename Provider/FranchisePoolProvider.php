@@ -163,28 +163,32 @@ class FranchisePoolProvider extends Provider implements PoolProviderInterface
             ]
         ];
         $requestUrl = $item->getDownloadlink();
-        do {
-            $response = $this->client->get(
-                $requestUrl,
-                $requestParams
-            );
-            if ($requestUrl = $response->getHeaderLine('Location')) {
-                $requestParams['sink'] = $resource;
-                $fileName  = (urldecode(basename(parse_url($requestUrl)['path'])));
+        try {
+            do {
+                $response = $this->client->get(
+                    $requestUrl,
+                    $requestParams
+                );
+                if ($requestUrl = $response->getHeaderLine('Location')) {
+                    $requestParams['sink'] = $resource;
+                    $fileName = (urldecode(basename(parse_url($requestUrl)['path'])));
+                }
+            } while ($response->hasHeader('Location'));
+
+            if ($response->getStatusCode() === 200) {
+                $fileName = $this->getConfValue('root_path') . DIRECTORY_SEPARATOR . sprintf('%s_%s', $item->getItemId(), str_replace(' ', '_', $fileName));
+                rename($tmpName, $fileName);
+                $item->setFullPath($fileName);
+                $item->setDownloaded(true);
+                $this->logger->info(sprintf('%s %s %s has succesfully downloaded', $item->getItemId(), $item->getArtist(), $item->getTitle()), [$item]);
+                $this->eventDispatcher->dispatch(ProviderEvents::ITEM_SUCCESS_DOWNLOAD, new ItemDownloadEvent($item, $fileName));
+
+                return true;
             }
+        } catch (\Exception $e) {
+            $this->setLastError($e->getMessage());
         }
-        while ($response->hasHeader('Location'));
 
-        if ($response->getStatusCode() === 200) {
-            $fileName = $this->getConfValue('root_path') . DIRECTORY_SEPARATOR .sprintf('%s_%s', $item->getItemId(), str_replace(' ', '_', $fileName));
-            rename($tmpName, $fileName);
-            $item->setFullPath($fileName);
-            $item->setDownloaded(true);
-            $this->logger->info(sprintf('%s %s %s has succesfully downloaded', $item->getItemId(), $item->getArtist(), $item->getTitle()), [$item]);
-            $this->eventDispatcher->dispatch(ProviderEvents::ITEM_SUCCESS_DOWNLOAD, new ItemDownloadEvent($item, $fileName));
-
-            return true;
-        }
         unlink($tmpName);
 
         $this->logger->info(sprintf('%s %s %s has download ERROR', $item->getItemId(), $item->getArtist(), $item->getTitle()), [$item, $this->getLastError()]);
