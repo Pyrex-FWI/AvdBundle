@@ -42,7 +42,8 @@ class AvItemNormalizer extends AbstractNormalizer
         $avdItem = new AvdItem();
         $avdItem->setItemId(intval($data[0]));
         $avdItem->setTitle(explode('::', $data[1])[0]);
-        $avdItem->setVersion(trim(explode('::', $data[1])[1])."-".trim(explode('::', $data[1])[2]));
+        $version = array_merge([ 0 => '', 1 => '', 2 => ''], explode('::', $data[1]));
+        $avdItem->setVersion(trim($version[1]) . "-" . trim($version[2]));
         $avdItem->setArtist($data[2]);
         $genres = explode(',', $data[3]);
 
