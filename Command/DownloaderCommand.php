@@ -182,7 +182,9 @@ EOF
         $contextProvider= $this->input->getArgument('provider');
         try {
             $this->provider = $this->manager->get($contextProvider);
-            $this->provider->setDebug(true);
+            if (OutputInterface::VERBOSITY_VERY_VERBOSE === $output->getVerbosity()) {
+                $this->provider->setDebug(true);
+            }
         } catch (\Exception $e) {
             $this->output->writeln(sprintf('%s provider not exist', $contextProvider));
             throw new \Exception($e->getMessage());
@@ -204,7 +206,7 @@ EOF
             $this->output->writeln("<info>Succesfull downloaded list</info>");
             $tableHelper = new Table($this->output);
             $tableHelper->setHeaders([
-                'avdID', 'Artist', 'Title', 'Version'
+                'itemId', 'Artist', 'Title', 'Version'
             ]);
             $rows = [];
             foreach ($this->orderItems($scope) as $item) {

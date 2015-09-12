@@ -30,6 +30,7 @@ class DownloaderCommandTest extends \DeejayPoolBundle\Tests\BaseTest
             '--start'   => 100,
             '--end'     => 102,
             '--sleep'   => 10,
+            '-vvv'
         ]);
 
         foreach ($command->getDownloadSuccess() as $avItem) {
