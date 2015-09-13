@@ -12,6 +12,8 @@
             <directory>./Tests/Lib</directory>
             <directory>./Tests/Command</directory>
             <directory>./Tests/Service</directory>
+            <directory>./Tests/Provider</directory>
+            <directory>./Tests/Serializer</directory>
         </testsuite>
     </testsuites>
     <filter>
@@ -20,12 +22,12 @@
         </blacklist>
         <whitelist>
         <!-- lib subfolders to include -->
-            <directory>./Lib</directory>
+            <directory>./Provider</directory>
             <directory>./Event</directory>
             <directory>./Entity</directory>
             <directory>./Command</directory>
             <directory>./Service</directory>
-            <directory>./Organizer</directory>
+            <directory>./Serializer</directory>
         </whitelist>
     </filter>
 </phpunit>

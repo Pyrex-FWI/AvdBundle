@@ -10,11 +10,8 @@ use DeejayPoolBundle\Event\ProviderEvents;
 use DeejayPoolBundle\Event\ItemDownloadEvent;
 use DeejayPoolBundle\Event\PostItemsListEvent;
 use DeejayPoolBundle\Serializer\Normalizer\FranchiseRecordPoolItemNormalizer;
-use GuzzleHttp\Client;
-use GuzzleHttp\Cookie\CookieJar;
 use Psr\Log\NullLogger;
 use Symfony\Bridge\Monolog\Logger;
-use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\Serializer\Serializer;
@@ -172,6 +169,7 @@ class FranchisePoolProvider extends Provider implements PoolProviderInterface
                 if ($requestUrl = $response->getHeaderLine('Location')) {
                     $requestParams['sink'] = $resource;
                     $fileName = (urldecode(basename(parse_url($requestUrl)['path'])));
+                    $item->setDownloadlink($requestUrl);
                 }
             } while ($response->hasHeader('Location'));
 
@@ -201,5 +199,13 @@ class FranchisePoolProvider extends Provider implements PoolProviderInterface
     public function getName()
     {
         return DeejayPoolBundle::PROVIDER_FPR_AUDIO;
+    }
+
+    /**
+     * @return bool
+     */
+    public function supportAsyncDownload()
+    {
+        return false;
     }
 }

@@ -39,7 +39,7 @@ class FranchiseRecordPoolItemNormalizer extends AbstractNormalizer
         $frpItem->addRelatedGenre(trim(strip_tags($data['cell'][6])));
         $frpItem->setBpm(intval($data['cell'][7]));
         $frpItem->setReleaseDate(\DateTime::createFromFormat('m/d/Y', $data['cell'][8]));
-
+        $frpItem->setVersion(null);
         return $frpItem;
     }
 

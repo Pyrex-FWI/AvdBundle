@@ -22,7 +22,7 @@ $container
 
 $container
     ->setDefinition(
-        'avd.session',
+        \DeejayPoolBundle\DeejayPoolBundle::PROVIDER_AVD,
         new Definition(
             '%av_district.provider.class%',
             array(
@@ -36,7 +36,7 @@ $container
 
 $container
     ->setDefinition(
-        'deejay_pool.provider.franchise',
+        \DeejayPoolBundle\DeejayPoolBundle::PROVIDER_FPR_AUDIO,
         new Definition(
             '%franchise_pool.provider.class%',
             array(
@@ -50,7 +50,7 @@ $container
 
 $container
     ->setDefinition(
-        'deejay_pool.provider.franchise_video',
+        \DeejayPoolBundle\DeejayPoolBundle::PROVIDER_FPR_VIDEO,
         new Definition(
             '%franchise_pool_video.provider.class%',
             array(
@@ -78,7 +78,7 @@ $container
         'deejaypool.command.status',
         '%avd.command.status.class%'
     )
-    ->addArgument(new Reference('avd.session'))
+    ->addArgument(new Reference(\DeejayPoolBundle\DeejayPoolBundle::PROVIDER_AVD))
     ->addArgument(new Reference('logger', \Symfony\Component\DependencyInjection\ContainerInterface::IGNORE_ON_INVALID_REFERENCE))
     ->addTag('console.command');
 

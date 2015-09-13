@@ -210,4 +210,11 @@ class AvDistrictProvider extends Provider implements PoolProviderInterface
     }
 
 
+    /**
+     * @return bool
+     */
+    public function supportAsyncDownload()
+    {
+        return false;
+    }
 }

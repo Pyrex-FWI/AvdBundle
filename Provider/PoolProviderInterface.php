@@ -16,4 +16,9 @@ interface PoolProviderInterface
     public function downloadItem(ProviderItemInterface $item);
 
     public function getName();
+
+    /**
+     * @return bool
+     */
+    public function supportAsyncDownload();
 }

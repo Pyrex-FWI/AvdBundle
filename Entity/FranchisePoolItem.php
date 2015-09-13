@@ -23,7 +23,6 @@ class FranchisePoolItem implements ProviderItemInterface
     protected $title;
     protected $itemId;
     protected $version;
-    protected $downloadId;
     protected $isVideo = false;
     protected $isAudio = false;
     protected $type;
@@ -282,22 +281,6 @@ class FranchisePoolItem implements ProviderItemInterface
     public function getRelatedGenres()
     {
         return $this->relatedGenres;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDownloadId()
-    {
-        return $this->downloadId;
-    }
-
-    /**
-     * @param mixed $downloadId
-     */
-    public function setDownloadId($downloadId)
-    {
-        $this->downloadId = $downloadId;
     }
 
     /**

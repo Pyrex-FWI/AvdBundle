@@ -3,23 +3,12 @@
 namespace DeejayPoolBundle\Provider;
 
 use DeejayPoolBundle\DeejayPoolBundle;
-use DeejayPoolBundle\Entity\AvdItem;
 use DeejayPoolBundle\Entity\FranchisePoolItem;
 use DeejayPoolBundle\Entity\ProviderItemInterface;
 use DeejayPoolBundle\Event\ProviderEvents;
 use DeejayPoolBundle\Event\ItemDownloadEvent;
-use DeejayPoolBundle\Event\PostItemsListEvent;
-use DeejayPoolBundle\Provider\PoolProviderInterface;
-use DeejayPoolBundle\Serializer\Normalizer\AvItemNormalizer;
-use DeejayPoolBundle\Serializer\Normalizer\FranchiseRecordPoolItemNormalizer;
 use DeejayPoolBundle\Serializer\Normalizer\FranchiseRecordPoolVideoItemNormalizer;
-use GuzzleHttp\Client;
-use GuzzleHttp\Cookie\CookieJar;
-use Psr\Log\NullLogger;
 use Symfony\Bridge\Monolog\Logger;
-use Symfony\Component\DependencyInjection\Container;
-use Symfony\Component\EventDispatcher\Event;
-use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\Serializer\Serializer;
 
 class FranchisePoolVideoProvider extends FranchisePoolProvider
@@ -122,5 +111,13 @@ class FranchisePoolVideoProvider extends FranchisePoolProvider
     public function getName()
     {
         return DeejayPoolBundle::PROVIDER_FPR_VIDEO;
+    }
+
+    /**
+     * @return bool
+     */
+    public function supportAsyncDownload()
+    {
+        return false;
     }
 }

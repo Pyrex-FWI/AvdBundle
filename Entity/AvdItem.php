@@ -309,7 +309,7 @@ class AvdItem implements ProviderItemInterface
     /**
      * @return boolean
      */
-    public function isIsHD()
+    public function isHD()
     {
         return $this->isHD;
     }

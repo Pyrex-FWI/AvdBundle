@@ -18,7 +18,7 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
 
     public function testServiceIsDefinedInContainer()
     {
-        $service = $this->container->get('avd.session');
+        $service = $this->container->get(\DeejayPoolBundle\DeejayPoolBundle::PROVIDER_AVD);
 
         $this->assertInstanceOf('DeejayPoolBundle\Provider\AvDistrictProvider', $service);
     }
