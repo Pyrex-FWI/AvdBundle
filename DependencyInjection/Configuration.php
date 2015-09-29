@@ -46,6 +46,13 @@ class Configuration implements ConfigurationInterface
                         ))
                     ->end()
                 ->end()
+                ->arrayNode(DeejayPoolBundle::PROVIDER_SV)
+                ->addDefaultsIfNotSet()
+                    ->children()
+                        ->append($this->getCredentialsDefinition())
+                        ->append($this->getSmashVisionConfigurationDefinition())
+                    ->end()
+                ->end()
             ->end();
 
         return $treeBuilder;
@@ -252,6 +259,95 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('download_url')
                     ->info('Download url')
                     ->defaultValue($dlUrl)
+                    ->cannotBeEmpty()
+                    ->validate()
+                        ->ifTrue(function ($v) { return !$this->isValidurl($v); })
+                        ->thenInvalid('%s is not a valid url, update yout download_url value.')
+                    ->end()
+                ->end()
+            ->end();
+        return $configurationDef;
+    }
+   /**
+     * @return ArrayNodeDefinition
+     */
+    public function getSmashVisionConfigurationDefinition( $dlUrl = null)
+    {
+
+        $configurationDef = new ArrayNodeDefinition('configuration');
+        $configurationDef
+
+            ->addDefaultsIfNotSet()
+            ->children()
+                ->scalarNode('root_path')
+                ->info('Path of your video files')
+                ->example('/your/path/to/download/target/files/')
+                ->defaultValue('%kernel.cache_dir%')
+                ->isRequired()
+                ->validate()
+                ->ifTrue(function ($v) {
+                    if(strlen($v) > 0 && !is_dir($v)){
+                        return true;
+                    }
+                    return 0;
+                })
+                ->thenInvalid('%s is not a valid folder.')
+            ->end();
+        $configurationDef
+            ->children()
+                ->scalarNode('login_check')
+                    ->info('Login url for authentication')
+                    ->defaultValue('https://www.smashvision.net/Account/CheckLogin')
+                    ->cannotBeEmpty()
+                    ->validate()
+                        ->ifTrue(function ($v) { return !$this->isValidurl($v); })
+                        ->thenInvalid('%s is not a valid url, update yout login_check value.')
+                    ->end()
+                ->end()
+                ->scalarNode('login_success_redirect')
+                    ->info('Url when login is success')
+                    ->defaultValue('http://www.franchiserecordpool.com/view-category')
+                    ->cannotBeEmpty()
+                ->end()
+            ->end();
+        $configurationDef
+            ->children()
+                ->scalarNode('login_form_name')
+                    ->info('Name of login field into form')
+                    ->defaultValue('email')
+                    ->cannotBeEmpty()
+                ->end()
+                ->scalarNode('password_form_name')
+                    ->info('Name of password field into form')
+                    ->defaultValue('password')
+                    ->cannotBeEmpty()
+                ->end()
+                ->integerNode('items_per_page')
+                    ->info('Items per page')
+                    ->defaultValue(50)
+                    ->cannotBeEmpty()
+                ->end()
+                ->scalarNode('items_url')
+                    ->info('Items page')
+                    ->defaultValue('https://www.smashvision.net/Videos/GetVideos')
+                    ->cannotBeEmpty()
+                    ->validate()
+                        ->ifTrue(function ($v) { return !$this->isValidurl($v); })
+                        ->thenInvalid('%s is not a valid url, update yout item_url value.')
+                    ->end()
+                ->end()
+                ->scalarNode('items_versions_url')
+                    ->info('Items versions page')
+                    ->defaultValue('https://www.smashvision.net/Videos/GetButtons')
+                    ->cannotBeEmpty()
+                    ->validate()
+                        ->ifTrue(function ($v) { return !$this->isValidurl($v); })
+                        ->thenInvalid('%s is not a valid url, update yout items_versions_url value.')
+                    ->end()
+                ->end()
+                ->scalarNode('download_url')
+                    ->info('Download url')
+                    ->defaultValue('https://www.smashvision.net/Handlers/DownloadHandler.ashx')
                     ->cannotBeEmpty()
                     ->validate()
                         ->ifTrue(function ($v) { return !$this->isValidurl($v); })

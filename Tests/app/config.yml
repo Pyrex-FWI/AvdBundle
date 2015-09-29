@@ -40,6 +40,13 @@ deejay_pool:
 
         configuration:
             root_path: %franchise_pool.configuration.root_path%
+    smashvision:
+        credentials:
+            login:    %smashvision.credentials.login%
+            password: %smashvision.credentials.password%
+
+        configuration:
+            root_path: %smashvision.configuration.root_path%
 
 framework:
     router:

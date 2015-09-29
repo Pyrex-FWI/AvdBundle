@@ -30,3 +30,9 @@ parameters:
     franchise_pool.session_subscriber.class: DeejayPoolBundle\Tests\Event\SessionSubscriberMock
 
     franchise_pool_video.provider.class: DeejayPoolBundle\Tests\Provider\FranchiseVideoProviderMock
+
+    smashvision.configuration.root_path: %kernel.root_dir%/../TestData/root_path
+    smashvision.credentials.login: coco@hotmail.fr
+    smashvision.credentials.password: toto
+
+    smashvision.provider.class: DeejayPoolBundle\Tests\Provider\SmashVisionProviderMock

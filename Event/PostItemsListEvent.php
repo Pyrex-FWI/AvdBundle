@@ -8,11 +8,11 @@ use Symfony\Component\EventDispatcher\Event;
 
 class PostItemsListEvent extends Event {
 
-    /** @var AvdItem[]  */
+    /** @var ProviderItemInterface[]  */
     protected $items;
 
     /**
-     * @param AvdItem[] $items
+     * @param ProviderItemInterface[] $items
      */
     public function __construct($items)
     {
@@ -20,7 +20,7 @@ class PostItemsListEvent extends Event {
     }
 
     /**
-     * @return AvdItem[]
+     * @return ProviderItemInterface[]
      */
     public function getItems()
     {
@@ -28,7 +28,7 @@ class PostItemsListEvent extends Event {
     }
 
     /**
-     * @param AvdItem $items
+     * @param ProviderItemInterface $items
      */
     public function setItems($items)
     {

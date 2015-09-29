@@ -24,7 +24,12 @@ class DeejayPoolExtension extends Extension
         $config = $this->processConfiguration($configuration, $configs);
         $loader = new Loader\PhpFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.php');
-        $providers = [DeejayPoolBundle::PROVIDER_FPR_AUDIO, DeejayPoolBundle::PROVIDER_AVD, DeejayPoolBundle::PROVIDER_FPR_VIDEO];
+        $providers = [
+            DeejayPoolBundle::PROVIDER_FPR_AUDIO,
+            DeejayPoolBundle::PROVIDER_AVD,
+            DeejayPoolBundle::PROVIDER_FPR_VIDEO,
+            DeejayPoolBundle::PROVIDER_SV,
+        ];
         foreach ($providers as $provider) {
             $container->setParameter(
                 sprintf('%s.configuration.root_path', $provider),
@@ -81,6 +86,12 @@ class DeejayPoolExtension extends Extension
         $container->setParameter(
             sprintf('%s.configuration.login_success_redirect', DeejayPoolBundle::PROVIDER_FPR_VIDEO),
             $config[DeejayPoolBundle::PROVIDER_FPR_VIDEO]['configuration']['login_success_redirect']
+        );
+
+        //Specific for SMASHVISION
+        $container->setParameter(
+            sprintf('%s.configuration.items_versions_url', DeejayPoolBundle::PROVIDER_SV),
+            $config[DeejayPoolBundle::PROVIDER_SV]['configuration']['items_versions_url']
         );
     }
 

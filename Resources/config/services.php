@@ -9,6 +9,7 @@ $container->setParameter('franchise_pool_video.provider.class', 'DeejayPoolBundl
 $container->setParameter('avd.command.download.class', 'DeejayPoolBundle\Command\DownloaderCommand');
 $container->setParameter('avd.command.status.class', 'DeejayPoolBundle\Command\StatusCommand');
 $container->setParameter('deejay_provider_manager.class', 'DeejayPoolBundle\Provider\ProviderManager');
+$container->setParameter('smashvision.provider.class', 'DeejayPoolBundle\Provider\SmashVisionProvider');
 
 $container
     ->setDefinition(
@@ -53,6 +54,20 @@ $container
         \DeejayPoolBundle\DeejayPoolBundle::PROVIDER_FPR_VIDEO,
         new Definition(
             '%franchise_pool_video.provider.class%',
+            array(
+                new Reference('event_dispatcher'),
+                new Reference('logger', \Symfony\Component\DependencyInjection\ContainerInterface::IGNORE_ON_INVALID_REFERENCE)
+            ))
+    )
+    ->addMethodCall('setContainer', [new Reference('service_container')])
+    ->addTag('monolog.logger', array('channel' => 'avd'))
+    ->addTag('deejay_provider', []);
+
+$container
+    ->setDefinition(
+        \DeejayPoolBundle\DeejayPoolBundle::PROVIDER_SV,
+        new Definition(
+            '%smashvision.provider.class%',
             array(
                 new Reference('event_dispatcher'),
                 new Reference('logger', \Symfony\Component\DependencyInjection\ContainerInterface::IGNORE_ON_INVALID_REFERENCE)
