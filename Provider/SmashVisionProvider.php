@@ -98,54 +98,75 @@ class SmashVisionProvider extends Provider implements PoolProviderInterface
             }
             return;
         }
+        if ($this->checkDownloadStatus($item) === false) {
+            $this->logger->info(sprintf('checkDownloadStatus failed for %s %s %s has download ERROR. %s', $item->getItemId(), $item->getArtist(), $item->getTitle(), $item->getDownloadStatus()), [$item, $this->getLastError()]);
+            $this->eventDispatcher->dispatch(ProviderEvents::ITEM_ERROR_DOWNLOAD, new ItemDownloadEvent($item, null, $this->getLastError()));
+            sleep(1);
+            return;
+        }
+
         /** @var SvGroup $item */
         $this->eventDispatcher->dispatch(ProviderEvents::ITEM_PRE_DOWNLOAD, new ItemDownloadEvent($item));
         /** @var SvItem $svItem */
-        $tmpName = $this->getConfValue('root_path') . DIRECTORY_SEPARATOR . $item->getVideoId();
+        $tmpName = $this->getConfValue('root_path') . DIRECTORY_SEPARATOR . $item->getItemId();
         $resource = fopen($tmpName, 'w');
-        try {
-            $response = $this->client->get(
-                $item->getDownloadlink(),
-                [
-                    'cookies' => $this->cookieJar,
-                    'allow_redirects' => false,
-                    'debug' => $this->debug,
-                    'sink' => $resource,
-                    'query' => [],
-                    'headers' => [
-                        'Referer'   => 'https://www.smashvision.net/Videos',
-                        'Connection' => 'keep-alive',
-                        'Referer' => 'http://www.avdistrict.net/Videos',
-                        'Upgrade-Insecure-Requests' => 1,
-                        'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-                        'Accept-Encoding' => 'gzip, deflate, sdch',
-                        'Accept-Language' => 'fr-FR,fr;q=0.8,en-US;q=0.6,en;q=0.4',
-                        'User-Agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36'
-                    ]
-                ]
-            );
 
+        try {
+            $response = $this->getDownloadResponse($item, $resource);
             if ($response->getStatusCode() === 200) {
-                $ctDisp = $response->getHeader('Content-Disposition')[0];
-                preg_match('/filename="+(?P<filename>.+)"+/', $ctDisp, $matches);
+                $ctDisp = str_replace('"', '', $response->getHeader('Content-Disposition')[0]);
+                preg_match('/filename="?(?P<filename>.+)$/', $ctDisp, $matches);
                 $fileName = $matches['filename'] != '' ? $matches['filename'] : $item->getVideoId();
-                $fileName = $this->getConfValue('root_path') . DIRECTORY_SEPARATOR . sprintf('%s_%s', $item->getVideoId(), str_replace(' ', '_', $fileName));
+                $fileName = $this->getConfValue('root_path') . DIRECTORY_SEPARATOR . sprintf('%s_%s', $item->getItemId(), str_replace(' ', '_', $fileName));
+                fclose($resource);
                 rename($tmpName, $fileName);
                 $item->setFullPath($fileName);
                 $item->setDownloaded(true);
                 $this->logger->info(sprintf('%s %s %s has succesfully downloaded', $item->getVideoId(), $item->getArtist(), $item->getTitle()), [$item]);
                 $this->eventDispatcher->dispatch(ProviderEvents::ITEM_SUCCESS_DOWNLOAD, new ItemDownloadEvent($item, $fileName));
-
             } else {
                 unlink($tmpName);
-                $this->logger->info(sprintf('%s %s %s has download ERROR', $item->getItemId(), $item->getArtist(), $item->getTitle()), [$item, $this->getLastError()]);
-                $this->eventDispatcher->dispatch(ProviderEvents::ITEM_ERROR_DOWNLOAD, new ItemDownloadEvent($item, null, $this->getLastError()));
+                new \Exception(sprintf('Invalid response code %s', $response->getStatusCode()));
             }
         } catch (\Exception $e) {
-            $this->setLastError($e->getMessage());
+            $this->logger->info(sprintf('%s %s %s has download ERROR. %s', $item->getItemId(), $item->getArtist(), $item->getTitle(), $e->getMessage()), [$item, $e->getMessage()]);
+            $this->eventDispatcher->dispatch(ProviderEvents::ITEM_ERROR_DOWNLOAD, new ItemDownloadEvent($item, null, $e->getMessage()));
+            sleep(1);
         }
     }
 
+    public function getDownloadResponse(SvItem $svItem, $resource)
+    {
+      $svItem->setDownloadlink($this->getConfValue('download_url') .'?'. http_build_query([
+            'id'  => $svItem->getVideoId(),
+            'fg'  => 'true',
+          ]));
+
+      return $this->client->get(
+          $this->getConfValue('download_url'),
+          [
+              'cookies' => $this->cookieJar,
+              'allow_redirects' => false,
+              'debug' => $this->debug ,
+              'sink'  => $resource,
+              'query' => [
+                'id'  => $svItem->getVideoId(),
+                'fg'  => 'true',
+              ],
+              'headers' => [
+                  'Pragma'          => 'no-cache',
+                  'Accept-Encoding' => 'gzip, deflate, sdch',
+                  'Accept-Language' => 'fr-FR,fr;q=0.8,en-US;q=0.6,en;q=0.4',
+                  'Upgrade-Insecure-Requests'  => 1,
+                  'User-Agent'      => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.99 Safari/537.36',
+                  'Accept'          => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+                  'Referer'         => 'https://www.smashvision.net/Videos?sort=date&dir=desc&keywords=&genreId=15&subGenreId=0&toolId=&featured=0&releaseyear=',
+                  'Cache-Control'   => 'no-cache',
+                  'Connection'      => 'keep-alive',
+              ]
+          ]
+      );
+    }
     /**
      * @param null $login
      * @param null $password
@@ -220,7 +241,6 @@ class SmashVisionProvider extends Provider implements PoolProviderInterface
             $uri,
             [
                 'cookies' => $this->cookieJar,
-                //'cookies'         => true,
                 'allow_redirects' => true,
                 'debug' => $this->debug,
             ]
@@ -235,5 +255,37 @@ class SmashVisionProvider extends Provider implements PoolProviderInterface
       }
 
       return $datas;
+    }
+
+    public function checkDownloadStatus(SvItem $svItem)
+    {
+      $videoCanBeDownloaded = false;
+
+        $response = $this->client->post(
+            $this->getConfValue('check_download_status_url'),
+            [
+                'cookies' =>  $this->cookieJar,
+                'debug'   =>  $this->debug,
+                'form_params' =>  [
+                      'videoId'   => $svItem->getVideoId(),
+                      'fromGrid'  => 'true',
+                  ]
+            ]
+        );
+
+        if ($response->getStatusCode() == 200) {
+            $responseString = json_decode($response->getBody()->__toString(), 1);
+            if (isset($responseString['haserrors']) && boolval($responseString['haserrors']) === false) {
+                $videoCanBeDownloaded = true;
+
+                //$this->logger->info(sprintf('%s: %s --> %s', $svItem->getVideoId(), boolval($responseString['haserrors']), $responseString['msg']), []);
+            } else {
+              //$this->logger->warning(sprintf('%s: %s --> %s', $svItem->getVideoId(), boolval($responseString['haserrors']), $responseString['msg']), []);
+            }
+            $svItem->setDownloadStatus($responseString['msg']);
+        } else {
+            $svItem->setDownloadStatus("Can't get download status for video");
+        }
+        return $videoCanBeDownloaded;
     }
 }

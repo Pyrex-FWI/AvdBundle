@@ -295,6 +295,26 @@ class ProvidersTest extends \DeejayPoolBundle\Tests\BaseTest
     /**
      * @return string
      */
+    public static function getJsonCheckDowloadStatusErrorForSmash()
+    {
+      return '
+        {"msg":"ERROR: You have exceed the number of times you are allowed to download this video. Contact support to have your video files reset.","haserrors":true,"id":0,"data":""}
+      ';
+    }
+
+    /**
+     * @return string
+     */
+    public static function getJsonCheckDowloadStatusSuccessForSmash()
+    {
+      return '
+        {"msg":"","haserrors":false,"id":81872,"data":""}
+      ';
+    }
+
+    /**
+     * @return string
+     */
     public static function getJsonItemsForSmash()
     {
         return '

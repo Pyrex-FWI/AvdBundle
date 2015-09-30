@@ -93,6 +93,11 @@ class DeejayPoolExtension extends Extension
             sprintf('%s.configuration.items_versions_url', DeejayPoolBundle::PROVIDER_SV),
             $config[DeejayPoolBundle::PROVIDER_SV]['configuration']['items_versions_url']
         );
+        //Specific for SMASHVISION
+        $container->setParameter(
+            sprintf('%s.configuration.check_download_status_url', DeejayPoolBundle::PROVIDER_SV),
+            $config[DeejayPoolBundle::PROVIDER_SV]['configuration']['check_download_status_url']
+        );
     }
 
     public function getAlias()

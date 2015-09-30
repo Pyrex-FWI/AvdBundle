@@ -3,6 +3,7 @@
 namespace DeejayPoolBundle\Tests\Provider;
 
 use DeejayPoolBundle\Entity\AvdItem;
+use DeejayPoolBundle\Entity\SvItem;
 use DeejayPoolBundle\Entity\ProviderItemInterface;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
@@ -142,79 +143,62 @@ class SmashVisionProviderMock extends \DeejayPoolBundle\Provider\SmashVisionProv
           return $result = parent::getAllVideos([$groups[0]]);
     }
 
-    public function downloadItem(ProviderItemInterface $avdItem, $force = false, $mockSucces = true)
-    {
-        $mock = new MockHandler([
-            new Response(
-                $mockSucces ? 200 : 302,
-                [
-                    'Cache-Control'         => 'private',
-                    'Content-Length'        => '164556298',
-                    'Content-Type'          => 'application/octet-stream',
-                    'Last-Modified'         => 'Mon, 31 Aug 2015 06:18:04 GMT',
-                    'Accept-Ranges'         => 'bytes',
-                    'ETag'                  => '-1885871426',
-                    'Server'                => 'Microsoft-IIS/7.5',
-                    'Content-Disposition'   => 'attachment; filename="Patoranking ft Wande Coal - My Woman [Snipz] - HD - Clean.mp4"',
-                    'X-AspNetMvc-Version'   => '4.0',
-                    'X-AspNet-Version'      => '4.0.30319',
-                    'X-Powered-By'          => 'ASP.NET',
-                    'Date'                  => 'Sun, 30 Aug 2015 09:13:34 GMT',
-                    'Content-Length'        => '59',
-                ],
-                '' //contentData
-            ),
-        ]);
-        $handler = HandlerStack::create($mock);
-        $this->client = new Client(['handler' => $handler]);
+        public function getDownloadResponse(SvItem $svItem)
+        {
+          die('cocococ');
+          $mock = new MockHandler([
+              new Response(
+                   200,
+                  [
+                      'Cache-Control'         => 'private',
+                      'Content-Length'        => '164556298',
+                      'Content-Type'          => 'application/octet-stream',
+                      'Last-Modified'         => 'Mon, 31 Aug 2015 06:18:04 GMT',
+                      'Accept-Ranges'         => 'bytes',
+                      'ETag'                  => '-1885871426',
+                      'Server'                => 'Microsoft-IIS/7.5',
+                      'Content-Disposition'   => 'attachment; filename="Patoranking ft Wande Coal - My Woman [Snipz] - HD - Clean.mp4"',
+                      'X-AspNetMvc-Version'   => '4.0',
+                      'X-AspNet-Version'      => '4.0.30319',
+                      'X-Powered-By'          => 'ASP.NET',
+                      'Date'                  => 'Sun, 30 Aug 2015 09:13:34 GMT',
+                      'Content-Length'        => '59',
+                  ],
+                  '' //contentData
+              ),
+          ]);
+          $handler = HandlerStack::create($mock);
+          $this->client = new Client(['handler' => $handler]);
 
-        return $result = parent::downloadItem($avdItem);
-
-    }
-
-    public function getDownloadKey(AvdItem $avdItem, $mockSucces = true)
-    {
-        if ($this->client->getConfig('handler')->hasHandler() == false || $mockSucces === false) {
-            if ($mockSucces) {
-                $mock = new MockHandler([
-                    new Response(
-                        200,
-                        [
-                            'Cache-Control' => 'private, s-maxage=0',
-                            'Content-Type' => 'application/json; charset=utf-8',
-                            'Server' => 'Microsoft-IIS/7.5',
-                            'X-AspNetMvc-Version' => '4.0',
-                            'X-AspNet-Version' => '4.0.30319',
-                            'X-Powered-By' => 'ASP.NET',
-                            'Date' => 'Sun, 30 Aug 2015 09:13:34 GMT',
-                            'Content-Length' => '59',
-                        ],
-                        '{"msg":"","haserrors":false,"id":0,"data":"XYHfVAhuVu4%3d"}'
-                    ),
-                ]);
-            } else {
-                $mock = new MockHandler([
-                    new Response(
-                        200,
-                        [
-                            'Cache-Control' => 'private, s-maxage=0',
-                            'Content-Type' => 'application/json; charset=utf-8',
-                            'Server' => 'Microsoft-IIS/7.5',
-                            'X-AspNetMvc-Version' => '4.0',
-                            'X-AspNet-Version' => '4.0.30319',
-                            'X-Powered-By' => 'ASP.NET',
-                            'Date' => 'Sun, 30 Aug 2015 09:13:34 GMT',
-                            'Content-Length' => '59',
-                        ],
-                        '{"msg":"You have already downloaded this video twice.  Please contact us for further assistance.","haserrors":true,"id":0,"data":""}'
-                    )
-                ]);
-            }
-            $handler = HandlerStack::create($mock);
-            $this->client = new Client(['handler' => $handler]);
+          return $result = parent::getDownloadResponse($svItem);
         }
 
-        return $result = parent::getDownloadKey($avdItem);
-    }
+        public function checkDownloadStatus(SvItem $svItem)
+        {
+            $mock = new MockHandler([
+                new Response(
+                   200,
+                    [
+                        'Cache-Control'         => 'private',
+                        'Content-Length'        => '164556298',
+                        'Content-Type'          => 'application/octet-stream',
+                        'Last-Modified'         => 'Mon, 31 Aug 2015 06:18:04 GMT',
+                        'Accept-Ranges'         => 'bytes',
+                        'ETag'                  => '-1885871426',
+                        'Server'                => 'Microsoft-IIS/7.5',
+                        'Content-Disposition'   => 'attachment; filename="Patoranking ft Wande Coal - My Woman [Snipz] - HD - Clean.mp4"',
+                        'X-AspNetMvc-Version'   => '4.0',
+                        'X-AspNet-Version'      => '4.0.30319',
+                        'X-Powered-By'          => 'ASP.NET',
+                        'Date'                  => 'Sun, 30 Aug 2015 09:13:34 GMT',
+                        'Content-Length'        => '59',
+                    ],
+                    ProvidersTest::getJsonCheckDowloadStatusSuccessForSmash() //contentData
+                ),
+            ]);
+            $handler = HandlerStack::create($mock);
+            $this->client = new Client(['handler' => $handler]);
 
+            return $result = parent::checkDownloadStatus($svItem);
+        }
 }

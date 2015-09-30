@@ -48,10 +48,11 @@ class SvItemNormalizer extends AbstractNormalizer
             $svItem = clone $svGroup;
             $svItem->setVideoId($videoArray['videoId']);
             $svItem->setDownloaded(boolval($videoArray['downloaded']));
-            $svItem->setDownloadlink(sprintf('%s?id=%s', $context['download_url'], $svItem->getVideoId()));
+            //$svItem->setDownloadlink(sprintf('%s?id=%s', $context['download_url'], $svItem->getVideoId()));
             $svItem->setCompleteVersion($this->exactDurationVersion($videoArray['title']). '/'.$this->exactContentVersion($videoArray['title']));
             $svGroup->addSvItem($svItem);
-            $svGroup->setParent(false);
+            $svItem->setParent(false);
+            $svItem->setItemId(sprintf('%s_%s', $svGroup->getGroupId(), $svItem->getVideoId()));
         }
         $svGroup->setParent(true);
 

@@ -29,6 +29,10 @@ class SvItem implements ProviderItemInterface
     protected $hd720        = false;
     protected $hd1080       = false;
     protected $parent       = false;
+    protected $itemId;
+    protected $downloadStatus;
+    protected $downloadable;
+
     /** @var ArrayCollection<SvItem> */
     protected $svItems;
 
@@ -39,6 +43,37 @@ class SvItem implements ProviderItemInterface
     }
 
     /**
+     *
+     */
+    public function setDownloadable($boolValue)
+    {
+        $this->downloadable = $boolValue;
+        return $this;
+    }
+
+    /**
+     *
+     */
+    public function getDownloadable()
+    {
+        return $this->downloadable;
+    }
+
+    /**
+     * @return SvItem
+     */
+    public function setDownloadStatus($dstatus)
+    {
+        $this->downloadStatus = $dstatus;
+        return $this;
+    }
+
+    public function getDownloadStatus()
+    {
+        return $this->downloadStatus;
+    }
+
+    /**
      * @return $isParent
      */
     public function isParent()
@@ -46,6 +81,27 @@ class SvItem implements ProviderItemInterface
         return $this->parent;
     }
 
+    /**
+     * Get trackId.
+     *
+     * @return int
+     */
+    public function getItemId()
+    {
+        return $this->itemId;
+    }
+
+    /**
+     * Set trackId.
+     *
+     * @return SvItem
+     */
+    public function setItemId($itemItd)
+    {
+        $this->itemId = $itemItd;
+
+        return $this;
+    }
     /**
      * @param boolean $isParent
      * @return $this

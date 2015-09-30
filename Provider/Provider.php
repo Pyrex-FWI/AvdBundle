@@ -20,7 +20,7 @@ abstract class Provider extends ContainerAware
     /**
      * @var Client
      */
-    public $client;
+    protected $client;
     /**
      * Flag to konw if we are connected to service.
      *
@@ -49,7 +49,7 @@ abstract class Provider extends ContainerAware
     public function __construct()
     {
         $this->cookieJar            = new CookieJar();
-        $this->client               = new Client(['cookies' => true]);
+        $this->client               = new Client();
     }
     /**
      * Return debug val.
