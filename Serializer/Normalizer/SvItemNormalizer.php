@@ -52,6 +52,7 @@ class SvItemNormalizer extends AbstractNormalizer
             $svItem->setCompleteVersion($this->exactDurationVersion($videoArray['title']). '/'.$this->exactContentVersion($videoArray['title']));
             $svGroup->addSvItem($svItem);
             $svGroup->setParent(false);
+            $svGroup->setItemId(sprintf('%s_%s', $svGroup->getGroupId(), $svItem->getVideoId()));
         }
         $svGroup->setParent(true);
 

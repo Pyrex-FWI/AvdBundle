@@ -29,6 +29,8 @@ class SvItem implements ProviderItemInterface
     protected $hd720        = false;
     protected $hd1080       = false;
     protected $parent       = false;
+    protected $itemId;
+
     /** @var ArrayCollection<SvItem> */
     protected $svItems;
 
@@ -46,6 +48,27 @@ class SvItem implements ProviderItemInterface
         return $this->parent;
     }
 
+    /**
+     * Get trackId.
+     *
+     * @return int
+     */
+    public function getItemId()
+    {
+        return $this->itemId;
+    }
+
+    /**
+     * Set trackId.
+     *
+     * @return AvItem
+     */
+    public function setItemId($itemItd)
+    {
+        $this->itemId = $itemItd;
+
+        return $this;
+    }
     /**
      * @param boolean $isParent
      * @return $this
