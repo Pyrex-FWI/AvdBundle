@@ -59,7 +59,7 @@ class SmashVisionProvider extends Provider implements PoolProviderInterface
                   'dir'         => 'desc',
                   'keywords'    => '',
                   'genreId'     => 1000, //all video
-                  'hd'          => 1 //Get only hd
+                  'hd'          => 1, //Get only hd
                   'subGenreId'  => 0,
                   'toolId'      => '',
                   'featured'    => 0,
