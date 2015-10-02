@@ -58,7 +58,7 @@ class SmashVisionProvider extends Provider implements PoolProviderInterface
                   'sort'        => 'date',
                   'dir'         => 'desc',
                   'keywords'    => '',
-                  'genreId'     => 0,
+                  'genreId'     => 1000, //all video
                   'subGenreId'  => 0,
                   'toolId'      => '',
                   'featured'    => 0,
