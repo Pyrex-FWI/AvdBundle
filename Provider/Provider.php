@@ -49,7 +49,7 @@ abstract class Provider extends ContainerAware
     public function __construct()
     {
         $this->cookieJar            = new CookieJar();
-        $this->client               = new Client();
+        $this->client               = new Client(['http_errors' => false]);
     }
     /**
      * Return debug val.

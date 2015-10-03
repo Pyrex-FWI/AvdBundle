@@ -35,4 +35,4 @@ parameters:
     smashvision.credentials.login: toto@hotmail.fr
     smashvision.credentials.password: toto
 
-    #smashvision.provider.class: DeejayPoolBundle\Tests\Provider\SmashVisionProviderMock
+    smashvision.provider.class: DeejayPoolBundle\Tests\Provider\SmashVisionProviderMock

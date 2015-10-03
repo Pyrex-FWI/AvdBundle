@@ -617,4 +617,8 @@ class SvItem implements ProviderItemInterface
             return preg_match('/Clean/i', $this->completeVersion) > 0;
         }
 
+        public function __clone()
+        {
+          $this->svItems = new ArrayCollection();
+        }
 }

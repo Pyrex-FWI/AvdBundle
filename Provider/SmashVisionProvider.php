@@ -78,14 +78,30 @@ class SmashVisionProvider extends Provider implements PoolProviderInterface
         if (isset($rep['data']) && count($rep) > 0) {
             $rep['data'] = $this->getAllVideos($rep['data']);
             foreach ($rep['data'] as $svItemArray) {
-                $itemsArray[] = $this->serializer->denormalize($svItemArray, SvItemNormalizer::SVITEM, null, $context);
+                $svGroupItem = $this->serializer->denormalize($svItemArray, SvItemNormalizer::SVITEM, null, $context);
+                $itemsArray = array_merge($itemsArray, $this->getChild($svGroupItem));
             }
         }
+
         $this->logger->info(sprintf('Page %s fetched successfuly with %s items', $page, count($itemsArray)), [$itemsArray]);
         $postItemsListEvent = new PostItemsListEvent($itemsArray);
         $this->eventDispatcher->dispatch(ProviderEvents::ITEMS_POST_GETLIST, $postItemsListEvent);
 
         return $postItemsListEvent->getItems();
+    }
+
+    private function getChild(SvItem $svGroup)
+    {
+        $itemsArray = [];
+        if ($svGroup->isParent() && $svGroup->getSvItems()->count() > 1) {
+            foreach ($svGroup->getSvItems() as $key => $svItem) {
+              $itemsArray[] = $svItem;
+            }
+        } else {
+          $itemsArray[] = $svGroup;
+        }
+
+        return $itemsArray;
     }
 
     /**

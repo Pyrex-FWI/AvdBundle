@@ -143,9 +143,8 @@ class SmashVisionProviderMock extends \DeejayPoolBundle\Provider\SmashVisionProv
           return $result = parent::getAllVideos([$groups[0]]);
     }
 
-        public function getDownloadResponse(SvItem $svItem)
+        public function getDownloadResponse(SvItem $svItem, $resource)
         {
-          die('cocococ');
           $mock = new MockHandler([
               new Response(
                    200,
@@ -170,7 +169,7 @@ class SmashVisionProviderMock extends \DeejayPoolBundle\Provider\SmashVisionProv
           $handler = HandlerStack::create($mock);
           $this->client = new Client(['handler' => $handler]);
 
-          return $result = parent::getDownloadResponse($svItem);
+          return $result = parent::getDownloadResponse($svItem, $resource);
         }
 
         public function checkDownloadStatus(SvItem $svItem)
