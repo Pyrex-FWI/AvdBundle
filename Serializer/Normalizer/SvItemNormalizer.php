@@ -115,7 +115,7 @@ class SvItemNormalizer extends AbstractNormalizer
     private function extractReleaseDate($date)
     {
         if (preg_match('#^/Date\((?<date>\d*)\)/$#i', $date, $matches) > 0) {
-            return intval($matches['date'])/1000;
+            return substr($matches['date'], 0, 10);
         }
 
         0;
