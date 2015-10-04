@@ -3,16 +3,10 @@
 namespace DeejayPoolBundle\Provider;
 
 use DeejayPoolBundle\DeejayPoolBundle;
-use DeejayPoolBundle\Entity\AvdItem;
 use DeejayPoolBundle\Entity\FranchisePoolItem;
 use DeejayPoolBundle\Entity\ProviderItemInterface;
-use DeejayPoolBundle\Event\ProviderEvents;
-use DeejayPoolBundle\Event\ItemDownloadEvent;
-use DeejayPoolBundle\Event\PostItemsListEvent;
 use DeejayPoolBundle\Serializer\Normalizer\FranchiseRecordPoolItemNormalizer;
-use Psr\Log\NullLogger;
 use Symfony\Bridge\Monolog\Logger;
-use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\Serializer\Serializer;
 
@@ -23,52 +17,18 @@ class FranchisePoolProvider extends Provider implements PoolProviderInterface
     protected $eventDispatcher;
     /** @var Serializer  */
     protected $serializer;
-
+    /**
+     *
+     * @var string 
+     */
+    protected $downloadedFileName;
+    
     public function __construct(
         $eventDispatcher,
         Logger $logger = null)
     {
-        parent::__construct();
-        $this->logger               = $logger ? $logger : new NullLogger();
-        $this->eventDispatcher      = $eventDispatcher;
+        parent::__construct($eventDispatcher,$logger);
         $this->serializer           = new Serializer([new FranchiseRecordPoolItemNormalizer()]);
-
-    }
-
-    /**
-     * @param null $login
-     * @param null $password
-     * @return bool
-     */
-    public function open($login = null, $password = null)
-    {
-        if (!$this->IsConnected()) {
-            $response = $this->client->post(
-                $this->getConfValue('login_check'),
-                [
-                    'cookies'           => $this->cookieJar,
-                    'allow_redirects'   => false,
-                    'debug'             => $this->debug,
-                    'headers'           => ['Content-Type' => 'application/x-www-form-urlencoded'],
-                    'form_params'       => [
-                        $this->container->getParameter(DeejayPoolBundle::PROVIDER_FPR_AUDIO.'.configuration.login_form_name') => $login ? $login : $this->container->getParameter(DeejayPoolBundle::PROVIDER_FPR_AUDIO.'.credentials.login'),
-                        $this->container->getParameter(DeejayPoolBundle::PROVIDER_FPR_AUDIO.'.configuration.password_form_name') => $password ? $password : $this->container->getParameter(DeejayPoolBundle::PROVIDER_FPR_AUDIO.'.credentials.password')
-                    ]
-                ]
-            );
-
-            if ($response->getHeaderLine('Location') === $this->getConfValue('login_success_redirect')) {
-                $this->isConnected = true;
-                $this->logger->info(sprintf('Connection has openned successfuly on %s', $this->getName()), []);
-                $this->eventDispatcher->dispatch(ProviderEvents::SESSION_OPENED, new Event());
-            } else {
-                $this->isConnected = false;
-                $this->logger->warning(sprintf('Unable to connect on %s', $this->getName()), []);
-                $this->eventDispatcher->dispatch(ProviderEvents::SESSION_OPEN_ERROR, new Event());
-            }
-        }
-
-        return $this->IsConnected();
     }
 
     /**
@@ -88,14 +48,63 @@ class FranchisePoolProvider extends Provider implements PoolProviderInterface
     }
 
     /**
-     * @param $page
-     * @return \DeejayPoolBundle\Entity\AvdItem[]
+     * @param $avItemArray
+     * @return FranchisePoolItem
      */
-    public function getItems($page)
+    protected function getNormalizedObject($avItemArray)
     {
-        /** @var AvdItem[] $itemsArray */
-        $itemsArray = [];
-        $response = $this->client->get(
+        return $this->serializer->denormalize($avItemArray, FranchiseRecordPoolItemNormalizer::ITEM_AUDIO);
+    }
+    
+    public function getName()
+    {
+        return DeejayPoolBundle::PROVIDER_FPR_AUDIO;
+    }
+
+    /**
+     * @return bool
+     */
+    public function supportAsyncDownload()
+    {
+        return false;
+    }
+
+    public function itemCanBeDownload(ProviderItemInterface $item)
+    {
+        return true;
+    }
+
+    protected function getLoginResponse($login, $password)
+    {
+        return $response = $this->client->post(
+            $this->getConfValue('login_check'),
+            [
+                'cookies'           => $this->cookieJar,
+                'allow_redirects'   => false,
+                'debug'             => $this->debug,
+                'headers'           => ['Content-Type' => 'application/x-www-form-urlencoded'],
+                'form_params'       => [
+                    $this->container->getParameter(DeejayPoolBundle::PROVIDER_FPR_AUDIO.'.configuration.login_form_name') => $login ? $login : $this->container->getParameter(DeejayPoolBundle::PROVIDER_FPR_AUDIO.'.credentials.login'),
+                    $this->container->getParameter(DeejayPoolBundle::PROVIDER_FPR_AUDIO.'.configuration.password_form_name') => $password ? $password : $this->container->getParameter(DeejayPoolBundle::PROVIDER_FPR_AUDIO.'.credentials.password')
+                ]
+            ]
+        );
+    }
+
+    protected function hasCorrectlyConnected(\Psr\Http\Message\ResponseInterface $response)
+    {
+        if ($response->getHeaderLine('Location') === $this->getConfValue('login_success_redirect')) {
+            return true;
+        } else {
+            return false;
+        }
+
+        return false;
+    }
+
+    protected function getItemsResponse($page)
+    {
+        return $response = $this->client->get(
             $this->getConfValue('items_url'),
             [
                 'cookies'           => $this->cookieJar,
@@ -104,9 +113,12 @@ class FranchisePoolProvider extends Provider implements PoolProviderInterface
                 'query'             => $this->getItemsQuery($page)
             ]
         );
+    }
 
+    protected function parseItemResponse(\Psr\Http\Message\ResponseInterface $response)
+    {
+        $itemsArray = [];
         $rep = json_decode($response->getBody(), true);
-
 
         if (isset($rep['rows']) && count($rep['rows']) > 0) {
             foreach ($rep['rows'] as $avItemArray) {
@@ -116,35 +128,14 @@ class FranchisePoolProvider extends Provider implements PoolProviderInterface
                 $itemsArray[] = $item;
             }
         }
-        $this->logger->info(sprintf('Page %s fetched successfuly with %s items', $page, count($itemsArray)), [$itemsArray]);
-        $postItemsListEvent = new PostItemsListEvent($itemsArray);
-        $this->eventDispatcher->dispatch(ProviderEvents::ITEMS_POST_GETLIST, $postItemsListEvent);
-
-        return $postItemsListEvent->getItems();
+        
+        return $itemsArray;
     }
 
-    /**
-     * @param $avItemArray
-     * @return FranchisePoolItem
-     */
-    protected function getNormalizedObject($avItemArray)
+    protected function getDownloadResponse(ProviderItemInterface $item, $tempName)
     {
-        return $this->serializer->denormalize($avItemArray, FranchiseRecordPoolItemNormalizer::ITEM_AUDIO);
-    }
-    /**
-     * @param FranchisePoolItem $item
-     * @param bool|false $force
-     * @return bool
-     */
-    public function downloadItem(ProviderItemInterface $item, $force = false)
-    {
-        /** @var FranchisePoolItem $item */
-        $this->eventDispatcher->dispatch(ProviderEvents::ITEM_PRE_DOWNLOAD, new ItemDownloadEvent($item));
-        $fileName = '';
-        $tmpName = $this->getConfValue('root_path').DIRECTORY_SEPARATOR.$item->getItemId();
-
-        $resource = fopen($tmpName, 'w');
-        $item->setDownloadlink($this->getConfValue('download_url').$item->getItemId());
+        $requestUrl = $item->getDownloadlink();
+        $resource = fopen($tempName, 'w');
 
         $requestParams = [
             'cookies' => $this->cookieJar,
@@ -159,53 +150,31 @@ class FranchisePoolProvider extends Provider implements PoolProviderInterface
                 'User-Agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36'
             ]
         ];
-        $requestUrl = $item->getDownloadlink();
-        try {
-            do {
-                $response = $this->client->get(
-                    $requestUrl,
-                    $requestParams
-                );
-                if ($requestUrl = $response->getHeaderLine('Location')) {
-                    $requestParams['sink'] = $resource;
-                    $fileName = (urldecode(basename(parse_url($requestUrl)['path'])));
-                    $item->setDownloadlink($requestUrl);
-                }
-            } while ($response->hasHeader('Location'));
-
-            if ($response->getStatusCode() === 200) {
-                $fileName = $this->getConfValue('root_path') . DIRECTORY_SEPARATOR . sprintf('%s_%s', $item->getItemId(), str_replace(' ', '_', $fileName));
-                rename($tmpName, $fileName);
-                $item->setFullPath($fileName);
-                $item->setDownloaded(true);
-                $this->logger->info(sprintf('%s %s %s has succesfully downloaded', $item->getItemId(), $item->getArtist(), $item->getTitle()), [$item]);
-                $this->eventDispatcher->dispatch(ProviderEvents::ITEM_SUCCESS_DOWNLOAD, new ItemDownloadEvent($item, $fileName));
-
-                return true;
+        do {
+            $response = $this->client->get(
+                $requestUrl,
+                $requestParams
+            );
+            if ($requestUrl = $response->getHeaderLine('Location')) {
+                $requestParams['sink'] = $resource;
+                $fileName = (urldecode(basename(parse_url($requestUrl)['path'])));
+                $item->setDownloadlink($requestUrl);
             }
-        } catch (\Exception $e) {
-            $this->setLastError($e->getMessage());
-        }
-
-        unlink($tmpName);
-
-        $this->logger->info(sprintf('%s %s %s has download ERROR', $item->getItemId(), $item->getArtist(), $item->getTitle()), [$item, $this->getLastError()]);
-        $this->eventDispatcher->dispatch(ProviderEvents::ITEM_ERROR_DOWNLOAD, new ItemDownloadEvent($item, null, $this->getLastError()));
-
-        return false;
+        } while ($response->hasHeader('Location'));
+  
+        return $response;
     }
 
-
-    public function getName()
+    
+    public function getDownloadedFileName(\Psr\Http\Message\ResponseInterface $response)
     {
-        return DeejayPoolBundle::PROVIDER_FPR_AUDIO;
+        $requestUrl = $response->getHeaderLine('Location');
+        $fileName = (urldecode(basename(parse_url($requestUrl)['path'])));
+        return $fileName;
     }
 
-    /**
-     * @return bool
-     */
-    public function supportAsyncDownload()
+    public function hasCorrectlyDownloaded(\Psr\Http\Message\ResponseInterface $response, $tempName)
     {
-        return false;
+        return ($response->getStatusCode() === 200) && parent::hasCorrectlyDownloaded($response, $tempName);
     }
 }

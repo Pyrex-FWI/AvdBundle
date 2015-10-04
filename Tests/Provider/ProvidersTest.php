@@ -91,11 +91,6 @@ class ProvidersTest extends \DeejayPoolBundle\Tests\BaseTest
                 unlink($downloadedFile);
             }
 
-            if($serviceName == \DeejayPoolBundle\DeejayPoolBundle::PROVIDER_AVD) {
-                $this->assertNull($this->provider->getDownloadKey($items[2], false));
-                $this->assertFalse($this->provider->downloadItem($items[2], false, false));
-            }
-
             $this->provider->close();
             $this->assertTrue(false === $this->provider->isConnected());
             $this->removeListeners();

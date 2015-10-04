@@ -120,4 +120,5 @@ class FranchisePoolVideoProvider extends FranchisePoolProvider
     {
         return false;
     }
+
 }

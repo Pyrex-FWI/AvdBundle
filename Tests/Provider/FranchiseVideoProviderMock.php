@@ -2,7 +2,6 @@
 
 namespace DeejayPoolBundle\Tests\Provider;
 
-use DeejayPoolBundle\Entity\AvdItem;
 use DeejayPoolBundle\Entity\ProviderItemInterface;
 use DeejayPoolBundle\Provider\FranchisePoolVideoProvider;
 use GuzzleHttp\Handler\MockHandler;
