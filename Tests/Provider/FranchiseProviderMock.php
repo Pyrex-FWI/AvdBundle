@@ -2,7 +2,6 @@
 
 namespace DeejayPoolBundle\Tests\Provider;
 
-use DeejayPoolBundle\Entity\AvdItem;
 use DeejayPoolBundle\Entity\ProviderItemInterface;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
@@ -12,54 +11,48 @@ use GuzzleHttp\Client;
 class FranchiseProviderMock extends \DeejayPoolBundle\Provider\FranchisePoolProvider
 {
 
-	/**
-	 * Open session on digitalDjPool service.
-	 *
-	 * @return bool true if auth succes else false
-	 */
-	public function open($login = null, $password = null, $mockFail = false)
-	{
-		if ($mockFail == false) {
-			$mock = new MockHandler([
-				new Response(302,
-					[
-						'Location' => $this->getConfValue('login_success_redirect'),
-					],
-					''
-				),
-			]);
-		} else {
-			$mock = new MockHandler([
-				new Response(200,
-					[],
-					'<html></html>'
-				),
-			]);
-		}
-		$handler = HandlerStack::create($mock);
-		$this->client = new Client(['handler' => $handler]);
-		$result = parent::open($login, $password);
+    /**
+     * Open session on digitalDjPool service.
+     *
+     * @return bool true if auth succes else false
+     */
+    public function open($login = null, $password = null, $mockFail = false)
+    {
+        if ($mockFail == false) {
+            $mock = new MockHandler([
+                new Response(302, [
+                    'Location' => $this->getConfValue('login_success_redirect'),
+                    ], ''
+                ),
+            ]);
+        } else {
+            $mock = new MockHandler([
+                new Response(200, [], '<html></html>'
+                ),
+            ]);
+        }
+        $handler      = HandlerStack::create($mock);
+        $this->client = new Client(['handler' => $handler]);
+        $result       = parent::open($login, $password);
 
-		return $result;
-	}
+        return $result;
+    }
 
-	public function getItems($page)
-	{
-		$mock = new MockHandler([
-			new Response(
-				200,
-				[
-					'Cache-Control' => 'private, s-maxage=0',
-					'Content-Type' => 'application/json; charset=utf-8',
-					'Server' => 'Microsoft-IIS/7.5',
-					'X-AspNetMvc-Version' => '4.0',
-					'X-AspNet-Version' => '4.0.30319',
-					'X-Powered-By' => 'ASP.NET',
-					'Date' => 'Sun, 30 Aug 2015 09:10:14 GMT',
-					'Content-Length' => '13326',
-					'Set-Cookie' => '.ASPXAUTH=',
-				],
-				'{
+    public function getItems($page)
+    {
+        $mock         = new MockHandler([
+            new Response(
+                200, [
+                'Cache-Control'       => 'private, s-maxage=0',
+                'Content-Type'        => 'application/json; charset=utf-8',
+                'Server'              => 'Microsoft-IIS/7.5',
+                'X-AspNetMvc-Version' => '4.0',
+                'X-AspNet-Version'    => '4.0.30319',
+                'X-Powered-By'        => 'ASP.NET',
+                'Date'                => 'Sun, 30 Aug 2015 09:10:14 GMT',
+                'Content-Length'      => '13326',
+                'Set-Cookie'          => '.ASPXAUTH=',
+                ], '{
 				   "page":"5",
 				   "total":17962,
 				   "records":269430,
@@ -321,66 +314,66 @@ class FranchiseProviderMock extends \DeejayPoolBundle\Provider\FranchisePoolProv
 					  }
 				   ]
 				}'
-			),
-		]);
-		$handler = HandlerStack::create($mock);
-		$this->client = new Client(['handler' => $handler]);
+            ),
+        ]);
+        $handler      = HandlerStack::create($mock);
+        $this->client = new Client(['handler' => $handler]);
 
-		return $result = parent::getItems($page);
-	}
+        return $result = parent::getItems($page);
+    }
 
-	public function downloadItem(ProviderItemInterface $avdItem, $force = false, $mockSucces = true)
-	{
-		$mock = new MockHandler([
-			new Response(
-				302,
-				[
-					'Access-Control-Allow-Headers'		=> 'X-Requested-With, X-Prototype-Version, Content-Type, Origin',
-					'Access-Control-Allow-Methods'		=> 'POST PUT DELETE GET OPTIONS',
-					'Access-Control-Allow-Origin'		=> 'http://localhost:9000',
-					'Cache-Control'						=> 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0',
-					'Content-Encoding'					=> 'gzip',
-					'Content-Type'						=> 'text/html; charset=UTF-8',
-					'Date'								=> 'Tue, 08 Sep 2015 11:39:27 GMT',
-					'Expires'							=> 'Thu, 19 Nov 1981 08:52:00 GMT',
-					'Location'							=> 'http://media.franchiserecordpool.com/audio/hiphop/Rick%20Ross%20-%20Foreclosures%20%28Clean%29.mp3?Expires=1441715967&Key-Pair-Id=APKAJNHBKLJXOJMHPAYQ&Signature=NlCnTJFV0SddvLxUpmtxExc6g7m99ccF0cKrABJh9w7r0pmlwZgsOnf5E~F2b8S9u3Wyqe80MOcLuXoCTBj7DuyWA-FJcetqecAIEcRMHaFv1VpgQ5ZdIlU4cQiBgv7iIxR9FFmV9cXKl8oPoL5vO-PE93K6h6CHjQpbeBc1LEo_',
-					'Pragma'							=> 'no-cache',
-					'Server'							=> 'nginx/1.2.7',
-					'Vary'								=> 'Accept-Encoding',
-					'X-FRP-build'						=> '3812:98d0c1b3f99e',
-					'X-FRP-node'						=> 'web5',
-					'X-Powered-By'						=> 'PHP/5.3.3',
-					'Content-Length'					=> 26,
-					'Connection'						=> 'keep-alive,'
-				],
-				''
-			),
-			new Response(
-				$mockSucces ? 200 : 302,
-				[
-					'Content-Type'			=> 'audio/mpeg',
-					'Content-Length'		=> '11057204',
-					'Connection'			=> 'keep-alive',
-					'Date'					=> 'Tue, 08 Sep 2015 11:39:29 GMT',
-					'Content-Disposition'	=> 'attachment',
-					'Last-Modified'			=> 'Wed, 02 Sep 2015 04:54:46 GMT',
-					'Etag'					=> '"0d841aa67b50760d58275b567754f05e"',
-					'Accept-Ranges'			=> 'bytes',
-					'Server'				=> 'AmazonS3',
-					'X-Cache'				=> 'Miss from cloudfront',
-					'Via'					=> '1.1 fda22d9cef54c172af1b22463f41c0c9.cloudfront.net (CloudFront)',
-					'X-Amz-Cf-Id'			=> 'S2Kqkpl2JkjjIXAq59Heqt6d8K8N-2v2XWqbQ76jt7l9DfrZmpb4jw=='
-				],
-				'' //contentData
-			),
-		]);
-		$handler = HandlerStack::create($mock);
-		$this->client = new Client(['handler' => $handler]);
+    public function downloadItem(ProviderItemInterface $avdItem, $force = false, $mockSucces = true)
+    {
+        $mock         = new MockHandler([
+            new Response(
+                302, [
+                'Access-Control-Allow-Headers' => 'X-Requested-With, X-Prototype-Version, Content-Type, Origin',
+                'Access-Control-Allow-Methods' => 'POST PUT DELETE GET OPTIONS',
+                'Access-Control-Allow-Origin'  => 'http://localhost:9000',
+                'Cache-Control'                => 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0',
+                'Content-Encoding'             => 'gzip',
+                'Content-Type'                 => 'text/html; charset=UTF-8',
+                'Date'                         => 'Tue, 08 Sep 2015 11:39:27 GMT',
+                'Expires'                      => 'Thu, 19 Nov 1981 08:52:00 GMT',
+                'Location'                     => 'http://media.franchiserecordpool.com/audio/hiphop/Rick%20Ross%20-%20Foreclosures%20%28Clean%29.mp3?Expires=1441715967&Key-Pair-Id=APKAJNHBKLJXOJMHPAYQ&Signature=NlCnTJFV0SddvLxUpmtxExc6g7m99ccF0cKrABJh9w7r0pmlwZgsOnf5E~F2b8S9u3Wyqe80MOcLuXoCTBj7DuyWA-FJcetqecAIEcRMHaFv1VpgQ5ZdIlU4cQiBgv7iIxR9FFmV9cXKl8oPoL5vO-PE93K6h6CHjQpbeBc1LEo_',
+                'Pragma'                       => 'no-cache',
+                'Server'                       => 'nginx/1.2.7',
+                'Vary'                         => 'Accept-Encoding',
+                'X-FRP-build'                  => '3812:98d0c1b3f99e',
+                'X-FRP-node'                   => 'web5',
+                'X-Powered-By'                 => 'PHP/5.3.3',
+                'Content-Length'               => 26,
+                'Connection'                   => 'keep-alive,'
+                ], 
+                ''
+            ),
+            new Response(
+                $mockSucces ? 200 : 302, [
+                'Content-Type'        => 'audio/mpeg',
+                'Content-Length'      => '11057204',
+                'Connection'          => 'keep-alive',
+                'Date'                => 'Tue, 08 Sep 2015 11:39:29 GMT',
+                'Content-Disposition' => 'attachment',
+                'Last-Modified'       => 'Wed, 02 Sep 2015 04:54:46 GMT',
+                'Etag'                => '"0d841aa67b50760d58275b567754f05e"',
+                'Accept-Ranges'       => 'bytes',
+                'Server'              => 'AmazonS3',
+                'X-Cache'             => 'Miss from cloudfront',
+                'Via'                 => '1.1 fda22d9cef54c172af1b22463f41c0c9.cloudfront.net (CloudFront)',
+                'X-Amz-Cf-Id'         => 'S2Kqkpl2JkjjIXAq59Heqt6d8K8N-2v2XWqbQ76jt7l9DfrZmpb4jw=='
+                ], 
+                '<dummy_content>'
 
-		return $result = parent::downloadItem($avdItem);
+            ),
+        ]);
+        $handler      = HandlerStack::create($mock);
+        $this->client = new Client(['handler' => $handler]);
 
-	}
-
-
+        return $result = parent::downloadItem($avdItem);
+    }
+    
+    public function getDownloadedFileName(\Psr\Http\Message\ResponseInterface $response)
+    {
+        return 'Rick Ross - Foreclosures (Clean).mp3';
+    }
 }
-

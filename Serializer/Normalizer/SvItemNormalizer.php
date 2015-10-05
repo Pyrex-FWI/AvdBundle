@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: chpyr
- * Date: 30/08/15
- * Time: 18:45
- */
 
 namespace DeejayPoolBundle\Serializer\Normalizer;
 
@@ -13,18 +7,15 @@ use DeejayPoolBundle\Entity\SvGroup;
 use DeejayPoolBundle\Entity\SvItem;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 
+/**
+ * @author Pyrex-FWI <yemistikris@hotmail.fr>
+ *
+ * SvItemNormalizer
+ */
 class SvItemNormalizer extends AbstractNormalizer
 {
-
     const SVITEM = 'SvItem';
 
-    /**
-     * @param $properties []
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
     /**
      * Denormalizes data back into an object of the given class.
      *
@@ -44,11 +35,11 @@ class SvItemNormalizer extends AbstractNormalizer
         $svGroup->setBpm(intval($data['bpm']));
         $svGroup->addRelatedGenre($data['genre']);
         $svGroup->setReleaseDate((new \DateTime())->setTimestamp($this->extractReleaseDate($data['date'])));
+
         foreach ($data['videos'] as $videoArray) {
             $svItem = clone $svGroup;
             $svItem->setVideoId($videoArray['videoId']);
             $svItem->setDownloaded(boolval($videoArray['downloaded']));
-            //$svItem->setDownloadlink(sprintf('%s?id=%s', $context['download_url'], $svItem->getVideoId()));
             $svItem->setCompleteVersion($this->exactDurationVersion($videoArray['title']). '/'.$this->exactContentVersion($videoArray['title']));
             $svGroup->addSvItem($svItem);
             $svItem->setParent(false);
@@ -58,17 +49,42 @@ class SvItemNormalizer extends AbstractNormalizer
 
         return $svGroup;
     }
-
+    /**
+     * [exactDurationVersion description]
+     * @method exactDurationVersion
+     * @param  [type]               $title [description]
+     * @return [type]                      [description]
+     */
     private function exactDurationVersion($title) {
         if (preg_match('/(?<version>single|xtendz|snipz)/i', $title, $matches) > 0) {
             return $matches['version'];
         }
     }
-
+    /**
+     * [exactContentVersion description]
+     * @method exactContentVersion
+     * @param  [type]              $title [description]
+     * @return [type]                     [description]
+     */
     private function exactContentVersion($title) {
         if (preg_match('/(?<version>clean|dirty)$/i', $title, $matches) > 0) {
             return $matches['version'];
         }
+    }
+
+    /**
+     * Extract timestamp from microtime timestamp
+     * @method extractReleaseDate
+     * @param  string             $date string like /Date(12345678901234)/
+     * @return int                      1234567890
+     */
+    private function extractReleaseDate($date)
+    {
+        if (preg_match('#^/Date\((?<date>\d*)\)/$#i', $date, $matches) > 0) {
+            return intval(substr($matches['date'], 0, 10));
+        }
+
+        return 0;
     }
 
     /**
@@ -112,12 +128,4 @@ class SvItemNormalizer extends AbstractNormalizer
         return false;
     }
 
-    private function extractReleaseDate($date)
-    {
-        if (preg_match('#^/Date\((?<date>\d*)\)/$#i', $date, $matches) > 0) {
-            return substr($matches['date'], 0, 10);
-        }
-
-        0;
-    }
 }

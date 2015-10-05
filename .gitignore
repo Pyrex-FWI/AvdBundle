@@ -7,3 +7,5 @@ composer.lock
 Tests/TestData/Coverage
 !Tests/TestData/root_path/.placeholder
 Tests/TestData/root_path
+/nbproject/private/
+/nbproject

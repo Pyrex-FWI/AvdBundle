@@ -2,7 +2,6 @@
 
 namespace DeejayPoolBundle\Tests\Provider;
 
-use DeejayPoolBundle\Entity\AvdItem;
 use DeejayPoolBundle\Entity\SvItem;
 use DeejayPoolBundle\Entity\ProviderItemInterface;
 use GuzzleHttp\Handler\MockHandler;
@@ -143,7 +142,7 @@ class SmashVisionProviderMock extends \DeejayPoolBundle\Provider\SmashVisionProv
           return $result = parent::getAllVideos([$groups[0]]);
     }
 
-        public function getDownloadResponse(SvItem $svItem, $resource)
+        public function getDownloadResponse(ProviderItemInterface $svItem, $tmpName)
         {
           $mock = new MockHandler([
               new Response(
@@ -169,7 +168,7 @@ class SmashVisionProviderMock extends \DeejayPoolBundle\Provider\SmashVisionProv
           $handler = HandlerStack::create($mock);
           $this->client = new Client(['handler' => $handler]);
 
-          return $result = parent::getDownloadResponse($svItem, $resource);
+          return $result = parent::getDownloadResponse($svItem, $tmpName);
         }
 
         public function checkDownloadStatus(SvItem $svItem)

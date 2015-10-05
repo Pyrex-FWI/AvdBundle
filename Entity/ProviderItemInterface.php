@@ -11,5 +11,5 @@ namespace DeejayPoolBundle\Entity;
 
 interface ProviderItemInterface
 {
-
+    public function getItemId();
 }

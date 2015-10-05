@@ -15,57 +15,50 @@ class AvDistrictProviderMock extends \DeejayPoolBundle\Provider\AvDistrictProvid
     private $headers = [];
     protected $debug = true;
 
-
     /**
      * Open session on digitalDjPool service.
      *
      * @return bool true if auth succes else false
      */
-     public function open($login = null, $password = null, $mockFail = false)
-     {
-         if ($mockFail == false) {
-             $mock = new MockHandler([
-                 new Response(200,
-                     [
-                       'Set-Cookie'=> '.ASPXAUTH=',
-                     ],
-                     '{"msg":"","haserrors":false,"id":1204,"data":"/Videos"}'
-               ),
-             ]);
-         } else {
-           $mock = new MockHandler([
-               new Response(200,
-                 [
-                   'Content-Type'  => 'application/json; charset=utf-8',
-                 ],
-                 '{"msg":"Invalid login email and/or password.","haserrors":true,"id":0,"data":"/Videos"}'
-               ),
-           ]);
-         }
-         $handler = HandlerStack::create($mock);
-         $this->client = new Client(['handler' => $handler]);
-         $result = parent::open($login, $password);
+    public function open($login = null, $password = null, $mockFail = false)
+    {
+        if ($mockFail == false) {
+            $mock = new MockHandler([
+                new Response(200, [
+                    'Set-Cookie' => '.ASPXAUTH=',
+                    ], '{"msg":"","haserrors":false,"id":1204,"data":"/Videos"}'
+                ),
+            ]);
+        } else {
+            $mock = new MockHandler([
+                new Response(200, [
+                    'Content-Type' => 'application/json; charset=utf-8',
+                    ], '{"msg":"Invalid login email and/or password.","haserrors":true,"id":0,"data":"/Videos"}'
+                ),
+            ]);
+        }
+        $handler      = HandlerStack::create($mock);
+        $this->client = new Client(['handler' => $handler]);
+        $result       = parent::open($login, $password);
 
-         return $result;
-     }
+        return $result;
+    }
 
     public function getItems($page)
     {
-         $mock = new MockHandler([
-             new Response(
-                 200,
-                 [
-                    'Cache-Control'             => 'private, s-maxage=0',
-                    'Content-Type'              => 'application/json; charset=utf-8',
-                    'Server'                    => 'Microsoft-IIS/7.5',
-                    'X-AspNetMvc-Version'       => '4.0',
-                    'X-AspNet-Version'          => '4.0.30319',
-                    'X-Powered-By'              => 'ASP.NET',
-                    'Date'                      => 'Sun, 30 Aug 2015 09:10:14 GMT',
-                    'Content-Length'            => '13326',
-                    'Set-Cookie'                => '.ASPXAUTH=',
-                 ],
-                 '{
+        $mock         = new MockHandler([
+            new Response(
+                200, [
+                'Cache-Control'       => 'private, s-maxage=0',
+                'Content-Type'        => 'application/json; charset=utf-8',
+                'Server'              => 'Microsoft-IIS/7.5',
+                'X-AspNetMvc-Version' => '4.0',
+                'X-AspNet-Version'    => '4.0.30319',
+                'X-Powered-By'        => 'ASP.NET',
+                'Date'                => 'Sun, 30 Aug 2015 09:10:14 GMT',
+                'Content-Length'      => '13326',
+                'Set-Cookie'          => '.ASPXAUTH=',
+                ], '{
     "sEcho": "1",
     "iTotalRecords": 7474,
     "iTotalDisplayRecords": 7172,
@@ -922,9 +915,9 @@ class AvDistrictProviderMock extends \DeejayPoolBundle\Provider\AvDistrictProvid
         ]
     ]
 }'
-           ),
-         ]);
-        $handler = HandlerStack::create($mock);
+            ),
+        ]);
+        $handler      = HandlerStack::create($mock);
         $this->client = new Client(['handler' => $handler]);
 
         return $result = parent::getItems($page);
@@ -932,87 +925,82 @@ class AvDistrictProviderMock extends \DeejayPoolBundle\Provider\AvDistrictProvid
 
     public function downloadItem(ProviderItemInterface $avdItem, $force = false, $mockSucces = true)
     {
-        $mock = new MockHandler([
+        $mock         = new MockHandler([
             new Response(
-                200,
-                [
-                    'Cache-Control'         => 'private, s-maxage=0',
-                    'Content-Type'          => 'application/json; charset=utf-8',
-                    'Server'                => 'Microsoft-IIS/7.5',
-                    'X-AspNetMvc-Version'   => '4.0',
-                    'X-AspNet-Version'      => '4.0.30319',
-                    'X-Powered-By'          => 'ASP.NET',
-                    'Date'                  => 'Sun, 30 Aug 2015 09:13:34 GMT',
-                    'Content-Length'        => '59',
-                ],
-                '{"msg":"","haserrors":false,"id":0,"data":"XYHfVAhuVu4%3d"}'
+                200, [
+                'Cache-Control'       => 'private, s-maxage=0',
+                'Content-Type'        => 'application/json; charset=utf-8',
+                'Server'              => 'Microsoft-IIS/7.5',
+                'X-AspNetMvc-Version' => '4.0',
+                'X-AspNet-Version'    => '4.0.30319',
+                'X-Powered-By'        => 'ASP.NET',
+                'Date'                => 'Sun, 30 Aug 2015 09:13:34 GMT',
+                'Content-Length'      => '59',
+                ], '{"msg":"","haserrors":false,"id":0,"data":"XYHfVAhuVu4%3d"}'
             ),
             new Response(
-                $mockSucces ? 200 : 302,
-                [
-                    'Cache-Control'         => 'private',
-                    'Content-Length'        => '164556298',
-                    'Content-Type'          => 'application/octet-stream',
-                    'Last-Modified'         => 'Mon, 31 Aug 2015 06:18:04 GMT',
-                    'Accept-Ranges'         => 'bytes',
-                    'ETag'                  => '-1885871426',
-                    'Server'                => 'Microsoft-IIS/7.5',
-                    'Content-Disposition'   => 'attachment; filename=Xxxx Yyyy_Rrrr Heee_Extended_Clean_HD.mp4',
-                    'X-AspNetMvc-Version'   => '4.0',
-                    'X-AspNet-Version'      => '4.0.30319',
-                    'X-Powered-By'          => 'ASP.NET',
-                    'Date'                  => 'Sun, 30 Aug 2015 09:13:34 GMT',
-                    'Content-Length'        => '59',
-                ],
-                '' //contentData
+                $mockSucces ? 200 : 302, [
+                'Cache-Control'       => 'private',
+                'Content-Length'      => '164556298',
+                'Content-Type'        => 'application/octet-stream',
+                'Last-Modified'       => 'Mon, 31 Aug 2015 06:18:04 GMT',
+                'Accept-Ranges'       => 'bytes',
+                'ETag'                => '-1885871426',
+                'Server'              => 'Microsoft-IIS/7.5',
+                'Content-Disposition' => 'attachment; filename=Xxxx Yyyy_Rrrr Heee_Extended_Clean_HD.mp4',
+                'X-AspNetMvc-Version' => '4.0',
+                'X-AspNet-Version'    => '4.0.30319',
+                'X-Powered-By'        => 'ASP.NET',
+                'Date'                => 'Sun, 30 Aug 2015 09:13:34 GMT',
+                'Content-Length'      => '59',
+                ], '' //contentData
             ),
         ]);
-        $handler = HandlerStack::create($mock);
+        $handler      = HandlerStack::create($mock);
         $this->client = new Client(['handler' => $handler]);
 
         return $result = parent::downloadItem($avdItem);
-
     }
-
+    public function itemCanBeDownload(ProviderItemInterface $item)
+    {
+        return true;
+    }
+    
     public function getDownloadKey(AvdItem $avdItem, $mockSucces = true)
     {
         if ($this->client->getConfig('handler')->hasHandler() == false || $mockSucces === false) {
             if ($mockSucces) {
                 $mock = new MockHandler([
                     new Response(
-                        200,
-                        [
-                            'Cache-Control' => 'private, s-maxage=0',
-                            'Content-Type' => 'application/json; charset=utf-8',
-                            'Server' => 'Microsoft-IIS/7.5',
-                            'X-AspNetMvc-Version' => '4.0',
-                            'X-AspNet-Version' => '4.0.30319',
-                            'X-Powered-By' => 'ASP.NET',
-                            'Date' => 'Sun, 30 Aug 2015 09:13:34 GMT',
-                            'Content-Length' => '59',
-                        ],
-                        '{"msg":"","haserrors":false,"id":0,"data":"XYHfVAhuVu4%3d"}'
+                        200, [
+                        'Cache-Control'       => 'private, s-maxage=0',
+                        'Content-Type'        => 'application/json; charset=utf-8',
+                        'Server'              => 'Microsoft-IIS/7.5',
+                        'X-AspNetMvc-Version' => '4.0',
+                        'X-AspNet-Version'    => '4.0.30319',
+                        'X-Powered-By'        => 'ASP.NET',
+                        'Date'                => 'Sun, 30 Aug 2015 09:13:34 GMT',
+                        'Content-Length'      => '59',
+                        ], '{"msg":"","haserrors":false,"id":0,"data":"XYHfVAhuVu4%3d"}'
                     ),
                 ]);
             } else {
                 $mock = new MockHandler([
                     new Response(
-                        200,
-                        [
-                            'Cache-Control' => 'private, s-maxage=0',
-                            'Content-Type' => 'application/json; charset=utf-8',
-                            'Server' => 'Microsoft-IIS/7.5',
-                            'X-AspNetMvc-Version' => '4.0',
-                            'X-AspNet-Version' => '4.0.30319',
-                            'X-Powered-By' => 'ASP.NET',
-                            'Date' => 'Sun, 30 Aug 2015 09:13:34 GMT',
-                            'Content-Length' => '59',
-                        ],
-                        '{"msg":"You have already downloaded this video twice.  Please contact us for further assistance.","haserrors":true,"id":0,"data":""}'
+                        200, [
+                        'Cache-Control'       => 'private, s-maxage=0',
+                        'Content-Type'        => 'application/json; charset=utf-8',
+                        'Server'              => 'Microsoft-IIS/7.5',
+                        'X-AspNetMvc-Version' => '4.0',
+                        'X-AspNet-Version'    => '4.0.30319',
+                        'X-Powered-By'        => 'ASP.NET',
+                        'Date'                => 'Sun, 30 Aug 2015 09:13:34 GMT',
+                        'Content-Length'      => '59',
+                        ], '{"msg":"You have already downloaded this video twice.  Please contact us for further assistance.","haserrors":true,"id":0,"data":""}'
                     )
                 ]);
             }
-            $handler = HandlerStack::create($mock);
+            $handler      = HandlerStack::create($mock);
             $this->client = new Client(['handler' => $handler]);
         }
 
