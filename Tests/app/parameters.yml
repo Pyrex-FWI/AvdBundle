@@ -35,4 +35,4 @@ parameters:
     smashvision.credentials.login: yemistikris@hotmail.fr
     smashvision.credentials.password: xerypjd
 
-    #smashvision.provider.class: DeejayPoolBundle\Tests\Provider\SmashVisionProviderMock
+    smashvision.provider.class: DeejayPoolBundle\Tests\Provider\SmashVisionProviderMock

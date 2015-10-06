@@ -217,21 +217,14 @@ class SmashVisionProvider extends Provider implements PoolProviderInterface, Sea
             'cookies'         => $this->cookieJar,
             'allow_redirects' => true,
             'debug'           => $this->debug,
-            'form_params'     => [
-                'rows'        => $this->getConfValue('items_per_page'),
-                'page'        => $page,
-                'cc'          => 'eu',
-                'sort'        => 'date',
-                'dir'         => 'desc',
-                'keywords'    => '',
-                'genreId'     => 1000, //all video
-                'hd'          => 1, //Get only hd
-                'subGenreId'  => 0,
-                'toolId'      => '',
-                'featured'    => 0,
-                'releaseyear' => '',
-                '_'           => microtime(false),
-            ]
+            'form_params'     => array_merge([
+                        'rows'        => $this->getConfValue('items_per_page'),
+                        'page'        => $page,
+                        'cc'          => 'eu',
+                        'sort'        => 'date',
+                        'dir'         => 'desc',
+                        '_'           => microtime(false),
+                    ], $this->getCriteria($filter))
             ]
         );        
     }
@@ -258,6 +251,34 @@ class SmashVisionProvider extends Provider implements PoolProviderInterface, Sea
         $ctDisp   = str_replace('"', '', $response->getHeader('Content-Disposition')[0]);
         preg_match('/filename="?(?P<filename>.+)$/', $ctDisp, $matches);
         return $matches['filename'];                
+    }
+    
+    public function getCriteria($filter = [])
+    {
+        return array_merge(
+            [
+                'keywords'    => '',
+                'genreId'     => 1000, //all video
+                'hd'          => 1, //Get only hd
+                'subGenreId'  => 0,
+                'toolId'      => '',
+                'featured'    => 0,
+                'releaseyear' => '',
+            ],
+            (array)$filter
+            );
+    }
+
+    public function getAvailableCriteria()
+    {
+        return [
+            'keywords',
+            'releaseyear',
+            'genreId',
+            'subGenreId',
+            'hd',
+            //'cc'
+        ];
     }
 
 }

@@ -38,7 +38,8 @@ class DownloaderCommand extends AbstractCommand
             ->addOption('end', null, InputOption::VALUE_OPTIONAL, 'Page end', 1)
             ->addOption('sleep', null, InputOption::VALUE_OPTIONAL, 'millisec sleep after download', 0)
             ->addOption('dry', null, InputOption::VALUE_NONE, 'Do not download', null)
-            //->addOption('filter', null, InputOption::VALUE_IS_ARRAY, 'Filter', 1)
+            ->addOption('show-criteria', null, InputOption::VALUE_NONE, 'Show available criteria', null)
+            ->addOption('filter', null, InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'Filter', [])
             ->setHelp(<<<EOF
 The <info>%command.name%</info> command download items from AVDistrict:
 
@@ -56,6 +57,7 @@ EOF
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->init($input, $output);
+        $this->catchBreakableOption();
         $this->registerListerners();
 
         if ($this->provider->open() !== true) {
@@ -162,10 +164,10 @@ EOF
         $this->initProgressBar($this->end - $this->start+1);
         $this->progressBar->setMessage('');
         $this->progressBar->start();
-
+        
         do {
             $this->progressBar->setMessage(sprintf('Read page %s', $this->start));
-            $items = array_merge($items, $this->provider->getItems($this->start));
+            $items = array_merge($items, $this->provider->getItems($this->start, $this->getFilters()));
             $this->progressBar->advance();
             $this->start++;
         } while($this->start <= $this->end);
@@ -203,7 +205,7 @@ EOF
     public function listItem($items) {
         $tableHelper = new Table($this->output);
         $tableHelper->setHeaders([
-            'itemId', 'Artist', 'Title', 'Version', 'AFD'
+            'itemId', 'Artist', 'Title', 'Version', 'AFD', 'Release Date'
         ]);
         $rows = [];
         foreach (($items) as $item) {
@@ -213,11 +215,57 @@ EOF
                 $item->getArtist(),
                 $item->getTitle(),
                 $item->getVersion(),
-                $this->provider->itemCanBeDownload($item) ? '✔' : '✖'
+                $this->provider->itemCanBeDownload($item) ? '<info>✔</info>' : '<error>✖</error>',
+                $item->getReleaseDate()->format('d/m/Y')
             ];
         }
         $tableHelper->setRows($rows);
         $tableHelper->render();
+    }
+    /**
+     * 
+     * @return bool
+     */
+    private function searchableIsAvailable()
+    {
+        return in_array('DeejayPoolBundle\Provider\SearchablePoolProviderInterface', class_implements($this->provider));
+    }
+
+    /**
+     * 
+     * @return []
+     * @throws \Exception
+     */
+    private function getFilters()
+    {
+        $filter = [];
+        foreach ($this->input->getOption('filter') as $rawValue) {
+            $keyVal = explode(':', $rawValue);
+            if (in_array($keyVal[0], $this->provider->getAvailableCriteria())) {
+                $filter[$keyVal[0]] = $keyVal[1];
+            } else {
+                throw new \Exception($keyVal[0]. ' criteria not exist');
+            }
+        }
+        
+        return $filter;
+    }
+    
+    public function catchBreakableOption()
+    {
+        if ($this->input->getOption('show-criteria')) {
+            if ($this->searchableIsAvailable()) {
+                $this->output->writeln("Available criteria");
+                $formatter = $this->getHelperSet()->get('formatter');
+                $message = $this->provider->getAvailableCriteria();
+                $formattedBlock = $formatter->formatBlock($message, 'info', true);
+                $this->output->writeln($formattedBlock);
+            } else {
+                $this->output->writeln(sprintf("<error>%s not implements SearchablePoolProviderInterface</error>", $this->provider->getName()));
+            }
+         
+            exit;
+        }
     }
 
 }
