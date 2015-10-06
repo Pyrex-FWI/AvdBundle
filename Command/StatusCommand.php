@@ -2,12 +2,10 @@
 
 namespace DeejayPoolBundle\Command;
 
-use DeejayPoolBundle\Event\FilterTrackDownloadEvent;
 use DeejayPoolBundle\Provider\AvDistrictProvider;
 use Symfony\Bridge\Monolog\Logger;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class StatusCommand extends ContainerAwareCommand

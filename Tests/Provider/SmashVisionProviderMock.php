@@ -58,7 +58,7 @@ class SmashVisionProviderMock extends \DeejayPoolBundle\Provider\SmashVisionProv
          return $result;
      }
 
-    public function getItems($page)
+    public function getItems($page, $filter = [])
     {
          $mock = new MockHandler([
              new Response(
@@ -73,7 +73,7 @@ class SmashVisionProviderMock extends \DeejayPoolBundle\Provider\SmashVisionProv
         $handler = HandlerStack::create($mock);
         $this->client = new Client(['handler' => $handler]);
 
-        return $result = parent::getItems($page);
+        return $result = parent::getItems($page, $filter);
     }
 
 

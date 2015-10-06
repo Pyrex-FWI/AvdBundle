@@ -44,7 +44,7 @@ class AvDistrictProviderMock extends \DeejayPoolBundle\Provider\AvDistrictProvid
         return $result;
     }
 
-    public function getItems($page)
+    public function getItems($page, $filter = [])
     {
         $mock         = new MockHandler([
             new Response(
@@ -920,7 +920,7 @@ class AvDistrictProviderMock extends \DeejayPoolBundle\Provider\AvDistrictProvid
         $handler      = HandlerStack::create($mock);
         $this->client = new Client(['handler' => $handler]);
 
-        return $result = parent::getItems($page);
+        return $result = parent::getItems($page, $filter);
     }
 
     public function downloadItem(ProviderItemInterface $avdItem, $force = false, $mockSucces = true)
@@ -959,7 +959,7 @@ class AvDistrictProviderMock extends \DeejayPoolBundle\Provider\AvDistrictProvid
         $handler      = HandlerStack::create($mock);
         $this->client = new Client(['handler' => $handler]);
 
-        return $result = parent::downloadItem($avdItem);
+        return $result = parent::downloadItem($avdItem, $filter = []);
     }
     public function itemCanBeDownload(ProviderItemInterface $item)
     {

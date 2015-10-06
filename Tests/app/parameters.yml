@@ -32,7 +32,7 @@ parameters:
     franchise_pool_video.provider.class: DeejayPoolBundle\Tests\Provider\FranchiseVideoProviderMock
 
     smashvision.configuration.root_path: %kernel.root_dir%/../TestData/root_path
-    smashvision.credentials.login: toto@hotmail.fr
-    smashvision.credentials.password: toto
+    smashvision.credentials.login: yemistikris@hotmail.fr
+    smashvision.credentials.password: xerypjd
 
-    smashvision.provider.class: DeejayPoolBundle\Tests\Provider\SmashVisionProviderMock
+    #smashvision.provider.class: DeejayPoolBundle\Tests\Provider\SmashVisionProviderMock

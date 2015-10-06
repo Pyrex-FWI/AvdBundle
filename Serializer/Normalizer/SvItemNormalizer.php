@@ -40,10 +40,11 @@ class SvItemNormalizer extends AbstractNormalizer
             $svItem = clone $svGroup;
             $svItem->setVideoId($videoArray['videoId']);
             $svItem->setDownloaded(boolval($videoArray['downloaded']));
-            $svItem->setCompleteVersion($this->exactDurationVersion($videoArray['title']). '/'.$this->exactContentVersion($videoArray['title']));
-            $svGroup->addSvItem($svItem);
+            $completeVersion = $this->extractCompleteVersion($videoArray);
+            $svItem->setVersion($completeVersion);
             $svItem->setParent(false);
             $svItem->setItemId(sprintf('%s_%s', $svGroup->getGroupId(), $svItem->getVideoId()));
+            $svGroup->addSvItem($svItem);
         }
         $svGroup->setParent(true);
 
@@ -126,6 +127,16 @@ class SvItemNormalizer extends AbstractNormalizer
     public function supportsNormalization($data, $format = null)
     {
         return false;
+    }
+
+    public function extractCompleteVersion($videoArray)
+    {
+        $duration = $this->exactDurationVersion($videoArray['title']);
+        if ($duration) {
+            return sprintf('%s/%s', $duration, $this->exactContentVersion($videoArray['title']));   
+        } else {
+            return $this->exactContentVersion($videoArray['title']);
+        }
     }
 
 }

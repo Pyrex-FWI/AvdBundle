@@ -39,7 +39,7 @@ abstract class Provider extends ContainerAware implements PoolProviderInterface
     protected $debug        = false;
 
     /**
-     * @var Logger;
+     * @var \Psr\Log\LoggerInterface;
      */
     protected $logger;
 
@@ -166,7 +166,7 @@ abstract class Provider extends ContainerAware implements PoolProviderInterface
      *  @param integer $$page page number 
      *  @return \Psr\Http\Message\ResponseInterface
      */
-    abstract protected function getItemsResponse($page);
+    abstract protected function getItemsResponse($page, $filter = []);
 
     /**
      * @return \DeejayPoolBundle\Entity\ProviderItemInterface[]
@@ -175,11 +175,12 @@ abstract class Provider extends ContainerAware implements PoolProviderInterface
 
     /**
      * @param $page
+     * @param $filter
      * @return \DeejayPoolBundle\Entity\ProviderItemInterface[]
      */
-    public function getItems($page)
+    public function getItems($page, $filter = [])
     {
-        $response           = $this->getItemsResponse($page);
+        $response           = $this->getItemsResponse($page, $filter);
         $normalizedItems    = $this->parseItemResponse($response);
         $this->logger->info(sprintf('Page %s fetched successfuly with %s items', $page, count($normalizedItems)), [$normalizedItems]);
         $postItemsListEvent = new \DeejayPoolBundle\Event\PostItemsListEvent($normalizedItems);
@@ -202,11 +203,12 @@ abstract class Provider extends ContainerAware implements PoolProviderInterface
         }
     }
     
-    public function downloadItem(\DeejayPoolBundle\Entity\ProviderItemInterface $item, $force = false) 
+    public function downloadItem(\DeejayPoolBundle\Entity\ProviderItemInterface $item) 
     {
         $idEvent = new \DeejayPoolBundle\Event\ItemDownloadEvent($item);
         $this->eventDispatcher->dispatch(ProviderEvents::ITEM_PRE_DOWNLOAD, $idEvent);
-
+        $this->setLastError(null);
+        
         if ($idEvent->isPropagationStopped()) {
             return;
         }
@@ -223,11 +225,13 @@ abstract class Provider extends ContainerAware implements PoolProviderInterface
             
                 return true;
             } else {
+                $this->setLastError(sprintf('%s %s - %s has not correctly download', $item->getItemId(), $item->getArtist(), $item->getTitle()));
                 $this->removeTmpFile($tempName);
-                $this->logger->warning(sprintf('%s %s %s has download ERROR, hasCorrectlyDownloaded() FAILD', $item->getItemId(), $item->getArtist(), $item->getTitle()), [$item, $this->getLastError()]);
+                $this->logger->warning($this->getLastError(),[$item]);
             }
         } else {
-            $this->logger->warning(sprintf('%s %s %s has download ERROR, itemCanBeDownload() FAIL. %s', $item->getItemId(), $item->getArtist(), $item->getTitle(), $item->getDownloadStatus()), [$item, $this->getLastError()]);
+            $this->setLastError(sprintf('%s %s %s has download ERROR, itemCanBeDownload() FAIL', $item->getItemId(), $item->getArtist(), $item->getTitle()));
+            $this->logger->warning($this->getLastError(), [$item]);
             $this->eventDispatcher->dispatch(ProviderEvents::ITEM_ERROR_DOWNLOAD, new \DeejayPoolBundle\Event\ItemDownloadEvent($item, null, $this->getLastError()));
         }
         return false;

@@ -102,7 +102,7 @@ class FranchisePoolProvider extends Provider implements PoolProviderInterface
         return false;
     }
 
-    protected function getItemsResponse($page)
+    protected function getItemsResponse($page, $filter = [])
     {
         return $response = $this->client->get(
             $this->getConfValue('items_url'),
