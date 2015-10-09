@@ -37,57 +37,11 @@ class SmashVisionProvider extends Provider implements PoolProviderInterface, Sea
                 $itemsArray[] = $svItem;
             }
         } else {
-            $itemsArray[] = $svGroup;
+            //$itemsArray[] = $svGroup;
         }
 
         return $itemsArray;
     }
-
-    /**
-     * @param ProviderItemInterface $item
-     */
-//    public function downloadItem(ProviderItemInterface $item, $force = false)
-//    {
-//        if ($item->isParent() && $item->getSvItems()->count() > 0) {
-//            foreach ($item->getSvItems() as $svItem) {
-//                $this->downloadItem($svItem, $force);
-//            }
-//            return;
-//        }
-//        if ($this->checkDownloadStatus($item) === false) {
-//            $this->logger->info(sprintf('checkDownloadStatus failed for %s %s %s has download ERROR. %s', $item->getItemId(), $item->getArtist(), $item->getTitle(), $item->getDownloadStatus()), [$item, $this->getLastError()]);
-//            $this->eventDispatcher->dispatch(ProviderEvents::ITEM_ERROR_DOWNLOAD, new ItemDownloadEvent($item, null, $this->getLastError()));
-//            return;
-//        }
-//
-//        /** @var SvGroup $item */
-//        $this->eventDispatcher->dispatch(ProviderEvents::ITEM_PRE_DOWNLOAD, new ItemDownloadEvent($item));
-//        /** @var SvItem $svItem */
-//        $tmpName  = $this->getConfValue('root_path') . DIRECTORY_SEPARATOR . $item->getItemId();
-//
-//        try {
-//            $response = $this->getDownloadResponse($item, $tmpName);
-//            if ($response->getStatusCode() === 200) {
-//                $ctDisp   = str_replace('"', '', $response->getHeader('Content-Disposition')[0]);
-//                preg_match('/filename="?(?P<filename>.+)$/', $ctDisp, $matches);
-//                $fileName = $matches['filename'] != '' ? $matches['filename'] : $item->getVideoId();
-//                $fileName = $this->getConfValue('root_path') . DIRECTORY_SEPARATOR . sprintf('%s_%s', $item->getItemId(), str_replace(' ', '_', $fileName));
-//                fclose($resource);
-//                rename($tmpName, $fileName);
-//                $item->setFullPath($fileName);
-//                $item->setDownloaded(true);
-//                $this->logger->info(sprintf('%s %s %s has succesfully downloaded', $item->getVideoId(), $item->getArtist(), $item->getTitle()), [$item]);
-//                $this->eventDispatcher->dispatch(ProviderEvents::ITEM_SUCCESS_DOWNLOAD, new ItemDownloadEvent($item, $fileName));
-//            } else {
-//                unlink($tmpName);
-//                new \Exception(sprintf('Invalid response code %s', $response->getStatusCode()));
-//            }
-//        } catch (\Exception $e) {
-//            $this->logger->info(sprintf('%s %s %s has download ERROR. %s', $item->getItemId(), $item->getArtist(), $item->getTitle(), $e->getMessage()), [$item, $e->getMessage()]);
-//            $this->eventDispatcher->dispatch(ProviderEvents::ITEM_ERROR_DOWNLOAD, new ItemDownloadEvent($item, null, $e->getMessage()));
-//            sleep(1);
-//        }
-//    }
 
     public function getDownloadResponse(\DeejayPoolBundle\Entity\ProviderItemInterface $item, $tempName)
     {
@@ -176,6 +130,7 @@ class SmashVisionProvider extends Provider implements PoolProviderInterface, Sea
     protected function checkDownloadStatus(SvItem $svItem)
     {
         $videoCanBeDownloaded = false;
+        $this->logger->info(sprintf('get Download status for %s',$svItem->getItemId()));
 
         $response = $this->client->post(
             $this->getConfValue('check_download_status_url'), [
@@ -193,9 +148,12 @@ class SmashVisionProvider extends Provider implements PoolProviderInterface, Sea
             if (isset($responseString['haserrors']) && boolval($responseString['haserrors']) === false) {
                 $videoCanBeDownloaded = true;
             }
+            \Symfony\Component\VarDumper\VarDumper::dump($responseString);
+            $this->logger->info(sprintf('Download status for %s : %s',$svItem->getItemId(), $responseString['msg']));
             $svItem->setDownloadStatus($responseString['msg']);
         } else {
-            $svItem->setDownloadStatus(sprintf("Can't get download status for video #%s", $svItem->getVideoId()));
+            $svItem->setDownloadStatus(sprintf("Can't get download status for video #%s", $svItem->getItemId()));
+            $this->logger->error(sprintf("Can't get download status for video #%s", $svItem->getItemId()));
         }
 
         return $videoCanBeDownloaded;
@@ -255,28 +213,21 @@ class SmashVisionProvider extends Provider implements PoolProviderInterface, Sea
         return false;
     }
 
-    protected function getItemsResponse($page)
+    protected function getItemsResponse($page, $filter = [])
     {
         return $response   = $this->client->post(
             $this->getConfValue('items_url'), [
             'cookies'         => $this->cookieJar,
             'allow_redirects' => true,
             'debug'           => $this->debug,
-            'form_params'     => [
-                'rows'        => $this->getConfValue('items_per_page'),
-                'page'        => $page,
-                'cc'          => 'eu',
-                'sort'        => 'date',
-                'dir'         => 'desc',
-                'keywords'    => '',
-                'genreId'     => 1000, //all video
-                'hd'          => 1, //Get only hd
-                'subGenreId'  => 0,
-                'toolId'      => '',
-                'featured'    => 0,
-                'releaseyear' => '',
-                '_'           => microtime(false),
-            ]
+            'form_params'     => array_merge([
+                        'rows'        => $this->getConfValue('items_per_page'),
+                        'page'        => $page,
+                        'cc'          => 'eu',
+                        'sort'        => 'date',
+                        'dir'         => 'desc',
+                        '_'           => microtime(false),
+                    ], $this->getCriteria($filter))
             ]
         );        
     }
@@ -303,6 +254,34 @@ class SmashVisionProvider extends Provider implements PoolProviderInterface, Sea
         $ctDisp   = str_replace('"', '', $response->getHeader('Content-Disposition')[0]);
         preg_match('/filename="?(?P<filename>.+)$/', $ctDisp, $matches);
         return $matches['filename'];                
+    }
+    
+    public function getCriteria($filter = [])
+    {
+        return array_merge(
+            [
+                'keywords'    => '',
+                'genreId'     => 1000, //all video
+                'hd'          => -1, //Get only hd
+                'subGenreId'  => 0,
+                'toolId'      => '',
+                'featured'    => 0,
+                'releaseyear' => '',
+            ],
+            (array)$filter
+            );
+    }
+
+    public function getAvailableCriteria()
+    {
+        return [
+            'keywords',
+            'releaseyear',
+            'genreId',
+            'subGenreId',
+            'hd',
+            //'cc'
+        ];
     }
 
 }

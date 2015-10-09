@@ -34,9 +34,10 @@ interface PoolProviderInterface
      * [getItems description]
      * @method getItems
      * @param  [type]   $pageNum [description]
+     * @param  [type]   $filter [description]
      * @return [type]            [description]
      */
-    public function getItems($pageNum);
+    public function getItems($pageNum, $filter = []);
 
     /**
      * Download a given item.

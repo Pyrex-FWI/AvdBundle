@@ -45,7 +45,7 @@ class FranchiseVideoProviderMock extends FranchisePoolVideoProvider
     }
 
 
-    public function getItems($page)
+    public function getItems($page, $filter = [])
     {
         $mock = new MockHandler([
             new Response(
@@ -367,7 +367,7 @@ class FranchiseVideoProviderMock extends FranchisePoolVideoProvider
         $handler = HandlerStack::create($mock);
         $this->client = new Client(['handler' => $handler]);
 
-        return $result = parent::getItems($page);
+        return $result = parent::getItems($page, $filter);
     }
 
 

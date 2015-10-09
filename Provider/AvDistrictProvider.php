@@ -100,7 +100,7 @@ class AvDistrictProvider extends Provider implements PoolProviderInterface
         return false;
     }
 
-    protected function getItemsResponse($page)
+    protected function getItemsResponse($page, $filter = [])
     {
         return $response   = $this->client->post(
             $this->getConfValue('items_url'), [

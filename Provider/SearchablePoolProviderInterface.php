@@ -2,8 +2,6 @@
 
 namespace DeejayPoolBundle\Provider;
 
-use DeejayPoolBundle\Entity\ProviderItemInterface;
-
 /**
  * @author Pyrex-FWI <yemistikris@hotmail.fr>
  *
@@ -12,5 +10,10 @@ use DeejayPoolBundle\Entity\ProviderItemInterface;
 interface SearchablePoolProviderInterface
 {
     public function getItemsBy($queryParameters = [], $limit = null);
+    
+    /**
+     * @return []
+     */
+    public function getAvailableCriteria(); 
     
 }
