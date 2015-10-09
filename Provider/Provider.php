@@ -217,6 +217,7 @@ abstract class Provider extends ContainerAware implements PoolProviderInterface
             if ($this->hasCorrectlyDownloaded($response, $tempName)) {
                 $newFileName = $this->getConfValue('root_path') . DIRECTORY_SEPARATOR . sprintf('%s_%s', $item->getItemId(), str_replace(' ', '_', $this->getDownloadedFileName($response)));
                 rename($tempName, $newFileName);
+                $item->setFullPath($newFileName);
                 $this->logger->info(sprintf('%s %s %s has succesfully downloaded', $item->getItemId(), $item->getArtist(), $item->getTitle()), [$item]);
                 $this->eventDispatcher->dispatch(ProviderEvents::ITEM_SUCCESS_DOWNLOAD, new \DeejayPoolBundle\Event\ItemDownloadEvent($item, $this->getDownloadedFileName($response)));
             
