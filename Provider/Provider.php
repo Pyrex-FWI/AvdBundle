@@ -227,7 +227,7 @@ abstract class Provider extends ContainerAware implements PoolProviderInterface
                 $this->logger->warning(sprintf('%s %s %s has download ERROR, hasCorrectlyDownloaded() FAILD', $item->getItemId(), $item->getArtist(), $item->getTitle()), [$item, $this->getLastError()]);
             }
         } else {
-            $this->logger->warning(sprintf('%s %s %s has download ERROR, itemCanBeDownload() FAIL', $item->getItemId(), $item->getArtist(), $item->getTitle()), [$item, $this->getLastError()]);
+            $this->logger->warning(sprintf('%s %s %s has download ERROR, itemCanBeDownload() FAIL. %s', $item->getItemId(), $item->getArtist(), $item->getTitle(), $item->getDownloadStatus()), [$item, $this->getLastError()]);
             $this->eventDispatcher->dispatch(ProviderEvents::ITEM_ERROR_DOWNLOAD, new \DeejayPoolBundle\Event\ItemDownloadEvent($item, null, $this->getLastError()));
         }
         return false;
