@@ -10,7 +10,7 @@ use Symfony\Bridge\Monolog\Logger;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\Serializer\Serializer;
 
-class FranchisePoolProvider extends Provider implements PoolProviderInterface
+class FranchisePoolProvider extends AbstractProvider implements PoolProviderInterface
 {
 
     /** @var  EventDispatcher */

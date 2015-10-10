@@ -16,7 +16,7 @@ use Symfony\Component\Serializer\Serializer;
  *
  * SmashVisionProvider
  */
-class SmashVisionProvider extends Provider implements PoolProviderInterface, SearchablePoolProviderInterface
+class SmashVisionProvider extends AbstractProvider implements PoolProviderInterface, SearchablePoolProviderInterface
 {
 
     protected $noTracksFromPage;

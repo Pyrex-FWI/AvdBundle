@@ -8,7 +8,7 @@ use DeejayPoolBundle\Serializer\Normalizer\AvItemNormalizer;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\Serializer\Serializer;
 
-class AvDistrictProvider extends Provider implements PoolProviderInterface
+class AvDistrictProvider extends AbstractProvider implements PoolProviderInterface
 {
 
     protected $noTracksFromPage;

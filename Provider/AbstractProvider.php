@@ -13,7 +13,7 @@ use Symfony\Component\EventDispatcher\Event;
  *
  * Provider
  */
-abstract class Provider extends ContainerAware implements PoolProviderInterface
+abstract class AbstractProvider extends ContainerAware implements PoolProviderInterface
 {
 
     /**
