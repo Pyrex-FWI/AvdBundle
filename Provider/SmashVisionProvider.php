@@ -148,7 +148,6 @@ class SmashVisionProvider extends Provider implements PoolProviderInterface, Sea
             if (isset($responseString['haserrors']) && boolval($responseString['haserrors']) === false) {
                 $videoCanBeDownloaded = true;
             }
-            \Symfony\Component\VarDumper\VarDumper::dump($responseString);
             $this->logger->info(sprintf('Download status for %s : %s',$svItem->getItemId(), $responseString['msg']));
             $svItem->setDownloadStatus($responseString['msg']);
         } else {
