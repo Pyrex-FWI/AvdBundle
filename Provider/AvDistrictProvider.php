@@ -8,10 +8,8 @@ use DeejayPoolBundle\Serializer\Normalizer\AvItemNormalizer;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\Serializer\Serializer;
 
-class AvDistrictProvider extends AbstractProvider implements PoolProviderInterface
+class AvDistrictProvider extends AbstractProvider implements PoolProviderInterface, SearchablePoolProviderInterface
 {
-
-    protected $noTracksFromPage;
 
     /** @var  EventDispatcher */
     protected $eventDispatcher;
@@ -26,7 +24,7 @@ class AvDistrictProvider extends AbstractProvider implements PoolProviderInterfa
         if ($avItem->getItemId()) {
             $response = $this->client->post(
                 $this->getConfValue('donwload_keygen_url'), [
-                'cookies'         => $this->cookieJar,
+                //'cookies'         => $this->cookieJar,
                 'allow_redirects' => true,
                 'debug'           => $this->debug,
                 'form_params'     => [
@@ -73,7 +71,7 @@ class AvDistrictProvider extends AbstractProvider implements PoolProviderInterfa
     {
         return $response = $this->client->post(
             $this->getConfValue('login_check'), [
-            'cookies'         => $this->cookieJar,
+            //'cookies'         => $this->cookieJar,
             //'cookies'         => true,
             'allow_redirects' => true,
             'debug'           => $this->debug,
@@ -93,6 +91,8 @@ class AvDistrictProvider extends AbstractProvider implements PoolProviderInterfa
             if (array_key_exists('Set-Cookie', $response->getHeaders()) && isset($rep['hasserrors']) != 1) {
                 return true;
             } else {
+                $this->logger->info('Login error: '.$rep['msg']);
+                
                 return false;
             }
         }
@@ -104,18 +104,18 @@ class AvDistrictProvider extends AbstractProvider implements PoolProviderInterfa
     {
         return $response   = $this->client->post(
             $this->getConfValue('items_url'), [
-            'cookies'         => $this->cookieJar,
+            //'cookies'         => $this->cookieJar,
             'allow_redirects' => true,
             'debug'           => $this->debug,
-            'form_params'     => [
-                'sEcho'          => 1,
-                'iColumns'       => 13,
-                'sColumns'       => implode(',', (array) $this->getConfValue('items_properties')),
-                'iDisplayStart'  => (($page - 1) * $this->getConfValue('items_per_page')) - $page < 0 ? 0 : (($page - 1) * $this->getConfValue('items_per_page')) - $page,
-                'iDisplayLength' => $this->getConfValue('items_per_page'),
-                'sSortDir_0'     => 'asc',
-                'iSortingCols'   => 1,
-            ]
+            'form_params'     => array_merge([
+                    'sEcho'          => 1,
+                    'iColumns'       => 13,
+                    'sColumns'       => implode(',', (array) $this->getConfValue('items_properties')),
+                    'iDisplayStart'  => (($page - 1) * $this->getConfValue('items_per_page')) - $page < 0 ? 0 : (($page - 1) * $this->getConfValue('items_per_page')) - $page,
+                    'iDisplayLength' => $this->getConfValue('items_per_page'),
+                    'sSortDir_0'     => 'asc',
+                    'iSortingCols'   => 1,
+                ], $this->getCriteria($filter))
             ]
         );
     }
@@ -142,7 +142,7 @@ class AvDistrictProvider extends AbstractProvider implements PoolProviderInterfa
         
         return $response = $this->client->get(
                     $this->getConfValue('download_url'), [
-                    'cookies'         => $this->cookieJar,
+                    //'cookies'         => $this->cookieJar,
                     'allow_redirects' => false,
                     'debug'           => $this->debug,
                     'sink'            => $resource,
@@ -155,7 +155,6 @@ class AvDistrictProvider extends AbstractProvider implements PoolProviderInterfa
                         'Accept'                    => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
                         'Accept-Encoding'           => 'gzip, deflate, sdch',
                         'Accept-Language'           => 'fr-FR,fr;q=0.8,en-US;q=0.6,en;q=0.4',
-                        'User-Agent'                => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36'
                     ]
                     ]
                 );
@@ -166,5 +165,32 @@ class AvDistrictProvider extends AbstractProvider implements PoolProviderInterfa
         $ctDisp   = $response->getHeader('Content-Disposition')[0];
         preg_match('/filename=(?P<filename>.+)/', $ctDisp, $matches);
         return $matches['filename'];                ;
+    }
+
+    public function getAvailableCriteria()
+    {
+        return [
+            'sSearch'
+        ];
+    }
+
+    public function getCriteria($filter)
+    {
+        return $filter;
+    }
+
+    public function getMaxPage()
+    {
+        // TODO: Implement getMaxPage() method.
+    }
+
+    public function getResultCount()
+    {
+        // TODO: Implement getResultCount() method.
+    }
+
+    public function search($filters = [])
+    {
+        // TODO: Implement search() method.
     }
 }

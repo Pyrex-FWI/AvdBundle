@@ -93,7 +93,8 @@ $container
         'deejaypool.command.status',
         '%avd.command.status.class%'
     )
-    ->addArgument(new Reference(\DeejayPoolBundle\DeejayPoolBundle::PROVIDER_AVD))
+    ->addArgument(new Reference('deejay_provider_manager'))
+    ->addArgument(new Reference('event_dispatcher'))
     ->addArgument(new Reference('logger', \Symfony\Component\DependencyInjection\ContainerInterface::IGNORE_ON_INVALID_REFERENCE))
     ->addTag('console.command');
 

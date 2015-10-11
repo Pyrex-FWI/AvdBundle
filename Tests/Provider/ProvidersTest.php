@@ -8,7 +8,6 @@ use DeejayPoolBundle\Entity\FranchisePoolItem;
 use DeejayPoolBundle\Event\ProviderEvents;
 use DeejayPoolBundle\Event\ItemDownloadEvent;
 use DeejayPoolBundle\Event\PostItemsListEvent;
-use DeejayPoolBundle\Provider\SmashVisionProvider;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
@@ -38,18 +37,6 @@ class ProvidersTest extends \DeejayPoolBundle\Tests\BaseTest
         $providerClass = get_class($this->provider);
         $providerReflection = new \ReflectionClass($providerClass);
         $this->assertTrue($providerReflection->implementsInterface('DeejayPoolBundle\Provider\PoolProviderInterface'));
-    }
-    /**
-     * @param $serviceName
-     */
-    public function _testSmash()
-    {
-        /** @var SmashVisionProvider $provider */
-        $provider = $this->container->get('smashvision');
-        $provider->setDebug(true);
-        $provider->open();
-        $globalVideos = $provider->getItems(1);
-        dump($globalVideos);
     }
 
     /**
@@ -125,7 +112,7 @@ class ProvidersTest extends \DeejayPoolBundle\Tests\BaseTest
                 null,
                 null,
             ],
-
+/*
             [
                 \DeejayPoolBundle\DeejayPoolBundle::PROVIDER_FPR_AUDIO,
                 false,
@@ -154,7 +141,7 @@ class ProvidersTest extends \DeejayPoolBundle\Tests\BaseTest
                 false,
                 null,
                 null,
-            ],
+            ],*/
             [
                 \DeejayPoolBundle\DeejayPoolBundle::PROVIDER_SV,
                 false,
@@ -218,6 +205,18 @@ class ProvidersTest extends \DeejayPoolBundle\Tests\BaseTest
         $obj->getDownloadlink();
     }
 
+    public function ensureIsProviderItem(\DeejayPoolBundle\Entity\ProviderItemInterface $obj)
+    {
+        /** @var \DeejayPoolBundle\Entity\ProviderItemInterface $obj */
+        $this->assertNotEmpty($obj->getTitle());
+        $this->assertNotEmpty($obj->getArtist());
+        $this->assertNotEmpty($obj->getFullPath());
+        $this->assertTrue(is_bool($obj->getDownloaded()));
+        $this->assertInstanceOf('\DateTime', $obj->getReleaseDate());
+        $this->assertInstanceOf('\Doctrine\Common\Collections\ArrayCollection', $obj->getRelatedGenres());
+        $obj->getDownloadlink();
+    }
+
     public function sessionOpenErrorEvent(Event $event)
     {
     }
@@ -230,9 +229,12 @@ class ProvidersTest extends \DeejayPoolBundle\Tests\BaseTest
         if ($this->serviceName === DeejayPoolBundle::PROVIDER_FPR_AUDIO) {
             $this->ensureIsFranchiseItem($event->getItem());
         }
+        //dump($event->getItem()->getDownloadLink());
+        //$this->assertNotNull($event->getItem()->getDownloadLink());
     }
     public function sessionSuccessDownload(ItemDownloadEvent $event)
     {
+        $this->ensureIsProviderItem($event->getItem());
         if ($this->serviceName === DeejayPoolBundle::PROVIDER_AVD) {
             $this->ensureIsAvdItem($event->getItem());
             $this->assertNotEmpty($event->getFileName());

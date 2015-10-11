@@ -7,20 +7,17 @@ use DeejayPoolBundle\Entity\AvdItem;
 use DeejayPoolBundle\Entity\ProviderItemInterface;
 use Symfony\Component\EventDispatcher\Event;
 
-class ItemDownloadEvent extends Event {
+class ItemLocalExistenceEvent extends Event {
 
     /** @var ProviderItemInterface  */
     protected $item;
-    protected $fileName;
-    protected $message;
+    private $existLocaly = false;
     /**
      * @param AvdItem $item
      */
-    public function __construct(ProviderItemInterface $item, $fileName = null, $message = null)
+    public function __construct(ProviderItemInterface $item)
     {
         $this->setItem($item);
-        $this->setFileName($fileName);
-        $this->setMessage($message);
     }
 
     /**
@@ -47,27 +44,15 @@ class ItemDownloadEvent extends Event {
         return $this->fileName;
     }
 
-    /**
-     * @param mixed $fileName
-     */
-    public function setFileName($fileName)
+    public function existLocaly()
     {
-        $this->fileName = $fileName;
+        return $this->existLocaly;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getMessage()
+    public function setExistLocaly($boolVal)
     {
-        return $this->message;
-    }
-
-    /**
-     * @param mixed $message
-     */
-    public function setMessage($message)
-    {
-        $this->message = $message;
+        $this->existLocaly = boolval($boolVal);
+        
+        return $this;
     }
 }

@@ -20,4 +20,14 @@ class DeejayPoolBundle extends Bundle
         parent::build($container);
         $container->addCompilerPass(new ProviderCompilerPass());
     }
+    
+    public static function getProvidersName()
+    {
+        return [
+            self::PROVIDER_AVD,
+            self::PROVIDER_FPR_AUDIO,
+            self::PROVIDER_FPR_VIDEO,
+            self::PROVIDER_SV,
+        ];
+    }
 }

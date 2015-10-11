@@ -79,7 +79,7 @@ class FranchisePoolProvider extends AbstractProvider implements PoolProviderInte
         return $response = $this->client->post(
             $this->getConfValue('login_check'),
             [
-                'cookies'           => $this->cookieJar,
+                //'cookies'           => $this->cookieJar,
                 'allow_redirects'   => false,
                 'debug'             => $this->debug,
                 'headers'           => ['Content-Type' => 'application/x-www-form-urlencoded'],
@@ -107,7 +107,7 @@ class FranchisePoolProvider extends AbstractProvider implements PoolProviderInte
         return $response = $this->client->get(
             $this->getConfValue('items_url'),
             [
-                'cookies'           => $this->cookieJar,
+                //'cookies'           => $this->cookieJar,
                 'allow_redirects'   => true,
                 'debug'             => $this->debug,
                 'query'             => $this->getItemsQuery($page)
@@ -138,7 +138,7 @@ class FranchisePoolProvider extends AbstractProvider implements PoolProviderInte
         $resource = fopen($tempName, 'w');
 
         $requestParams = [
-            'cookies' => $this->cookieJar,
+            //'cookies' => $this->cookieJar,
             'allow_redirects' => false,
             'debug' => $this->debug,
             'headers' => [
@@ -147,7 +147,6 @@ class FranchisePoolProvider extends AbstractProvider implements PoolProviderInte
                 'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
                 'Accept-Encoding' => 'gzip, deflate, sdch',
                 'Accept-Language' => 'fr-FR,fr;q=0.8,en-US;q=0.6,en;q=0.4',
-                'User-Agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36'
             ]
         ];
         do {

@@ -3,7 +3,6 @@
 namespace DeejayPoolBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping as ORM;
 
 /**
  * SvGroup.
@@ -22,7 +21,6 @@ class SvItem implements ProviderItemInterface
     protected $hd720        = false;
     protected $hd1080       = false;
     protected $parent       = false;
-    protected $downloadStatus;
     protected $downloadable;
 
     /** @var ArrayCollection<SvItem> */
@@ -50,21 +48,6 @@ class SvItem implements ProviderItemInterface
     {
         return $this->downloadable;
     }
-
-    /**
-     * @return SvItem
-     */
-    public function setDownloadStatus($dstatus)
-    {
-        $this->downloadStatus = $dstatus;
-        return $this;
-    }
-
-    public function getDownloadStatus()
-    {
-        return $this->downloadStatus;
-    }
-
     /**
      * @return $isParent
      */

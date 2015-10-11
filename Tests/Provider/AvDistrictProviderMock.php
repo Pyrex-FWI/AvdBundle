@@ -961,9 +961,14 @@ class AvDistrictProviderMock extends \DeejayPoolBundle\Provider\AvDistrictProvid
 
         return $result = parent::downloadItem($avdItem, $filter = []);
     }
+    
     public function itemCanBeDownload(ProviderItemInterface $item)
     {
-        return true;
+        if($key = $this->getDownloadKey($item)) {
+            $item->setDownloadlink($this->getConfValue('download_url') . '?key=' . $key);
+            return true;
+        }
+        return false;
     }
     
     public function getDownloadKey(AvdItem $avdItem, $mockSucces = true)
@@ -1007,4 +1012,53 @@ class AvDistrictProviderMock extends \DeejayPoolBundle\Provider\AvDistrictProvid
         return $result = parent::getDownloadKey($avdItem);
     }
 
+    protected function getDownloadResponse(ProviderItemInterface $item, $tempName)
+    {
+        $resource          = fopen($tempName, 'w');
+        $downloadKey       = $this->getDownloadKey($item);
+        $mock = new MockHandler([
+              new Response(
+                   200,
+                  [
+                    'Cache-Control'       => 'private',
+                    'Content-Length'      => '164556298',
+                    'Content-Type'        => 'application/octet-stream',
+                    'Last-Modified'       => 'Mon, 31 Aug 2015 06:18:04 GMT',
+                    'Accept-Ranges'       => 'bytes',
+                    'ETag'                => '-1885871426',
+                    'Server'              => 'Microsoft-IIS/7.5',
+                    'Content-Disposition' => 'attachment; filename=Xxxx Yyyy_Rrrr Heee_Extended_Clean_HD.mp4',
+                    'X-AspNetMvc-Version' => '4.0',
+                    'X-AspNet-Version'    => '4.0.30319',
+                    'X-Powered-By'        => 'ASP.NET',
+                    'Date'                => 'Sun, 30 Aug 2015 09:13:34 GMT',
+                    'Content-Length'      => '59',
+                  ],
+                  '' //contentData
+              ),
+          ]);
+          $handler = HandlerStack::create($mock);
+          $this->client = new Client(['handler' => $handler]);
+          
+         $response = $this->client->get(
+                    $this->getConfValue('download_url'), [
+                    //'cookies'         => $this->cookieJar,
+                    'allow_redirects' => false,
+                    'debug'           => $this->debug,
+                    'sink'            => $resource,
+                    'query'           => [
+                        'key' => $downloadKey,
+                    ],
+                    'headers'         => [
+                        'Referer'                   => 'http://www.avdistrict.net/Videos',
+                        'Upgrade-Insecure-Requests' => 1,
+                        'Accept'                    => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+                        'Accept-Encoding'           => 'gzip, deflate, sdch',
+                        'Accept-Language'           => 'fr-FR,fr;q=0.8,en-US;q=0.6,en;q=0.4',
+                    ]
+                    ]
+                );
+        file_put_contents($tempName, "very long string, very long string, very long string very long string, very long string, very long string very long string, very long string, very long string");
+        return $response;
+    }
 }

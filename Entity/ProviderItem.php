@@ -16,6 +16,8 @@ trait ProviderItem {
     protected $itemId;
     /** @var string */
     protected $downloadlink;
+    
+    protected $downloadStatus;
     /** @var string */
     protected $fullPath;
     /** @var \Doctrine\Common\Collections\ArrayCollection */
@@ -48,6 +50,23 @@ trait ProviderItem {
         return $this;
     }
 
+    public function getDownloadStatus()
+    {
+        return $this->downloadStatus;
+    }
+    
+    /**
+     * 
+     * @param type $downloadStatus
+     * @return ProviderItemInterface
+     */
+    public function setDownloadStatus($downloadStatus)
+    {
+        $this->downloadStatus = $downloadStatus;
+        
+        return $this;
+    }
+    
     /**
      * Get title.
      *

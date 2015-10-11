@@ -20,14 +20,17 @@ class StatusCommandTest extends \DeejayPoolBundle\Tests\BaseTest
         $application    = new \Symfony\Bundle\FrameworkBundle\Console\Application($kernel);
         $kernel->boot();
         $application->add($this->container->get('deejaypool.command.status'));
+        foreach (\DeejayPoolBundle\DeejayPoolBundle::getProvidersName() as $providerName) {
+            /** @var \DeejayPoolBundle\Command\DownloaderCommand $command */
+            $command        = $application->find('deejay:pool:status');
+            $commandTester  = new CommandTester($command);
+            $commandTester->execute([
+                'command'   => $command->getName(),
+                'provider'  => $providerName,
+            ]);
+            $this->assertRegExp(sprintf('/%s connection is available/', $providerName), $commandTester->getDisplay());
 
-        /** @var \DeejayPoolBundle\Command\DownloaderCommand $command */
-        $command        = $application->find('avd:status');
-        $commandTester  = new CommandTester($command);
-        $commandTester->execute([
-            'command'   => $command->getName(),
-        ]);
-        $this->assertRegExp('/AvDistrict connection is available/', $commandTester->getDisplay());
+        }
     }
 
 }

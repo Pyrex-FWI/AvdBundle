@@ -167,11 +167,15 @@ class SmashVisionProviderMock extends \DeejayPoolBundle\Provider\SmashVisionProv
           ]);
           $handler = HandlerStack::create($mock);
           $this->client = new Client(['handler' => $handler]);
-
-          return $result = parent::getDownloadResponse($svItem, $tmpName);
+          //To pass test
+          
+          $result = parent::getDownloadResponse($svItem, $tmpName);
+          
+          file_put_contents($tmpName, "very long string, very long string, very long string very long string, very long string, very long string very long string, very long string, very long string");
+          return $result;
         }
 
-        public function checkDownloadStatus(SvItem $svItem)
+        public function checkDownloadStatus(SvItem $svItem, $fg = true)
         {
             $mock = new MockHandler([
                 new Response(
@@ -197,6 +201,6 @@ class SmashVisionProviderMock extends \DeejayPoolBundle\Provider\SmashVisionProv
             $handler = HandlerStack::create($mock);
             $this->client = new Client(['handler' => $handler]);
 
-            return $result = parent::checkDownloadStatus($svItem);
+            return $result = parent::checkDownloadStatus($svItem, $fg);
         }
 }

@@ -16,8 +16,8 @@ parameters:
     secret: e2894c470f51ab52a28818bbbd747c8db9036a4f
 
     av_district.configuration.root_path: %kernel.root_dir%/../TestData/root_path
-    av_district.credentials.login: xxx@mail.fr
-    av_district.credentials.password: xxx
+    av_district.credentials.login: toto@hotmail.fr
+    av_district.credentials.password: totot
 
     av_district.provider.class: DeejayPoolBundle\Tests\Provider\AvDistrictProviderMock
     av_district.session_subscriber.class: DeejayPoolBundle\Tests\Event\SessionSubscriberMock
@@ -32,7 +32,7 @@ parameters:
     franchise_pool_video.provider.class: DeejayPoolBundle\Tests\Provider\FranchiseVideoProviderMock
 
     smashvision.configuration.root_path: %kernel.root_dir%/../TestData/root_path
-    smashvision.credentials.login: toto@hotmail.fr
-    smashvision.credentials.password: toto
+    smashvision.credentials.login: anonym@hotmail.fr
+    smashvision.credentials.password: no_pass
 
-    smashvision.provider.class: DeejayPoolBundle\Tests\Provider\SmashVisionProviderMock
+    #smashvision.provider.class: DeejayPoolBundle\Tests\Provider\SmashVisionProviderMock

@@ -45,16 +45,13 @@ class SmashVisionProvider extends AbstractProvider implements PoolProviderInterf
 
     public function getDownloadResponse(\DeejayPoolBundle\Entity\ProviderItemInterface $item, $tempName)
     {
-        $item->setDownloadlink($this->getConfValue('download_url') . '?' . http_build_query([
-                'id' => $item->getVideoId(),
-                'fg' => 'true',
-        ]));
-        $resource = fopen($tempName, 'w');
 
+        $resource = fopen($tempName, 'w');
         return $this->client->get(
-                $this->getConfValue('download_url'), 
+                //$this->getConfValue('download_url'), 
+                $item->getDownloadlink(),
                 [
-                    'cookies'         => $this->cookieJar,
+                    //'cookies'         => $this->cookieJar,
                     'allow_redirects' => false,
                     'debug'           => $this->debug,
                     'sink'            => $resource,
@@ -102,7 +99,7 @@ class SmashVisionProvider extends AbstractProvider implements PoolProviderInterf
             ]);
             $promises[$index] = $this->client->getAsync(
                 $uri, [
-                'cookies'         => $this->cookieJar,
+                //'cookies'         => $this->cookieJar,
                 'allow_redirects' => true,
                 'debug'           => $this->debug,
                 ]
@@ -127,18 +124,18 @@ class SmashVisionProvider extends AbstractProvider implements PoolProviderInterf
      * @param  SvItem              $svItem video item
      * @return boolean                     result
      */
-    protected function checkDownloadStatus(SvItem $svItem)
+    protected function checkDownloadStatus(SvItem $svItem, $fg = true)
     {
         $videoCanBeDownloaded = false;
         $this->logger->info(sprintf('get Download status for %s',$svItem->getItemId()));
 
         $response = $this->client->post(
             $this->getConfValue('check_download_status_url'), [
-            'cookies'     => $this->cookieJar,
+            //'cookies'     => $this->cookieJar,
             'debug'       => $this->debug,
             'form_params' => [
                 'videoId'  => $svItem->getVideoId(),
-                'fromGrid' => 'true',
+                'fromGrid' => $fg ? 'true' : 'false',
             ]
             ]
         );
@@ -147,6 +144,11 @@ class SmashVisionProvider extends AbstractProvider implements PoolProviderInterf
             $responseString = json_decode($response->getBody()->__toString(), 1);
             if (isset($responseString['haserrors']) && boolval($responseString['haserrors']) === false) {
                 $videoCanBeDownloaded = true;
+                
+                $svItem->setDownloadlink($this->getConfValue('download_url') . '?' . http_build_query([
+                'id' => $svItem->getVideoId(),
+                'fg' => $fg ? 'true' : 'false',
+        ]));
             }
             $this->logger->info(sprintf('Download status for %s : %s',$svItem->getItemId(), $responseString['msg']));
             $svItem->setDownloadStatus($responseString['msg']);
@@ -165,12 +167,13 @@ class SmashVisionProvider extends AbstractProvider implements PoolProviderInterf
 
     public function itemCanBeDownload(ProviderItemInterface $item)
     {
-        return $this->checkDownloadStatus($item);
-    }
-
-    public function getItemsBy($queryParameters = array(), $limit = null)
-    {
-        
+        try {
+            return $this->checkDownloadStatus($item, true) || $this->checkDownloadStatus($item, false);
+        } catch (\Exception $e) {
+            $this->logger->error($e->getMessage(), [$item]);
+            $this->raiseDownloadError($item);
+            return false;
+        }
     }
 
     /**
@@ -183,7 +186,7 @@ class SmashVisionProvider extends AbstractProvider implements PoolProviderInterf
     {
         return $response = $this->client->post(
                 $this->getConfValue('login_check'), [
-                'cookies'         => $this->cookieJar,
+                //'cookies'         => $this->cookieJar,
                 //'cookies'         => true,
                 'allow_redirects' => true,
                 'debug'           => $this->debug,
@@ -203,6 +206,7 @@ class SmashVisionProvider extends AbstractProvider implements PoolProviderInterf
         if ($response->getStatusCode() == 200) {
             $rep = json_decode($response->getBody(), true);
             if (array_key_exists('Set-Cookie', $response->getHeaders())) {
+                $this->search();
                 return true;
             } else {
                 return false;
@@ -214,9 +218,9 @@ class SmashVisionProvider extends AbstractProvider implements PoolProviderInterf
 
     protected function getItemsResponse($page, $filter = [])
     {
-        return $response   = $this->client->post(
+        $response   = $this->client->post(
             $this->getConfValue('items_url'), [
-            'cookies'         => $this->cookieJar,
+            //'cookies'         => $this->cookieJar,
             'allow_redirects' => true,
             'debug'           => $this->debug,
             'form_params'     => array_merge([
@@ -228,7 +232,8 @@ class SmashVisionProvider extends AbstractProvider implements PoolProviderInterf
                         '_'           => microtime(false),
                     ], $this->getCriteria($filter))
             ]
-        );        
+        );  
+        return $response;
     }
 
     protected function parseItemResponse(\Psr\Http\Message\ResponseInterface $response)
@@ -252,6 +257,9 @@ class SmashVisionProvider extends AbstractProvider implements PoolProviderInterf
     {
         $ctDisp   = str_replace('"', '', $response->getHeader('Content-Disposition')[0]);
         preg_match('/filename="?(?P<filename>.+)$/', $ctDisp, $matches);
+        if(!isset($matches['filename'])) {
+            $this->logger->error("Error fileName: " .$response->getHeader('Content-Disposition')[0]);
+        }
         return $matches['filename'];                
     }
     
@@ -261,7 +269,7 @@ class SmashVisionProvider extends AbstractProvider implements PoolProviderInterf
             [
                 'keywords'    => '',
                 'genreId'     => 1000, //all video
-                'hd'          => -1, //Get only hd
+                'hd'          => -1,
                 'subGenreId'  => 0,
                 'toolId'      => '',
                 'featured'    => 0,
@@ -283,4 +291,17 @@ class SmashVisionProvider extends AbstractProvider implements PoolProviderInterf
         ];
     }
 
+    /**
+     * @param array $filters
+     * @return $this
+     */
+    public function search($filters = [])
+    {
+        $response = $this->getItemsResponse(1, $filters);
+        $responseArray = json_decode($response->getBody()->__toString(), true);
+        $this->setResultCount(intval($responseArray['records']));
+        $this->setMaxPage(intval($responseArray['pages']));
+
+        return $this;
+    }
 }
