@@ -84,6 +84,25 @@ class ProvidersTest extends \DeejayPoolBundle\Tests\BaseTest
         }
     }
 
+    /**
+     * @dataProvider searchData
+     */
+    public function testSearch($provider, $maxPage, $resultCount)
+    {
+        $this->setProvider($provider);
+        $this->provider->open();
+        $this->assertEquals($maxPage, $this->provider->getMaxPage());
+        $this->assertEquals($resultCount, $this->provider->getResultCount());
+    }
+
+    public function searchData()
+    {
+        return [
+            [
+                DeejayPoolBundle::PROVIDER_SV, 686, 17143
+            ]
+        ];
+    }
 
     /**@Example:
      * [

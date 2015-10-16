@@ -1,9 +1,5 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: chpyr
- * Date: 06/09/15
- * Time: 12:30
  */
 
 namespace DeejayPoolBundle\Tests\Provider;
@@ -26,11 +22,13 @@ class ProviderManagerTest extends BaseTest
     public function testServiceExistence()
     {
         $this->assertInstanceOf('DeejayPoolBundle\Provider\ProviderManager', $this->providerManager);
-        //$this->providerManager->get('')
     }
 
     public function testProvider()
     {
         $this->assertInstanceOf('DeejayPoolBundle\Provider\AvDistrictProvider', $this->providerManager->get('av_district'));
+        $this->assertInstanceOf('DeejayPoolBundle\Provider\FranchisePoolProvider', $this->providerManager->get('franchise_pool_audio'));
+        $this->assertInstanceOf('DeejayPoolBundle\Provider\FranchisePoolVideoProvider', $this->providerManager->get('franchise_pool_video'));
+        $this->assertInstanceOf('DeejayPoolBundle\Provider\SmashVisionProvider', $this->providerManager->get('smashvision'));
     }
 }

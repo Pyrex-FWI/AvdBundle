@@ -35,4 +35,4 @@ parameters:
     smashvision.credentials.login: anonym@hotmail.fr
     smashvision.credentials.password: no_pass
 
-    #smashvision.provider.class: DeejayPoolBundle\Tests\Provider\SmashVisionProviderMock
+    smashvision.provider.class: DeejayPoolBundle\Tests\Provider\SmashVisionProviderMock

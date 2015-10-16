@@ -232,7 +232,7 @@ class SmashVisionProvider extends AbstractProvider implements PoolProviderInterf
                         '_'           => microtime(false),
                     ], $this->getCriteria($filter))
             ]
-        );  
+        );
         return $response;
     }
 

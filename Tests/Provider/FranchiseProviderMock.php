@@ -368,7 +368,7 @@ class FranchiseProviderMock extends \DeejayPoolBundle\Provider\FranchisePoolProv
         ]);
         $handler      = HandlerStack::create($mock);
         $this->client = new Client(['handler' => $handler]);
-
+		//file_put_contents($tmpName, "very long string, very long string, very long string very long string, very long string, very long string very long string, very long string, very long string");
         return $result = parent::downloadItem($avdItem);
     }
     

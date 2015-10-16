@@ -58,20 +58,29 @@ class SmashVisionProviderMock extends \DeejayPoolBundle\Provider\SmashVisionProv
          return $result;
      }
 
-    public function getItems($page, $filter = [])
-    {
-         $mock = new MockHandler([
-             new Response(
-                 200,
-                 [
+    /**
+     * @return HandlerStack
+     */
+    public function getItemsMock(){
+        $mock = new MockHandler([
+            new Response(
+                200,
+                [
                     'Cache-Control'             => 'private',
                     'Content-Type'              => 'application/json; charset=utf-8',
-                 ],
+                ],
                 ProvidersTest::getJsonItemsForSmash()
-           ),
-         ]);
+            ),
+        ]);
         $handler = HandlerStack::create($mock);
-        $this->client = new Client(['handler' => $handler]);
+
+        return $handler;
+    }
+
+    public function getItems($page, $filter = [])
+    {
+
+        $this->client = new Client(['handler' => $this->getItemsMock()]);
 
         return $result = parent::getItems($page, $filter);
     }
@@ -203,4 +212,10 @@ class SmashVisionProviderMock extends \DeejayPoolBundle\Provider\SmashVisionProv
 
             return $result = parent::checkDownloadStatus($svItem, $fg);
         }
+
+    public function search($filter = [])
+    {
+        $this->client = new Client(['handler' => $this->getItemsMock()]);
+        return parent::search($filter);
+    }
 }
