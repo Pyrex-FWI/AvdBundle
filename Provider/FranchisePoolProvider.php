@@ -71,6 +71,7 @@ class FranchisePoolProvider extends AbstractProvider implements PoolProviderInte
 
     public function itemCanBeDownload(ProviderItemInterface $item)
     {
+        $item->setDownloadlink($this->getConfValue('download_url').$item->getItemId());
         return true;
     }
 

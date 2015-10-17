@@ -11,7 +11,6 @@ namespace DeejayPoolBundle\Serializer\Normalizer;
 
 use DeejayPoolBundle\Entity\AvdItem;
 use DeejayPoolBundle\Entity\FranchisePoolItem;
-use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 
 class FranchiseRecordPoolItemNormalizer extends AbstractNormalizer

@@ -971,43 +971,29 @@ class AvDistrictProviderMock extends \DeejayPoolBundle\Provider\AvDistrictProvid
         return false;
     }
     
+    private function downloadKeyMockResponse($success = true)
+    {
+        return new Response(
+            200, [
+            'Cache-Control'       => 'private, s-maxage=0',
+            'Content-Type'        => 'application/json; charset=utf-8',
+            'Server'              => 'Microsoft-IIS/7.5',
+            'X-AspNetMvc-Version' => '4.0',
+            'X-AspNet-Version'    => '4.0.30319',
+            'X-Powered-By'        => 'ASP.NET',
+            'Date'                => 'Sun, 30 Aug 2015 09:13:34 GMT',
+            'Content-Length'      => '59',
+            ], 
+            $success ? 
+                '{"msg":"","haserrors":false,"id":0,"data":"XYHfVAhuVu4%3d"}'
+                :
+                '{"msg":"You have already downloaded this video twice.  Please contact us for further assistance.","haserrors":true,"id":0,"data":""}'
+            );
+    }
+    
     public function getDownloadKey(AvdItem $avdItem, $mockSucces = true)
     {
-        if ($this->client->getConfig('handler')->hasHandler() == false || $mockSucces === false) {
-            if ($mockSucces) {
-                $mock = new MockHandler([
-                    new Response(
-                        200, [
-                        'Cache-Control'       => 'private, s-maxage=0',
-                        'Content-Type'        => 'application/json; charset=utf-8',
-                        'Server'              => 'Microsoft-IIS/7.5',
-                        'X-AspNetMvc-Version' => '4.0',
-                        'X-AspNet-Version'    => '4.0.30319',
-                        'X-Powered-By'        => 'ASP.NET',
-                        'Date'                => 'Sun, 30 Aug 2015 09:13:34 GMT',
-                        'Content-Length'      => '59',
-                        ], '{"msg":"","haserrors":false,"id":0,"data":"XYHfVAhuVu4%3d"}'
-                    ),
-                ]);
-            } else {
-                $mock = new MockHandler([
-                    new Response(
-                        200, [
-                        'Cache-Control'       => 'private, s-maxage=0',
-                        'Content-Type'        => 'application/json; charset=utf-8',
-                        'Server'              => 'Microsoft-IIS/7.5',
-                        'X-AspNetMvc-Version' => '4.0',
-                        'X-AspNet-Version'    => '4.0.30319',
-                        'X-Powered-By'        => 'ASP.NET',
-                        'Date'                => 'Sun, 30 Aug 2015 09:13:34 GMT',
-                        'Content-Length'      => '59',
-                        ], '{"msg":"You have already downloaded this video twice.  Please contact us for further assistance.","haserrors":true,"id":0,"data":""}'
-                    )
-                ]);
-            }
-            $handler      = HandlerStack::create($mock);
-            $this->client = new Client(['handler' => $handler]);
-        }
+        $this->client = ProvidersTest::applyMock([$this->downloadKeyMockResponse($mockSucces)]);
 
         return $result = parent::getDownloadKey($avdItem);
     }

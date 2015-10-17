@@ -264,7 +264,6 @@ abstract class AbstractProvider extends ContainerAware implements PoolProviderIn
         $tempName = $this->getConfValue('root_path') . DIRECTORY_SEPARATOR . $item->getItemId();
         try {
             $response = $this->getDownloadResponse($item, $tempName);
-
         } catch (\Exception $e) {
             $this->logger->error($e->getMessage(), [$item]);
             $this->raiseDownloadError($item);

@@ -322,7 +322,7 @@ class FranchiseProviderMock extends \DeejayPoolBundle\Provider\FranchisePoolProv
         return $result = parent::getItems($page, $filter);
     }
 
-    public function downloadItem(ProviderItemInterface $avdItem, $force = false, $mockSucces = true)
+    public function getDownloadResponse(ProviderItemInterface $svItem, $tmpName)
     {
         $mock         = new MockHandler([
             new Response(
@@ -348,7 +348,7 @@ class FranchiseProviderMock extends \DeejayPoolBundle\Provider\FranchisePoolProv
                 ''
             ),
             new Response(
-                $mockSucces ? 200 : 302, [
+                200, [
                 'Content-Type'        => 'audio/mpeg',
                 'Content-Length'      => '11057204',
                 'Connection'          => 'keep-alive',
@@ -366,12 +366,16 @@ class FranchiseProviderMock extends \DeejayPoolBundle\Provider\FranchisePoolProv
 
             ),
         ]);
-        $handler      = HandlerStack::create($mock);
-        $this->client = new Client(['handler' => $handler]);
-		//file_put_contents($tmpName, "very long string, very long string, very long string very long string, very long string, very long string very long string, very long string, very long string");
-        return $result = parent::downloadItem($avdItem);
+      $handler = HandlerStack::create($mock);
+      $this->client = new Client(['handler' => $handler]);
+      //To pass test
+
+      $result = parent::getDownloadResponse($svItem, $tmpName);
+
+      file_put_contents($tmpName, "very long string, very long string, very long string very long string, very long string, very long string very long string, very long string, very long string");
+      return $result;
     }
-    
+
     public function getDownloadedFileName(\Psr\Http\Message\ResponseInterface $response)
     {
         return 'Rick Ross - Foreclosures (Clean).mp3';

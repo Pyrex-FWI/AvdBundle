@@ -370,13 +370,12 @@ class FranchiseVideoProviderMock extends FranchisePoolVideoProvider
         return $result = parent::getItems($page, $filter);
     }
 
-
-   public function downloadItem(ProviderItemInterface $avdItem, $force = false, $mockSucces = true)
-   {
+    public function getDownloadResponse(ProviderItemInterface $svItem, $tmpName)
+    {
       $mock = new MockHandler([
 
           new Response(
-              $mockSucces ? 200 : 302,
+              200,
               [
                   'Content-Type'			=> 'audio/mpeg',
                   'Content-Length'		=> '11057204',
@@ -397,10 +396,13 @@ class FranchiseVideoProviderMock extends FranchisePoolVideoProvider
       ]);
       $handler = HandlerStack::create($mock);
       $this->client = new Client(['handler' => $handler]);
+      //To pass test
 
-      return $result = parent::downloadItem($avdItem);
-
-   }
-
+      $result = parent::getDownloadResponse($svItem, $tmpName);
+      file_put_contents($tmpName, "very long string, very long string, very long string very long string, very long string, very long string very long string, very long string, very long string");
+      return $result;
+    }
+   
+   
 }
 

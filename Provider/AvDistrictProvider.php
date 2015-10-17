@@ -26,7 +26,7 @@ class AvDistrictProvider extends AbstractProvider implements PoolProviderInterfa
                 $this->getConfValue('donwload_keygen_url'), [
                 //'cookies'         => $this->cookieJar,
                 'allow_redirects' => true,
-                'debug'           => $this->debug,
+                'debug'           => $this->getDebug(),
                 'form_params'     => [
                     'videoid' => $avItem->getItemId(),
                 ]
@@ -74,7 +74,7 @@ class AvDistrictProvider extends AbstractProvider implements PoolProviderInterfa
             //'cookies'         => $this->cookieJar,
             //'cookies'         => true,
             'allow_redirects' => true,
-            'debug'           => $this->debug,
+            'debug'           => $this->getDebug(),
             'headers'         => ['Content-Type' => 'application/x-www-form-urlencoded'],
             'form_params'     => [
                     $this->container->getParameter('av_district.configuration.login_form_name')    => $login ? $login : $this->container->getParameter('av_district.credentials.login'),
@@ -106,7 +106,7 @@ class AvDistrictProvider extends AbstractProvider implements PoolProviderInterfa
             $this->getConfValue('items_url'), [
             //'cookies'         => $this->cookieJar,
             'allow_redirects' => true,
-            'debug'           => $this->debug,
+            'debug'           => $this->getDebug(),
             'form_params'     => array_merge([
                     'sEcho'          => 1,
                     'iColumns'       => 13,
@@ -144,7 +144,7 @@ class AvDistrictProvider extends AbstractProvider implements PoolProviderInterfa
                     $this->getConfValue('download_url'), [
                     //'cookies'         => $this->cookieJar,
                     'allow_redirects' => false,
-                    'debug'           => $this->debug,
+                    'debug'           => $this->getDebug(),
                     'sink'            => $resource,
                     'query'           => [
                         'key' => $downloadKey,
