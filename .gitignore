@@ -5,7 +5,7 @@ Tests/app/logs
 composer.lock
 /.idea/
 Tests/TestData/Coverage
-!Tests/TestData/root_path/.placeholder
-Tests/TestData/root_path
+Tests/TestData/root_path/
+!Tests/TestData/root_path/.gitkeep
 /nbproject/private/
 /nbproject
