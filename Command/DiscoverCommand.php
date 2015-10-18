@@ -9,7 +9,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class DiscoverCommand extends ContainerAwareCommand
 {
-
     /** @var  ProviderManager */
     private $manager;
 
@@ -43,7 +42,7 @@ EOF
         foreach ($this->manager->getProviers() as $key => $provider) {
             $output->writeln($provider->getName());
         }
+
         return 1;
     }
-
 }

@@ -15,43 +15,53 @@ interface PoolProviderInterface
      * This mathod must open new connection on
      * dedicated provider and return true if connection
      * are successfuly openned.
+     *
      * @method open
-     * @param  string $login    login account
-     * @param  string $password password account
-     * @return bool             result
+     *
+     * @param string $login    login account
+     * @param string $password password account
+     *
+     * @return bool result
      */
     public function open($login, $password);
 
     /**
      * This method must turn off an openned connection
      * correctly.
+     *
      * @method close
-     * @return void
      */
     public function close();
 
     /**
-     * [getItems description]
+     * [getItems description].
+     *
      * @method getItems
-     * @param  [type]   $pageNum [description]
-     * @param  [type]   $filter [description]
-     * @return [type]            [description]
+     *
+     * @param [type] $pageNum [description]
+     * @param [type] $filter  [description]
+     *
+     * @return [type] [description]
      */
     public function getItems($pageNum, $filter = []);
 
     /**
      * Download a given item.
+     *
      * @method downloadItem
-     * @param  ProviderItemInterface $item item to download
-     * @return void
+     *
+     * @param ProviderItemInterface $item item to download
      */
     public function downloadItem(ProviderItemInterface $item);
 
     /**
-     * Check if item can be downloaded from provider permission
+     * Check if item can be downloaded from provider permission.
+     *
      * @method itemCanBeDownload
-     * @param  ProviderItemInterface $item [description]
-     * @return [type]                      [description]
+     *
+     * @param ProviderItemInterface $item [description]
+     *
+     * @return [type] [description]
      */
     public function itemCanBeDownload(ProviderItemInterface $item);
 

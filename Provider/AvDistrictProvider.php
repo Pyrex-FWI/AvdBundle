@@ -10,13 +10,14 @@ use Symfony\Component\Serializer\Serializer;
 
 class AvDistrictProvider extends AbstractProvider implements PoolProviderInterface, SearchablePoolProviderInterface
 {
-
     /** @var  EventDispatcher */
     protected $eventDispatcher;
 
     /**
      * @todo Throw exception
+     *
      * @param AvdItem $avItem
+     *
      * @return null|string
      */
     public function getDownloadKey(AvdItem $avItem)
@@ -26,10 +27,10 @@ class AvDistrictProvider extends AbstractProvider implements PoolProviderInterfa
                 $this->getConfValue('donwload_keygen_url'), [
                 //'cookies'         => $this->cookieJar,
                 'allow_redirects' => true,
-                'debug'           => $this->getDebug(),
-                'form_params'     => [
+                'debug' => $this->getDebug(),
+                'form_params' => [
                     'videoid' => $avItem->getItemId(),
-                ]
+                ],
                 ]
             );
 
@@ -42,7 +43,7 @@ class AvDistrictProvider extends AbstractProvider implements PoolProviderInterfa
             }
         }
 
-        return null;
+        return;
     }
 
     public function getName()
@@ -60,10 +61,12 @@ class AvDistrictProvider extends AbstractProvider implements PoolProviderInterfa
 
     public function itemCanBeDownload(ProviderItemInterface $item)
     {
-        if($key = $this->getDownloadKey($item)) {
-            $item->setDownloadlink($this->getConfValue('download_url') . '?key=' . $key);
+        if ($key = $this->getDownloadKey($item)) {
+            $item->setDownloadlink($this->getConfValue('download_url').'?key='.$key);
+
             return true;
         }
+
         return false;
     }
 
@@ -74,12 +77,12 @@ class AvDistrictProvider extends AbstractProvider implements PoolProviderInterfa
             //'cookies'         => $this->cookieJar,
             //'cookies'         => true,
             'allow_redirects' => true,
-            'debug'           => $this->getDebug(),
-            'headers'         => ['Content-Type' => 'application/x-www-form-urlencoded'],
-            'form_params'     => [
-                    $this->container->getParameter('av_district.configuration.login_form_name')    => $login ? $login : $this->container->getParameter('av_district.credentials.login'),
-                    $this->container->getParameter('av_district.configuration.password_form_name') => $password ? $password : $this->container->getParameter('av_district.credentials.password')
-                ]
+            'debug' => $this->getDebug(),
+            'headers' => ['Content-Type' => 'application/x-www-form-urlencoded'],
+            'form_params' => [
+                    $this->container->getParameter('av_district.configuration.login_form_name') => $login ? $login : $this->container->getParameter('av_district.credentials.login'),
+                    $this->container->getParameter('av_district.configuration.password_form_name') => $password ? $password : $this->container->getParameter('av_district.credentials.password'),
+                ],
             ]
         );
     }
@@ -92,7 +95,7 @@ class AvDistrictProvider extends AbstractProvider implements PoolProviderInterfa
                 return true;
             } else {
                 $this->logger->info('Login error: '.$rep['msg']);
-                
+
                 return false;
             }
         }
@@ -102,28 +105,28 @@ class AvDistrictProvider extends AbstractProvider implements PoolProviderInterfa
 
     protected function getItemsResponse($page, $filter = [])
     {
-        return $response   = $this->client->post(
+        return $response = $this->client->post(
             $this->getConfValue('items_url'), [
             //'cookies'         => $this->cookieJar,
             'allow_redirects' => true,
-            'debug'           => $this->getDebug(),
-            'form_params'     => array_merge([
-                    'sEcho'          => 1,
-                    'iColumns'       => 13,
-                    'sColumns'       => implode(',', (array) $this->getConfValue('items_properties')),
-                    'iDisplayStart'  => (($page - 1) * $this->getConfValue('items_per_page')) - $page < 0 ? 0 : (($page - 1) * $this->getConfValue('items_per_page')) - $page,
+            'debug' => $this->getDebug(),
+            'form_params' => array_merge([
+                    'sEcho' => 1,
+                    'iColumns' => 13,
+                    'sColumns' => implode(',', (array) $this->getConfValue('items_properties')),
+                    'iDisplayStart' => (($page - 1) * $this->getConfValue('items_per_page')) - $page < 0 ? 0 : (($page - 1) * $this->getConfValue('items_per_page')) - $page,
                     'iDisplayLength' => $this->getConfValue('items_per_page'),
-                    'sSortDir_0'     => 'asc',
-                    'iSortingCols'   => 1,
-                ], $this->getCriteria($filter))
+                    'sSortDir_0' => 'asc',
+                    'iSortingCols' => 1,
+                ], $this->getCriteria($filter)),
             ]
         );
     }
 
     protected function parseItemResponse(\Psr\Http\Message\ResponseInterface $response)
     {
-        $itemsArray       = [];
-        $rep              = json_decode($response->getBody(), true);
+        $itemsArray = [];
+        $rep = json_decode($response->getBody(), true);
         $this->serializer = new Serializer([new AvItemNormalizer($this->getConfValue('items_properties'))]);
 
         if (isset($rep['aaData']) && count($rep) > 0) {
@@ -131,46 +134,47 @@ class AvDistrictProvider extends AbstractProvider implements PoolProviderInterfa
                 $itemsArray[] = $this->serializer->denormalize($avItemArray, AvItemNormalizer::AVITEM);
             }
         }
+
         return $itemsArray;
     }
 
-    
     protected function getDownloadResponse(ProviderItemInterface $item, $tempName)
     {
-        $resource          = fopen($tempName, 'w');
-        $downloadKey       = $this->getDownloadKey($item);
-        
+        $resource = fopen($tempName, 'w');
+        $downloadKey = $this->getDownloadKey($item);
+
         return $response = $this->client->get(
                     $this->getConfValue('download_url'), [
                     //'cookies'         => $this->cookieJar,
                     'allow_redirects' => false,
-                    'debug'           => $this->getDebug(),
-                    'sink'            => $resource,
-                    'query'           => [
+                    'debug' => $this->getDebug(),
+                    'sink' => $resource,
+                    'query' => [
                         'key' => $downloadKey,
                     ],
-                    'headers'         => [
-                        'Referer'                   => 'http://www.avdistrict.net/Videos',
+                    'headers' => [
+                        'Referer' => 'http://www.avdistrict.net/Videos',
                         'Upgrade-Insecure-Requests' => 1,
-                        'Accept'                    => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-                        'Accept-Encoding'           => 'gzip, deflate, sdch',
-                        'Accept-Language'           => 'fr-FR,fr;q=0.8,en-US;q=0.6,en;q=0.4',
-                    ]
+                        'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+                        'Accept-Encoding' => 'gzip, deflate, sdch',
+                        'Accept-Language' => 'fr-FR,fr;q=0.8,en-US;q=0.6,en;q=0.4',
+                    ],
                     ]
                 );
     }
 
     protected function getDownloadedFileName(\Psr\Http\Message\ResponseInterface $response)
     {
-        $ctDisp   = $response->getHeader('Content-Disposition')[0];
+        $ctDisp = $response->getHeader('Content-Disposition')[0];
         preg_match('/filename=(?P<filename>.+)/', $ctDisp, $matches);
-        return $matches['filename'];                ;
+
+        return $matches['filename'];
     }
 
     public function getAvailableCriteria()
     {
         return [
-            'sSearch'
+            'sSearch',
         ];
     }
 

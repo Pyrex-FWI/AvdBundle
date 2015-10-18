@@ -2,13 +2,12 @@
 
 namespace DeejayPoolBundle\Event;
 
-
 use DeejayPoolBundle\Entity\AvdItem;
 use DeejayPoolBundle\Entity\ProviderItemInterface;
 use Symfony\Component\EventDispatcher\Event;
 
-class ItemLocalExistenceEvent extends Event {
-
+class ItemLocalExistenceEvent extends Event
+{
     /** @var ProviderItemInterface  */
     protected $item;
     private $existLocaly = false;
@@ -52,7 +51,7 @@ class ItemLocalExistenceEvent extends Event {
     public function setExistLocaly($boolVal)
     {
         $this->existLocaly = boolval($boolVal);
-        
+
         return $this;
     }
 }

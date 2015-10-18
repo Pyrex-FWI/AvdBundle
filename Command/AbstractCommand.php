@@ -37,19 +37,19 @@ class AbstractCommand extends ContainerAwareCommand
         $eventDispatcher,
         \Psr\Log\LoggerInterface $logger = null)
     {
-        $this->logger               = $logger ? $logger : new NullLogger();
-        $this->manager              = $manager;
-        $this->eventDispatcher      = $eventDispatcher;
+        $this->logger = $logger ? $logger : new NullLogger();
+        $this->manager = $manager;
+        $this->eventDispatcher = $eventDispatcher;
         parent::__construct();
     }
     /**
-     * @param InputInterface $input
+     * @param InputInterface  $input
      * @param OutputInterface $output
      */
     public function init(InputInterface $input, OutputInterface $output)
     {
-        $this->input     = $input;
-        $this->output    = $output;
+        $this->input = $input;
+        $this->output = $output;
         if ($this->input->hasArgument('provider') && $this->input->getArgument('provider')) {
             $contextProvider = $this->input->getArgument('provider');
             try {
@@ -81,5 +81,4 @@ class AbstractCommand extends ContainerAwareCommand
 
         return $downloadSuccess;
     }
-
 }

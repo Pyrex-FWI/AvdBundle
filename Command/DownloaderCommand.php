@@ -19,11 +19,11 @@ class DownloaderCommand extends AbstractCommand
     private $downloadSuccess = [];
     /** @var  AvdItem[] */
     private $downloadError = [];
-    /** @var  integer */
+    /** @var  int */
     private $pageLen = 0;
-    /** @var  integer */
+    /** @var  int */
     protected $start;
-    /** @var  integer */
+    /** @var  int */
     protected $end;
 
     const TRUNCATE_SIZE = 15;
@@ -72,27 +72,25 @@ EOF
 
         if ($this->provider->open() !== true) {
             $formatter = $this->getHelperSet()->get('formatter');
-            $message = array(sprintf("Unable to connect on %s", $this->provider->getName()));
+            $message = array(sprintf('Unable to connect on %s', $this->provider->getName()));
             $formattedBlock = $formatter->formatBlock($message, 'error', true);
             $this->output->writeln($formattedBlock);
+
             return 0;
         }
         $items = $this->readPages();
 
-        $this->output->writeln("");
+        $this->output->writeln('');
 
         if ($this->input->getOption('dry')) {
             $this->listItem($items);
-
         } elseif ($this->input->getOption('read-tags-only')) {
-
-
         } else {
             $this->download($items);
-            $this->output->writeln("");
+            $this->output->writeln('');
             $this->printSummary('Downloaded Tracks', $this->downloadSuccess);
         }
-        
+
         $this->output->writeln(sprintf('%s items found', count($items)));
 
         return 1;
@@ -104,7 +102,7 @@ EOF
         $this->eventDispatcher->addListener(ProviderEvents::ITEM_ERROR_DOWNLOAD, [$this, 'incrementErrorDownloaded']);
         $listeners = $this->eventDispatcher->getListeners(ProviderEvents::ITEMS_POST_GETLIST);
 
-        if (!empty($listeners) && ($this->input->getOption('dry') || $this->input->getOption('read-tags-only') )) {
+        if (!empty($listeners) && ($this->input->getOption('dry') || $this->input->getOption('read-tags-only'))) {
             foreach ($listeners as $listener) {
                 $this->eventDispatcher->removeListener(ProviderEvents::ITEMS_POST_GETLIST, $listener);
             }
@@ -138,7 +136,7 @@ EOF
     }
 
     /**
-     * @param InputInterface $input
+     * @param InputInterface  $input
      * @param OutputInterface $output
      */
     public function init(InputInterface $input, OutputInterface $output)
@@ -153,20 +151,20 @@ EOF
     private function printSummary($msg, $scope)
     {
         if (count($this->getDownloadSuccess()) > 0) {
-            $this->output->writeln("<info>Succesfull downloaded list</info>");
+            $this->output->writeln('<info>Succesfull downloaded list</info>');
             $tableHelper = new Table($this->output);
             $tableHelper->setHeaders([
-                'itemId', 'Artist', 'Title', 'Version'
+                'itemId', 'Artist', 'Title', 'Version',
             ]);
 
             $rows = [];
             foreach ($this->orderItems($scope) as $item) {
-                /** @var AvdItem $item */
+                /* @var AvdItem $item */
                 $rows[] = [
                     $item->getItemId(),
                     $item->getArtist(),
                     $item->getTitle(),
-                    $item->getVersion()
+                    $item->getVersion(),
                 ];
             }
             $tableHelper->setRows($rows);
@@ -192,21 +190,21 @@ EOF
                 $this->end = $this->getSearchableProvider()->getMaxPage();
             }
         }
-        $this->initProgressBar($this->end - $this->start+1);
+        $this->initProgressBar($this->end - $this->start + 1);
         $this->progressBar->setMessage('');
         $this->progressBar->start();
-        
+
         do {
             $this->progressBar->setMessage(sprintf('Read page %s', $this->start));
             $items = array_merge($items, $this->provider->getItems($this->start, $this->getFilters()));
             $this->progressBar->advance();
-            $this->start++;
-        } while($this->start <= $this->end);
+            ++$this->start;
+        } while ($this->start <= $this->end);
 
         $this->progressBar->finish();
         $this->totalToDonwload = count($items);
+
         return $items;
-   
     }
 
     /**
@@ -223,7 +221,6 @@ EOF
         $this->progressBar->start();
 
         foreach ($items as $item) {
-
             $this->progressBar->setMessage(
                 sprintf(
                     'Try Download %s: %s - %s %s',
@@ -234,54 +231,59 @@ EOF
             );
             $this->provider->downloadItem($item);
             $this->progressBar->advance();
-            usleep($this->input->getOption('sleep')*1000);
+            usleep($this->input->getOption('sleep') * 1000);
         }
 
-        $this->progressBar->finish();        
+        $this->progressBar->finish();
     }
-    
+
     /**
-     * 
      * @param \DeejayPoolBundle\Entity\ProviderItemInterface[] $items
      */
-    public function listItem($items) {
+    public function listItem($items)
+    {
         $tableHelper = new Table($this->output);
         $tableHelper->setHeaders([
-            'itemId', 'Artist', 'Title', 'Version', 'Local', 'AFD', 'Release Date', 'Link'
+            'itemId', 'Artist', 'Title', 'Version', 'Local', 'AFD', 'Release Date', 'Link',
         ]);
         $rows = [];
         $itemsExist = [];
         $itemsDownloadable = [];
         $mustBeDownload = [];
-        
+
         foreach (($items) as $item) {
-            /** @var \DeejayPoolBundle\Entity\ProviderItemInterface $item */
+            /* @var \DeejayPoolBundle\Entity\ProviderItemInterface $item */
             $searchItemLocaly = new \DeejayPoolBundle\Event\ItemLocalExistenceEvent($item);
             $this->eventDispatcher->dispatch(ProviderEvents::SEARCH_ITEM_LOCALY, $searchItemLocaly);
             $itemCanBeDownload = $this->provider->itemCanBeDownload($item);
             $existLocaly = $searchItemLocaly->existLocaly();
             $rows[] = [
-                substr($item->getItemId(), 0 , self::TRUNCATE_SIZE),
-                substr($item->getArtist(), 0 , self::TRUNCATE_SIZE),
-                substr($item->getTitle(), 0 , self::TRUNCATE_SIZE),
-                substr($item->getVersion(), 0 , self::TRUNCATE_SIZE),
+                substr($item->getItemId(), 0, self::TRUNCATE_SIZE),
+                substr($item->getArtist(), 0, self::TRUNCATE_SIZE),
+                substr($item->getTitle(), 0, self::TRUNCATE_SIZE),
+                substr($item->getVersion(), 0, self::TRUNCATE_SIZE),
                 $existLocaly ? '<info>✔</info>' : '<error>✖</error>',
                 $itemCanBeDownload ? '<info>✔</info>' : '<error>✖</error>',
                 $item->getReleaseDate()->format('d/m/Y'),
                 $item->getDownloadlink(),
             ];
-            if ($itemCanBeDownload) {$itemsDownloadable[] = $item->getItemId();}
-            if ($existLocaly) {$itemsExist[] = $item->getItemId();}
-            if (!$existLocaly && $itemCanBeDownload) { $mustBeDownload[] = $item->getItemId();} 
+            if ($itemCanBeDownload) {
+                $itemsDownloadable[] = $item->getItemId();
+            }
+            if ($existLocaly) {
+                $itemsExist[] = $item->getItemId();
+            }
+            if (!$existLocaly && $itemCanBeDownload) {
+                $mustBeDownload[] = $item->getItemId();
+            }
         }
         $tableHelper->setRows($rows);
         $tableHelper->render();
-        
+
         $this->output->writeln(sprintf('%s items can be (re)downloaded', count($itemsDownloadable)));
         $this->output->writeln(sprintf('%s items already downloaded localy', count($itemsExist)));
     }
     /**
-     * 
      * @return bool
      */
     private function searchableIsAvailable()
@@ -291,6 +293,7 @@ EOF
 
     /**
      * @return array []
+     *
      * @throws \Exception
      */
     private function getFilters()
@@ -301,31 +304,30 @@ EOF
             if (in_array($keyVal[0], $this->provider->getAvailableCriteria())) {
                 $filter[$keyVal[0]] = $keyVal[1];
             } else {
-                throw new \Exception($keyVal[0]. ' criteria not exist');
+                throw new \Exception($keyVal[0].' criteria not exist');
             }
         }
-        
+
         return $filter;
     }
 
     /**
-     * Find all options can not ne apply without verification
+     * Find all options can not ne apply without verification.
      */
     public function catchBreakableOption()
     {
         if ($this->input->getOption('show-criteria')) {
             if ($this->searchableIsAvailable()) {
-                $this->output->writeln("Available criteria");
+                $this->output->writeln('Available criteria');
                 $formatter = $this->getHelperSet()->get('formatter');
                 $message = $this->provider->getAvailableCriteria();
                 $formattedBlock = $formatter->formatBlock($message, 'info', true);
                 $this->output->writeln($formattedBlock);
             } else {
-                $this->output->writeln(sprintf("<error>%s not implements SearchablePoolProviderInterface</error>", $this->provider->getName()));
+                $this->output->writeln(sprintf('<error>%s not implements SearchablePoolProviderInterface</error>', $this->provider->getName()));
             }
-         
+
             exit;
         }
     }
-
 }

@@ -12,11 +12,10 @@ use Symfony\Component\Config\Definition\ScalarNode;
 class Configuration implements ConfigurationInterface
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getConfigTreeBuilder()
     {
-
         $treeBuilder = new TreeBuilder();
         $digital_dj_poolRoot = $treeBuilder->root('deejay_pool');
 
@@ -70,7 +69,8 @@ class Configuration implements ConfigurationInterface
 
     /**
      * Credentials configuration part
-     * For AvDistrict and Franchise Record Pool Providers
+     * For AvDistrict and Franchise Record Pool Providers.
+     *
      * @return ArrayNodeDefinition
      */
     public function getCredentialsDefinition()
@@ -90,6 +90,7 @@ class Configuration implements ConfigurationInterface
                 ->info('Password of your account')
                 ->cannotBeEmpty()
             ->end();
+
         return $node;
     }
 
@@ -110,9 +111,10 @@ class Configuration implements ConfigurationInterface
                 ->isRequired()
                 ->validate()
                 ->ifTrue(function ($v) {
-                    if(strlen($v) > 0 && !is_dir($v)){
+                    if (strlen($v) > 0 && !is_dir($v)) {
                         return true;
                     }
+
                     return 0;
                 })
                 ->thenInvalid('%s is not a valid folder.')
@@ -180,6 +182,7 @@ class Configuration implements ConfigurationInterface
                     ->end()
                 ->end()
             ->end();
+
         return $configurationDef;
     }
     /**
@@ -206,9 +209,10 @@ class Configuration implements ConfigurationInterface
                 ->isRequired()
                 ->validate()
                 ->ifTrue(function ($v) {
-                    if(strlen($v) > 0 && !is_dir($v)){
+                    if (strlen($v) > 0 && !is_dir($v)) {
                         return true;
                     }
+
                     return 0;
                 })
                 ->thenInvalid('%s is not a valid folder.')
@@ -266,14 +270,14 @@ class Configuration implements ConfigurationInterface
                     ->end()
                 ->end()
             ->end();
+
         return $configurationDef;
     }
-   /**
+    /**
      * @return ArrayNodeDefinition
      */
-    public function getSmashVisionConfigurationDefinition( $dlUrl = null)
+    public function getSmashVisionConfigurationDefinition($dlUrl = null)
     {
-
         $configurationDef = new ArrayNodeDefinition('configuration');
         $configurationDef
 
@@ -286,9 +290,10 @@ class Configuration implements ConfigurationInterface
                 ->isRequired()
                 ->validate()
                 ->ifTrue(function ($v) {
-                    if(strlen($v) > 0 && !is_dir($v)){
+                    if (strlen($v) > 0 && !is_dir($v)) {
                         return true;
                     }
+
                     return 0;
                 })
                 ->thenInvalid('%s is not a valid folder.')
@@ -359,6 +364,7 @@ class Configuration implements ConfigurationInterface
                     ->end()
                 ->end()
             ->end();
+
         return $configurationDef;
     }
 }

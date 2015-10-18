@@ -2,13 +2,12 @@
 
 namespace DeejayPoolBundle\Event;
 
-
 use DeejayPoolBundle\Entity\AvdItem;
 use DeejayPoolBundle\Entity\ProviderItemInterface;
 use Symfony\Component\EventDispatcher\Event;
 
-class ItemDownloadEvent extends Event {
-
+class ItemDownloadEvent extends Event
+{
     /** @var ProviderItemInterface  */
     protected $item;
     protected $fileName;

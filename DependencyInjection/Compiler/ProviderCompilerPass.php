@@ -4,9 +4,8 @@
  * Created by PhpStorm.
  * User: chpyr
  * Date: 06/09/15
- * Time: 13:08
+ * Time: 13:08.
  */
-
 namespace DeejayPoolBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
@@ -15,7 +14,6 @@ use Symfony\Component\DependencyInjection\Reference;
 
 class ProviderCompilerPass implements CompilerPassInterface
 {
-
     /**
      * You can modify the container here before it is dumped to PHP code.
      *
@@ -39,7 +37,7 @@ class ProviderCompilerPass implements CompilerPassInterface
             $providerManager->addMethodCall(
                 'addProvider',
                 [
-                    new Reference($id)
+                    new Reference($id),
                 ]
             );
         }

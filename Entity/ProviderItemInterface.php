@@ -1,13 +1,12 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: chpyr
  * Date: 05/09/15
- * Time: 20:38
+ * Time: 20:38.
  */
-
 namespace DeejayPoolBundle\Entity;
-
 
 interface ProviderItemInterface
 {
@@ -15,7 +14,7 @@ interface ProviderItemInterface
     public function setItemId($itemId);
     public function getArtist();
     public function setArtist($artist);
-    public function getTitle();    
+    public function getTitle();
     public function setTitle($title);
     public function getDownloaded();
     public function setDownloaded($boolValue);

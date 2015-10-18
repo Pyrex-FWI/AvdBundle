@@ -11,14 +11,14 @@
   "description": "Test project to download files from Digital Dj pool",
   "keywords": ["Deejay", "clips", "Downloader"],
   "require": {
-    "guzzlehttp/guzzle"                     : "~6.0",
-    "doctrine/doctrine-bundle"              : "~1.5",
-    "doctrine/doctrine-fixtures-bundle"     : "~2.2",
-    "doctrine/orm"                          : "~2.4",
-    "james-heinrich/getid3"                 : "~1.9",
-    "symfony/monolog-bundle"                : "~2.4",
-    "symfony/framework-bundle"              : "~2.6",
-    "symfony/serializer"                    : "^2.7.2|~3.0"
+        "guzzlehttp/guzzle"                     : "~6.0",
+        "doctrine/doctrine-bundle"              : "~1.5",
+        "doctrine/doctrine-fixtures-bundle"     : "~2.2",
+        "doctrine/orm"                          : "~2.4",
+        "james-heinrich/getid3"                 : "~1.9",
+        "symfony/monolog-bundle"                : "~2.4",
+        "symfony/framework-bundle"              : "~2.6",
+        "symfony/serializer"                    : "^2.7.2|~3.0"
   },
   "require-dev": {
     "symfony/symfony"                       : "~2.7",
@@ -26,7 +26,10 @@
     "fabpot/php-cs-fixer"                   : "@stable",
     "behat/symfony2-extension"              : "~2.0",
     "symfony/var-dumper"                    : "~2.7",
-    "fzaninotto/faker"                      : "~1.4"
+    "fzaninotto/faker"                      : "~1.4",
+    "mikey179/vfsStream"                    : "~1.6",
+        "escapestudios/symfony2-coding-standard": "~2.0"
+
     },
   "scripts": {
     "test:phpunit": "vendor/bin/phpunit --coverage-html Tests/coverage",

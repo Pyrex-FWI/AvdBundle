@@ -1,11 +1,10 @@
 <?php
+
 /**
  * Date: 06/09/15
- * Time: 11:56
+ * Time: 11:56.
  */
-
 namespace DeejayPoolBundle\Provider;
-
 
 class ProviderManager
 {
@@ -19,7 +18,9 @@ class ProviderManager
 
     /**
      * @param $name
+     *
      * @return mixed
+     *
      * @throws \Exception
      */
     public function get($name)

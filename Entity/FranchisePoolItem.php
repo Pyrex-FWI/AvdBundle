@@ -1,10 +1,9 @@
 <?php
+
 /**
- * User: chpyr
+ * User: chpyr.
  */
-
 namespace DeejayPoolBundle\Entity;
-
 
 use Doctrine\Common\Collections\ArrayCollection;
 
@@ -23,16 +22,18 @@ class FranchisePoolItem implements ProviderItemInterface
 
     /**
      * @param $true
+     *
      * @return $this
      */
     public function setVideo($true)
     {
         $this->isVideo = $true;
+
         return $this;
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isVideo()
     {
@@ -41,20 +42,21 @@ class FranchisePoolItem implements ProviderItemInterface
 
     /**
      * @param $true
+     *
      * @return $this
      */
     public function setAudio($true)
     {
         $this->isAudio = $true;
+
         return $this;
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isAudio()
     {
         return $this->isAudio;
     }
-
 }

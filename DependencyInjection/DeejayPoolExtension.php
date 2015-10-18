@@ -16,7 +16,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 class DeejayPoolExtension extends Extension
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function load(array $configs, ContainerBuilder $container)
     {
@@ -66,7 +66,6 @@ class DeejayPoolExtension extends Extension
                 sprintf('%s.configuration.password_form_name', $provider),
                 $config[$provider]['configuration']['password_form_name']
             );
-
         }
         //Spécific for AVD
         $container->setParameter(
@@ -104,6 +103,4 @@ class DeejayPoolExtension extends Extension
     {
         return DeejayPoolBundle::BUNDLE_ALIAS;
     }
-
-
 }

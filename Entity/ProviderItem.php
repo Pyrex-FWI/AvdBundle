@@ -2,13 +2,13 @@
 
 namespace DeejayPoolBundle\Entity;
 
-trait ProviderItem {
+trait ProviderItem
+{
     /** @var string */
-
     protected $artist;
     /** @var string */
-    protected $title;    
-    /** @var integer */
+    protected $title;
+    /** @var int */
     protected $bpm;
     /** @var bool */
     protected $downloaded = false;
@@ -16,7 +16,7 @@ trait ProviderItem {
     protected $itemId;
     /** @var string */
     protected $downloadlink;
-    
+
     protected $downloadStatus;
     /** @var string */
     protected $fullPath;
@@ -26,7 +26,6 @@ trait ProviderItem {
     protected $releaseDate;
     /** @var string */
     protected $version;
-
 
     /**
      * Get trackId.
@@ -54,19 +53,19 @@ trait ProviderItem {
     {
         return $this->downloadStatus;
     }
-    
+
     /**
-     * 
      * @param type $downloadStatus
+     *
      * @return ProviderItemInterface
      */
     public function setDownloadStatus($downloadStatus)
     {
         $this->downloadStatus = $downloadStatus;
-        
+
         return $this;
     }
-    
+
     /**
      * Get title.
      *
@@ -236,6 +235,7 @@ trait ProviderItem {
     }
     /**
      * @param AvdItem $genre
+     *
      * @return $this
      */
     public function addRelatedGenre($genre)
@@ -249,6 +249,7 @@ trait ProviderItem {
 
     /**
      * @param  $genre
+     *
      * @return ProviderItemInterface
      */
     public function removeRelatedGenre($genre)

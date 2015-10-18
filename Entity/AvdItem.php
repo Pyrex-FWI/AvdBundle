@@ -6,12 +6,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * AvdItem.
- *
  */
 class AvdItem implements ProviderItemInterface
 {
     use ProviderItem;
-    
+
     protected $downloadId;
     protected $isHD = false;
 
@@ -38,21 +37,21 @@ class AvdItem implements ProviderItemInterface
 
     /**
      * @param $true
+     *
      * @return $this
      */
     public function setHD($true)
     {
         $this->isHD = $true;
+
         return $this;
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isHD()
     {
         return $this->isHD;
     }
-
-
 }

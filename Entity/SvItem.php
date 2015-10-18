@@ -6,21 +6,20 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * SvGroup.
- *
  */
 class SvItem implements ProviderItemInterface
 {
     use ProviderItem;
-    
+
     protected $groupId;
     protected $downloadId;
-    protected $isHD         = false;
+    protected $isHD = false;
     protected $completeVersion;
     protected $videoId;
-    protected $qHD          = false;
-    protected $hd720        = false;
-    protected $hd1080       = false;
-    protected $parent       = false;
+    protected $qHD = false;
+    protected $hd720 = false;
+    protected $hd1080 = false;
+    protected $parent = false;
     protected $downloadable;
 
     /** @var ArrayCollection<SvItem> */
@@ -38,6 +37,7 @@ class SvItem implements ProviderItemInterface
     public function setDownloadable($boolValue)
     {
         $this->downloadable = $boolValue;
+
         return $this;
     }
 
@@ -56,14 +56,15 @@ class SvItem implements ProviderItemInterface
         return $this->parent;
     }
 
-    
     /**
-     * @param boolean $isParent
+     * @param bool $isParent
+     *
      * @return $this
      */
     public function setParent($isParent)
     {
         $this->parent = $isParent;
+
         return $this;
     }
     /**
@@ -76,11 +77,13 @@ class SvItem implements ProviderItemInterface
 
     /**
      * @param ArrayCollection $svItems
+     *
      * @return $this
      */
     public function setSvItems($svItems)
     {
         $this->svItems = $svItems;
+
         return $this;
     }
 
@@ -106,9 +109,9 @@ class SvItem implements ProviderItemInterface
         return $this;
     }
 
-
     /**
      * @param SvItem $svItem
+     *
      * @return $this
      */
     public function addSvItem($svItem)
@@ -122,6 +125,7 @@ class SvItem implements ProviderItemInterface
 
     /**
      * @param SvItem $svItem
+     *
      * @return $this
      */
     public function removeSvItem($svItem)
@@ -132,7 +136,6 @@ class SvItem implements ProviderItemInterface
 
         return $this;
     }
-
 
     /**
      * @return mixed
@@ -152,25 +155,26 @@ class SvItem implements ProviderItemInterface
 
     /**
      * @param $true
+     *
      * @return $this
      */
     public function setHD($true)
     {
         $this->isHD = $true;
+
         return $this;
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isHD()
     {
         return $this->isHD;
     }
 
-
     /**
-     * Get videoId
+     * Get videoId.
      *
      * @return $videoId
      */
@@ -194,7 +198,7 @@ class SvItem implements ProviderItemInterface
     }
 
     /**
-     * Get Xtend
+     * Get Xtend.
      *
      * @return bool
      */
@@ -217,13 +221,12 @@ class SvItem implements ProviderItemInterface
         return $this;
     }
 
-
     /**
-     * Get $qHD
+     * Get $qHD.
      *
      * @return bool
      */
-    public function  isQHD()
+    public function isQHD()
     {
         return $this->qHD;
     }
@@ -243,7 +246,7 @@ class SvItem implements ProviderItemInterface
     }
 
     /**
-     * Get $qHD
+     * Get $qHD.
      *
      * @return bool
      */
@@ -267,7 +270,7 @@ class SvItem implements ProviderItemInterface
     }
 
     /**
-     * Get $hd1080
+     * Get $hd1080.
      *
      * @return bool
      */
@@ -300,11 +303,13 @@ class SvItem implements ProviderItemInterface
 
     /**
      * @param mixed $version
+     *
      * @return SvItem
      */
     public function setCompleteVersion($version)
     {
         $this->completeVersion = $version;
+
         return $this;
     }
 
@@ -318,36 +323,43 @@ class SvItem implements ProviderItemInterface
 
     /**
      * @param mixed $durationMode
+     *
      * @return SvItem
      */
     public function setDurationMode($durationMode)
     {
         $this->durationMode = $durationMode;
+
         return $this;
     }
 
-    public function isSnipz() {
+    public function isSnipz()
+    {
         return preg_match('/Snipz/i', $this->completeVersion) > 0;
     }
 
-    public function isSingle() {
+    public function isSingle()
+    {
         return preg_match('/Single/i', $this->completeVersion) > 0;
     }
 
-    public function isXtend() {
+    public function isXtend()
+    {
         return preg_match('/Xtendz/i', $this->completeVersion) > 0;
     }
 
-    public function isDirty() {
+    public function isDirty()
+    {
         return preg_match('/Dirty/i', $this->completeVersion) > 0;
     }
 
-    public function isClean() {
+    public function isClean()
+    {
         return preg_match('/Clean/i', $this->completeVersion) > 0;
     }
 
     public function __clone()
     {
-      $this->svItems = new ArrayCollection();
+        $this->svItems = new ArrayCollection();
     }
 }

@@ -2,7 +2,6 @@
 
 namespace DeejayPoolBundle\Serializer\Normalizer;
 
-
 use DeejayPoolBundle\Entity\SvGroup;
 use DeejayPoolBundle\Entity\SvItem;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
@@ -19,10 +18,10 @@ class SvItemNormalizer extends AbstractNormalizer
     /**
      * Denormalizes data back into an object of the given class.
      *
-     * @param array $data data to restore
-     * @param string $class the expected class to instantiate
-     * @param string $format format the given data was extracted from
-     * @param array $context options available to the denormalizer
+     * @param array  $data    data to restore
+     * @param string $class   the expected class to instantiate
+     * @param string $format  format the given data was extracted from
+     * @param array  $context options available to the denormalizer
      *
      * @return SvGroup
      */
@@ -51,33 +50,44 @@ class SvItemNormalizer extends AbstractNormalizer
         return $svGroup;
     }
     /**
-     * [exactDurationVersion description]
+     * [exactDurationVersion description].
+     *
      * @method exactDurationVersion
-     * @param  [type]               $title [description]
-     * @return [type]                      [description]
+     *
+     * @param [type] $title [description]
+     *
+     * @return [type] [description]
      */
-    private function exactDurationVersion($title) {
+    private function exactDurationVersion($title)
+    {
         if (preg_match('/(?<version>single|xtendz|snipz)/i', $title, $matches) > 0) {
             return $matches['version'];
         }
     }
     /**
-     * [exactContentVersion description]
+     * [exactContentVersion description].
+     *
      * @method exactContentVersion
-     * @param  [type]              $title [description]
-     * @return [type]                     [description]
+     *
+     * @param [type] $title [description]
+     *
+     * @return [type] [description]
      */
-    private function exactContentVersion($title) {
+    private function exactContentVersion($title)
+    {
         if (preg_match('/(?<version>clean|dirty)$/i', $title, $matches) > 0) {
             return $matches['version'];
         }
     }
 
     /**
-     * Extract timestamp from microtime timestamp
+     * Extract timestamp from microtime timestamp.
+     *
      * @method extractReleaseDate
-     * @param  string             $date string like /Date(12345678901234)/
-     * @return int                      1234567890
+     *
+     * @param string $date string like /Date(12345678901234)/
+     *
+     * @return int 1234567890
      */
     private function extractReleaseDate($date)
     {
@@ -91,8 +101,8 @@ class SvItemNormalizer extends AbstractNormalizer
     /**
      * Checks whether the given class is supported for denormalization by this normalizer.
      *
-     * @param mixed $data Data to denormalize from.
-     * @param string $type The class to which the data should be denormalized.
+     * @param mixed  $data   Data to denormalize from.
+     * @param string $type   The class to which the data should be denormalized.
      * @param string $format The format being deserialized from.
      *
      * @return bool
@@ -105,9 +115,9 @@ class SvItemNormalizer extends AbstractNormalizer
     /**
      * Normalizes an object into a set of arrays/scalars.
      *
-     * @param object $object object to normalize
-     * @param string $format format the normalization result will be encoded as
-     * @param array $context Context options for the normalizer
+     * @param object $object  object to normalize
+     * @param string $format  format the normalization result will be encoded as
+     * @param array  $context Context options for the normalizer
      *
      * @return array|string|bool|int|float|null
      */
@@ -119,7 +129,7 @@ class SvItemNormalizer extends AbstractNormalizer
     /**
      * Checks whether the given class is supported for normalization by this normalizer.
      *
-     * @param mixed $data Data to normalize.
+     * @param mixed  $data   Data to normalize.
      * @param string $format The format being (de-)serialized from or into.
      *
      * @return bool
@@ -133,10 +143,9 @@ class SvItemNormalizer extends AbstractNormalizer
     {
         $duration = $this->exactDurationVersion($videoArray['title']);
         if ($duration) {
-            return sprintf('%s/%s', $duration, $this->exactContentVersion($videoArray['title']));   
+            return sprintf('%s/%s', $duration, $this->exactContentVersion($videoArray['title']));
         } else {
             return $this->exactContentVersion($videoArray['title']);
         }
     }
-
 }

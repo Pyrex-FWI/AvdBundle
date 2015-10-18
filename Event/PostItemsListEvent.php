@@ -2,12 +2,10 @@
 
 namespace DeejayPoolBundle\Event;
 
-
-use DeejayPoolBundle\Entity\AvdItem;
 use Symfony\Component\EventDispatcher\Event;
 
-class PostItemsListEvent extends Event {
-
+class PostItemsListEvent extends Event
+{
     /** @var ProviderItemInterface[]  */
     protected $items;
 
