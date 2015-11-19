@@ -9,3 +9,4 @@ Tests/TestData/root_path/
 !Tests/TestData/root_path/.gitkeep
 /nbproject/private/
 /nbproject
+.DS_Store
