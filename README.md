@@ -1,11 +1,15 @@
-# AvDistrict Downloader
+# DeejayPoolBundle
 
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.txt)
-[![Build Status](https://travis-ci.org/Pyrex-FWI/DigitalDjPoolBundle.svg?branch=master)](https://travis-ci.org/Pyrex-FWI/DigitalDjPoolBundle)
-[![Codacy Badge](https://www.codacy.com/project/badge/96ed127edb5c409e99550057b49025f0)](https://www.codacy.com/app/yemistikris/DigitalDjPoolBundle)
+[![Build Status](https://travis-ci.org/Pyrex-FWI/DigitalDjPoolBundle.svg?branch=master)](https://travis-ci.org/Pyrex-FWI/DeejayPoolBundle)
+[![Codacy Badge](https://www.codacy.com/project/badge/96ed127edb5c409e99550057b49025f0)](https://www.codacy.com/app/yemistikris/DeejayPoolBundle)
 
-INSTALL
-=======
+# Getting started
+
+
+
+
+## Installing DeejayPoolBundle
 
 Update your composer.json
 
@@ -14,31 +18,89 @@ Update your composer.json
     "pyrex-fwi/avdistrict-bundle": "dev-master"
 }
 ```
+or 
 
-Update your AppKernel.php
+`composer require pyrex-fwi/avdistrict-bundle`
+
+Update your `app/config/AppKernel.php` file
 
 ```php
-new DeejayPoolBundle\DeejayPoolBundle()
-```
+<?php
+
+public function registerBundles()
+{
+    $bundles = [
+        // ...
+        new DeejayPoolBundle\DeejayPoolBundle()
+        // ...
+    ];
+
+    // ...
+}
+
+?>
+```php
 
 Add your account information into config.yml
 
 ```yaml
-av_district:
-    credentials:
-        login:    %avd.credentials.login%
-        password: %avd.credentials.password%
-
-    configuration:
-        root_path: %avd.configuration.root_path%
+deejay_pool:
+    providerName:
+        credentials:
+            login: replace_with_yours
+            password: replace_with_yours
+        configuration:
+            root_path: /replace/by/writable/path/destination
 
 ```
 
-Console usages:
+## Supported providers
+
+* AvDistrict (Videos, [Create account](http://www.avdistrict.net/Account/Register))
+* DigitalDjPool (Musics, [Create account](https://digitaldjpool.com/Account.aspx/Register))
+* Samsh Vision (Videos, [Create account](https://www.smashvision.net/Home/Register)
+* Franchise Record Pool(Musics and videos, [Create account](http://www.franchiserecordpool.com)
+
 ```yaml
- avd
-  ddp:download              Download files from av district
+deejay_pool:
+    av_district:
+        credentials:
+            login:    %av_district.credentials.login%
+            password: %av_district.credentials.password%
+        configuration:
+            root_path: %av_district.configuration.root_path%
+
+    franchise_pool_audio:
+        credentials:
+            login:    brubruno
+            password: maladede
+        configuration:
+            root_path: %franchise_pool.configuration.root_path%
+
+    franchise_pool_video:
+        credentials:
+            login:    %franchise_pool.credentials.login%
+            password: %franchise_pool.credentials.password%
+        configuration:
+            root_path: %franchise_pool.configuration.root_path%
+    
+    smashvision:
+        credentials:
+            login:    %smashvision.credentials.login%
+            password: %smashvision.credentials.password%
+
+        configuration:
+            root_path: %smashvision.configuration.root_path%
 ```
+
+## Console usages:
+
+-  deejay:discover                         (Discover prodivers)
+-  deejay:pool:status                      (Check account credentials)
+- -  php app/console deejay:pool:status franchise_pool_audio -vvv
+-  deejay:pool:download                    (Download files from a specific provider)
+ - download files 
+ - search files
 
 #### Run tests
 

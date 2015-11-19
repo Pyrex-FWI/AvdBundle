@@ -32,7 +32,7 @@ $container
             ))
     )
     ->addMethodCall('setContainer', [new Reference('service_container')])
-    ->addTag('monolog.logger', array('channel' => 'avd'))
+    ->addTag('monolog.logger', array('channel' => 'ddp'))
     ->addTag('deejay_provider', []);
 
 $container
@@ -46,7 +46,7 @@ $container
             ))
     )
     ->addMethodCall('setContainer', [new Reference('service_container')])
-    ->addTag('monolog.logger', array('channel' => 'avd'))
+    ->addTag('monolog.logger', array('channel' => 'ddp'))
     ->addTag('deejay_provider', []);
 
 $container
@@ -60,7 +60,7 @@ $container
             ))
     )
     ->addMethodCall('setContainer', [new Reference('service_container')])
-    ->addTag('monolog.logger', array('channel' => 'avd'))
+    ->addTag('monolog.logger', array('channel' => 'ddp'))
     ->addTag('deejay_provider', []);
 
 $container
@@ -74,7 +74,7 @@ $container
             ))
     )
     ->addMethodCall('setContainer', [new Reference('service_container')])
-    ->addTag('monolog.logger', array('channel' => 'avd'))
+    ->addTag('monolog.logger', array('channel' => 'ddp'))
     ->addTag('deejay_provider', []);
 
 
