@@ -31,6 +31,10 @@ class DeejayPoolExtension extends Extension
             DeejayPoolBundle::PROVIDER_SV,
         ];
         foreach ($providers as $provider) {
+
+            if (!isset($config[$provider]['credentials']['login']) || !isset($config[$provider]['credentials']['password'])) {
+                continue;
+            }
             $container->setParameter(
                 sprintf('%s.configuration.root_path', $provider),
                 realpath($config[$provider]['configuration']['root_path'])
