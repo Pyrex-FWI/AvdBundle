@@ -16,6 +16,8 @@ class FranchisePoolProvider extends AbstractProvider implements PoolProviderInte
     protected $eventDispatcher;
     /** @var Serializer  */
     protected $serializer;
+    /** @var  string */
+    private $lastDownloadLink;
     /**
      * @var string
      */
@@ -138,6 +140,7 @@ class FranchisePoolProvider extends AbstractProvider implements PoolProviderInte
     {
         $requestUrl = $item->getDownloadlink();
         $resource = fopen($tempName, 'w');
+        $this->lastDownloadLink = null;
 
         $requestParams = [
             //'cookies' => $this->cookieJar,
@@ -160,6 +163,7 @@ class FranchisePoolProvider extends AbstractProvider implements PoolProviderInte
                 $requestParams['sink'] = $resource;
                 $fileName = (urldecode(basename(parse_url($requestUrl)['path'])));
                 $item->setDownloadlink($requestUrl);
+                $this->lastDownloadLink = $requestUrl;
             }
         } while ($response->hasHeader('Location'));
 
@@ -168,8 +172,7 @@ class FranchisePoolProvider extends AbstractProvider implements PoolProviderInte
 
     public function getDownloadedFileName(\Psr\Http\Message\ResponseInterface $response)
     {
-        $requestUrl = $response->getHeaderLine('Location');
-        $fileName = (urldecode(basename(parse_url($requestUrl)['path'])));
+        $fileName = (urldecode(basename(parse_url($this->lastDownloadLink)['path'])));
 
         return $fileName;
     }
