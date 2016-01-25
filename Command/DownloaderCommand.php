@@ -76,7 +76,7 @@ EOF
             $formattedBlock = $formatter->formatBlock($message, 'error', true);
             $this->output->writeln($formattedBlock);
 
-            return 0;
+            return 1;
         }
         $items = $this->readPages();
 
@@ -93,7 +93,7 @@ EOF
 
         $this->output->writeln(sprintf('%s items found', count($items)));
 
-        return 1;
+        return 0;
     }
 
     private function registerListerners()
