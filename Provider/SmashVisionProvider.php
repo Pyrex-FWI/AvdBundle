@@ -20,6 +20,8 @@ class SmashVisionProvider extends AbstractProvider implements PoolProviderInterf
 {
     protected $noTracksFromPage;
 
+    private $loginData = [];
+
     /** @var  EventDispatcher */
     protected $eventDispatcher;
     /**
@@ -50,29 +52,29 @@ class SmashVisionProvider extends AbstractProvider implements PoolProviderInterf
         $resource = fopen($tempName, 'w');
 
         return $this->client->get(
-                //$this->getConfValue('download_url'), 
-                $item->getDownloadlink(),
-                [
-                    //'cookies'         => $this->cookieJar,
-                    'allow_redirects' => false,
-                    'debug' => $this->debug,
-                    'sink' => $resource,
-                    'query' => [
-                        'id' => $item->getVideoId(),
-                        'fg' => 'true',
-                    ],
-                    'headers' => [
-                        'Pragma' => 'no-cache',
-                        'Accept-Encoding' => 'gzip, deflate, sdch',
-                        'Accept-Language' => 'fr-FR,fr;q=0.8,en-US;q=0.6,en;q=0.4',
-                        'Upgrade-Insecure-Requests' => 1,
-                        'User-Agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.99 Safari/537.36',
-                        'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-                        'Referer' => 'https://www.smashvision.net/Videos?sort=date&dir=desc&keywords=&genreId=15&subGenreId=0&toolId=&featured=0&releaseyear=',
-                        'Cache-Control' => 'no-cache',
-                        'Connection' => 'keep-alive',
-                    ],
-                ]
+        //$this->getConfValue('download_url'),
+            $item->getDownloadlink(),
+            [
+                //'cookies'         => $this->cookieJar,
+                'allow_redirects' => false,
+                'debug' => $this->debug,
+                'sink' => $resource,
+                'query' => [
+                    'id' => $item->getVideoId(),
+                    'fg' => 'true',
+                ],
+                'headers' => [
+                    'Pragma' => 'no-cache',
+                    'Accept-Encoding' => 'gzip, deflate, sdch',
+                    'Accept-Language' => 'fr-FR,fr;q=0.8,en-US;q=0.6,en;q=0.4',
+                    'Upgrade-Insecure-Requests' => 1,
+                    'User-Agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.99 Safari/537.36',
+                    'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+                    'Referer' => 'https://www.smashvision.net/Videos?sort=date&dir=desc&keywords=&genreId=15&subGenreId=0&toolId=&featured=0&releaseyear=',
+                    'Cache-Control' => 'no-cache',
+                    'Connection' => 'keep-alive',
+                ],
+            ]
         );
     }
 
@@ -98,12 +100,12 @@ class SmashVisionProvider extends AbstractProvider implements PoolProviderInterf
                     'groupId' => $videoGroup['groupId'],
                     'title' => $videoGroup['title'],
                     '_' => microtime(),
-            ]);
+                ]);
             $promises[$index] = $this->client->getAsync(
                 $uri, [
-                //'cookies'         => $this->cookieJar,
-                'allow_redirects' => true,
-                'debug' => $this->debug,
+                    //'cookies'         => $this->cookieJar,
+                    'allow_redirects' => true,
+                    'debug' => $this->debug,
                 ]
             );
         }
@@ -136,12 +138,12 @@ class SmashVisionProvider extends AbstractProvider implements PoolProviderInterf
 
         $response = $this->client->post(
             $this->getConfValue('check_download_status_url'), [
-            //'cookies'     => $this->cookieJar,
-            'debug' => $this->debug,
-            'form_params' => [
-                'videoId' => $svItem->getVideoId(),
-                'fromGrid' => $fg ? 'true' : 'false',
-            ],
+                //'cookies'     => $this->cookieJar,
+                'debug' => $this->debug,
+                'form_params' => [
+                    'videoId' => $svItem->getVideoId(),
+                    'fromGrid' => $fg ? 'true' : 'false',
+                ],
             ]
         );
 
@@ -151,9 +153,9 @@ class SmashVisionProvider extends AbstractProvider implements PoolProviderInterf
                 $videoCanBeDownloaded = true;
 
                 $svItem->setDownloadlink($this->getConfValue('download_url').'?'.http_build_query([
-                'id' => $svItem->getVideoId(),
-                'fg' => $fg ? 'true' : 'false',
-        ]));
+                        'id' => $svItem->getVideoId(),
+                        'fg' => $fg ? 'true' : 'false',
+                    ]));
             }
             $this->logger->info(sprintf('Download status for %s : %s', $svItem->getItemId(), $responseString['msg']));
             $svItem->setDownloadStatus($responseString['msg']);
@@ -190,8 +192,8 @@ class SmashVisionProvider extends AbstractProvider implements PoolProviderInterf
      */
     protected function getLoginResponse($login, $password)
     {
-        return $response = $this->client->post(
-                $this->getConfValue('login_check'), [
+        $response = $this->client->post(
+            $this->getConfValue('login_check'), [
                 //'cookies'         => $this->cookieJar,
                 //'cookies'         => true,
                 'allow_redirects' => true,
@@ -203,8 +205,11 @@ class SmashVisionProvider extends AbstractProvider implements PoolProviderInterf
                     'rememberme' => true,
                     'ReturnUrl' => '',
                 ],
-                ]
+            ]
         );
+
+        $this->loginData = json_decode($response->getBody()->__toString(), true);
+        return $response;
     }
 
     protected function hasCorrectlyConnected(\Psr\Http\Message\ResponseInterface $response)
@@ -225,21 +230,7 @@ class SmashVisionProvider extends AbstractProvider implements PoolProviderInterf
 
     protected function getItemsResponse($page, $filter = [])
     {
-        $response = $this->client->post(
-            $this->getConfValue('items_url'), [
-            //'cookies'         => $this->cookieJar,
-            'allow_redirects' => true,
-            'debug' => $this->debug,
-            'form_params' => array_merge([
-                        'rows' => $this->getConfValue('items_per_page'),
-                        'page' => $page,
-                        'cc' => 'eu',
-                        'sort' => 'date',
-                        'dir' => 'desc',
-                        '_' => microtime(false),
-                    ], $this->getCriteria($filter)),
-            ]
-        );
+        $response = $this->getResponseByPostQuery($page, $filter);
 
         return $response;
     }
@@ -286,7 +277,7 @@ class SmashVisionProvider extends AbstractProvider implements PoolProviderInterf
                 'releaseyear' => '',
             ],
             (array) $filter
-            );
+        );
     }
 
     public function getAvailableCriteria()
@@ -314,5 +305,72 @@ class SmashVisionProvider extends AbstractProvider implements PoolProviderInterf
         $this->setMaxPage(intval($responseArray['pages']));
 
         return $this;
+    }
+
+    /**
+     * @param $page
+     * @param $filter
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    protected function getResponseByGetQuery($page, $filter)
+    {
+        $formParams = array_merge(
+            [
+                'rows' => $this->getConfValue('items_per_page'),
+                'page' => $page,
+                'cc' => 'eu',
+                'sort' => 'date',
+                'dir' => 'desc',
+                '_' => intval(microtime(true)),
+            ],
+            $this->getCriteria($filter)
+        );
+
+        $query = http_build_query($formParams);
+        $url = sprintf('%s/%s?%s', $this->getConfValue('items_url'), $this->loginData['id'], $query);
+        $params = [
+            //'cookies'         => $this->cookieJar,
+            'allow_redirects' => true,
+            'debug' => $this->debug
+        ];
+
+        $response = $this->client->get(
+            $url,
+            $params
+        );
+
+        return $response;
+    }
+    /**
+     * @param $page
+     * @param $filter
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    protected function getResponseByPostQuery($page, $filter)
+    {
+        $url = sprintf('%s', $this->getConfValue('items_url'));
+        $params = [
+            //'cookies'         => $this->cookieJar,
+            'allow_redirects' => true,
+            'debug' => $this->debug,
+            'form_params' => array_merge(
+                [
+                    'rows' => $this->getConfValue('items_per_page'),
+                    'page' => $page,
+                    'cc' => 'eu',
+                    'sort' => 'date',
+                    'dir' => 'desc',
+                    '_' => intval(microtime(true)),
+                ],
+                $this->getCriteria($filter)
+            ),
+        ];
+
+        $response = $this->client->post(
+            $url,
+            $params
+        );
+
+        return $response;
     }
 }
