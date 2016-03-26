@@ -229,7 +229,11 @@ EOF
                     $item->getTitle(),
                     $item->getVersion())
             );
-            $this->provider->downloadItem($item);
+            try {
+                $this->provider->downloadItem($item);
+            } catch (\Exception $e) {
+                $this->getContainer()->get('logger')->info($e->getMessage());
+            }
             $this->progressBar->advance();
             usleep($this->input->getOption('sleep') * 1000);
         }
