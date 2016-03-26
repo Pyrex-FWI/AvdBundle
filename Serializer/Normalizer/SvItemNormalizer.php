@@ -14,7 +14,9 @@ use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 class SvItemNormalizer extends AbstractNormalizer
 {
     const SVITEM = 'SvItem';
-
+    const QUALITY_qHD = 1;          //groupId like "17991_qHD"
+    const QUALITY_HD_720 = 2;       //groupId like "17988_HD720"
+    const QUALITY_HD_1080 = 3;      //groupId like "18018_HD1080"
     /**
      * Denormalizes data back into an object of the given class.
      *
@@ -34,6 +36,15 @@ class SvItemNormalizer extends AbstractNormalizer
         $svGroup->setBpm(intval($data['bpm']));
         $svGroup->addRelatedGenre($data['genre']);
         $svGroup->setReleaseDate((new \DateTime())->setTimestamp($this->extractReleaseDate($data['date'])));
+        if (SvItemNormalizer::QUALITY_HD_720 == $data["quality"]) {
+            $svGroup->set720(true);
+        }
+        if (SvItemNormalizer::QUALITY_HD_1080 == $data["quality"]) {
+            $svGroup->set1080(true);
+        }
+        if (SvItemNormalizer::QUALITY_qHD == $data["quality"]) {
+            $svGroup->setQHD(true);
+        }
 
         foreach ($data['videos'] as $videoArray) {
             $svItem = clone $svGroup;

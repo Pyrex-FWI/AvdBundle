@@ -36,12 +36,9 @@ class SmashVisionProvider extends AbstractProvider implements PoolProviderInterf
     private function getChild(SvItem $svGroup)
     {
         $itemsArray = [];
-        if ($svGroup->isParent() && $svGroup->getSvItems()->count() > 1) {
-            foreach ($svGroup->getSvItems() as $svItem) {
-                $itemsArray[] = $svItem;
-            }
-        } else {
-            //$itemsArray[] = $svGroup;
+        if ($svGroup->isParent() && $svGroup->getSvItems()->count() > 0) {
+
+            return $svGroup->getSvItems()->toArray();
         }
 
         return $itemsArray;
@@ -94,7 +91,7 @@ class SmashVisionProvider extends AbstractProvider implements PoolProviderInterf
         $promises = [];
 
         foreach ($datas as $index => $videoGroup) {
-            $uri = $this->getConfValue('items_versions_url').'?'.http_build_query([
+            $uri = $this->getConfValue('items_versions_url').'/'.$this->loginData['id'].'?'.http_build_query([
                     'cc' => 'eu',
                     'rowId' => '',
                     'groupId' => $videoGroup['groupId'],
@@ -230,7 +227,7 @@ class SmashVisionProvider extends AbstractProvider implements PoolProviderInterf
 
     protected function getItemsResponse($page, $filter = [])
     {
-        $response = $this->getResponseByPostQuery($page, $filter);
+        $response = $this->getResponseByGetQuery($page, $filter);
 
         return $response;
     }
@@ -246,7 +243,8 @@ class SmashVisionProvider extends AbstractProvider implements PoolProviderInterf
             $rep['data'] = $this->getAllVideos($rep['data']);
             foreach ($rep['data'] as $svItemArray) {
                 $svGroupItem = $this->serializer->denormalize($svItemArray, SvItemNormalizer::SVITEM, null, $context);
-                $itemsArray = array_merge($itemsArray, $this->getChild($svGroupItem));
+                $itemsGroup = $this->getChild($svGroupItem);
+                $itemsArray = array_merge($itemsArray, $itemsGroup);
             }
         }
 
