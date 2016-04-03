@@ -109,15 +109,6 @@ class Configuration implements ConfigurationInterface
                 ->example('/your/path/to/download/target/files/')
                 ->defaultValue('%kernel.cache_dir%')
                 ->isRequired()
-                ->validate()
-                ->ifTrue(function ($v) {
-                    if (strlen($v) > 0 && !is_dir($v)) {
-                        return true;
-                    }
-
-                    return 0;
-                })
-                ->thenInvalid('%s is not a valid folder.')
             ->end();
         $configurationDef
             ->children()
@@ -207,15 +198,6 @@ class Configuration implements ConfigurationInterface
                 ->example('/your/path/to/download/target/files/')
                 ->defaultValue('%kernel.cache_dir%')
                 ->isRequired()
-                ->validate()
-                ->ifTrue(function ($v) {
-                    if (strlen($v) > 0 && !is_dir($v)) {
-                        return true;
-                    }
-
-                    return 0;
-                })
-                ->thenInvalid('%s is not a valid folder.')
             ->end();
         $configurationDef
             ->children()
@@ -288,15 +270,6 @@ class Configuration implements ConfigurationInterface
                 ->example('/your/path/to/download/target/files/')
                 ->defaultValue('%kernel.cache_dir%')
                 ->isRequired()
-                ->validate()
-                ->ifTrue(function ($v) {
-                    if (strlen($v) > 0 && !is_dir($v)) {
-                        return true;
-                    }
-
-                    return 0;
-                })
-                ->thenInvalid('%s is not a valid folder.')
             ->end();
         $configurationDef
             ->children()
