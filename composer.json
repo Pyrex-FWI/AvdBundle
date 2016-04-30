@@ -38,7 +38,11 @@
     "doctrine:create": "php Tests/app/console.php doctrine:d:c",
     "doctrine:update": "php Tests/app/console.php doctrine:s:u --force",
     "doctrine:init": "composer doctrine:drop && composer doctrine:create && composer doctrine:update",
-    "test": "composer doctrine:init && composer test:phpunit"
+    "test": "composer doctrine:init && composer test:phpunit",
+    "get-plantuml": "[ -f /vendore/bin/plantuml.jar ] || wget http://downloads.sourceforge.net/project/plantuml/plantuml.jar -q -O vendor/bin/plantuml.jar",
+    "post-install-cmd": [
+        "@get-plantuml"
+    ]
   },
     "autoload": {
       "psr-4": { "DeejayPoolBundle\\": "" }

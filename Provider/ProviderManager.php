@@ -1,9 +1,5 @@
 <?php
 
-/**
- * Date: 06/09/15
- * Time: 11:56.
- */
 namespace DeejayPoolBundle\Provider;
 
 class ProviderManager

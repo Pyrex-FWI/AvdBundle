@@ -1,0 +1,9 @@
+!definelong CRAWL_ITEMS()
+partition "Crawl items" {
+    repeat
+    :Retrieve page data (getItemsResponse);
+    :normalizeItems;
+    :emit event ITEMS_POST_GETLIST;
+    repeat while(next page?)
+}
+!enddefinelong
