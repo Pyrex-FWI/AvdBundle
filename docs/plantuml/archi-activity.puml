@@ -6,13 +6,13 @@ title Download command process
 
 
 start
-
+: deejay:pool:download <prodivder> - -start 1 - -end 10;
 :Open [Provider] session;
 
 
 if (Logged into The Game?) then (yes)
     CRAWL_ITEMS()
-    if (Dry run) then (yes)
+    if (--dry-run) then (yes)
     else (no)
         DOWNLOAD_ITEMS()
     endif
