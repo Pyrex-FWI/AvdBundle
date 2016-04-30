@@ -12,6 +12,10 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * Class DownloaderCommand
+ * @package DeejayPoolBundle\Command
+ */
 class DownloaderCommand extends AbstractCommand
 {
     protected $totalToDonwload;
@@ -19,8 +23,6 @@ class DownloaderCommand extends AbstractCommand
     private $downloadSuccess = [];
     /** @var  AvdItem[] */
     private $downloadError = [];
-    /** @var  int */
-    private $pageLen = 0;
     /** @var  int */
     protected $start;
     /** @var  int */
@@ -39,7 +41,7 @@ class DownloaderCommand extends AbstractCommand
             ->addOption('end', null, InputOption::VALUE_OPTIONAL, 'Page end', 1)
             ->addOption('sleep', null, InputOption::VALUE_OPTIONAL, 'millisec sleep after download', 0)
             ->addOption('dry', null, InputOption::VALUE_NONE, 'Do not download', null)
-            ->addOption('read-tags-only', null, InputOption::VALUE_NONE, 'Read tags only', null)
+            ->addOption('read-tags-only', null, InputOption::VALUE_NONE, 'Read tags only [to update local database per example]', null)
             ->addOption('show-criteria', null, InputOption::VALUE_NONE, 'Show available criteria', null)
             ->addOption('filter', null, InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'Filter', [])
             ->setHelp(<<<EOF
@@ -214,6 +216,7 @@ EOF
     {
         return $this->provider;
     }
+
     public function download($items)
     {
         $this->initProgressBar($this->totalToDonwload);

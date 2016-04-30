@@ -1,0 +1,24 @@
+!definelong DOWNLOAD_ITEMS()
+partition "Download items" {
+    repeat
+    if (Item can be downloaded) then (yes)
+        :emit event ITEM_PRE_DOWNLOAD;
+        if (Event.ITEM_PRE_DOWNLOAD.propagation stopped) then (yes)
+        :get binary data;
+            if (Correctly downloaded) then (yes)
+            :Move file to [Provider] root path;
+            :emit event ITEM_SUCCESS_DOWNLOAD;
+            :Log;
+            else (no)
+            :emit event ITEM_ERROR_DOWNLOAD;
+            :Log;
+            endif
+        else (no)
+        :emit event ITEM_ERROR_DOWNLOAD;
+        :Log;
+        endif
+    else (no)
+    endif
+    repeat while(next item?)
+}
+!enddefinelong

@@ -109,4 +109,38 @@ deejay_pool:
 - vendor/bin/phpunit -c phpunit.xml --debug --verbose --coverage-html Tests/TestData/Coverage --debug --stop-on-error -v
 
 
+Events
+======
+
+Session events
+==============
+
+| Name              |                                                  |
+|:------------------|:------------------------------------------------:|
+| SESSION_OPENED    | After successful PoolProviderInterface::open()   |
+| SESSION_OPEN_ERROR| When error occur on PoolProviderInterface::open()|
+| SESSION_CLOSED    | After successful PoolProviderInterface::close()  |
+
+
+Item events
+===========
+
+| Name                            |                                                                                  |
+|:------------------------------- |:--------------------------------------------------------------------------------:|
+| ITEMS_POST_GETLIST              | After successful page items normalization in PoolProviderInterface::getItems()   |
+| ITEM_PRE_DOWNLOAD               | Triggered inside PoolProviderInterface::downloadItem() before true request       |
+| ITEM_SUCCESS_DOWNLOAD           | Dispatched when an item is correctly downloaded                                  |
+| ITEM_ERROR_DOWNLOAD             | Dispatched when itemCanBeDownloaded/ItemPreDownload propagation is stopped/Http Download Error /  |
+| SEARCH_ITEM_LOCALY      | Dispatched when an item is correctly downloaded                                  |
+
+
+    
+
+
+    SEARCH_ITEM_LOCALY = 'provider.search.item.localy';
+
 http://gnugat.github.io/2014/10/29/sf2-bundle-standalone.html
+
+
+
+![Pseudoarchi](docs/plantuml/assets/archi.png)

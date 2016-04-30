@@ -11,6 +11,7 @@ class ItemLocalExistenceEvent extends Event
     /** @var ProviderItemInterface  */
     protected $item;
     private $existLocaly = false;
+    private $forceDownload = false;
     /**
      * @param AvdItem $item
      */
@@ -54,4 +55,24 @@ class ItemLocalExistenceEvent extends Event
 
         return $this;
     }
+
+    /**
+     * @return boolean
+     */
+    public function isForceDownload()
+    {
+        return $this->forceDownload;
+    }
+
+    /**
+     * @param boolean $forceDownload
+     * @return ItemLocalExistenceEvent
+     */
+    public function setForceDownload($forceDownload)
+    {
+        $this->forceDownload = $forceDownload;
+
+        return $this;
+    }
+
 }

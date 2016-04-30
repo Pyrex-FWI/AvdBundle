@@ -1,0 +1,27 @@
+@startuml
+!include macros/crawl_items.puml
+!include macros/download_items.puml
+
+title Download command process
+
+
+start
+
+:Open [Provider] session;
+
+
+if (Logged into The Game?) then (yes)
+    CRAWL_ITEMS()
+    if (Dry run) then (yes)
+    else (no)
+        DOWNLOAD_ITEMS()
+    endif
+    :print summary;
+else (no)
+  stop
+endif
+
+
+stop
+
+@enduml
