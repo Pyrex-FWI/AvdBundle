@@ -132,6 +132,11 @@ Item events
 - vendor/bin/phpunit -c phpunit.xml --debug --verbose --coverage-html Tests/TestData/Coverage
 - vendor/bin/phpunit -c phpunit.xml --debug --verbose --coverage-html Tests/TestData/Coverage --debug --stop-on-error -v
 
+### Run tests with real credentials
+
+- export credential login and password
+
+- vendor/bin/phpunit -c phpunit.xml --group online --debug --verbose
 
 
 ![Pseudoarchi](docs/plantuml/assets/archi.png)

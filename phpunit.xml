@@ -6,14 +6,12 @@
          backupGlobals="false"
          colors="true"
          bootstrap="./Tests/app/autoload.php"
+         printerFile="Tests/AppTestListener.php"
+         printerClass="DigitalDjPoolBundle\Tests\AppTestListener"
         >
     <testsuites>
         <testsuite name="Test Suite">
-            <directory>./Tests/Lib</directory>
-            <directory>./Tests/Command</directory>
-            <directory>./Tests/Service</directory>
-            <directory>./Tests/Provider</directory>
-            <directory>./Tests/Serializer</directory>
+            <directory>./Tests</directory>
         </testsuite>
     </testsuites>
     <filter>

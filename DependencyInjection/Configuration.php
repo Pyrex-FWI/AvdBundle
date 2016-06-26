@@ -11,6 +11,8 @@ use Symfony\Component\Config\Definition\ScalarNode;
 
 class Configuration implements ConfigurationInterface
 {
+    const LOGIN_CHECK = 'http://www.avdistrict.net/Account/CheckLogin';
+    const ITEMS_PER_PAGE = 25;
     /**
      * {@inheritdoc}
      */
@@ -120,7 +122,7 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->scalarNode('login_check')
                     ->info('Login url for authentication')
-                    ->defaultValue('http://www.avdistrict.net/Account/CheckLogin')
+                    ->defaultValue(Configuration::LOGIN_CHECK)
                     ->cannotBeEmpty()
                     ->validate()
                         ->ifTrue(function ($v) { return !$this->isValidurl($v); })
@@ -129,7 +131,7 @@ class Configuration implements ConfigurationInterface
                 ->end()
                 ->integerNode('items_per_page')
                     ->info('Items per page')
-                    ->defaultValue(25)
+                    ->defaultValue(Configuration::ITEMS_PER_PAGE)
                     ->cannotBeEmpty()
                 ->end()
             ->end();

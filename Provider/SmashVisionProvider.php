@@ -169,6 +169,10 @@ class SmashVisionProvider extends AbstractProvider implements PoolProviderInterf
         return 'smashvision';
     }
 
+    /**
+     * @param ProviderItemInterface $item
+     * @return bool
+     */
     public function itemCanBeDownload(ProviderItemInterface $item)
     {
         try {

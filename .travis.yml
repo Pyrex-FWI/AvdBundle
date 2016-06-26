@@ -15,7 +15,7 @@ before_script:
 install:
   #composer install
 script:
-  - phpunit -c phpunit.xml --debug --verbose
+  - phpunit -c phpunit.xml --debug --verbose --exclude-group online
   #- php php-cs-fixer.phar fix --no-interaction --dry-run --diff -vvv ./
 
 notifications:

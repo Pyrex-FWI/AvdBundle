@@ -13,13 +13,15 @@ abstract class BaseTest extends \PHPUnit_Framework_TestCase {
 
     /** @var  Container */
     protected $container;
+    /** @var  \AppKernel */
+    protected $kernel;
 
     protected function setUp()
     {
-        $kernel = new \AppKernel('test', true);
-        $kernel->boot();
+        $this->kernel = new \AppKernel('test', true);
+        $this->kernel->boot();
 
-        $this->container = $kernel->getContainer();
+        $this->container = $this->kernel->getContainer();
     }
 
     /**
