@@ -8,6 +8,11 @@ namespace DeejayPoolBundle\Tests\Provider;
 use DeejayPoolBundle\Provider\ProviderManager;
 use DeejayPoolBundle\Tests\BaseTest;
 
+/**
+ * Class ProviderManagerTest
+ * @package DeejayPoolBundle\Tests\Provider
+ * @group provider
+ */
 class ProviderManagerTest extends BaseTest
 {
     /** @var  ProviderManager */

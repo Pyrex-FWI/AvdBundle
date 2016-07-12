@@ -8,6 +8,12 @@ use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Client;
 
+/**
+ * Class FranchiseProviderMock
+ * @package DeejayPoolBundle\Tests\Provider
+ * @group provider
+ * @group franchise
+ */
 class FranchiseProviderMock extends \DeejayPoolBundle\Provider\FranchisePoolProvider
 {
 

@@ -9,6 +9,11 @@ use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Client;
 
+/**
+ * Class AvDistrictProviderMock
+ * @package DeejayPoolBundle\Tests\Provider
+ * @group provider
+ */
 class AvDistrictProviderMock extends \DeejayPoolBundle\Provider\AvDistrictProvider
 {
 

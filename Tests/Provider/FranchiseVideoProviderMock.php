@@ -9,6 +9,12 @@ use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Client;
 
+/**
+ * Class FranchiseVideoProviderMock
+ * @package DeejayPoolBundle\Tests\Provider
+ * @group provider
+ * @group franchise
+ */
 class FranchiseVideoProviderMock extends FranchisePoolVideoProvider
 {
 

@@ -11,6 +11,11 @@ use DigitalDjPool\Tests\BaseTest;
 use DigitalDjPoolBundle\Command\DownloaderCommand;
 use Symfony\Component\Console\Tester\CommandTester;
 
+/**
+ * Class StatusCommandTest
+ * @package DeejayPoolBundle\Tests\Command
+ * @group command
+ */
 class StatusCommandTest extends \DeejayPoolBundle\Tests\BaseTest
 {
 

@@ -14,6 +14,7 @@ use Symfony\Component\EventDispatcher\Event;
  * Class SessionTest
  * @package DigitalDjPool\Tests\Provider
  * @author "Pyrex-Fwi" <yemistikrys@gmail.com>
+ * @group provider
  */
 class ProvidersTest extends \DeejayPoolBundle\Tests\BaseTest
 {
