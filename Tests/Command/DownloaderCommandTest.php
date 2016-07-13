@@ -7,8 +7,10 @@
 
 namespace DeejayPoolBundle\Tests\Command;
 
+use DeejayPoolBundle\Command\AbstractCommand;
 use DigitalDjPool\Tests\BaseTest;
 use DigitalDjPoolBundle\Command\DownloaderCommand;
+use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Tester\CommandTester;
 
@@ -17,18 +19,15 @@ use Symfony\Component\Console\Tester\CommandTester;
  * @package DeejayPoolBundle\Tests\Command
  * @group command
  */
-class DownloaderCommandTest extends \DeejayPoolBundle\Tests\BaseTest
+class DownloaderCommandTest extends AbstractCommandTest
 {
 
     public function testAvdExecute()
     {
-        $kernel         = new \AppKernel('test', true);
-        $application    = new \Symfony\Bundle\FrameworkBundle\Console\Application($kernel);
-        $kernel->boot();
-        $application->add($this->container->get('deejay_pool.command.download'));
+        $this->application->add($this->container->get('deejay_pool.command.download'));
 
         /** @var \DeejayPoolBundle\Command\DownloaderCommand $command */
-        $command        = $application->find('deejay:pool:download');
+        $command        = $this->application->find('deejay:pool:download');
         $commandTester  = new CommandTester($command);
         $commandTester->execute([
             'command'   => $command->getName(),
@@ -64,13 +63,10 @@ class DownloaderCommandTest extends \DeejayPoolBundle\Tests\BaseTest
      */
     public function exception()
     {
-        $kernel         = new \AppKernel('test', true);
-        $application    = new \Symfony\Bundle\FrameworkBundle\Console\Application($kernel);
-        $kernel->boot();
-        $application->add($this->container->get('deejay_pool.command.download'));
+        $this->application->add($this->container->get('deejay_pool.command.download'));
 
         /** @var \DeejayPoolBundle\Command\DownloaderCommand $command */
-        $command        = $application->find('deejay:pool:download');
+        $command        = $this->application->find('deejay:pool:download');
         $commandTester  = new CommandTester($command);
         $commandTester->execute([
             'command'   => $command->getName(),
