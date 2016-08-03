@@ -11,7 +11,7 @@ use Symfony\Component\Config\Definition\ScalarNode;
 
 class Configuration implements ConfigurationInterface
 {
-    const LOGIN_CHECK = 'http://www.avdistrict.net/Account/CheckLogin';
+    const AVD_LOGIN_CHECK = 'http://www.avdistrict.net/Account/CheckLogin';
     const ITEMS_PER_PAGE = 25;
     /**
      * {@inheritdoc}
@@ -23,6 +23,13 @@ class Configuration implements ConfigurationInterface
 
         $digital_dj_poolRoot
             ->children()
+                ->arrayNode(DeejayPoolBundle::PROVIDER_DPP)
+                ->addDefaultsIfNotSet()
+                    ->children()
+                        ->append($this->getCredentialsDefinition())
+                        ->append($this->getDdpConfigurationDefinition())
+                    ->end()
+                ->end()
                 ->arrayNode(DeejayPoolBundle::PROVIDER_AVD)
                 ->addDefaultsIfNotSet()
                     ->children()
@@ -122,7 +129,7 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->scalarNode('login_check')
                     ->info('Login url for authentication')
-                    ->defaultValue(Configuration::LOGIN_CHECK)
+                    ->defaultValue(Configuration::AVD_LOGIN_CHECK)
                     ->cannotBeEmpty()
                     ->validate()
                         ->ifTrue(function ($v) { return !$this->isValidurl($v); })
@@ -178,6 +185,74 @@ class Configuration implements ConfigurationInterface
 
         return $configurationDef;
     }
+    /**
+     * @return ArrayNodeDefinition
+     */
+    public function getDdpConfigurationDefinition()
+    {
+        $configurationDef = new ArrayNodeDefinition('configuration');
+        $configurationDef
+
+            ->addDefaultsIfNotSet()
+            ->children()
+                ->scalarNode('root_path')
+                ->info('Path of your video files')
+                ->example('/your/path/to/download/target/files/')
+                ->defaultValue('%kernel.cache_dir%')
+                ->isRequired()
+            ->end();
+        $configurationDef
+            ->children()
+                ->scalarNode('login_check')
+                    ->info('Login url for authentication')
+                    ->defaultValue('https://digitaldjpool.com/Account/SignIn')
+                    ->cannotBeEmpty()
+                    ->validate()
+                        ->ifTrue(function ($v) { return !$this->isValidurl($v); })
+                        ->thenInvalid('%s is not a valid url, update yout login_check value.')
+                    ->end()
+                ->end()
+                ->integerNode('items_per_page')
+                    ->info('Items per page')
+                    ->defaultValue(Configuration::ITEMS_PER_PAGE)
+                    ->cannotBeEmpty()
+                ->end()
+            ->end();
+        $configurationDef
+            ->children()
+                ->scalarNode('login_form_name')
+                    ->info('Name of login field into form')
+                    ->defaultValue('UserName')
+                    ->cannotBeEmpty()
+                ->end()
+                ->scalarNode('password_form_name')
+                    ->info('Name of password field into form')
+                    ->defaultValue('Password')
+                    ->cannotBeEmpty()
+                ->end()
+                ->scalarNode('items_url')
+                    ->info('Items page')
+                    ->defaultValue('https://digitaldjpool.com/RecordPool/FilterSearch')
+                    ->cannotBeEmpty()
+                    ->validate()
+                        ->ifTrue(function ($v) { return !$this->isValidurl($v); })
+                        ->thenInvalid('%s is not a valid url, update yout item_url value.')
+                    ->end()
+                ->end()
+                ->scalarNode('download_url')
+                    ->info('Download url')
+                    ->defaultValue('http://www.avdistrict.net/Handlers/DownloadHandler.ashx')
+                    ->cannotBeEmpty()
+                    ->validate()
+                        ->ifTrue(function ($v) { return !$this->isValidurl($v); })
+                        ->thenInvalid('%s is not a valid url, update yout download_url value.')
+                    ->end()
+                ->end()
+            ->end();
+
+        return $configurationDef;
+    }
+
     /**
      * @return ArrayNodeDefinition
      */

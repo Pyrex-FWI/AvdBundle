@@ -137,6 +137,11 @@ class AppTestListener extends \PHPUnit_TextUI_ResultPrinter implements \PHPUnit_
         }
     }
 
+    /**
+     * @param array $annotations
+     * @param null $part
+     * @return array
+     */
     private function getGroups($annotations = [], $part = null)
     {
         if ($part) {
@@ -151,6 +156,7 @@ class AppTestListener extends \PHPUnit_TextUI_ResultPrinter implements \PHPUnit_
         }
         return [];
     }
+
     /**
      * A test ended.
      *
@@ -172,12 +178,18 @@ class AppTestListener extends \PHPUnit_TextUI_ResultPrinter implements \PHPUnit_
         parent::endTest($test, $time);
     }
 
+    /**
+     * @param PHPUnit_Framework_TestResult $result
+     */
     public function printResult(PHPUnit_Framework_TestResult $result)
     {
         parent::printResult($result);
         $this->printAdditionalData();
     }
 
+    /**
+     *
+     */
     private function printAdditionalData()
     {
         $out = new ConsoleOutput();
@@ -208,6 +220,11 @@ class AppTestListener extends \PHPUnit_TextUI_ResultPrinter implements \PHPUnit_
         $table->render();
     }
 
+    /**
+     * @param $current
+     * @param $total
+     * @return string
+     */
     private function percentCalc($current, $total) {
         if ($total > 0) {
             return number_format(($current/$total)*100, 2 ). ' %';

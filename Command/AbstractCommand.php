@@ -3,12 +3,18 @@
 namespace DeejayPoolBundle\Command;
 
 use DeejayPoolBundle\Provider\PoolProviderInterface;
+use DeejayPoolBundle\Provider\ProviderManager;
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
+/**
+ * Class AbstractCommand
+ * @package DeejayPoolBundle\Command
+ */
 class AbstractCommand extends ContainerAwareCommand
 {
     /** @var  \DeejayPoolBundle\Provider\ProviderManager */
@@ -32,19 +38,27 @@ class AbstractCommand extends ContainerAwareCommand
     /** @var Logger; */
     protected $logger;
 
+    /**
+     * AbstractCommand constructor.
+     * @param ProviderManager      $manager
+     * @param EventDispatcher      $eventDispatcher
+     * @param LoggerInterface|null $logger
+     */
     public function __construct(
-        \DeejayPoolBundle\Provider\ProviderManager $manager,
+        ProviderManager $manager,
         $eventDispatcher,
-        \Psr\Log\LoggerInterface $logger = null)
-    {
+        LoggerInterface $logger = null
+    ) {
         $this->logger = $logger ? $logger : new NullLogger();
         $this->manager = $manager;
         $this->eventDispatcher = $eventDispatcher;
         parent::__construct();
     }
+
     /**
      * @param InputInterface  $input
      * @param OutputInterface $output
+     * @throws \UnexpectedValueException
      */
     public function init(InputInterface $input, OutputInterface $output)
     {
@@ -60,19 +74,28 @@ class AbstractCommand extends ContainerAwareCommand
                 }
             } catch (\Exception $e) {
                 $this->output->writeln(sprintf('%s provider not exist', $contextProvider));
-                throw new \Exception($e->getMessage());
+                throw new \UnexpectedValueException($e->getMessage());
             }
         }
     }
 
+    /**
+     * @param int $max
+     */
     public function initProgressBar($max)
     {
         $this->progressBar = new ProgressBar($this->output, $max);
         ProgressBar::setFormatDefinition(
-            'debug', "%message%\n%current%/%max% [%bar%] %percent:3s%% %elapsed:6s%/%estimated:-6s% %memory:6s%");
+            'debug',
+            "%message%\n%current%/%max% [%bar%] %percent:3s%% %elapsed:6s%/%estimated:-6s% %memory:6s%"
+        );
         $this->progressBar->setFormat('debug');
     }
 
+    /**
+     * @param array $downloadSuccess
+     * @return mixed
+     */
     public function orderItems($downloadSuccess)
     {
         usort($downloadSuccess, function ($a, $b) {

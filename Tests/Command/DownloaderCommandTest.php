@@ -35,9 +35,10 @@ class DownloaderCommandTest extends AbstractCommandTest
             '--start'   => 100,
             '--end'     => 102,
             '--sleep'   => 10,
-            ],
+        ],
             [
-                'verbosity' => OutputInterface::VERBOSITY_DEBUG
+                'verbosity' => OutputInterface::VERBOSITY_DEBUG,
+
             ]
             );
 
@@ -81,5 +82,35 @@ class DownloaderCommandTest extends AbstractCommandTest
         );
     }
 
+
+    /**
+     * @throws \Throwable
+     * @test
+     */
+    public function dryExecute()
+    {
+        $this->application->add($this->container->get('deejay_pool.command.download'));
+
+        /** @var \DeejayPoolBundle\Command\DownloaderCommand $command */
+        $command        = $this->application->find('deejay:pool:download');
+        $commandTester  = new CommandTester($command);
+        $commandTester->execute([
+            'command'   => $command->getName(),
+            'provider'  => 'av_district',
+            '--start'   => 1,
+            '--end'     => 2,
+            '--sleep'   => 10,
+            '--read-tags-only' => true,
+            '--dry' => true,
+        ],
+            [
+                'verbosity' => OutputInterface::VERBOSITY_DEBUG,
+
+            ]
+        );
+
+        $command->readPages();
+        echo $commandTester->getDisplay();
+    }
 }
 

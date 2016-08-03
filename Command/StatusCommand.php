@@ -29,15 +29,15 @@ EOF
     {
         $this->init($input, $output);
         $formatter = $this->getHelperSet()->get('formatter');
+
+        $errorMessages = array('Woooww!', sprintf('%s connection is NOT available, Check your credentials', $this->provider->getName()));
+        $formattedBlock = $formatter->formatBlock($errorMessages, 'error', true);
+
         if ($this->provider->open()) {
             $errorMessages = array('OK!', sprintf('%s connection is available', $this->provider->getName()));
             $formattedBlock = $formatter->formatBlock($errorMessages, 'info', true);
-            $output->writeln($formattedBlock);
-        } else {
-            $errorMessages = array('Woooww!', sprintf('%s connection is NOT available, Check your credentials', $this->provider->getName()));
-            $formattedBlock = $formatter->formatBlock($errorMessages, 'error', true);
-            $output->writeln($formattedBlock);
         }
+        $output->writeln($formattedBlock);
 
         return 1;
     }

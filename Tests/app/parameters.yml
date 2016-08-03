@@ -15,6 +15,10 @@ parameters:
     locale: en
     secret: e2894c470f51ab52a28818bbbd747c8db9036a4f
 
+    ddp.configuration.root_path: %kernel.root_dir%/../TestData/root_path
+    ddp.credentials.login: toto
+    ddp.credentials.password: lobineau
+
     av_district.configuration.root_path: %kernel.root_dir%/../TestData/root_path
     av_district.credentials.login: toto@hotmail.fr
     av_district.credentials.password: totot

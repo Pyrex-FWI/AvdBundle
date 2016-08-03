@@ -3,6 +3,7 @@
 namespace DeejayPoolBundle\Command;
 
 use DeejayPoolBundle\Entity\AvdItem;
+use DeejayPoolBundle\Entity\ProviderItemInterface;
 use DeejayPoolBundle\Event\ProviderEvents;
 use DeejayPoolBundle\Event\ItemDownloadEvent;
 use DeejayPoolBundle\Provider\SearchablePoolProviderInterface;
@@ -13,11 +14,11 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Class DownloaderCommand
- * @package DeejayPoolBundle\Command
+ * Class DownloaderCommand.
  */
 class DownloaderCommand extends AbstractCommand
 {
+    /** @var  int */
     protected $totalToDonwload;
     /** @var  AvdItem[] */
     private $downloadSuccess = [];
@@ -90,7 +91,7 @@ EOF
         } else {
             $this->download($items);
             $this->output->writeln('');
-            $this->printSummary('Downloaded Tracks', $this->downloadSuccess);
+            $this->printSummary($this->downloadSuccess);
         }
 
         $this->output->writeln(sprintf('%s items found', count($items)));
@@ -98,6 +99,9 @@ EOF
         return 0;
     }
 
+    /**
+     * 
+     */
     private function registerListerners()
     {
         $this->eventDispatcher->addListener(ProviderEvents::ITEM_SUCCESS_DOWNLOAD, [$this, 'incrementSuccessDownloaded']);
@@ -111,6 +115,9 @@ EOF
         }
     }
 
+    /**
+     * @param ItemDownloadEvent $event
+     */
     public function incrementSuccessDownloaded(ItemDownloadEvent $event)
     {
         $this->downloadSuccess[] = $event->getItem();
@@ -145,12 +152,15 @@ EOF
     {
         parent::init($input, $output);
         if (!$this->input->getOption('read-tags-only')) {
-            $this->start = abs(intval($this->input->getOption('start')));
-            $this->end = abs(intval($this->input->getOption('end')));
+            $this->start = abs((int)$this->input->getOption('start'));
+            $this->end = abs((int)$this->input->getOption('end'));
         }
     }
 
-    private function printSummary($msg, $scope)
+    /**
+     * @param $scope
+     */
+    private function printSummary($scope)
     {
         if (count($this->getDownloadSuccess()) > 0) {
             $this->output->writeln('<info>Succesfull downloaded list</info>');
@@ -182,15 +192,17 @@ EOF
         $this->output->writeln($formattedBlock);
     }
 
+    /**
+     * @return \DeejayPoolBundle\Entity\AvdItem[]
+     */
     public function readPages()
     {
         /** @var AvdItem[] $items */
         $items = [];
         if ($this->input->getOption('read-tags-only')) {
-            if ($this->getSearchableProvider()->getMaxPage() > 0) {
-                $this->start = 0;
-                $this->end = $this->getSearchableProvider()->getMaxPage();
-            }
+            $end = $this->getSearchableProvider()->getMaxPage() > 0 ?: 10;
+            $this->start = 0;
+            $this->end = $end;
         }
         $this->initProgressBar($this->end - $this->start + 1);
         $this->progressBar->setMessage('');
@@ -217,6 +229,9 @@ EOF
         return $this->provider;
     }
 
+    /**
+     * @param ProviderItemInterface[] $items
+     */
     public function download($items)
     {
         $this->initProgressBar($this->totalToDonwload);
@@ -230,13 +245,16 @@ EOF
                     $item->getItemId(),
                     $item->getArtist(),
                     $item->getTitle(),
-                    $item->getVersion())
+                    $item->getVersion()
+                )
             );
             try {
                 $this->provider->downloadItem($item);
-            } catch (\Exception $e) {
+            } // @codeCoverageIgnoreStart
+            catch (\Exception $e) {
                 $this->getContainer()->get('logger')->info($e->getMessage());
-            }
+            } // @codeCoverageIgnoreEnd
+
             $this->progressBar->advance();
             usleep($this->input->getOption('sleep') * 1000);
         }
@@ -277,9 +295,11 @@ EOF
             if ($itemCanBeDownload) {
                 $itemsDownloadable[] = $item->getItemId();
             }
+            // @codeCoverageIgnoreStart
             if ($existLocaly) {
                 $itemsExist[] = $item->getItemId();
             }
+            // @codeCoverageIgnoreEnd
             if (!$existLocaly && $itemCanBeDownload) {
                 $mustBeDownload[] = $item->getItemId();
             }
@@ -319,7 +339,9 @@ EOF
     }
 
     /**
-     * Find all options can not ne apply without verification.
+     * Find all options can not be apply without verification.
+     *
+     * @codeCoverageIgnore
      */
     public function catchBreakableOption()
     {
