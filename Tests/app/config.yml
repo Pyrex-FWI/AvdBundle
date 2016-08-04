@@ -19,6 +19,13 @@ doctrine:
         auto_mapping: true
 
 deejay_pool:
+    ddp:
+        credentials:
+            login:    %ddp.credentials.login%
+            password: %ddp.credentials.password%
+
+        configuration:
+            root_path: %ddp.configuration.root_path%
     av_district:
         credentials:
             login:    %av_district.credentials.login%

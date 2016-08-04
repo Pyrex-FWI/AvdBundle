@@ -222,9 +222,7 @@ abstract class AbstractProvider extends ContainerAware implements PoolProviderIn
      */
     public function hasCorrectlyDownloaded(\Psr\Http\Message\ResponseInterface $response, $tempName)
     {
-        //dump($response->getHeaders());
-        //$size = intval($response->getHeaderLine('Content-Length')['0']);
-        if ($response->getStatusCode() !== 404 && file_exists($tempName) && filesize($tempName) > 150) {
+        if ( ! in_array($response->getStatusCode(), [404, 500]) && file_exists($tempName) && filesize($tempName) > 150) {
             return true;
         } else {
             return false;

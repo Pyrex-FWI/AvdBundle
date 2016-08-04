@@ -29,6 +29,7 @@ class DeejayPoolExtension extends Extension
             DeejayPoolBundle::PROVIDER_AVD,
             DeejayPoolBundle::PROVIDER_FPR_VIDEO,
             DeejayPoolBundle::PROVIDER_SV,
+            DeejayPoolBundle::PROVIDER_DPP,
         ];
         foreach ($providers as $provider) {
 

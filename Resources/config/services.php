@@ -3,6 +3,7 @@
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 
+$container->setParameter('ddp.provider.class', 'DeejayPoolBundle\Provider\DigitalDjPoolProvider');
 $container->setParameter('av_district.provider.class', 'DeejayPoolBundle\Provider\AvDistrictProvider');
 $container->setParameter('franchise_pool.provider.class', 'DeejayPoolBundle\Provider\FranchisePoolProvider');
 $container->setParameter('franchise_pool_video.provider.class', 'DeejayPoolBundle\Provider\FranchisePoolVideoProvider');
@@ -20,6 +21,20 @@ $container
         )
     )
 ;
+
+$container
+    ->setDefinition(
+        \DeejayPoolBundle\DeejayPoolBundle::PROVIDER_DPP,
+        new Definition(
+            '%ddp.provider.class%',
+            array(
+                new Reference('event_dispatcher'),
+                new Reference('logger', \Symfony\Component\DependencyInjection\ContainerInterface::IGNORE_ON_INVALID_REFERENCE)
+            ))
+    )
+    ->addMethodCall('setContainer', [new Reference('service_container')])
+    ->addTag('monolog.logger', array('channel' => 'ddp'))
+    ->addTag('deejay_provider', []);
 
 $container
     ->setDefinition(
