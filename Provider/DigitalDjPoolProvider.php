@@ -71,10 +71,11 @@ class DigitalDjPoolProvider extends AbstractProvider implements SearchablePoolPr
             $this->getConfValue('items_url'), [
             'allow_redirects' => true,
             'debug' => $this->getDebug(),
-            'body' => http_build_query([
+            'form_params' => [
                 "PageNumber" => $page-1,
                 "OrderBy" => "Chronologic",
-                "OrderDirection" => "Ascending",
+                //"OrderDirection" => "Ascending",
+                "OrderDirection" => "Descending",
                 "SearchTerm" => "",
                 "GenreGroupId" => "",
                 "Version" => "",
@@ -82,7 +83,7 @@ class DigitalDjPoolProvider extends AbstractProvider implements SearchablePoolPr
                 "BpmTo" => "",
                 "ReleaseDate" => "Select Date",
                 "X-Requested-With" => "XMLHttpRequest"
-                ]),
+                ],
             ]
         );
     }
