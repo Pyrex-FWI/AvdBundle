@@ -3,6 +3,7 @@
 namespace DeejayPoolBundle\Provider;
 
 use DeejayPoolBundle\DeejayPoolBundle;
+use DeejayPoolBundle\Entity\EntityCollection;
 use DeejayPoolBundle\Entity\ProviderItemInterface;
 use DeejayPoolBundle\Entity\SvItem;
 use DeejayPoolBundle\Serializer\Normalizer\SvItemNormalizer;
@@ -248,11 +249,44 @@ class SmashVisionProvider extends AbstractProvider implements PoolProviderInterf
             foreach ($rep['data'] as $svItemArray) {
                 $svGroupItem = $this->serializer->denormalize($svItemArray, SvItemNormalizer::SVITEM, null, $context);
                 $itemsGroup = $this->getChild($svGroupItem);
+                $itemsGroup = $this->filter($itemsGroup);
                 $itemsArray = array_merge($itemsArray, $itemsGroup);
             }
         }
-
         return $itemsArray;
+    }
+
+    /**
+     * @param $itemsArray
+     * @return array
+     */
+    private function filter($itemsArray)
+    {
+        $collection = new EntityCollection($itemsArray);
+
+        if ($collection->count() === 1) {
+            return $itemsArray;
+        }
+
+        //Keep Dirty
+        $subCollection = $collection->filterBy('dirty', true);
+        if ($subCollection->count() > 0) {
+            $collection = $subCollection;
+        }
+
+        //remove snipz
+        $subCollection = $collection->filterBy('snipz', false);
+        if ($subCollection->count() > 0) {
+            $collection = $subCollection;
+        }
+
+        //remove single
+        $subCollection = $collection->filterBy('single', false);
+        if ($subCollection->count() > 0) {
+            $collection = $subCollection;
+        }
+
+        return $collection->getValues();
     }
 
     protected function getDownloadedFileName(\Psr\Http\Message\ResponseInterface $response)

@@ -30,26 +30,30 @@ class SvItemNormalizer extends AbstractNormalizer
     public function denormalize($data, $class, $format = null, array $context = array())
     {
         $svGroup = new SvItem();
-        $svGroup->setGroupId(intval($data['groupId']));
+        $svGroup->setGroupId((int)$data['groupId']);
         $svGroup->setArtist($data['artist']);
         $svGroup->setTitle($data['title']);
-        $svGroup->setBpm(intval($data['bpm']));
+        $svGroup->setBpm((int)$data['bpm']);
         $svGroup->addRelatedGenre($data['genre']);
         $svGroup->setReleaseDate((new \DateTime())->setTimestamp($this->extractReleaseDate($data['date'])));
-        if (SvItemNormalizer::QUALITY_HD_720 == $data["quality"]) {
+        if (SvItemNormalizer::QUALITY_HD_720 === $data['quality']) {
             $svGroup->set720(true);
         }
-        if (SvItemNormalizer::QUALITY_HD_1080 == $data["quality"]) {
+        if (SvItemNormalizer::QUALITY_HD_1080 === $data['quality']) {
             $svGroup->set1080(true);
         }
-        if (SvItemNormalizer::QUALITY_qHD == $data["quality"]) {
+        if (SvItemNormalizer::QUALITY_qHD === $data['quality']) {
             $svGroup->setQHD(true);
         }
 
-        foreach ($data['videos'] as $videoArray) {
+        foreach ((array)$data['videos'] as $videoArray) {
             $svItem = clone $svGroup;
             $svItem->setVideoId($videoArray['videoId']);
-            $svItem->setDownloaded(boolval($videoArray['downloaded']));
+            if ($videoFilePart = explode('.', $videoArray['video_file'])) {
+                $svItem->setVideoFile($videoFilePart[0]);
+                $svItem->updateInfoFromVideoFileProperties();
+            }
+            $svItem->setDownloaded((bool)$videoArray['downloaded']);
             $completeVersion = $this->extractCompleteVersion($videoArray);
             $svItem->setVersion($completeVersion);
             $svItem->setParent(false);

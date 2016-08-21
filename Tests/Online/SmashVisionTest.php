@@ -53,7 +53,9 @@ class SmashVisionTest extends BaseTest
      */
     public function fetchItems(SmashVisionProvider $smashVisionProvider)
     {
-        $dataItem = $smashVisionProvider->getItems(1);
+        foreach(range(1,1) as $page) {
+            $dataItem = $smashVisionProvider->getItems($page);
+        }
         $this->assertContainsOnlyInstancesOf(SvItem::class, $dataItem);
         $this->assertContainsOnlyInstancesOf(ProviderItemInterface::class, $dataItem);
         /** @var SvItem $item */

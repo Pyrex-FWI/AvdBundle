@@ -103,7 +103,7 @@ class SmashVisionProviderMock extends \DeejayPoolBundle\Provider\SmashVisionProv
                       "groupId": "16388_qHD",
                       "version": "Xtendz",
                       "video_file": "SV_16388_XZ_CN_qHD.mp4",
-                      "title": "Armada Latina [Xtendz] - qHD - Clean",
+                      "title": "Armada Latina [Xtendz] - qHD - Dirty",
                       "queueId": 0,
                       "downloading": false,
                       "downloaded": false
@@ -123,7 +123,7 @@ class SmashVisionProviderMock extends \DeejayPoolBundle\Provider\SmashVisionProv
                       "groupId": "16388_qHD",
                       "version": "Snipz",
                       "video_file": "SV_16388_SZ_DY_qHD.mp4",
-                      "title": "Armada Latina [Snipz] - qHD - Dirty",
+                      "title": "Armada Latina [Xtendz] - qHD - Dirty",
                       "queueId": 0,
                       "downloading": false,
                       "downloaded": true
@@ -137,7 +137,7 @@ class SmashVisionProviderMock extends \DeejayPoolBundle\Provider\SmashVisionProv
           return $result = parent::getAllVideos([$groups[0]]);
     }
 
-        public function getDownloadResponse(ProviderItemInterface $svItem, $tmpName)
+    public function getDownloadResponse(ProviderItemInterface $svItem, $tmpName)
         {
           $mock = new MockHandler([
               new Response(

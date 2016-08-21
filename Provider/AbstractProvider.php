@@ -300,7 +300,13 @@ abstract class AbstractProvider extends ContainerAware implements PoolProviderIn
 
     public static function getDefaultUserAgent()
     {
-        return 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36';
+         $uAgent = [
+             'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36',
+             'Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; AS; rv:11.0) like Gecko',
+             ];
+        shuffle($uAgent);
+
+        return $uAgent[0];
     }
 
     /**
