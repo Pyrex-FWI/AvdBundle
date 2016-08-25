@@ -6,6 +6,7 @@ use DeejayPoolBundle\Event\ProviderEvents;
 use GuzzleHttp\Client;
 use GuzzleHttp\Cookie\CookieJar;
 use Symfony\Component\DependencyInjection\ContainerAware;
+use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
@@ -13,8 +14,9 @@ use Symfony\Component\EventDispatcher\Event;
  *
  * AbstractProvider
  */
-abstract class AbstractProvider extends ContainerAware implements PoolProviderInterface
+abstract class AbstractProvider implements PoolProviderInterface
 {
+    use ContainerAwareTrait;
     /**
      * @var Client
      */

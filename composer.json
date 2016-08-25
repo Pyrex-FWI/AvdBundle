@@ -17,18 +17,18 @@
         "doctrine/orm"                          : "~2.4",
         "james-heinrich/getid3"                 : "~1.9",
         "symfony/monolog-bundle"                : "~2.4",
-        "symfony/framework-bundle"              : "~2.6",
-        "symfony/serializer"                    : "^2.7.2|~3.0"
+        "symfony/framework-bundle"              : "^3.0.2",
+        "symfony/serializer"                    : "^2.7.2|~3.0",
+        "friendsofphp/php-cs-fixer"             : "^1.12"
   },
   "require-dev": {
-    "symfony/symfony"                       : "~2.7",
+    "symfony/symfony"                       : "3.1.*",
     "phpunit/phpunit"                       : "4.7.*@dev",
-    "fabpot/php-cs-fixer"                   : "@stable",
     "behat/symfony2-extension"              : "~2.0",
     "symfony/var-dumper"                    : "~2.7",
     "fzaninotto/faker"                      : "~1.4",
     "mikey179/vfsStream"                    : "~1.6",
-        "escapestudios/symfony2-coding-standard": "~2.0"
+    "escapestudios/symfony2-coding-standard": "~2.0"
 
     },
   "scripts": {
