@@ -287,7 +287,7 @@ class Configuration implements ConfigurationInterface
                 ->end()
                 ->scalarNode('login_success_redirect')
                     ->info('Url when login is success')
-                    ->defaultValue('http://www.franchiserecordpool.com/view-category')
+                    ->defaultValue('http://www.franchiserecordpool.com/welcome')
                     ->cannotBeEmpty()
                 ->end()
             ->end();

@@ -5,7 +5,6 @@ namespace DeejayPoolBundle\Provider;
 use DeejayPoolBundle\Event\ProviderEvents;
 use GuzzleHttp\Client;
 use GuzzleHttp\Cookie\CookieJar;
-use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\EventDispatcher\Event;
 
@@ -64,11 +63,11 @@ abstract class AbstractProvider implements PoolProviderInterface
         $this->cookieJar = new CookieJar();
         $this->client = new Client([
             'http_errors' => false,
-            'cookies' => true,
+            'cookies' => $this->cookieJar,
             'headers' => [
                 'User-Agent' => self::getDefaultUserAgent(),
             ],
-            ]);
+        ]);
         $this->logger = $logger ? $logger : new \Psr\Log\NullLogger();
         $this->eventDispatcher = $eventDispatcher;
     }
@@ -172,7 +171,7 @@ abstract class AbstractProvider implements PoolProviderInterface
     }
 
     /**
-     *  @param int $$page page number 
+     *  @param int $$page page number
      *
      *  @return \Psr\Http\Message\ResponseInterface
      */
@@ -207,8 +206,8 @@ abstract class AbstractProvider implements PoolProviderInterface
     }
 
     /**
-     *  @param ProviderItemInterface $item item 
-     *  @param string $tempName page number 
+     *  @param ProviderItemInterface $item item
+     *  @param string $tempName page number
      *
      *  @return \Psr\Http\Message\ResponseInterface
      */
@@ -302,10 +301,11 @@ abstract class AbstractProvider implements PoolProviderInterface
 
     public static function getDefaultUserAgent()
     {
-         $uAgent = [
-             'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36',
-             'Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; AS; rv:11.0) like Gecko',
-             ];
+        $uAgent = [
+            'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36',
+            'Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; AS; rv:11.0) like Gecko',
+            'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.101 Safari/537.36',
+        ];
         shuffle($uAgent);
 
         return $uAgent[0];

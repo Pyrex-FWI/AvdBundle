@@ -7,11 +7,17 @@ use DeejayPoolBundle\Entity\DdpItem;
 use DeejayPoolBundle\Entity\ProviderItemInterface;
 use DeejayPoolBundle\Serializer\Normalizer\AvItemNormalizer;
 use DeejayPoolBundle\Serializer\Normalizer\DigitalDjPoolItemNormalizer;
+use GuzzleHttp\Cookie\CookieJar;
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\Serializer\Serializer;
 
 class DigitalDjPoolProvider extends AbstractProvider implements SearchablePoolProviderInterface
 {
+
+    private $authCookieData = [];
+
+    /** @var  CookieJar */
+    private $authCookie;
 
     public function getName()
     {
@@ -42,24 +48,26 @@ class DigitalDjPoolProvider extends AbstractProvider implements SearchablePoolPr
         return $response = $this->client->post(
             $loginUrl,
             [
-            'allow_redirects' => true,
-            'debug' => $this->getDebug(),
-            'headers' => [
-                'Content-Type' => 'application/x-www-form-urlencoded',
-                'Referer' => 'https://digitaldjpool.com/Account/SignIn',
-                'Upgrade-Insecure-Requests' => '1',
-                'Pragma' => 'no-cache',
-                'Origin' => 'https://digitaldjpool.com',
-            ],
-            'body' => sprintf("$loginInput=$login&$passwordInput=$password&RememberMe=True&RememberMe=False")
+                'allow_redirects' => false,
+                'debug' => $this->getDebug(),
+                'headers' => [
+                    'Content-Type' => 'application/x-www-form-urlencoded',
+                    'Referer' => 'https://digitaldjpool.com/Account/SignIn',
+                    'Upgrade-Insecure-Requests' => '1',
+                    'Pragma' => 'no-cache',
+                    'Origin' => 'https://digitaldjpool.com',
+                ],
+                'body' => sprintf("$loginInput=$login&$passwordInput=$password&RememberMe=True&RememberMe=False")
             ]
         );
     }
 
     protected function hasCorrectlyConnected(\Psr\Http\Message\ResponseInterface $response)
     {
-        if ($response->getStatusCode() === 200) {
-                return true;
+        if (in_array($response->getStatusCode(), [200, 302])) {
+            $this->authCookieData = $this->cookieJar->toArray();
+            $this->authCookie = clone($this->cookieJar);
+            return true;
         }
 
         return false;
@@ -67,22 +75,31 @@ class DigitalDjPoolProvider extends AbstractProvider implements SearchablePoolPr
 
     protected function getItemsResponse($page, $filter = [])
     {
+        //var_dump($this->authCookie->toArray());
         return $response = $this->client->post(
             $this->getConfValue('items_url'), [
-            'allow_redirects' => true,
-            'debug' => $this->getDebug(),
-            'form_params' => [
-                "PageNumber" => $page-1,
-                "OrderBy" => "Chronologic",
-                //"OrderDirection" => "Ascending",
-                "OrderDirection" => "Descending",
-                "SearchTerm" => "",
-                "GenreGroupId" => "",
-                "Version" => "",
-                "BpmFrom" => "",
-                "BpmTo" => "",
-                "ReleaseDate" => "Select Date",
-                "X-Requested-With" => "XMLHttpRequest"
+                'allow_redirects' => false,
+                'cookies' => clone($this->authCookie),
+                'debug' => $this->getDebug(),
+                'headers' => [
+                    'referer'       => 'https://digitaldjpool.com/RecordPool/Search',
+                    'Content-type'  =>'application/x-www-form-urlencoded; charset=UTF-8',
+                    'Accept'        => '*/*',
+                    'Accept-Encoding' => 'gzip, deflate, br',
+                    'Accept-Language' => 'fr-FR,fr;q=0.8,en-US;q=0.6,en;q=0.4'
+                ],
+                'form_params' => [
+                    "PageNumber" => $page-1,
+                    "OrderBy" => "Chronologic",
+                    //"OrderDirection" => "Ascending",
+                    "OrderDirection" => "Descending",
+                    "SearchTerm" => "",
+                    "GenreGroupId" => "",
+                    "Version" => "",
+                    "BpmFrom" => "",
+                    "BpmTo" => "",
+                    "ReleaseDate" => "Select Date",
+                    "X-Requested-With" => "XMLHttpRequest"
                 ],
             ]
         );
@@ -112,9 +129,10 @@ class DigitalDjPoolProvider extends AbstractProvider implements SearchablePoolPr
 
         return $response = $this->client->get(
             $item->getDownloadlink(), [
-                'allow_redirects' => true,
+                'allow_redirects' => false,
                 'debug' => $this->getDebug(),
                 'sink' => $resource,
+                'cookies' => clone($this->authCookie),
                 'headers' => [
                     'Referer' => 'https://digitaldjpool.com/RecordPool/Search',
                     'Upgrade-Insecure-Requests' => 1,

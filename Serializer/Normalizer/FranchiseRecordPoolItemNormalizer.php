@@ -10,6 +10,7 @@ namespace DeejayPoolBundle\Serializer\Normalizer;
 
 use DeejayPoolBundle\Entity\AvdItem;
 use DeejayPoolBundle\Entity\FranchisePoolItem;
+use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 
 class FranchiseRecordPoolItemNormalizer extends AbstractNormalizer
@@ -31,14 +32,31 @@ class FranchiseRecordPoolItemNormalizer extends AbstractNormalizer
     {
         $frpItem = new FranchisePoolItem();
         $frpItem->setItemId(intval(intval($data['id'])));
-        $frpItem->setArtist(strip_tags($data['cell'][2]));
-        $frpItem->setTitle(strip_tags($data['cell'][4]));
-        $frpItem->addRelatedGenre(trim(strip_tags($data['cell'][6])));
-        $frpItem->setBpm(intval($data['cell'][7]));
-        $frpItem->setReleaseDate(\DateTime::createFromFormat('m/d/Y', $data['cell'][8]));
+        $frpItem->setArtist($this->parseHtmlText($data['cell'][1], 'a.popup-artist'));
+        $frpItem->setTitle($this->parseHtmlText($data['cell'][1], 'a.popup-song'));
+        $frpItem->addRelatedGenre(trim(strip_tags($data['cell'][4])));
+        $frpItem->setBpm(intval($data['cell'][5]));
+        $frpItem->setReleaseDate(\DateTime::createFromFormat('m/d/Y', $data['cell'][6]));
         $frpItem->setVersion(null);
+        $frpItem->setAudio(true);
 
         return $frpItem;
+    }
+
+    public function parseHtmlText($html, $filter = null)
+    {
+        $crawler = new Crawler($html);
+
+        if ($filter) {
+            $node = $crawler->filter($filter);
+            if ($node->count() > 0 && $crawler->text()) {
+                return $node->text();
+            }
+        }
+
+        if ($crawler->text()) {
+            return $crawler->text();
+        }
     }
 
     /**
