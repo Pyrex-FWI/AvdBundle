@@ -139,7 +139,6 @@ class Configuration implements ConfigurationInterface
                 ->integerNode('items_per_page')
                     ->info('Items per page')
                     ->defaultValue(Configuration::ITEMS_PER_PAGE)
-                    ->cannotBeEmpty()
                 ->end()
             ->end();
         $configurationDef
@@ -215,7 +214,6 @@ class Configuration implements ConfigurationInterface
                 ->integerNode('items_per_page')
                     ->info('Items per page')
                     ->defaultValue(Configuration::ITEMS_PER_PAGE)
-                    ->cannotBeEmpty()
                 ->end()
             ->end();
         $configurationDef
@@ -289,7 +287,7 @@ class Configuration implements ConfigurationInterface
                 ->end()
                 ->scalarNode('login_success_redirect')
                     ->info('Url when login is success')
-                    ->defaultValue('http://www.franchiserecordpool.com/view-category')
+                    ->defaultValue('http://www.franchiserecordpool.com/welcome')
                     ->cannotBeEmpty()
                 ->end()
             ->end();
@@ -308,7 +306,6 @@ class Configuration implements ConfigurationInterface
                 ->integerNode('items_per_page')
                     ->info('Items per page')
                     ->defaultValue(10)
-                    ->cannotBeEmpty()
                 ->end()
                 ->scalarNode('items_url')
                     ->info('Items page')
@@ -375,7 +372,6 @@ class Configuration implements ConfigurationInterface
                 ->integerNode('items_per_page')
                     ->info('Items per page')
                     ->defaultValue(25)
-                    ->cannotBeEmpty()
                 ->end()
                 ->scalarNode('items_url')
                     ->info('Items page')

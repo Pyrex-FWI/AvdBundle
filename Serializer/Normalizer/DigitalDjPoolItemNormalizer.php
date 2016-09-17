@@ -6,8 +6,6 @@ use DeejayPoolBundle\Entity\AvdItem;
 use DeejayPoolBundle\Entity\DdpItem;
 use DigitalDjPoolBundle\Exception\DownloadLinkNotFound;
 use Symfony\Component\DomCrawler\Crawler;
-use Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactoryInterface;
-use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 
 class DigitalDjPoolItemNormalizer extends AbstractNormalizer
@@ -24,15 +22,14 @@ class DigitalDjPoolItemNormalizer extends AbstractNormalizer
      * @throws DownloadLinkNotFound
      * @return AvdItem
      */
-    public function denormalize($data, $class, $format = null, array $context = array())
+    public function denormalize($dataRaw, $class, $format = null, array $context = array())
     {
-        $data = new Crawler($data);
+        $data = new Crawler($dataRaw);
         $ddpItem = new DdpItem();
 
-        if ($data->filter('a.ddjp-download')->count() === 0) {
+        if ($data->filter('a.ddjp-download')->count() === 0  || $data->filter('a.ddjp-download')->attr('href') == '#' ) {
             throw new DownloadLinkNotFound();
         }
-
         $ddpItem->setDownloadlink($data->filter('a.ddjp-download')->attr('href'));
         if ($data->filter('input.hid-song-id')->count()) {
             $ddpItem->setItemId($data->filter('input.hid-song-id')->attr('value'));
