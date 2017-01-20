@@ -8,10 +8,11 @@ use Symfony\Component\EventDispatcher\Event;
 
 class ItemDownloadEvent extends Event
 {
-    /** @var ProviderItemInterface  */
+    /** @var ProviderItemInterface */
     protected $item;
     protected $fileName;
     protected $message;
+
     /**
      * @param AvdItem $item
      */

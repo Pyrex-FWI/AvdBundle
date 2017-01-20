@@ -32,7 +32,6 @@ class DeejayPoolExtension extends Extension
             DeejayPoolBundle::PROVIDER_DPP,
         ];
         foreach ($providers as $provider) {
-
             if (!isset($config[$provider]['credentials']['login']) || !isset($config[$provider]['credentials']['password'])) {
                 continue;
             }

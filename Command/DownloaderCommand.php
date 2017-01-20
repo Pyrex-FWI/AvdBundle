@@ -18,18 +18,19 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class DownloaderCommand extends AbstractCommand
 {
-    /** @var  int */
+    /** @var int */
     protected $totalToDonwload;
-    /** @var  AvdItem[] */
+    /** @var AvdItem[] */
     private $downloadSuccess = [];
-    /** @var  AvdItem[] */
+    /** @var AvdItem[] */
     private $downloadError = [];
-    /** @var  int */
+    /** @var int */
     protected $start;
-    /** @var  int */
+    /** @var int */
     protected $end;
 
     const TRUNCATE_SIZE = 15;
+
     /**
      * {@inheritdoc}
      */
@@ -45,7 +46,7 @@ class DownloaderCommand extends AbstractCommand
             ->addOption('read-tags-only', null, InputOption::VALUE_NONE, 'Read tags only [to update local database per example]', null)
             ->addOption('show-criteria', null, InputOption::VALUE_NONE, 'Show available criteria', null)
             ->addOption('filter', null, InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'Filter', [])
-            ->setHelp(<<<EOF
+            ->setHelp(<<<'EOF'
 The <info>%command.name%</info> command download items from AVDistrict:
 
 
@@ -99,9 +100,6 @@ EOF
         return 0;
     }
 
-    /**
-     * 
-     */
     private function registerListerners()
     {
         $this->eventDispatcher->addListener(ProviderEvents::ITEM_SUCCESS_DOWNLOAD, [$this, 'incrementSuccessDownloaded']);
@@ -152,8 +150,8 @@ EOF
     {
         parent::init($input, $output);
         if (!$this->input->getOption('read-tags-only')) {
-            $this->start = abs((int)$this->input->getOption('start'));
-            $this->end = abs((int)$this->input->getOption('end'));
+            $this->start = abs((int) $this->input->getOption('start'));
+            $this->end = abs((int) $this->input->getOption('end'));
         }
     }
 
@@ -310,6 +308,7 @@ EOF
         $this->output->writeln(sprintf('%s items can be (re)downloaded', count($itemsDownloadable)));
         $this->output->writeln(sprintf('%s items already downloaded localy', count($itemsExist)));
     }
+
     /**
      * @return bool
      */

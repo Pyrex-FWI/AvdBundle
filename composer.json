@@ -9,7 +9,7 @@
         }
     ],
   "description": "Test project to download files from Digital Dj pool",
-  "keywords": ["Deejay", "clips", "Downloader"],
+  "keywords": ["Deejay", "clips", "Downloader", "Bundle", "Serato", "Traktor"],
   "require": {
         "guzzlehttp/guzzle"                     : "~6.0",
         "doctrine/doctrine-bundle"              : "~1.5",
@@ -19,7 +19,7 @@
         "symfony/monolog-bundle"                : "~2.4",
         "symfony/framework-bundle"              : "^3.0.2",
         "symfony/serializer"                    : "^2.7.2|~3.0",
-        "friendsofphp/php-cs-fixer"             : "^1.12"
+        "friendsofphp/php-cs-fixer"             : "^2.0"
   },
   "require-dev": {
     "symfony/symfony"                       : "3.1.*",
@@ -29,17 +29,16 @@
     "fzaninotto/faker"                      : "~1.4",
     "mikey179/vfsStream"                    : "~1.6",
     "escapestudios/symfony2-coding-standard": "~2.0"
-
     },
   "scripts": {
-    "test:phpunit": "vendor/bin/phpunit --coverage-html Tests/coverage",
+    "test:phpunit": "Tests/vendor/bin/phpunit --coverage-html Tests/coverage",
     "doctrine:drop": "php Tests/app/console.php doctrine:d:d --force",
     "doctrine": "php Tests/app/console.php doctrine:d:c",
     "doctrine:create": "php Tests/app/console.php doctrine:d:c",
     "doctrine:update": "php Tests/app/console.php doctrine:s:u --force",
     "doctrine:init": "composer doctrine:drop && composer doctrine:create && composer doctrine:update",
     "test": "composer doctrine:init && composer test:phpunit",
-    "get-plantuml": "[ -f /vendore/bin/plantuml.jar ] || wget http://downloads.sourceforge.net/project/plantuml/plantuml.jar -q -O vendor/bin/plantuml.jar",
+    "get-plantuml": "[ -f /Tests/vendor/bin/plantuml.jar ] || wget http://downloads.sourceforge.net/project/plantuml/plantuml.jar -q -O Tests/vendor/bin/plantuml.jar",
     "generate-uml" : [
 
     ],
@@ -47,7 +46,10 @@
         "@get-plantuml"
     ]
   },
-    "autoload": {
-      "psr-4": { "DeejayPoolBundle\\": "" }
-    }
+  "autoload": {
+    "psr-4": { "DeejayPoolBundle\\": "" }
+  },
+  "config": {
+    "vendor-dir": "Tests/vendor"
+  }
 }

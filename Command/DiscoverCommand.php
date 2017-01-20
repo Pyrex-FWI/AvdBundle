@@ -10,12 +10,11 @@ use Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceExce
 use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 
 /**
- * Class DiscoverCommand
- * @package DeejayPoolBundle\Command
+ * Class DiscoverCommand.
  */
 class DiscoverCommand extends ContainerAwareCommand
 {
-    /** @var  ProviderManager */
+    /** @var ProviderManager */
     private $manager;
 
     /**
@@ -29,6 +28,7 @@ class DiscoverCommand extends ContainerAwareCommand
 
     /**
      * {@inheritdoc}
+     *
      * @throws \Symfony\Component\Console\Exception\InvalidArgumentException
      */
     protected function configure()
@@ -36,7 +36,7 @@ class DiscoverCommand extends ContainerAwareCommand
         $this
             ->setName('deejay:discover')
             ->setDescription('Discover prodivers')
-            ->setHelp(<<<EOF
+            ->setHelp(<<<'EOF'
 The <info>%command.name%</info> Display all registered Providers:
 
 
@@ -48,6 +48,7 @@ EOF
 
     /**
      * {@inheritdoc}
+     *
      * @throws \LogicException
      * @throws ServiceCircularReferenceException
      * @throws ServiceNotFoundException

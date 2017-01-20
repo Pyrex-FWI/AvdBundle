@@ -11,34 +11,33 @@ use GuzzleHttp\Client;
 
 class SmashVisionProviderMock extends \DeejayPoolBundle\Provider\SmashVisionProvider
 {
-
     private $headers = [];
     protected $debug = true;
 
     /**
-     * 
      * @return Response
      */
     private function openResponse()
     {
         return new Response(200,
             [
-               "Cache-Control"         => "private",
-               "Content-Type"          => "application/json; charset=utf-8",
-               "Server"                => "Microsoft-IIS/7.5",
-               "X-AspNetMvc-Version"   => "4.0",
-               "X-AspNet-Version"      => "4.0.30319",
-               "Set-Cookie"            => ".ASPXAUTH=74C4D4193E165E47B03601CD146119BCBFAF679EC695BBDA; expires=Thu, 29-Oct-2015 05:39:11 GMT; path=/",
-               "X-Powered-By"          => "ASP.NET",
-               "Access-Control-Allow-Origin"       => "*",
-               "Access-Control-Allow-Headers"      => "Origin, X-Requested-With, Content-Type, Accept",
-               "Access-Control-Allow-Methods"      => "GET, POST, PUT",
-               "Date"                              => "Tue, 29 Sep 2015 05:39:10 GMT",
-               "Content-Length"                    => "97",
+               'Cache-Control' => 'private',
+               'Content-Type' => 'application/json; charset=utf-8',
+               'Server' => 'Microsoft-IIS/7.5',
+               'X-AspNetMvc-Version' => '4.0',
+               'X-AspNet-Version' => '4.0.30319',
+               'Set-Cookie' => '.ASPXAUTH=74C4D4193E165E47B03601CD146119BCBFAF679EC695BBDA; expires=Thu, 29-Oct-2015 05:39:11 GMT; path=/',
+               'X-Powered-By' => 'ASP.NET',
+               'Access-Control-Allow-Origin' => '*',
+               'Access-Control-Allow-Headers' => 'Origin, X-Requested-With, Content-Type, Accept',
+               'Access-Control-Allow-Methods' => 'GET, POST, PUT',
+               'Date' => 'Tue, 29 Sep 2015 05:39:10 GMT',
+               'Content-Length' => '97',
             ],
                 'https://www.smashvision.net/Videos'
         );
     }
+
     /**
      * Open session on digitalDjPool service.
      *
@@ -57,8 +56,8 @@ class SmashVisionProviderMock extends \DeejayPoolBundle\Provider\SmashVisionProv
         return  new Response(
             200,
             [
-                'Cache-Control'             => 'private',
-                'Content-Type'              => 'application/json; charset=utf-8',
+                'Cache-Control' => 'private',
+                'Content-Type' => 'application/json; charset=utf-8',
             ],
             ProvidersTest::getJsonItemsForSmash()
         );
@@ -71,21 +70,20 @@ class SmashVisionProviderMock extends \DeejayPoolBundle\Provider\SmashVisionProv
         return $result = parent::getItems($page, $filter);
     }
 
-
     public function getAllVideos($groups)
     {
         $mock = new MockHandler([
               new Response(
                   200,
                   [
-                    'User-Agent'        => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.10; rv:40.0) Gecko/20100101 Firefox/40.0',
-                    'Accept'            => 'application/json, text/javascript, */*; q=0.01',
-                    'Accept-Language'   => 'fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3',
-                    'Accept-Encoding'   => 'gzip, deflate',
-                    'X-Requested-With'  => 'XMLHttpRequest',
-                    'Referer'           => 'https://www.smashvision.net/Videos',
-                    'Cookie'            => 'animations=bounce; .ASPXAUTH=4B9C1B5B2F81BEF5',
-                    'Connection'        => 'keep-alive'
+                    'User-Agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.10; rv:40.0) Gecko/20100101 Firefox/40.0',
+                    'Accept' => 'application/json, text/javascript, */*; q=0.01',
+                    'Accept-Language' => 'fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3',
+                    'Accept-Encoding' => 'gzip, deflate',
+                    'X-Requested-With' => 'XMLHttpRequest',
+                    'Referer' => 'https://www.smashvision.net/Videos',
+                    'Cookie' => 'animations=bounce; .ASPXAUTH=4B9C1B5B2F81BEF5',
+                    'Connection' => 'keep-alive',
                   ],
                   '[{
                       "rowId": 4,
@@ -128,70 +126,72 @@ class SmashVisionProviderMock extends \DeejayPoolBundle\Provider\SmashVisionProv
                       "downloading": false,
                       "downloaded": true
                   }]'
-              )
+              ),
           ]);
 
-          $handler = HandlerStack::create($mock);
-          $this->client = new Client(['handler' => $handler]);
+        $handler = HandlerStack::create($mock);
+        $this->client = new Client(['handler' => $handler]);
 
-          return $result = parent::getAllVideos([$groups[0]]);
+        return $result = parent::getAllVideos([$groups[0]]);
     }
 
     public function getDownloadResponse(ProviderItemInterface $svItem, $tmpName)
-        {
-          $mock = new MockHandler([
+    {
+        $mock = new MockHandler([
               new Response(
                    200,
                   [
-                      'Cache-Control'         => 'private',
-                      'Content-Length'        => '164556298',
-                      'Content-Type'          => 'application/octet-stream',
-                      'Last-Modified'         => 'Mon, 31 Aug 2015 06:18:04 GMT',
-                      'Accept-Ranges'         => 'bytes',
-                      'ETag'                  => '-1885871426',
-                      'Server'                => 'Microsoft-IIS/7.5',
-                      'Content-Disposition'   => 'attachment; filename="Patoranking ft Wande Coal - My Woman [Snipz] - HD - Clean.mp4"',
-                      'X-AspNetMvc-Version'   => '4.0',
-                      'X-AspNet-Version'      => '4.0.30319',
-                      'X-Powered-By'          => 'ASP.NET',
-                      'Date'                  => 'Sun, 30 Aug 2015 09:13:34 GMT',
-                      'Content-Length'        => '59',
+                      'Cache-Control' => 'private',
+                      'Content-Length' => '164556298',
+                      'Content-Type' => 'application/octet-stream',
+                      'Last-Modified' => 'Mon, 31 Aug 2015 06:18:04 GMT',
+                      'Accept-Ranges' => 'bytes',
+                      'ETag' => '-1885871426',
+                      'Server' => 'Microsoft-IIS/7.5',
+                      'Content-Disposition' => 'attachment; filename="Patoranking ft Wande Coal - My Woman [Snipz] - HD - Clean.mp4"',
+                      'X-AspNetMvc-Version' => '4.0',
+                      'X-AspNet-Version' => '4.0.30319',
+                      'X-Powered-By' => 'ASP.NET',
+                      'Date' => 'Sun, 30 Aug 2015 09:13:34 GMT',
+                      'Content-Length' => '59',
                   ],
                   '' //contentData
               ),
           ]);
-          $handler = HandlerStack::create($mock);
-          $this->client = new Client(['handler' => $handler]);
+        $handler = HandlerStack::create($mock);
+        $this->client = new Client(['handler' => $handler]);
           //To pass test
-          
+
           $result = parent::getDownloadResponse($svItem, $tmpName);
-          
-          file_put_contents($tmpName, "very long string, very long string, very long string very long string, very long string, very long string very long string, very long string, very long string");
-          return $result;
-        }
+
+        file_put_contents($tmpName, 'very long string, very long string, very long string very long string, very long string, very long string very long string, very long string, very long string');
+
+        return $result;
+    }
 
     private function checkDownloadResponse()
     {
         return new Response(
             200,
              [
-                 'Cache-Control'         => 'private',
-                 'Content-Length'        => '164556298',
-                 'Content-Type'          => 'application/octet-stream',
-                 'Last-Modified'         => 'Mon, 31 Aug 2015 06:18:04 GMT',
-                 'Accept-Ranges'         => 'bytes',
-                 'ETag'                  => '-1885871426',
-                 'Server'                => 'Microsoft-IIS/7.5',
-                 'Content-Disposition'   => 'attachment; filename="Patoranking ft Wande Coal - My Woman [Snipz] - HD - Clean.mp4"',
-                 'X-AspNetMvc-Version'   => '4.0',
-                 'X-AspNet-Version'      => '4.0.30319',
-                 'X-Powered-By'          => 'ASP.NET',
-                 'Date'                  => 'Sun, 30 Aug 2015 09:13:34 GMT',
-                 'Content-Length'        => '59',
+                 'Cache-Control' => 'private',
+                 'Content-Length' => '164556298',
+                 'Content-Type' => 'application/octet-stream',
+                 'Last-Modified' => 'Mon, 31 Aug 2015 06:18:04 GMT',
+                 'Accept-Ranges' => 'bytes',
+                 'ETag' => '-1885871426',
+                 'Server' => 'Microsoft-IIS/7.5',
+                 'Content-Disposition' => 'attachment; filename="Patoranking ft Wande Coal - My Woman [Snipz] - HD - Clean.mp4"',
+                 'X-AspNetMvc-Version' => '4.0',
+                 'X-AspNet-Version' => '4.0.30319',
+                 'X-Powered-By' => 'ASP.NET',
+                 'Date' => 'Sun, 30 Aug 2015 09:13:34 GMT',
+                 'Content-Length' => '59',
              ],
              ProvidersTest::getJsonCheckDowloadStatusSuccessForSmash() //contentData
          );
     }
+
     public function checkDownloadStatus(SvItem $svItem, $fg = true)
     {
         $this->client = ProvidersTest::applyMock([$this->checkDownloadResponse()]);
@@ -202,6 +202,7 @@ class SmashVisionProviderMock extends \DeejayPoolBundle\Provider\SmashVisionProv
     public function search($filter = [])
     {
         $this->client = ProvidersTest::applyMock([$this->itemsResponse()]);
+
         return parent::search($filter);
     }
 }

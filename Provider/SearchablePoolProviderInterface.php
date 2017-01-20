@@ -17,7 +17,9 @@ interface SearchablePoolProviderInterface
     public function getAvailableCriteria();
 
     public function getMaxPage();
+
     public function getResultCount();
+
     /** @return SearchablePoolProviderInterface */
     public function search($filters = []);
 }

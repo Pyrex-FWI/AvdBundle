@@ -1,16 +1,15 @@
 <?php
 /**
  * User: chpyr
- * Time: 15:29
+ * Time: 15:29.
  */
 
 namespace DigitalDjPoolBundle\Tests\Faker\Provider;
 
-
 use Faker\Provider\Base;
 
-class TrackFakerProvider extends Base {
-
+class TrackFakerProvider extends Base
+{
     protected static $artist = [
         'Beyonce', 'Booba', 'Bruno Mars', 'Busta Rhymes', 'Bobby Brackins', 'Boosie Badazz',
         'Calvin Harris', 'Ciara', 'Cole Black',
@@ -96,6 +95,7 @@ class TrackFakerProvider extends Base {
         if ($min && $max) {
             return static::numberBetween(intval($min), intval($max));
         }
+
         return static::numberBetween(static::$trackId[0], static::$trackId[1]);
     }
 
@@ -107,7 +107,7 @@ class TrackFakerProvider extends Base {
         }
         $result = $this->generator->parse(static::$trackFileNameFormats);
         self::$trackId = $old;
+
         return $result;
     }
-
 }

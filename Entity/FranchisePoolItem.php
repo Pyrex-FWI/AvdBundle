@@ -3,6 +3,7 @@
 /**
  * User: chpyr.
  */
+
 namespace DeejayPoolBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;

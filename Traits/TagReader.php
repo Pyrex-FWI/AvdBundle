@@ -2,7 +2,6 @@
 
 namespace DigitalDjPoolBundle\Traits;
 
-
 trait TagReader
 {
     /**
@@ -12,13 +11,15 @@ trait TagReader
 
     private $id3;
 
-    private function readTag($file){
+    private function readTag($file)
+    {
         $this->id3 = $this->id3 === null ? new \getID3() : $this->id3;
 
         $this->analyseResult = $this->id3->analyze($file);
     }
 
-    private function tagIsAvailable(){
+    private function tagIsAvailable()
+    {
         return isset($this->analyseResult['tags']);
     }
 

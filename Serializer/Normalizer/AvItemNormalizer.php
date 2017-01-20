@@ -6,6 +6,7 @@
  * Date: 30/08/15
  * Time: 18:45.
  */
+
 namespace DeejayPoolBundle\Serializer\Normalizer;
 
 use DeejayPoolBundle\Entity\AvdItem;
@@ -16,6 +17,7 @@ class AvItemNormalizer extends AbstractNormalizer
     const AVITEM = 'AvItem';
 
     protected $properties = [];
+
     /**
      * @param $properties []
      */
@@ -24,6 +26,7 @@ class AvItemNormalizer extends AbstractNormalizer
         $this->properties = $properties;
         parent::__construct();
     }
+
     /**
      * Denormalizes data back into an object of the given class.
      *
@@ -62,9 +65,9 @@ class AvItemNormalizer extends AbstractNormalizer
     /**
      * Checks whether the given class is supported for denormalization by this normalizer.
      *
-     * @param mixed  $data   Data to denormalize from.
-     * @param string $type   The class to which the data should be denormalized.
-     * @param string $format The format being deserialized from.
+     * @param mixed  $data   data to denormalize from
+     * @param string $type   the class to which the data should be denormalized
+     * @param string $format the format being deserialized from
      *
      * @return bool
      */
@@ -90,8 +93,8 @@ class AvItemNormalizer extends AbstractNormalizer
     /**
      * Checks whether the given class is supported for normalization by this normalizer.
      *
-     * @param mixed  $data   Data to normalize.
-     * @param string $format The format being (de-)serialized from or into.
+     * @param mixed  $data   data to normalize
+     * @param string $format the format being (de-)serialized from or into
      *
      * @return bool
      */

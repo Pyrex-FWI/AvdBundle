@@ -15,7 +15,7 @@ class StatusCommand extends AbstractCommand
     {
         $this->setName('deejay:pool:status')->setDescription('Check AVDistrict availability')
             ->addArgument('provider', InputArgument::REQUIRED, 'Provider (like avd or ddp')
-            ->setHelp(<<<EOF
+            ->setHelp(<<<'EOF'
 <info>%command.name%</info>
 php app/console deejay:pool:status av_district
 EOF

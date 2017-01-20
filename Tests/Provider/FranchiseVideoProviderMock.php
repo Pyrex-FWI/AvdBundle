@@ -10,15 +10,13 @@ use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Client;
 
 /**
- * Class FranchiseVideoProviderMock
- * @package DeejayPoolBundle\Tests\Provider
+ * Class FranchiseVideoProviderMock.
+ *
  * @group provider
  * @group franchise
  */
 class FranchiseVideoProviderMock extends FranchisePoolVideoProvider
 {
-
-
     /**
      * Open session on digitalDjPool service.
      *
@@ -49,7 +47,6 @@ class FranchiseVideoProviderMock extends FranchisePoolVideoProvider
 
         return $result;
     }
-
 
     public function getItems($page, $filter = [])
     {
@@ -378,37 +375,34 @@ class FranchiseVideoProviderMock extends FranchisePoolVideoProvider
 
     public function getDownloadResponse(ProviderItemInterface $svItem, $tmpName)
     {
-      $mock = new MockHandler([
-
+        $mock = new MockHandler([
           new Response(
               200,
               [
-                  'Content-Type'			=> 'audio/mpeg',
-                  'Content-Length'		=> '11057204',
-                  'Connection'			=> 'keep-alive',
-                  'Date'					=> 'Tue, 08 Sep 2015 11:39:29 GMT',
-                  'Content-Disposition'	=> 'attachment',
-                  'Last-Modified'			=> 'Wed, 02 Sep 2015 04:54:46 GMT',
-                  'Etag'					=> '"0d841aa67b50760d58275b567754f05e"',
-                  'Accept-Ranges'			=> 'bytes',
-                  'Server'				=> 'AmazonS3',
-                  'X-Cache'				=> 'Miss from cloudfront',
-                  'Via'					=> '1.1 fda22d9cef54c172af1b22463f41c0c9.cloudfront.net (CloudFront)',
-                  'X-Amz-Cf-Id'			=> 'S2Kqkpl2JkjjIXAq59Heqt6d8K8N-2v2XWqbQ76jt7l9DfrZmpb4jw==',
+                  'Content-Type' => 'audio/mpeg',
+                  'Content-Length' => '11057204',
+                  'Connection' => 'keep-alive',
+                  'Date' => 'Tue, 08 Sep 2015 11:39:29 GMT',
+                  'Content-Disposition' => 'attachment',
+                  'Last-Modified' => 'Wed, 02 Sep 2015 04:54:46 GMT',
+                  'Etag' => '"0d841aa67b50760d58275b567754f05e"',
+                  'Accept-Ranges' => 'bytes',
+                  'Server' => 'AmazonS3',
+                  'X-Cache' => 'Miss from cloudfront',
+                  'Via' => '1.1 fda22d9cef54c172af1b22463f41c0c9.cloudfront.net (CloudFront)',
+                  'X-Amz-Cf-Id' => 'S2Kqkpl2JkjjIXAq59Heqt6d8K8N-2v2XWqbQ76jt7l9DfrZmpb4jw==',
                   'Content-Disposition' => 'attachment;filename="Tinashe - Cold Sweat.mp4"',
               ],
               '' //contentData
           ),
       ]);
-      $handler = HandlerStack::create($mock);
-      $this->client = new Client(['handler' => $handler]);
+        $handler = HandlerStack::create($mock);
+        $this->client = new Client(['handler' => $handler]);
       //To pass test
 
       $result = parent::getDownloadResponse($svItem, $tmpName);
-      file_put_contents($tmpName, "very long string, very long string, very long string very long string, very long string, very long string very long string, very long string, very long string");
-      return $result;
-    }
-   
-   
-}
+        file_put_contents($tmpName, 'very long string, very long string, very long string very long string, very long string, very long string very long string, very long string, very long string');
 
+        return $result;
+    }
+}

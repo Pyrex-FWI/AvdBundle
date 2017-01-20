@@ -14,13 +14,12 @@ use Symfony\Component\Console\Question\Question;
 /**
  * Class FranchiseRecordPoolTest.php
  * SYMFONY__FRANCHISE__POOL__CREDENTIALS__LOGIN=xxx@xxx
- * SYMFONY__FRANCHISE__POOL__CREDENTIALS__PASSWORD=****
- * @package DeejayPoolBundle\Tests\Online
+ * SYMFONY__FRANCHISE__POOL__CREDENTIALS__PASSWORD=****.
+ *
  * @group online
  */
 class FranchiseRecordPoolTest extends BaseTest
 {
-
     /**
      * @test
      * @group franchise
@@ -42,11 +41,14 @@ class FranchiseRecordPoolTest extends BaseTest
         $franchiseProvider->setContainer($this->container);
         $this->assertFalse($franchiseProvider->open('bad', 'bad'));
         $this->assertTrue($franchiseProvider->open($login, $password));
+
         return $franchiseProvider;
     }
+
     /**
      * @test
      * @depends franchiseRecordPoolConnection
+     *
      * @param FranchisePoolProvider $franchisePoolProvider
      */
     public function fetchItems(FranchisePoolProvider $franchisePoolProvider)

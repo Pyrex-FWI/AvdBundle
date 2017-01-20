@@ -23,8 +23,9 @@ class SmashVisionProvider extends AbstractProvider implements PoolProviderInterf
 
     private $loginData = [];
 
-    /** @var  EventDispatcher */
+    /** @var EventDispatcher */
     protected $eventDispatcher;
+
     /**
      * Get all embed children video into Parent VideoGroup.
      *
@@ -38,7 +39,6 @@ class SmashVisionProvider extends AbstractProvider implements PoolProviderInterf
     {
         $itemsArray = [];
         if ($svGroup->isParent() && $svGroup->getSvItems()->count() > 0) {
-
             return $svGroup->getSvItems()->toArray();
         }
 
@@ -172,6 +172,7 @@ class SmashVisionProvider extends AbstractProvider implements PoolProviderInterf
 
     /**
      * @param ProviderItemInterface $item
+     *
      * @return bool
      */
     public function itemCanBeDownload(ProviderItemInterface $item)
@@ -211,6 +212,7 @@ class SmashVisionProvider extends AbstractProvider implements PoolProviderInterf
         );
 
         $this->loginData = json_decode($response->getBody()->__toString(), true);
+
         return $response;
     }
 
@@ -253,11 +255,13 @@ class SmashVisionProvider extends AbstractProvider implements PoolProviderInterf
                 $itemsArray = array_merge($itemsArray, $itemsGroup);
             }
         }
+
         return $itemsArray;
     }
 
     /**
      * @param $itemsArray
+     *
      * @return array
      */
     private function filter($itemsArray)
@@ -346,6 +350,7 @@ class SmashVisionProvider extends AbstractProvider implements PoolProviderInterf
     /**
      * @param $page
      * @param $filter
+     *
      * @return \Psr\Http\Message\ResponseInterface
      */
     protected function getResponseByGetQuery($page, $filter)
@@ -367,7 +372,7 @@ class SmashVisionProvider extends AbstractProvider implements PoolProviderInterf
         $params = [
             //'cookies'         => $this->cookieJar,
             'allow_redirects' => true,
-            'debug' => $this->debug
+            'debug' => $this->debug,
         ];
 
         $response = $this->client->get(
@@ -377,9 +382,11 @@ class SmashVisionProvider extends AbstractProvider implements PoolProviderInterf
 
         return $response;
     }
+
     /**
      * @param $page
      * @param $filter
+     *
      * @return \Psr\Http\Message\ResponseInterface
      */
     protected function getResponseByPostQuery($page, $filter)

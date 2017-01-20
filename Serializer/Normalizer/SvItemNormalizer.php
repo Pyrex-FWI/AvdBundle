@@ -17,6 +17,7 @@ class SvItemNormalizer extends AbstractNormalizer
     const QUALITY_qHD = 1;          //groupId like "17991_qHD"
     const QUALITY_HD_720 = 2;       //groupId like "17988_HD720"
     const QUALITY_HD_1080 = 3;      //groupId like "18018_HD1080"
+
     /**
      * Denormalizes data back into an object of the given class.
      *
@@ -30,30 +31,30 @@ class SvItemNormalizer extends AbstractNormalizer
     public function denormalize($data, $class, $format = null, array $context = array())
     {
         $svGroup = new SvItem();
-        $svGroup->setGroupId((int)$data['groupId']);
+        $svGroup->setGroupId((int) $data['groupId']);
         $svGroup->setArtist($data['artist']);
         $svGroup->setTitle($data['title']);
-        $svGroup->setBpm((int)$data['bpm']);
+        $svGroup->setBpm((int) $data['bpm']);
         $svGroup->addRelatedGenre($data['genre']);
         $svGroup->setReleaseDate((new \DateTime())->setTimestamp($this->extractReleaseDate($data['date'])));
-        if (SvItemNormalizer::QUALITY_HD_720 === $data['quality']) {
+        if (self::QUALITY_HD_720 === $data['quality']) {
             $svGroup->set720(true);
         }
-        if (SvItemNormalizer::QUALITY_HD_1080 === $data['quality']) {
+        if (self::QUALITY_HD_1080 === $data['quality']) {
             $svGroup->set1080(true);
         }
-        if (SvItemNormalizer::QUALITY_qHD === $data['quality']) {
+        if (self::QUALITY_qHD === $data['quality']) {
             $svGroup->setQHD(true);
         }
 
-        foreach ((array)$data['videos'] as $videoArray) {
+        foreach ((array) $data['videos'] as $videoArray) {
             $svItem = clone $svGroup;
             $svItem->setVideoId($videoArray['videoId']);
             if ($videoFilePart = explode('.', $videoArray['video_file'])) {
                 $svItem->setVideoFile($videoFilePart[0]);
                 $svItem->updateInfoFromVideoFileProperties();
             }
-            $svItem->setDownloaded((bool)$videoArray['downloaded']);
+            $svItem->setDownloaded((bool) $videoArray['downloaded']);
             $completeVersion = $this->extractCompleteVersion($videoArray);
             $svItem->setVersion($completeVersion);
             $svItem->setParent(false);
@@ -64,6 +65,7 @@ class SvItemNormalizer extends AbstractNormalizer
 
         return $svGroup;
     }
+
     /**
      * [exactDurationVersion description].
      *
@@ -79,6 +81,7 @@ class SvItemNormalizer extends AbstractNormalizer
             return $matches['version'];
         }
     }
+
     /**
      * [exactContentVersion description].
      *
@@ -116,9 +119,9 @@ class SvItemNormalizer extends AbstractNormalizer
     /**
      * Checks whether the given class is supported for denormalization by this normalizer.
      *
-     * @param mixed  $data   Data to denormalize from.
-     * @param string $type   The class to which the data should be denormalized.
-     * @param string $format The format being deserialized from.
+     * @param mixed  $data   data to denormalize from
+     * @param string $type   the class to which the data should be denormalized
+     * @param string $format the format being deserialized from
      *
      * @return bool
      */
@@ -144,8 +147,8 @@ class SvItemNormalizer extends AbstractNormalizer
     /**
      * Checks whether the given class is supported for normalization by this normalizer.
      *
-     * @param mixed  $data   Data to normalize.
-     * @param string $format The format being (de-)serialized from or into.
+     * @param mixed  $data   data to normalize
+     * @param string $format the format being (de-)serialized from or into
      *
      * @return bool
      */

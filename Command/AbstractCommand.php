@@ -12,15 +12,14 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
 /**
- * Class AbstractCommand
- * @package DeejayPoolBundle\Command
+ * Class AbstractCommand.
  */
 class AbstractCommand extends ContainerAwareCommand
 {
-    /** @var  \DeejayPoolBundle\Provider\ProviderManager */
+    /** @var \DeejayPoolBundle\Provider\ProviderManager */
     protected $manager;
 
-    /** @var  PoolProviderInterface */
+    /** @var PoolProviderInterface */
     protected $provider;
 
     /** @var InputInterface */
@@ -29,7 +28,7 @@ class AbstractCommand extends ContainerAwareCommand
     /**     * @var OutputInterface */
     protected $output;
 
-    /** @var  ProgressBar */
+    /** @var ProgressBar */
     protected $progressBar;
 
     /** @var EventDispatcher */
@@ -40,6 +39,7 @@ class AbstractCommand extends ContainerAwareCommand
 
     /**
      * AbstractCommand constructor.
+     *
      * @param ProviderManager      $manager
      * @param EventDispatcher      $eventDispatcher
      * @param LoggerInterface|null $logger
@@ -58,6 +58,7 @@ class AbstractCommand extends ContainerAwareCommand
     /**
      * @param InputInterface  $input
      * @param OutputInterface $output
+     *
      * @throws \UnexpectedValueException
      */
     public function init(InputInterface $input, OutputInterface $output)
@@ -94,6 +95,7 @@ class AbstractCommand extends ContainerAwareCommand
 
     /**
      * @param array $downloadSuccess
+     *
      * @return mixed
      */
     public function orderItems($downloadSuccess)

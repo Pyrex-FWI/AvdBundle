@@ -10,13 +10,12 @@ use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Client;
 
 /**
- * Class AvDistrictProviderMock
- * @package DeejayPoolBundle\Tests\Provider
+ * Class AvDistrictProviderMock.
+ *
  * @group provider
  */
 class AvDistrictProviderMock extends \DeejayPoolBundle\Provider\AvDistrictProvider
 {
-
     private $headers = [];
     protected $debug = true;
 
@@ -42,27 +41,27 @@ class AvDistrictProviderMock extends \DeejayPoolBundle\Provider\AvDistrictProvid
                 ),
             ]);
         }
-        $handler      = HandlerStack::create($mock);
+        $handler = HandlerStack::create($mock);
         $this->client = new Client(['handler' => $handler]);
-        $result       = parent::open($login, $password);
+        $result = parent::open($login, $password);
 
         return $result;
     }
 
     public function getItems($page, $filter = [])
     {
-        $mock         = new MockHandler([
+        $mock = new MockHandler([
             new Response(
                 200, [
-                'Cache-Control'       => 'private, s-maxage=0',
-                'Content-Type'        => 'application/json; charset=utf-8',
-                'Server'              => 'Microsoft-IIS/7.5',
+                'Cache-Control' => 'private, s-maxage=0',
+                'Content-Type' => 'application/json; charset=utf-8',
+                'Server' => 'Microsoft-IIS/7.5',
                 'X-AspNetMvc-Version' => '4.0',
-                'X-AspNet-Version'    => '4.0.30319',
-                'X-Powered-By'        => 'ASP.NET',
-                'Date'                => 'Sun, 30 Aug 2015 09:10:14 GMT',
-                'Content-Length'      => '13326',
-                'Set-Cookie'          => '.ASPXAUTH=',
+                'X-AspNet-Version' => '4.0.30319',
+                'X-Powered-By' => 'ASP.NET',
+                'Date' => 'Sun, 30 Aug 2015 09:10:14 GMT',
+                'Content-Length' => '13326',
+                'Set-Cookie' => '.ASPXAUTH=',
                 ], '{
     "sEcho": "1",
     "iTotalRecords": 7474,
@@ -922,7 +921,7 @@ class AvDistrictProviderMock extends \DeejayPoolBundle\Provider\AvDistrictProvid
 }'
             ),
         ]);
-        $handler      = HandlerStack::create($mock);
+        $handler = HandlerStack::create($mock);
         $this->client = new Client(['handler' => $handler]);
 
         return $result = parent::getItems($page, $filter);
@@ -930,72 +929,74 @@ class AvDistrictProviderMock extends \DeejayPoolBundle\Provider\AvDistrictProvid
 
     public function downloadItem(ProviderItemInterface $avdItem, $force = false, $mockSucces = true)
     {
-        $mock         = new MockHandler([
+        $mock = new MockHandler([
             new Response(
                 200, [
-                'Cache-Control'       => 'private, s-maxage=0',
-                'Content-Type'        => 'application/json; charset=utf-8',
-                'Server'              => 'Microsoft-IIS/7.5',
+                'Cache-Control' => 'private, s-maxage=0',
+                'Content-Type' => 'application/json; charset=utf-8',
+                'Server' => 'Microsoft-IIS/7.5',
                 'X-AspNetMvc-Version' => '4.0',
-                'X-AspNet-Version'    => '4.0.30319',
-                'X-Powered-By'        => 'ASP.NET',
-                'Date'                => 'Sun, 30 Aug 2015 09:13:34 GMT',
-                'Content-Length'      => '59',
+                'X-AspNet-Version' => '4.0.30319',
+                'X-Powered-By' => 'ASP.NET',
+                'Date' => 'Sun, 30 Aug 2015 09:13:34 GMT',
+                'Content-Length' => '59',
                 ], '{"msg":"","haserrors":false,"id":0,"data":"XYHfVAhuVu4%3d"}'
             ),
             new Response(
                 $mockSucces ? 200 : 302, [
-                'Cache-Control'       => 'private',
-                'Content-Length'      => '164556298',
-                'Content-Type'        => 'application/octet-stream',
-                'Last-Modified'       => 'Mon, 31 Aug 2015 06:18:04 GMT',
-                'Accept-Ranges'       => 'bytes',
-                'ETag'                => '-1885871426',
-                'Server'              => 'Microsoft-IIS/7.5',
+                'Cache-Control' => 'private',
+                'Content-Length' => '164556298',
+                'Content-Type' => 'application/octet-stream',
+                'Last-Modified' => 'Mon, 31 Aug 2015 06:18:04 GMT',
+                'Accept-Ranges' => 'bytes',
+                'ETag' => '-1885871426',
+                'Server' => 'Microsoft-IIS/7.5',
                 'Content-Disposition' => 'attachment; filename=Xxxx Yyyy_Rrrr Heee_Extended_Clean_HD.mp4',
                 'X-AspNetMvc-Version' => '4.0',
-                'X-AspNet-Version'    => '4.0.30319',
-                'X-Powered-By'        => 'ASP.NET',
-                'Date'                => 'Sun, 30 Aug 2015 09:13:34 GMT',
-                'Content-Length'      => '59',
+                'X-AspNet-Version' => '4.0.30319',
+                'X-Powered-By' => 'ASP.NET',
+                'Date' => 'Sun, 30 Aug 2015 09:13:34 GMT',
+                'Content-Length' => '59',
                 ], '' //contentData
             ),
         ]);
-        $handler      = HandlerStack::create($mock);
+        $handler = HandlerStack::create($mock);
         $this->client = new Client(['handler' => $handler]);
 
         return $result = parent::downloadItem($avdItem, $filter = []);
     }
-    
+
     public function itemCanBeDownload(ProviderItemInterface $item)
     {
-        if($key = $this->getDownloadKey($item)) {
-            $item->setDownloadlink($this->getConfValue('download_url') . '?key=' . $key);
+        if ($key = $this->getDownloadKey($item)) {
+            $item->setDownloadlink($this->getConfValue('download_url').'?key='.$key);
+
             return true;
         }
+
         return false;
     }
-    
+
     private function downloadKeyMockResponse($success = true)
     {
         return new Response(
             200, [
-            'Cache-Control'       => 'private, s-maxage=0',
-            'Content-Type'        => 'application/json; charset=utf-8',
-            'Server'              => 'Microsoft-IIS/7.5',
+            'Cache-Control' => 'private, s-maxage=0',
+            'Content-Type' => 'application/json; charset=utf-8',
+            'Server' => 'Microsoft-IIS/7.5',
             'X-AspNetMvc-Version' => '4.0',
-            'X-AspNet-Version'    => '4.0.30319',
-            'X-Powered-By'        => 'ASP.NET',
-            'Date'                => 'Sun, 30 Aug 2015 09:13:34 GMT',
-            'Content-Length'      => '59',
-            ], 
-            $success ? 
+            'X-AspNet-Version' => '4.0.30319',
+            'X-Powered-By' => 'ASP.NET',
+            'Date' => 'Sun, 30 Aug 2015 09:13:34 GMT',
+            'Content-Length' => '59',
+            ],
+            $success ?
                 '{"msg":"","haserrors":false,"id":0,"data":"XYHfVAhuVu4%3d"}'
                 :
                 '{"msg":"You have already downloaded this video twice.  Please contact us for further assistance.","haserrors":true,"id":0,"data":""}'
             );
     }
-    
+
     public function getDownloadKey(AvdItem $avdItem, $mockSucces = true)
     {
         $this->client = ProvidersTest::applyMock([$this->downloadKeyMockResponse($mockSucces)]);
@@ -1005,51 +1006,52 @@ class AvDistrictProviderMock extends \DeejayPoolBundle\Provider\AvDistrictProvid
 
     protected function getDownloadResponse(ProviderItemInterface $item, $tempName)
     {
-        $resource          = fopen($tempName, 'w');
-        $downloadKey       = $this->getDownloadKey($item);
+        $resource = fopen($tempName, 'w');
+        $downloadKey = $this->getDownloadKey($item);
         $mock = new MockHandler([
               new Response(
                    200,
                   [
-                    'Cache-Control'       => 'private',
-                    'Content-Length'      => '164556298',
-                    'Content-Type'        => 'application/octet-stream',
-                    'Last-Modified'       => 'Mon, 31 Aug 2015 06:18:04 GMT',
-                    'Accept-Ranges'       => 'bytes',
-                    'ETag'                => '-1885871426',
-                    'Server'              => 'Microsoft-IIS/7.5',
+                    'Cache-Control' => 'private',
+                    'Content-Length' => '164556298',
+                    'Content-Type' => 'application/octet-stream',
+                    'Last-Modified' => 'Mon, 31 Aug 2015 06:18:04 GMT',
+                    'Accept-Ranges' => 'bytes',
+                    'ETag' => '-1885871426',
+                    'Server' => 'Microsoft-IIS/7.5',
                     'Content-Disposition' => 'attachment; filename=Xxxx Yyyy_Rrrr Heee_Extended_Clean_HD.mp4',
                     'X-AspNetMvc-Version' => '4.0',
-                    'X-AspNet-Version'    => '4.0.30319',
-                    'X-Powered-By'        => 'ASP.NET',
-                    'Date'                => 'Sun, 30 Aug 2015 09:13:34 GMT',
-                    'Content-Length'      => '59',
+                    'X-AspNet-Version' => '4.0.30319',
+                    'X-Powered-By' => 'ASP.NET',
+                    'Date' => 'Sun, 30 Aug 2015 09:13:34 GMT',
+                    'Content-Length' => '59',
                   ],
                   '' //contentData
               ),
           ]);
-          $handler = HandlerStack::create($mock);
-          $this->client = new Client(['handler' => $handler]);
-          
-         $response = $this->client->get(
+        $handler = HandlerStack::create($mock);
+        $this->client = new Client(['handler' => $handler]);
+
+        $response = $this->client->get(
                     $this->getConfValue('download_url'), [
                     //'cookies'         => $this->cookieJar,
                     'allow_redirects' => false,
-                    'debug'           => $this->debug,
-                    'sink'            => $resource,
-                    'query'           => [
+                    'debug' => $this->debug,
+                    'sink' => $resource,
+                    'query' => [
                         'key' => $downloadKey,
                     ],
-                    'headers'         => [
-                        'Referer'                   => 'http://www.avdistrict.net/Videos',
+                    'headers' => [
+                        'Referer' => 'http://www.avdistrict.net/Videos',
                         'Upgrade-Insecure-Requests' => 1,
-                        'Accept'                    => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-                        'Accept-Encoding'           => 'gzip, deflate, sdch',
-                        'Accept-Language'           => 'fr-FR,fr;q=0.8,en-US;q=0.6,en;q=0.4',
-                    ]
+                        'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+                        'Accept-Encoding' => 'gzip, deflate, sdch',
+                        'Accept-Language' => 'fr-FR,fr;q=0.8,en-US;q=0.6,en;q=0.4',
+                    ],
                     ]
                 );
-        file_put_contents($tempName, "very long string, very long string, very long string very long string, very long string, very long string very long string, very long string, very long string");
+        file_put_contents($tempName, 'very long string, very long string, very long string very long string, very long string, very long string very long string, very long string, very long string');
+
         return $response;
     }
 }

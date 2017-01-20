@@ -5,13 +5,13 @@
          xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/4.3/phpunit.xsd"
          backupGlobals="false"
          colors="true"
-         bootstrap="./Tests/app/autoload.php"
-         printerFile="Tests/AppTestListener.php"
+         bootstrap="./app/autoload.php"
+         printerFile="AppTestListener.php"
          printerClass="DigitalDjPoolBundle\Tests\AppTestListener"
         >
     <testsuites>
         <testsuite name="Test Suite">
-            <directory>./Tests</directory>
+            <directory>../</directory>
         </testsuite>
     </testsuites>
     <filter>
@@ -20,12 +20,7 @@
         </blacklist>
         <whitelist>
         <!-- lib subfolders to include -->
-            <directory>./Provider</directory>
-            <directory>./Event</directory>
-            <directory>./Entity</directory>
-            <directory>./Command</directory>
-            <directory>./Service</directory>
-            <directory>./Serializer</directory>
+            <directory>./../</directory>
         </whitelist>
     </filter>
 </phpunit>

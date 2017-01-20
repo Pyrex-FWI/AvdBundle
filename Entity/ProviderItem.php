@@ -233,6 +233,7 @@ trait ProviderItem
 
         return $this;
     }
+
     /**
      * @param AvdItem $genre
      *
