@@ -24,14 +24,12 @@ parameters:
     av_district.credentials.password: totot
 
     av_district.provider.class: DeejayPoolBundle\Tests\Provider\AvDistrictProviderMock
-    av_district.session_subscriber.class: DeejayPoolBundle\Tests\Event\SessionSubscriberMock
 
     franchise_pool.configuration.root_path: %kernel.root_dir%/../TestData/root_path
     franchise_pool.credentials.login: toto
     franchise_pool.credentials.password: xxx
 
     franchise_pool.provider.class: DeejayPoolBundle\Tests\Provider\FranchiseProviderMock
-    franchise_pool.session_subscriber.class: DeejayPoolBundle\Tests\Event\SessionSubscriberMock
 
     franchise_pool_video.provider.class: DeejayPoolBundle\Tests\Provider\FranchiseVideoProviderMock
 

@@ -10,3 +10,4 @@ Tests/TestData/root_path/
 /nbproject/private/
 /nbproject
 .DS_Store
+/build
