@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <phpdox xmlns="http://xml.phpdox.net/config">
-<project name="Example" source="${basedir}/Provider" workdir="${basedir}/build/phpdox">
-    <collector backend="parser" />
+<project name="Example" source="${basedir}/" workdir="${basedir}/build/phpdox">
+    <!-- https://github.com/theseer/phpdox/issues/100 -->
+    <collector backend="parser" >
+        <include mask="*/*/**.php" />
+        <exclude mask="*/Tests/**.php" />
+    </collector>
     <generator output="${basedir}/build/api">
         <build engine="html" output="html"/>
     </generator>
