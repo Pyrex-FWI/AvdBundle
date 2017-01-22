@@ -35,6 +35,7 @@
             <directory>../Exception</directory>
             <directory>../Provider</directory>
             <directory>../Serializer</directory>
+            <file>../DeejayPoolBundle.php</file>
         </whitelist>
     </filter>
     <logging>

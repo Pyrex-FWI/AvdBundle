@@ -1,5 +1,6 @@
 /Tests/app/parameters.yml
 /Tests/vendor/
+/vendor
 Tests/app/cache
 Tests/app/logs
 composer.lock

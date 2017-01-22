@@ -31,7 +31,7 @@
     "escapestudios/symfony2-coding-standard": "~2.0"
     },
   "scripts": {
-    "test:phpunit": "Tests/vendor/bin/phpunit --coverage-html Tests/coverage",
+    "test:phpunit": "Tests/vendor/bin/phpunit --coverage-html build/coverage",
     "doctrine:drop": "php Tests/app/console.php doctrine:d:d --force",
     "doctrine": "php Tests/app/console.php doctrine:d:c",
     "doctrine:create": "php Tests/app/console.php doctrine:d:c",
