@@ -3,8 +3,7 @@
 namespace DeejayPoolBundle\Provider;
 
 /**
- * Class ProviderManager
- * @package DeejayPoolBundle\Provider
+ * Class ProviderManager.
  */
 class ProviderManager
 {
@@ -21,7 +20,9 @@ class ProviderManager
 
     /**
      * @param string $name
+     *
      * @throws \UnexpectedValueException
+     *
      * @return array|mixed
      */
     public function get($name)

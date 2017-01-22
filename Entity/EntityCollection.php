@@ -22,7 +22,7 @@ class EntityCollection extends ArrayCollection
     final public function filterBy($fieldName, $fieldValues, $revert = false)
     {
         $results = [];
-        $fieldValues = (array)$fieldValues;
+        $fieldValues = (array) $fieldValues;
         $propertyAccess = PropertyAccess::createPropertyAccessor();
         foreach ($this->getValues() as $object) {
             foreach ($fieldValues as $fieldValue) {

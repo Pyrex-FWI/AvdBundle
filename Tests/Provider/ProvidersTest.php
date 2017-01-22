@@ -11,8 +11,8 @@ use DeejayPoolBundle\Event\PostItemsListEvent;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
- * Class SessionTest
- * @package DigitalDjPool\Tests\Provider
+ * Class SessionTest.
+ *
  * @author "Pyrex-Fwi" <yemistikrys@gmail.com>
  * @group provider
  */
@@ -21,7 +21,7 @@ class ProvidersTest extends \DeejayPoolBundle\Tests\BaseTest
     protected $postItemListObject;
     protected $serviceName;
 
-    /** @var  AvDistrictProviderMock */
+    /** @var AvDistrictProviderMock */
     private $provider;
 
     protected function setUp()
@@ -50,11 +50,10 @@ class ProvidersTest extends \DeejayPoolBundle\Tests\BaseTest
         $supportMultipleDownload,
         $postItemListObject,
         $downloadedFileName
-    )
-    {
+    ) {
         $this->setProvider($serviceName);
         $this->assertTrue($this->provider->supportAsyncDownload() === $supportMultipleDownload);
-        $this->assertTrue($this->provider->open(null, null) );
+        $this->assertTrue($this->provider->open(null, null));
         $this->postItemListObject = $postItemListObject;
         $this->serviceName = $serviceName;
 
@@ -63,18 +62,18 @@ class ProvidersTest extends \DeejayPoolBundle\Tests\BaseTest
 
         $items = $this->provider->getItems(2);
         $this->assertTrue(count($items) > 0);
-        
+
         /** @var DeejayPoolBundle\Entity\ProviderItemInterface $itemToDownload */
         $itemToDownload = $serviceName === \DeejayPoolBundle\DeejayPoolBundle::PROVIDER_SV ? $items[0] : $items[2];
 
         if ($this->provider->itemCanBeDownload($itemToDownload)) {
             $this->assertNotNull($itemToDownload->getDownloadLink());
         }
-        
+
         $this->assertTrue($this->provider->downloadItem($itemToDownload));
-        
+
         $this->assertNotNull($itemToDownload->getFullPath());
-        
+
         $downloadedFile = $this->container->getParameter($this->provider->getName().'.configuration.root_path').DIRECTORY_SEPARATOR.$downloadedFileName;
         dump($downloadedFile);
         $this->assertTrue(file_exists($downloadedFile));
@@ -102,37 +101,36 @@ class ProvidersTest extends \DeejayPoolBundle\Tests\BaseTest
     {
         return [
             [
-                DeejayPoolBundle::PROVIDER_SV, 686, 17143
-            ]
+                DeejayPoolBundle::PROVIDER_SV, 686, 17143,
+            ],
         ];
     }
-    
-    
+
     public function _testHEAD()
     {
         $client = new \GuzzleHttp\Client();
         $resource = fopen('dl', 'w');
         $response = $client->head(
-            'http://www.franchiserecordpool.com/download/track/325382', 
+            'http://www.franchiserecordpool.com/download/track/325382',
             [
-                'allow_redirects'   => [
-                    'on_redirect'       => function (
+                'allow_redirects' => [
+                    'on_redirect' => function (
                     \Psr\Http\Message\RequestInterface $request,
                     \Psr\Http\Message\ResponseInterface $response,
                     \Psr\Http\Message\UriInterface $uri
                         ) {
-                            echo 'Redirecting! ' . $request->getUri() . ' to ' . $uri . "\n";
-                        }
+                        echo 'Redirecting! '.$request->getUri().' to '.$uri."\n";
+                    },
                 ],
-                'debug'             => true,
+                'debug' => true,
                 //'sink'              => $resource,
-                'headers'           => [
-                        'Accept'            => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-                        'Accept-Encoding'   => 'gzip, deflate',
-                        'Cookie'            => '__utma=128985947.1677725527.1440829624.1444163357.1445063379.7; __utmz=128985947.1440829624.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); PHPSESSID=vvb2digh75a9fkgsfsaaqfj540; AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E1F20B2567A0661AA43F837B10AF505559079E941345CA4C459689F730415CE9C70FA4BBCCAB255E00E7D473C41A8F0DD; __utmb=128985947.2.10.1445063379; __utmc=128985947; __utmt=1; perveiousurl=http://www.franchiserecordpool.com/view-category',
-                        'Referer'           => 'http://www.franchiserecordpool.com/view-category',
-                        'User-Agent'        => \DeejayPoolBundle\Provider\AbstractProvider::getDefaultUserAgent()
-                    ]
+                'headers' => [
+                        'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+                        'Accept-Encoding' => 'gzip, deflate',
+                        'Cookie' => '__utma=128985947.1677725527.1440829624.1444163357.1445063379.7; __utmz=128985947.1440829624.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); PHPSESSID=vvb2digh75a9fkgsfsaaqfj540; AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E1F20B2567A0661AA43F837B10AF505559079E941345CA4C459689F730415CE9C70FA4BBCCAB255E00E7D473C41A8F0DD; __utmb=128985947.2.10.1445063379; __utmc=128985947; __utmt=1; perveiousurl=http://www.franchiserecordpool.com/view-category',
+                        'Referer' => 'http://www.franchiserecordpool.com/view-category',
+                        'User-Agent' => \DeejayPoolBundle\Provider\AbstractProvider::getDefaultUserAgent(),
+                    ],
                 ]
             );
     }
@@ -160,7 +158,7 @@ class ProvidersTest extends \DeejayPoolBundle\Tests\BaseTest
                 \DeejayPoolBundle\DeejayPoolBundle::PROVIDER_FPR_AUDIO,
                 false,
                 'DeejayPoolBundle\Entity\FranchisePoolItem',
-                '320001_Rick_Ross_-_Foreclosures_(Clean).mp3'
+                '320001_Rick_Ross_-_Foreclosures_(Clean).mp3',
             ],
             [
                 \DeejayPoolBundle\DeejayPoolBundle::PROVIDER_FPR_VIDEO,
@@ -179,7 +177,7 @@ class ProvidersTest extends \DeejayPoolBundle\Tests\BaseTest
 
     public function ensureIsFranchiseItem($obj)
     {
-        /** @var FranchisePoolItem $obj */
+        /* @var FranchisePoolItem $obj */
         $this->assertInstanceOf('DeejayPoolBundle\Entity\FranchisePoolItem', $obj);
         $this->assertNotEmpty($obj->getTitle());
         $this->assertNotEmpty($obj->getArtist());
@@ -191,7 +189,7 @@ class ProvidersTest extends \DeejayPoolBundle\Tests\BaseTest
         $genreCount = $obj->getRelatedGenres()->count();
         if ($genreCount > 1) {
             $obj->removeRelatedGenre($obj->getRelatedGenres()->last());
-            $this->assertEquals($genreCount-1, $obj->getRelatedGenres()->count());
+            $this->assertEquals($genreCount - 1, $obj->getRelatedGenres()->count());
         }
         $obj->getVersion();
         $obj->getFullPath();
@@ -203,7 +201,7 @@ class ProvidersTest extends \DeejayPoolBundle\Tests\BaseTest
 
     public function ensureIsAvdItem($obj)
     {
-        /** @var AvdItem $obj */
+        /* @var AvdItem $obj */
         $this->assertInstanceOf('DeejayPoolBundle\Entity\AvdItem', $obj);
         $this->assertNotEmpty($obj->getTitle());
         $this->assertNotEmpty($obj->getArtist());
@@ -217,7 +215,7 @@ class ProvidersTest extends \DeejayPoolBundle\Tests\BaseTest
         $genreCount = $obj->getRelatedGenres()->count();
         if ($genreCount > 1) {
             $obj->removeRelatedGenre($obj->getRelatedGenres()->last());
-            $this->assertEquals($genreCount-1, $obj->getRelatedGenres()->count());
+            $this->assertEquals($genreCount - 1, $obj->getRelatedGenres()->count());
         }
         $this->assertTrue(is_bool($obj->isHd()));
         $obj->getDownloadlink();
@@ -225,7 +223,7 @@ class ProvidersTest extends \DeejayPoolBundle\Tests\BaseTest
 
     public function ensureIsProviderItem(\DeejayPoolBundle\Entity\ProviderItemInterface $obj)
     {
-        /** @var \DeejayPoolBundle\Entity\ProviderItemInterface $obj */
+        /* @var \DeejayPoolBundle\Entity\ProviderItemInterface $obj */
         $this->assertNotEmpty($obj->getTitle());
         $this->assertNotEmpty($obj->getArtist());
         $this->assertNotEmpty($obj->getFullPath());
@@ -250,6 +248,7 @@ class ProvidersTest extends \DeejayPoolBundle\Tests\BaseTest
         //dump($event->getItem()->getDownloadLink());
         //$this->assertNotNull($event->getItem()->getDownloadLink());
     }
+
     public function sessionSuccessDownload(ItemDownloadEvent $event)
     {
         $this->ensureIsProviderItem($event->getItem());
@@ -261,6 +260,7 @@ class ProvidersTest extends \DeejayPoolBundle\Tests\BaseTest
             $this->ensureIsFranchiseItem($event->getItem());
         }
     }
+
     public function sessionErrorDownload(ItemDownloadEvent $event)
     {
         if ($this->serviceName === DeejayPoolBundle::PROVIDER_AVD) {
@@ -276,6 +276,7 @@ class ProvidersTest extends \DeejayPoolBundle\Tests\BaseTest
     {
         $this->assertTrue($this->provider->IsConnected() === false);
     }
+
     /**
      * @param PostItemsListEvent $obj
      */
@@ -285,6 +286,7 @@ class ProvidersTest extends \DeejayPoolBundle\Tests\BaseTest
         $this->assertTrue(count($obj->getItems()) > 0);
         $this->assertContainsOnlyInstancesOf($this->postItemListObject, $obj->getItems());
     }
+
     private function addListeners()
     {
         $this->getEventDispatcher()->addListener(ProviderEvents::SESSION_OPENED, [$this, 'sessionOpenedEvent']);
@@ -312,7 +314,7 @@ class ProvidersTest extends \DeejayPoolBundle\Tests\BaseTest
      */
     public static function getJsonCheckDowloadStatusErrorForSmash()
     {
-      return '
+        return '
         {"msg":"ERROR: You have exceed the number of times you are allowed to download this video. Contact support to have your video files reset.","haserrors":true,"id":0,"data":""}
       ';
     }
@@ -322,7 +324,7 @@ class ProvidersTest extends \DeejayPoolBundle\Tests\BaseTest
      */
     public static function getJsonCheckDowloadStatusSuccessForSmash()
     {
-      return '
+        return '
         {"msg":"","haserrors":false,"id":81872,"data":""}
       ';
     }
@@ -984,19 +986,21 @@ class ProvidersTest extends \DeejayPoolBundle\Tests\BaseTest
             }
                  ';
     }
+
     /**
-     * 
-     * @param \GuzzleHttp\Client $client
+     * @param \GuzzleHttp\Client                    $client
      * @param \Psr\Http\Message\ResponseInterface[] $responses
      */
     public static function applyMock($responses)
     {
         $handler = \GuzzleHttp\HandlerStack::create(self::getMockHandler($responses));
+
         return new \GuzzleHttp\Client(['handler' => $handler]);
     }
-    
+
     /**
      * @param \Psr\Http\Message\ResponseInterface[] $responses
+     *
      * @return \GuzzleHttp\Handler\MockHandler
      */
     public static function getMockHandler($responses)

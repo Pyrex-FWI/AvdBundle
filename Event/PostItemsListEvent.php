@@ -6,7 +6,7 @@ use Symfony\Component\EventDispatcher\Event;
 
 class PostItemsListEvent extends Event
 {
-    /** @var ProviderItemInterface[]  */
+    /** @var ProviderItemInterface[] */
     protected $items;
 
     /**

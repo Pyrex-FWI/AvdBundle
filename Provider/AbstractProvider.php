@@ -54,6 +54,7 @@ abstract class AbstractProvider implements PoolProviderInterface
     protected $maxPage = 0;
 
     protected $resultCount = 0;
+
     /**
      * @param type                     $eventDispatcher
      * @param \Psr\Log\LoggerInterface $logger
@@ -223,7 +224,7 @@ abstract class AbstractProvider implements PoolProviderInterface
      */
     public function hasCorrectlyDownloaded(\Psr\Http\Message\ResponseInterface $response, $tempName)
     {
-        if ( ! in_array($response->getStatusCode(), [404, 500]) && file_exists($tempName) && filesize($tempName) > 150) {
+        if (!in_array($response->getStatusCode(), [404, 500]) && file_exists($tempName) && filesize($tempName) > 150) {
             return true;
         } else {
             return false;
@@ -292,6 +293,7 @@ abstract class AbstractProvider implements PoolProviderInterface
     {
         $this->eventDispatcher->dispatch(ProviderEvents::ITEM_ERROR_DOWNLOAD, new \DeejayPoolBundle\Event\ItemDownloadEvent($item, null, $this->getLastError()));
     }
+
     private function removeTmpFile($tempName)
     {
         if (file_exists($tempName)) {

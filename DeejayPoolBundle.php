@@ -6,6 +6,11 @@ use DeejayPoolBundle\DependencyInjection\Compiler\ProviderCompilerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
+/**
+ * Class DeejayPoolBundle.
+ *
+ * @author  Christophe Pyree <christophe.pyree@gmail.com>
+ */
 class DeejayPoolBundle extends Bundle
 {
     const PROVIDER_AVD = 'av_district';
@@ -15,6 +20,9 @@ class DeejayPoolBundle extends Bundle
     const PROVIDER_DPP = 'ddp';
     const BUNDLE_ALIAS = 'deejay_pool';
 
+    /**
+     * @param ContainerBuilder $container
+     */
     public function build(ContainerBuilder $container)
     {
         parent::build($container);
@@ -22,6 +30,9 @@ class DeejayPoolBundle extends Bundle
         $container->addCompilerPass(new ProviderCompilerPass());
     }
 
+    /**
+     * @return array
+     */
     public static function getProvidersName()
     {
         return [

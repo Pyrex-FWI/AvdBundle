@@ -14,13 +14,12 @@ use Symfony\Component\Console\Question\Question;
 /**
  * Class SmashVisionTest
  * SYMFONY__SMASHVISION__CREDENTIALS__LOGIN=xxx@xxx
- * SYMFONY__SMASHVISION__CREDENTIALS__PASSWORD=****
- * @package DeejayPoolBundle\Tests\Online
+ * SYMFONY__SMASHVISION__CREDENTIALS__PASSWORD=****.
+ *
  * @group online
  */
 class SmashVisionTest extends BaseTest
 {
-
     /**
      * @test
      * @group smash
@@ -49,11 +48,12 @@ class SmashVisionTest extends BaseTest
     /**
      * @test
      * @depends smashConnection
+     *
      * @param SmashVisionProvider $smashVisionProvider
      */
     public function fetchItems(SmashVisionProvider $smashVisionProvider)
     {
-        foreach(range(1,1) as $page) {
+        foreach (range(1, 1) as $page) {
             $dataItem = $smashVisionProvider->getItems($page);
         }
         $this->assertContainsOnlyInstancesOf(SvItem::class, $dataItem);
@@ -68,7 +68,7 @@ class SmashVisionTest extends BaseTest
         $this->assertNotEmpty($item->getItemId());
         $this->assertNotEmpty($item->getBpm());
         $this->assertNotEmpty($item->getVersion());
-        $this->assertTrue(count($item->getRelatedGenres()) ? true:false);
+        $this->assertTrue(count($item->getRelatedGenres()) ? true : false);
         $this->assertTrue(is_bool($downladable));
         if ($downladable) {
             $this->assertTrue($item->getDownloaded());

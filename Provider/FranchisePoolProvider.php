@@ -12,11 +12,11 @@ use Symfony\Component\Serializer\Serializer;
 
 class FranchisePoolProvider extends AbstractProvider implements PoolProviderInterface
 {
-    /** @var  EventDispatcher */
+    /** @var EventDispatcher */
     protected $eventDispatcher;
-    /** @var Serializer  */
+    /** @var Serializer */
     protected $serializer;
-    /** @var  string */
+    /** @var string */
     private $lastDownloadLink;
     /**
      * @var string

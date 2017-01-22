@@ -29,7 +29,7 @@ $container
             '%ddp.provider.class%',
             array(
                 new Reference('event_dispatcher'),
-                new Reference('logger', \Symfony\Component\DependencyInjection\ContainerInterface::IGNORE_ON_INVALID_REFERENCE)
+                new Reference('logger', \Symfony\Component\DependencyInjection\ContainerInterface::IGNORE_ON_INVALID_REFERENCE),
             ))
     )
     ->addMethodCall('setContainer', [new Reference('service_container')])
@@ -43,7 +43,7 @@ $container
             '%av_district.provider.class%',
             array(
                 new Reference('event_dispatcher'),
-                new Reference('logger', \Symfony\Component\DependencyInjection\ContainerInterface::IGNORE_ON_INVALID_REFERENCE)
+                new Reference('logger', \Symfony\Component\DependencyInjection\ContainerInterface::IGNORE_ON_INVALID_REFERENCE),
             ))
     )
     ->addMethodCall('setContainer', [new Reference('service_container')])
@@ -57,7 +57,7 @@ $container
             '%franchise_pool.provider.class%',
             array(
                 new Reference('event_dispatcher'),
-                new Reference('logger', \Symfony\Component\DependencyInjection\ContainerInterface::IGNORE_ON_INVALID_REFERENCE)
+                new Reference('logger', \Symfony\Component\DependencyInjection\ContainerInterface::IGNORE_ON_INVALID_REFERENCE),
             ))
     )
     ->addMethodCall('setContainer', [new Reference('service_container')])
@@ -71,7 +71,7 @@ $container
             '%franchise_pool_video.provider.class%',
             array(
                 new Reference('event_dispatcher'),
-                new Reference('logger', \Symfony\Component\DependencyInjection\ContainerInterface::IGNORE_ON_INVALID_REFERENCE)
+                new Reference('logger', \Symfony\Component\DependencyInjection\ContainerInterface::IGNORE_ON_INVALID_REFERENCE),
             ))
     )
     ->addMethodCall('setContainer', [new Reference('service_container')])
@@ -85,13 +85,12 @@ $container
             '%smashvision.provider.class%',
             array(
                 new Reference('event_dispatcher'),
-                new Reference('logger', \Symfony\Component\DependencyInjection\ContainerInterface::IGNORE_ON_INVALID_REFERENCE)
+                new Reference('logger', \Symfony\Component\DependencyInjection\ContainerInterface::IGNORE_ON_INVALID_REFERENCE),
             ))
     )
     ->addMethodCall('setContainer', [new Reference('service_container')])
     ->addTag('monolog.logger', array('channel' => 'ddp'))
     ->addTag('deejay_provider', []);
-
 
 $container
     ->register(
@@ -112,4 +111,3 @@ $container
     ->addArgument(new Reference('event_dispatcher'))
     ->addArgument(new Reference('logger', \Symfony\Component\DependencyInjection\ContainerInterface::IGNORE_ON_INVALID_REFERENCE))
     ->addTag('console.command');
-

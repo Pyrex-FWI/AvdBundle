@@ -2,43 +2,38 @@
 /**
  * User: chpyr
  * Date: 11/04/15
- * Time: 16:11
+ * Time: 16:11.
  */
 
 namespace DeejayPoolBundle\Tests\Command;
 
-use DeejayPoolBundle\Command\AbstractCommand;
-use DigitalDjPool\Tests\BaseTest;
-use DigitalDjPoolBundle\Command\DownloaderCommand;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Tester\CommandTester;
 
 /**
- * Class DownloaderCommandTest
- * @package DeejayPoolBundle\Tests\Command
+ * Class DownloaderCommandTest.
+ *
  * @group command
  */
 class DownloaderCommandTest extends AbstractCommandTest
 {
-
     public function testAvdExecute()
     {
         $this->application->add($this->container->get('deejay_pool.command.download'));
 
         /** @var \DeejayPoolBundle\Command\DownloaderCommand $command */
-        $command        = $this->application->find('deejay:pool:download');
-        $commandTester  = new CommandTester($command);
+        $command = $this->application->find('deejay:pool:download');
+        $commandTester = new CommandTester($command);
         $commandTester->execute([
-            'command'   => $command->getName(),
-            'provider'  => 'av_district',
-            '--start'   => 100,
-            '--end'     => 102,
-            '--sleep'   => 10,
+            'command' => $command->getName(),
+            'provider' => 'av_district',
+            '--start' => 100,
+            '--end' => 102,
+            '--sleep' => 10,
         ],
             [
                 'verbosity' => OutputInterface::VERBOSITY_DEBUG,
-
             ]
             );
 
@@ -67,21 +62,20 @@ class DownloaderCommandTest extends AbstractCommandTest
         $this->application->add($this->container->get('deejay_pool.command.download'));
 
         /** @var \DeejayPoolBundle\Command\DownloaderCommand $command */
-        $command        = $this->application->find('deejay:pool:download');
-        $commandTester  = new CommandTester($command);
+        $command = $this->application->find('deejay:pool:download');
+        $commandTester = new CommandTester($command);
         $commandTester->execute([
-            'command'   => $command->getName(),
-            'provider'  => 'toto',
-            '--start'   => 100,
-            '--end'     => 102,
-            '--sleep'   => 10,
+            'command' => $command->getName(),
+            'provider' => 'toto',
+            '--start' => 100,
+            '--end' => 102,
+            '--sleep' => 10,
             ],
             [
-                'verbosity' => OutputInterface::VERBOSITY_DEBUG
+                'verbosity' => OutputInterface::VERBOSITY_DEBUG,
             ]
         );
     }
-
 
     /**
      * @throws \Throwable
@@ -92,20 +86,19 @@ class DownloaderCommandTest extends AbstractCommandTest
         $this->application->add($this->container->get('deejay_pool.command.download'));
 
         /** @var \DeejayPoolBundle\Command\DownloaderCommand $command */
-        $command        = $this->application->find('deejay:pool:download');
-        $commandTester  = new CommandTester($command);
+        $command = $this->application->find('deejay:pool:download');
+        $commandTester = new CommandTester($command);
         $commandTester->execute([
-            'command'   => $command->getName(),
-            'provider'  => 'av_district',
-            '--start'   => 1,
-            '--end'     => 2,
-            '--sleep'   => 10,
+            'command' => $command->getName(),
+            'provider' => 'av_district',
+            '--start' => 1,
+            '--end' => 2,
+            '--sleep' => 10,
             '--read-tags-only' => true,
             '--dry' => true,
         ],
             [
                 'verbosity' => OutputInterface::VERBOSITY_DEBUG,
-
             ]
         );
 
@@ -113,4 +106,3 @@ class DownloaderCommandTest extends AbstractCommandTest
         echo $commandTester->getDisplay();
     }
 }
-

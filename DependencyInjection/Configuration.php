@@ -13,6 +13,7 @@ class Configuration implements ConfigurationInterface
 {
     const AVD_LOGIN_CHECK = 'http://www.avdistrict.net/Account/CheckLogin';
     const ITEMS_PER_PAGE = 25;
+
     /**
      * {@inheritdoc}
      */
@@ -129,16 +130,18 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->scalarNode('login_check')
                     ->info('Login url for authentication')
-                    ->defaultValue(Configuration::AVD_LOGIN_CHECK)
+                    ->defaultValue(self::AVD_LOGIN_CHECK)
                     ->cannotBeEmpty()
                     ->validate()
-                        ->ifTrue(function ($v) { return !$this->isValidurl($v); })
+                        ->ifTrue(function ($v) {
+                            return !$this->isValidurl($v);
+                        })
                         ->thenInvalid('%s is not a valid url, update yout login_check value.')
                     ->end()
                 ->end()
                 ->integerNode('items_per_page')
                     ->info('Items per page')
-                    ->defaultValue(Configuration::ITEMS_PER_PAGE)
+                    ->defaultValue(self::ITEMS_PER_PAGE)
                 ->end()
             ->end();
         $configurationDef
@@ -158,7 +161,9 @@ class Configuration implements ConfigurationInterface
                     ->defaultValue('http://www.avdistrict.net/Videos/LoadVideosData')
                     ->cannotBeEmpty()
                     ->validate()
-                        ->ifTrue(function ($v) { return !$this->isValidurl($v); })
+                        ->ifTrue(function ($v) {
+                            return !$this->isValidurl($v);
+                        })
                         ->thenInvalid('%s is not a valid url, update yout item_url value.')
                     ->end()
                 ->end()
@@ -167,7 +172,9 @@ class Configuration implements ConfigurationInterface
                     ->defaultValue('http://www.avdistrict.net/Handlers/DownloadHandler.ashx')
                     ->cannotBeEmpty()
                     ->validate()
-                        ->ifTrue(function ($v) { return !$this->isValidurl($v); })
+                        ->ifTrue(function ($v) {
+                            return !$this->isValidurl($v);
+                        })
                         ->thenInvalid('%s is not a valid url, update yout download_url value.')
                     ->end()
                 ->end()
@@ -176,7 +183,9 @@ class Configuration implements ConfigurationInterface
                     ->defaultValue('http://www.avdistrict.net/Videos/InitializeDownload')
                     ->cannotBeEmpty()
                     ->validate()
-                        ->ifTrue(function ($v) { return !$this->isValidurl($v); })
+                        ->ifTrue(function ($v) {
+                            return !$this->isValidurl($v);
+                        })
                         ->thenInvalid('%s is not a valid url, update yout download_keygen_url value.')
                     ->end()
                 ->end()
@@ -184,6 +193,7 @@ class Configuration implements ConfigurationInterface
 
         return $configurationDef;
     }
+
     /**
      * @return ArrayNodeDefinition
      */
@@ -207,13 +217,15 @@ class Configuration implements ConfigurationInterface
                     ->defaultValue('https://digitaldjpool.com/Account/SignIn')
                     ->cannotBeEmpty()
                     ->validate()
-                        ->ifTrue(function ($v) { return !$this->isValidurl($v); })
+                        ->ifTrue(function ($v) {
+                            return !$this->isValidurl($v);
+                        })
                         ->thenInvalid('%s is not a valid url, update yout login_check value.')
                     ->end()
                 ->end()
                 ->integerNode('items_per_page')
                     ->info('Items per page')
-                    ->defaultValue(Configuration::ITEMS_PER_PAGE)
+                    ->defaultValue(self::ITEMS_PER_PAGE)
                 ->end()
             ->end();
         $configurationDef
@@ -233,7 +245,9 @@ class Configuration implements ConfigurationInterface
                     ->defaultValue('https://digitaldjpool.com/RecordPool/FilterSearch')
                     ->cannotBeEmpty()
                     ->validate()
-                        ->ifTrue(function ($v) { return !$this->isValidurl($v); })
+                        ->ifTrue(function ($v) {
+                            return !$this->isValidurl($v);
+                        })
                         ->thenInvalid('%s is not a valid url, update yout item_url value.')
                     ->end()
                 ->end()
@@ -242,7 +256,9 @@ class Configuration implements ConfigurationInterface
                     ->defaultValue('http://www.avdistrict.net/Handlers/DownloadHandler.ashx')
                     ->cannotBeEmpty()
                     ->validate()
-                        ->ifTrue(function ($v) { return !$this->isValidurl($v); })
+                        ->ifTrue(function ($v) {
+                            return !$this->isValidurl($v);
+                        })
                         ->thenInvalid('%s is not a valid url, update yout download_url value.')
                     ->end()
                 ->end()
@@ -281,7 +297,9 @@ class Configuration implements ConfigurationInterface
                     ->defaultValue('https://www.franchiserecordpool.com/signin')
                     ->cannotBeEmpty()
                     ->validate()
-                        ->ifTrue(function ($v) { return !$this->isValidurl($v); })
+                        ->ifTrue(function ($v) {
+                            return !$this->isValidurl($v);
+                        })
                         ->thenInvalid('%s is not a valid url, update yout login_check value.')
                     ->end()
                 ->end()
@@ -312,7 +330,9 @@ class Configuration implements ConfigurationInterface
                     ->defaultValue($items_url)
                     ->cannotBeEmpty()
                     ->validate()
-                        ->ifTrue(function ($v) { return !$this->isValidurl($v); })
+                        ->ifTrue(function ($v) {
+                            return !$this->isValidurl($v);
+                        })
                         ->thenInvalid('%s is not a valid url, update yout item_url value.')
                     ->end()
                 ->end()
@@ -321,7 +341,9 @@ class Configuration implements ConfigurationInterface
                     ->defaultValue($dlUrl)
                     ->cannotBeEmpty()
                     ->validate()
-                        ->ifTrue(function ($v) { return !$this->isValidurl($v); })
+                        ->ifTrue(function ($v) {
+                            return !$this->isValidurl($v);
+                        })
                         ->thenInvalid('%s is not a valid url, update yout download_url value.')
                     ->end()
                 ->end()
@@ -329,6 +351,7 @@ class Configuration implements ConfigurationInterface
 
         return $configurationDef;
     }
+
     /**
      * @return ArrayNodeDefinition
      */
@@ -352,7 +375,9 @@ class Configuration implements ConfigurationInterface
                     ->defaultValue('https://www.smashvision.net/Account/CheckLogin')
                     ->cannotBeEmpty()
                     ->validate()
-                        ->ifTrue(function ($v) { return !$this->isValidurl($v); })
+                        ->ifTrue(function ($v) {
+                            return !$this->isValidurl($v);
+                        })
                         ->thenInvalid('%s is not a valid url, update yout login_check value.')
                     ->end()
                 ->end()
@@ -378,7 +403,9 @@ class Configuration implements ConfigurationInterface
                     ->defaultValue('https://www.smashvision.net/Videos/GetVideos')
                     ->cannotBeEmpty()
                     ->validate()
-                        ->ifTrue(function ($v) { return !$this->isValidurl($v); })
+                        ->ifTrue(function ($v) {
+                            return !$this->isValidurl($v);
+                        })
                         ->thenInvalid('%s is not a valid url, update yout item_url value.')
                     ->end()
                 ->end()
@@ -387,7 +414,9 @@ class Configuration implements ConfigurationInterface
                     ->defaultValue('https://www.smashvision.net/Videos/GetButtons')
                     ->cannotBeEmpty()
                     ->validate()
-                        ->ifTrue(function ($v) { return !$this->isValidurl($v); })
+                        ->ifTrue(function ($v) {
+                            return !$this->isValidurl($v);
+                        })
                         ->thenInvalid('%s is not a valid url, update yout items_versions_url value.')
                     ->end()
                 ->end()
@@ -396,7 +425,9 @@ class Configuration implements ConfigurationInterface
                     ->defaultValue('https://www.smashvision.net/Handlers/DownloadHandler.ashx')
                     ->cannotBeEmpty()
                     ->validate()
-                        ->ifTrue(function ($v) { return !$this->isValidurl($v); })
+                        ->ifTrue(function ($v) {
+                            return !$this->isValidurl($v);
+                        })
                         ->thenInvalid('%s is not a valid url, update yout download_url value.')
                     ->end()
                 ->end()
@@ -405,7 +436,9 @@ class Configuration implements ConfigurationInterface
                     ->defaultValue('https://www.smashvision.net/Videos/CheckDownload')
                     ->cannotBeEmpty()
                     ->validate()
-                        ->ifTrue(function ($v) { return !$this->isValidurl($v); })
+                        ->ifTrue(function ($v) {
+                            return !$this->isValidurl($v);
+                        })
                         ->thenInvalid('%s is not a valid url, update yout download_url value.')
                     ->end()
                 ->end()

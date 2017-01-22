@@ -12,8 +12,7 @@ use Symfony\Component\Console\Helper\TableCell;
 use Symfony\Component\Console\Output\ConsoleOutput;
 
 /**
- * Class AppTestListener
- * @package AppBundle\Tests
+ * Class AppTestListener.
  */
 class AppTestListener extends \PHPUnit_TextUI_ResultPrinter implements \PHPUnit_Framework_TestListener
 {
@@ -29,8 +28,8 @@ class AppTestListener extends \PHPUnit_TextUI_ResultPrinter implements \PHPUnit_
      * An error occurred.
      *
      * @param PHPUnit_Framework_Test $test
-     * @param Exception $e
-     * @param float $time
+     * @param Exception              $e
+     * @param float                  $time
      */
     public function addError(PHPUnit_Framework_Test $test, Exception $e, $time)
     {
@@ -40,9 +39,9 @@ class AppTestListener extends \PHPUnit_TextUI_ResultPrinter implements \PHPUnit_
     /**
      * A failure occurred.
      *
-     * @param PHPUnit_Framework_Test $test
+     * @param PHPUnit_Framework_Test                 $test
      * @param PHPUnit_Framework_AssertionFailedError $e
-     * @param float $time
+     * @param float                                  $time
      */
     public function addFailure(PHPUnit_Framework_Test $test, PHPUnit_Framework_AssertionFailedError $e, $time)
     {
@@ -53,16 +52,16 @@ class AppTestListener extends \PHPUnit_TextUI_ResultPrinter implements \PHPUnit_
      * Incomplete test.
      *
      * @param PHPUnit_Framework_Test $test
-     * @param Exception $e
-     * @param float $time
+     * @param Exception              $e
+     * @param float                  $time
      */
     public function addIncompleteTest(PHPUnit_Framework_Test $test, Exception $e, $time)
     {
         /** @var \PHPUnit_Framework_TestCase $test */
         if (is_subclass_of($test, 'PHPUnit_Framework_TestCase')) {
-            $this->incomplete['_'] = isset($this->incomplete['_']) ? $this->incomplete['_']+1 : 1;
+            $this->incomplete['_'] = isset($this->incomplete['_']) ? $this->incomplete['_'] + 1 : 1;
             foreach ($this->getGroups($test->getAnnotations()) as $group) {
-                $this->incomplete[$group] = isset($this->incomplete[$group]) ? $this->incomplete[$group]+1 : 1;
+                $this->incomplete[$group] = isset($this->incomplete[$group]) ? $this->incomplete[$group] + 1 : 1;
             }
         }
 
@@ -73,8 +72,8 @@ class AppTestListener extends \PHPUnit_TextUI_ResultPrinter implements \PHPUnit_
      * Risky test.
      *
      * @param PHPUnit_Framework_Test $test
-     * @param Exception $e
-     * @param float $time
+     * @param Exception              $e
+     * @param float                  $time
      *
      * @since  Method available since Release 4.0.0
      */
@@ -87,8 +86,8 @@ class AppTestListener extends \PHPUnit_TextUI_ResultPrinter implements \PHPUnit_
      * Skipped test.
      *
      * @param PHPUnit_Framework_Test $test
-     * @param Exception $e
-     * @param float $time
+     * @param Exception              $e
+     * @param float                  $time
      *
      * @since  Method available since Release 3.0.0
      */
@@ -130,16 +129,17 @@ class AppTestListener extends \PHPUnit_TextUI_ResultPrinter implements \PHPUnit_
     {
         parent::startTest($test);
         if (is_subclass_of($test, 'PHPUnit_Framework_TestCase')) {
-            $this->total['_'] = isset($this->total['_']) ? $this->total['_']+1 : 1;
+            $this->total['_'] = isset($this->total['_']) ? $this->total['_'] + 1 : 1;
             foreach ($this->getGroups($test->getAnnotations()) as $group) {
-                $this->total[$group] = isset($this->total[$group]) ? $this->total[$group]+1 : 1;
+                $this->total[$group] = isset($this->total[$group]) ? $this->total[$group] + 1 : 1;
             }
         }
     }
 
     /**
      * @param array $annotations
-     * @param null $part
+     * @param null  $part
+     *
      * @return array
      */
     private function getGroups($annotations = [], $part = null)
@@ -154,6 +154,7 @@ class AppTestListener extends \PHPUnit_TextUI_ResultPrinter implements \PHPUnit_
                 $this->getGroups($annotations, 'class')
             );
         }
+
         return [];
     }
 
@@ -161,17 +162,17 @@ class AppTestListener extends \PHPUnit_TextUI_ResultPrinter implements \PHPUnit_
      * A test ended.
      *
      * @param PHPUnit_Framework_Test $test
-     * @param float $time
+     * @param float                  $time
      */
     public function endTest(PHPUnit_Framework_Test $test, $time)
     {
         /** @var \PHPUnit_Framework_TestCase $test */
         if (is_subclass_of($test, 'PHPUnit_Framework_TestCase')) {
             if ($test->getStatus()) {
-                $this->succes['_'] = isset($this->succes['_']) ? $this->succes['_']+1 : 1;
+                $this->succes['_'] = isset($this->succes['_']) ? $this->succes['_'] + 1 : 1;
 
                 foreach ($this->getGroups($test->getAnnotations()) as $group) {
-                    $this->succes[$group] = isset($this->succes[$group]) ? $this->succes[$group]+1 : 1;
+                    $this->succes[$group] = isset($this->succes[$group]) ? $this->succes[$group] + 1 : 1;
                 }
             }
         }
@@ -187,9 +188,6 @@ class AppTestListener extends \PHPUnit_TextUI_ResultPrinter implements \PHPUnit_
         $this->printAdditionalData();
     }
 
-    /**
-     *
-     */
     private function printAdditionalData()
     {
         $out = new ConsoleOutput();
@@ -202,15 +200,15 @@ class AppTestListener extends \PHPUnit_TextUI_ResultPrinter implements \PHPUnit_
                 [
                     $group,
                     sprintf('%s (%s)', $this->incomplete[$group].'/'.$this->total[$group], $this->percentCalc($this->incomplete[$group], $this->total[$group])),
-                    sprintf('%s (%s)', $this->total[$group] - $this->incomplete[$group].'/'.$this->total[$group], $this->percentCalc($this->total[$group] - $this->incomplete[$group], $this->total[$group]))
+                    sprintf('%s (%s)', $this->total[$group] - $this->incomplete[$group].'/'.$this->total[$group], $this->percentCalc($this->total[$group] - $this->incomplete[$group], $this->total[$group])),
                 ]
             );
         }
         $table->render();
         $table->setRows([]);
-        $table->addRow([new TableCell('**Total**', ['colspan'=>3])]);
+        $table->addRow([new TableCell('**Total**', ['colspan' => 3])]);
         foreach ($this->total as $group => $val) {
-            if ('_' === $group ) {
+            if ('_' === $group) {
                 continue;
             }
             $table->addRow(
@@ -223,12 +221,15 @@ class AppTestListener extends \PHPUnit_TextUI_ResultPrinter implements \PHPUnit_
     /**
      * @param $current
      * @param $total
+     *
      * @return string
      */
-    private function percentCalc($current, $total) {
+    private function percentCalc($current, $total)
+    {
         if ($total > 0) {
-            return number_format(($current/$total)*100, 2 ). ' %';
+            return number_format(($current / $total) * 100, 2).' %';
         }
-        return 0 . ' %';
+
+        return 0 .' %';
     }
 }

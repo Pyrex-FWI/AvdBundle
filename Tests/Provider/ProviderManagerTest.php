@@ -1,21 +1,18 @@
 <?php
-/**
- */
 
 namespace DeejayPoolBundle\Tests\Provider;
-
 
 use DeejayPoolBundle\Provider\ProviderManager;
 use DeejayPoolBundle\Tests\BaseTest;
 
 /**
- * Class ProviderManagerTest
- * @package DeejayPoolBundle\Tests\Provider
+ * Class ProviderManagerTest.
+ *
  * @group provider
  */
 class ProviderManagerTest extends BaseTest
 {
-    /** @var  ProviderManager */
+    /** @var ProviderManager */
     private $providerManager;
 
     protected function setUp()

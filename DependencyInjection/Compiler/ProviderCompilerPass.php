@@ -6,6 +6,7 @@
  * Date: 06/09/15
  * Time: 13:08.
  */
+
 namespace DeejayPoolBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;

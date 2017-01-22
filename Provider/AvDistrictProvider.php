@@ -10,7 +10,7 @@ use Symfony\Component\Serializer\Serializer;
 
 class AvDistrictProvider extends AbstractProvider implements PoolProviderInterface, SearchablePoolProviderInterface
 {
-    /** @var  EventDispatcher */
+    /** @var EventDispatcher */
     protected $eventDispatcher;
 
     /**

@@ -1,5 +1,6 @@
 /Tests/app/parameters.yml
-/vendor/
+/Tests/vendor/
+/vendor
 Tests/app/cache
 Tests/app/logs
 composer.lock
@@ -10,3 +11,4 @@ Tests/TestData/root_path/
 /nbproject/private/
 /nbproject
 .DS_Store
+/build

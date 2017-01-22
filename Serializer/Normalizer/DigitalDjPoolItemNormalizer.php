@@ -19,7 +19,9 @@ class DigitalDjPoolItemNormalizer extends AbstractNormalizer
      * @param string $class   the expected class to instantiate
      * @param string $format  format the given data was extracted from
      * @param array  $context options available to the denormalizer
+     *
      * @throws DownloadLinkNotFound
+     *
      * @return AvdItem
      */
     public function denormalize($dataRaw, $class, $format = null, array $context = array())
@@ -27,7 +29,7 @@ class DigitalDjPoolItemNormalizer extends AbstractNormalizer
         $data = new Crawler($dataRaw);
         $ddpItem = new DdpItem();
 
-        if ($data->filter('a.ddjp-download')->count() === 0  || $data->filter('a.ddjp-download')->attr('href') == '#' ) {
+        if ($data->filter('a.ddjp-download')->count() === 0 || $data->filter('a.ddjp-download')->attr('href') == '#') {
             throw new DownloadLinkNotFound();
         }
         $ddpItem->setDownloadlink($data->filter('a.ddjp-download')->attr('href'));
@@ -59,9 +61,9 @@ class DigitalDjPoolItemNormalizer extends AbstractNormalizer
     /**
      * Checks whether the given class is supported for denormalization by this normalizer.
      *
-     * @param mixed  $data   Data to denormalize from.
-     * @param string $type   The class to which the data should be denormalized.
-     * @param string $format The format being deserialized from.
+     * @param mixed  $data   data to denormalize from
+     * @param string $type   the class to which the data should be denormalized
+     * @param string $format the format being deserialized from
      *
      * @return bool
      */
@@ -87,8 +89,8 @@ class DigitalDjPoolItemNormalizer extends AbstractNormalizer
     /**
      * Checks whether the given class is supported for normalization by this normalizer.
      *
-     * @param mixed  $data   Data to normalize.
-     * @param string $format The format being (de-)serialized from or into.
+     * @param mixed  $data   data to normalize
+     * @param string $format the format being (de-)serialized from or into
      *
      * @return bool
      */

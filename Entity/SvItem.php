@@ -11,65 +11,64 @@ class SvItem implements ProviderItemInterface
 {
     use ProviderItem;
 
-    const ADVISOR_DIRTY             = 'DY';
-    const ADVISOR_CLEAN             = 'CN';
+    const ADVISOR_DIRTY = 'DY';
+    const ADVISOR_CLEAN = 'CN';
 
-    const TYPE_ACAPELLA             = 'AA';
-    const TYPE_BLENDX               = 'BX';
-    const TYPE_BLENDX_IN            = 'BN';
-    const TYPE_CLUB                 = 'CB';
-    const TYPE_FUNCKY_MIX           = 'FM';
-    const TYPE_SE_LYRICS_VIDEO      = 'SELV';
-    const TYPE_SE_X                 = 'SEXX';
-    const TYPE_XZ_X                 = 'XZXX';
-    const TYPE_SZ_X                 = 'SZXX';
-    const TYPE_TRANSITION           = 'TN';
-    const TYPE_TRANSITION_X         = 'TNXX';
-    const TYPE_SINGLE               = 'SE';
-    const TYPE_SNIPZ                = 'SZ';
-    const TYPE_TRANSITION_DOWN      = 'TNDN';
-    const TYPE_TRANSITION_UP        = 'TNUP';
-    const TYPE_ULTIMIX              = 'UX';
-    const TYPE_XTENDZ               = 'XZ';
-    const TYPE_INTRO                = 'IO';
-    const TYPE_XZ_LYRICS_VIDEO      = 'XZLV';
-    const TYPE_SYNX_CLUB            = 'CBSX';
-    const TYPE_SINGLE_SYNX          = 'SESX';
-    const TYPE_SZ_LYRICS_VIDEO      = 'SZLV';
-    const TYPE_CB_LYRICS_VIDEO      = 'CBLV';
-    const TYPE_XTENDZ_SYNX          = 'XZSX';
-    const TYPE_CB_ALTERNATE_VIDEO   = 'CBAV';
-    const TYPE_SZ_ALTERNATE_VIDEO   = 'SZAV';
-    const TYPE_SE_ALTERNATE_VIDEO   = 'SEAV';
-    const TYPE_XV_ALTERNATE_VIDEO   = 'XZAV';
-
+    const TYPE_ACAPELLA = 'AA';
+    const TYPE_BLENDX = 'BX';
+    const TYPE_BLENDX_IN = 'BN';
+    const TYPE_CLUB = 'CB';
+    const TYPE_FUNCKY_MIX = 'FM';
+    const TYPE_SE_LYRICS_VIDEO = 'SELV';
+    const TYPE_SE_X = 'SEXX';
+    const TYPE_XZ_X = 'XZXX';
+    const TYPE_SZ_X = 'SZXX';
+    const TYPE_TRANSITION = 'TN';
+    const TYPE_TRANSITION_X = 'TNXX';
+    const TYPE_SINGLE = 'SE';
+    const TYPE_SNIPZ = 'SZ';
+    const TYPE_TRANSITION_DOWN = 'TNDN';
+    const TYPE_TRANSITION_UP = 'TNUP';
+    const TYPE_ULTIMIX = 'UX';
+    const TYPE_XTENDZ = 'XZ';
+    const TYPE_INTRO = 'IO';
+    const TYPE_XZ_LYRICS_VIDEO = 'XZLV';
+    const TYPE_SYNX_CLUB = 'CBSX';
+    const TYPE_SINGLE_SYNX = 'SESX';
+    const TYPE_SZ_LYRICS_VIDEO = 'SZLV';
+    const TYPE_CB_LYRICS_VIDEO = 'CBLV';
+    const TYPE_XTENDZ_SYNX = 'XZSX';
+    const TYPE_CB_ALTERNATE_VIDEO = 'CBAV';
+    const TYPE_SZ_ALTERNATE_VIDEO = 'SZAV';
+    const TYPE_SE_ALTERNATE_VIDEO = 'SEAV';
+    const TYPE_XV_ALTERNATE_VIDEO = 'XZAV';
 
     protected $groupId;
     protected $downloadId;
-    protected $isHD                 = false;
+    protected $isHD = false;
     protected $completeVersion;
     protected $videoId;
     protected $videoFile;
-    protected $videoFileProperties  = [];
-    protected $single               = false;
-    protected $xtend                = false;
-    protected $snipz                = false;
-    protected $transitionDown       = false;
-    protected $transitionUp         = false;
-    protected $ultimix              = false;
-    protected $acapella             = false;
-    protected $blendX               = false;
-    protected $blendXIn             = false;
-    protected $sex                  = false;
-    protected $club                 = false;
-    protected $dirty                = false;
-    protected $clean                = false;
-    protected $funckyMix            = false;
-    protected $lyrics               = false;
-    protected $synX                 = false;
-    protected $alerternateVideo     = false;
-    protected $transition           = false;
-    protected $intro                = false;
+    protected $videoFileProperties = [];
+    protected $single = false;
+    protected $xtend = false;
+    protected $snipz = false;
+    protected $transitionDown = false;
+    protected $transitionUp = false;
+    protected $ultimix = false;
+    protected $acapella = false;
+    protected $blendX = false;
+    protected $blendXIn = false;
+    protected $sex = false;
+    protected $club = false;
+    protected $dirty = false;
+    protected $clean = false;
+    protected $funckyMix = false;
+    protected $lyrics = false;
+    protected $synX = false;
+    protected $alerternateVideo = false;
+    protected $transition = false;
+    protected $intro = false;
 
     protected $qHD = false;
     protected $hd720 = false;
@@ -86,9 +85,6 @@ class SvItem implements ProviderItemInterface
         $this->svItems = new ArrayCollection();
     }
 
-    /**
-     *
-     */
     public function setDownloadable($boolValue)
     {
         $this->downloadable = $boolValue;
@@ -96,13 +92,11 @@ class SvItem implements ProviderItemInterface
         return $this;
     }
 
-    /**
-     *
-     */
     public function getDownloadable()
     {
         return $this->downloadable;
     }
+
     /**
      * @return $isParent
      */
@@ -122,6 +116,7 @@ class SvItem implements ProviderItemInterface
 
         return $this;
     }
+
     /**
      * @return ArrayCollection
      */
@@ -251,6 +246,7 @@ class SvItem implements ProviderItemInterface
 
         return $this;
     }
+
     /**
      * Get videoFile.
      *
@@ -271,7 +267,7 @@ class SvItem implements ProviderItemInterface
     public function setVideoFile($videoFile)
     {
         $this->videoFile = strtoupper($videoFile);
-        $this->videoFileProperties = (array)explode('_', $this->videoFile);
+        $this->videoFileProperties = (array) explode('_', $this->videoFile);
 
         return $this;
     }
@@ -283,7 +279,6 @@ class SvItem implements ProviderItemInterface
     {
         $propertiesCount = count($this->videoFileProperties);
         if ($propertiesCount === 0) {
-
             return;
         }
 
@@ -295,7 +290,6 @@ class SvItem implements ProviderItemInterface
 
         return $this;
     }
-
 
     private function setAdvisorFromVideoFileProperties()
     {
@@ -412,7 +406,6 @@ class SvItem implements ProviderItemInterface
 
     private function setQualityFromVideoFileProperties()
     {
-
         return $this;
     }
 
@@ -447,6 +440,7 @@ class SvItem implements ProviderItemInterface
     {
         return $this->xtend;
     }
+
     /**
      * Get $qHD.
      *
@@ -585,8 +579,6 @@ class SvItem implements ProviderItemInterface
         return $this;
     }
 
-
-
     public function isDirty()
     {
         return $this->dirty;
@@ -594,6 +586,7 @@ class SvItem implements ProviderItemInterface
 
     /**
      * @param $value
+     *
      * @return $this
      */
     public function setDirty($value)
@@ -613,6 +606,7 @@ class SvItem implements ProviderItemInterface
 
     /**
      * @param $value
+     *
      * @return $this
      */
     public function setClean($value)
@@ -622,14 +616,13 @@ class SvItem implements ProviderItemInterface
         return $this;
     }
 
-
     public function __clone()
     {
         $this->svItems = new ArrayCollection();
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isTransitionDown()
     {
@@ -637,7 +630,8 @@ class SvItem implements ProviderItemInterface
     }
 
     /**
-     * @param boolean $transitionDown
+     * @param bool $transitionDown
+     *
      * @return SvItem
      */
     public function setTransitionDown($transitionDown)
@@ -648,7 +642,7 @@ class SvItem implements ProviderItemInterface
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isTransitionUp()
     {
@@ -656,7 +650,8 @@ class SvItem implements ProviderItemInterface
     }
 
     /**
-     * @param boolean $transitionUp
+     * @param bool $transitionUp
+     *
      * @return SvItem
      */
     public function setTransitionUp($transitionUp)
@@ -667,7 +662,7 @@ class SvItem implements ProviderItemInterface
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isUltimix()
     {
@@ -675,7 +670,8 @@ class SvItem implements ProviderItemInterface
     }
 
     /**
-     * @param boolean $ultimix
+     * @param bool $ultimix
+     *
      * @return SvItem
      */
     public function setUltimix($ultimix)
@@ -686,7 +682,7 @@ class SvItem implements ProviderItemInterface
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isAcapella()
     {
@@ -694,7 +690,8 @@ class SvItem implements ProviderItemInterface
     }
 
     /**
-     * @param boolean $acapella
+     * @param bool $acapella
+     *
      * @return SvItem
      */
     public function setAcapella($acapella)
@@ -705,7 +702,7 @@ class SvItem implements ProviderItemInterface
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isBlendX()
     {
@@ -713,7 +710,8 @@ class SvItem implements ProviderItemInterface
     }
 
     /**
-     * @param boolean $blendX
+     * @param bool $blendX
+     *
      * @return SvItem
      */
     public function setBlendX($blendX)
@@ -724,7 +722,7 @@ class SvItem implements ProviderItemInterface
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isBlendXIn()
     {
@@ -732,7 +730,8 @@ class SvItem implements ProviderItemInterface
     }
 
     /**
-     * @param boolean $blendXIn
+     * @param bool $blendXIn
+     *
      * @return SvItem
      */
     public function setBlendXIn($blendXIn)
@@ -743,7 +742,7 @@ class SvItem implements ProviderItemInterface
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isClub()
     {
@@ -751,7 +750,8 @@ class SvItem implements ProviderItemInterface
     }
 
     /**
-     * @param boolean $club
+     * @param bool $club
+     *
      * @return SvItem
      */
     public function setClub($club)
@@ -762,7 +762,7 @@ class SvItem implements ProviderItemInterface
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isSex()
     {
@@ -770,7 +770,8 @@ class SvItem implements ProviderItemInterface
     }
 
     /**
-     * @param boolean $sex
+     * @param bool $sex
+     *
      * @return SvItem
      */
     public function setSex($sex)
@@ -781,7 +782,7 @@ class SvItem implements ProviderItemInterface
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isFunckyMix()
     {
@@ -789,7 +790,8 @@ class SvItem implements ProviderItemInterface
     }
 
     /**
-     * @param boolean $funckyMix
+     * @param bool $funckyMix
+     *
      * @return SvItem
      */
     public function setFunckyMix($funckyMix)
@@ -800,7 +802,7 @@ class SvItem implements ProviderItemInterface
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isLyrics()
     {
@@ -808,7 +810,8 @@ class SvItem implements ProviderItemInterface
     }
 
     /**
-     * @param boolean $lyrics
+     * @param bool $lyrics
+     *
      * @return SvItem
      */
     public function setLyrics($lyrics)
@@ -819,7 +822,7 @@ class SvItem implements ProviderItemInterface
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isSynX()
     {
@@ -827,7 +830,8 @@ class SvItem implements ProviderItemInterface
     }
 
     /**
-     * @param boolean $synX
+     * @param bool $synX
+     *
      * @return SvItem
      */
     public function setSynX($synX)
@@ -838,7 +842,7 @@ class SvItem implements ProviderItemInterface
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isAlerternateVideo()
     {
@@ -846,7 +850,8 @@ class SvItem implements ProviderItemInterface
     }
 
     /**
-     * @param boolean $alerternateVideo
+     * @param bool $alerternateVideo
+     *
      * @return SvItem
      */
     public function setAlerternateVideo($alerternateVideo)
@@ -857,7 +862,7 @@ class SvItem implements ProviderItemInterface
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isTransition()
     {
@@ -865,7 +870,8 @@ class SvItem implements ProviderItemInterface
     }
 
     /**
-     * @param boolean $transition
+     * @param bool $transition
+     *
      * @return SvItem
      */
     public function setTransition($transition)
@@ -876,7 +882,7 @@ class SvItem implements ProviderItemInterface
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isIntro()
     {
@@ -884,7 +890,8 @@ class SvItem implements ProviderItemInterface
     }
 
     /**
-     * @param boolean $intro
+     * @param bool $intro
+     *
      * @return SvItem
      */
     public function setIntro($intro)

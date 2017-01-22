@@ -8,10 +8,11 @@ use Symfony\Component\EventDispatcher\Event;
 
 class ItemLocalExistenceEvent extends Event
 {
-    /** @var ProviderItemInterface  */
+    /** @var ProviderItemInterface */
     protected $item;
     private $existLocaly = false;
     private $forceDownload = false;
+
     /**
      * @param AvdItem $item
      */
@@ -57,7 +58,7 @@ class ItemLocalExistenceEvent extends Event
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isForceDownload()
     {
@@ -65,7 +66,8 @@ class ItemLocalExistenceEvent extends Event
     }
 
     /**
-     * @param boolean $forceDownload
+     * @param bool $forceDownload
+     *
      * @return ItemLocalExistenceEvent
      */
     public function setForceDownload($forceDownload)
@@ -74,5 +76,4 @@ class ItemLocalExistenceEvent extends Event
 
         return $this;
     }
-
 }
