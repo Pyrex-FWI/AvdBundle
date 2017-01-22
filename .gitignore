@@ -12,3 +12,4 @@ Tests/TestData/root_path/
 /nbproject
 .DS_Store
 /build
+/cache.properties
