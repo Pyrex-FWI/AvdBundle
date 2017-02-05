@@ -7,7 +7,7 @@
     <property name="phpdox"  value="/usr/sbin/phpdox"/>
     <property name="phploc"  value="/usr/sbin/phploc"/>
     <property name="phpmd"   value="/usr/sbin/phpmd"/>
-    <property name="phpunit" value="phpunit"/>
+    <property name="phpunit" value="Tests/vendor/bin/phpunit"/>
     <property name="composer" value="/usr/bin/composer"/>
     <property name="appDirectories" value="${basedir}/Command,${basedir}/DependencyInjection,${basedir}/Entity,${basedir}/Event,${basedir}/Exception,${basedir}/Provider,${basedir}/Serializer,${basedir}/Traits,${basedir}/Utils"/>
     <property name="appDirectoriesSpace" value="${basedir}/Command/ ${basedir}/DependencyInjection/ ${basedir}/Entity/ ${basedir}/Event/ ${basedir}/Exception/ ${basedir}/Provider/ ${basedir}/Serializer/ ${basedir}/Traits/ ${basedir}/Utils/"/>
@@ -31,11 +31,11 @@
     <property name="phpunit" value="${basedir}/vendor/bin/phpunit"/> -->
 
     <target name="full-build"
-            depends="prepare,static-analysis,phpunit,phpdox,remove-vendors,-check-failure"
+            depends="prepare,static-analysis,phpunit,phpdox,-check-failure"
             description="Performs static analysis, runs the tests, and generates project documentation"/>
 
     <target name="full-build-parallel"
-            depends="prepare,static-analysis-parallel,phpunit,phpdox,remove-vendors,-check-failure"
+            depends="prepare,static-analysis-parallel,phpunit,phpdox,-check-failure"
             description="Performs static analysis (executing the tools in parallel), runs the tests, and generates project documentation"/>
 
     <target name="quick-build"
