@@ -28,7 +28,7 @@
     <property name="phpdox"  value="${basedir}/vendor/bin/phpdox"/>
     <property name="phploc"  value="${basedir}/vendor/bin/phploc"/>
     <property name="phpmd"   value="${basedir}/vendor/bin/phpmd"/>
-    <property name="phpunit" value="${basedir}/vendor/bin/phpunit"/> x-->
+    <property name="phpunit" value="${basedir}/vendor/bin/phpunit"/> xx-->
 
     <target name="full-build"
             depends="prepare,static-analysis,phpunit,phpdox,remove-vendors,-check-failure"
