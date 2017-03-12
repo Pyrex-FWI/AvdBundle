@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="name-of-project" default="full-build">
+<project name="name-of-project" default="full-build-parallel">
     <!-- By default, we assume all tools to be on the $PATH -->
     <property name="pdepend" value="/usr/sbin/pdepend"/>
     <property name="phpcpd"  value="/usr/sbin/phpcpd"/>
@@ -73,11 +73,13 @@
     </target>
 
     <target name="composer"
+            unless="composer.done"
             description="Composer install">
         <exec executable="${composer}">
             <arg value="install"/>
             <arg value="--prefer-dist"/>
         </exec>
+        <property name="composer.done" value="true"/>
     </target>
 
     <target name="prepare"
