@@ -84,12 +84,4 @@ class FranchisePoolVideoProvider extends FranchisePoolProvider
             $requestParams
         );
     }
-
-    public function getDownloadedFileName(\Psr\Http\Message\ResponseInterface $response)
-    {
-        $ctDisp = $response->getHeader('Content-Disposition')[0];
-        preg_match('/filename="+(?P<filename>.+)"+/', $ctDisp, $matches);
-
-        return $fileName = $matches['filename'];
-    }
 }

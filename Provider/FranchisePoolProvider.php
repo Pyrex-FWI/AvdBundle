@@ -138,10 +138,6 @@ class FranchisePoolProvider extends AbstractProvider implements PoolProviderInte
 
     protected function getDownloadResponse(ProviderItemInterface $item, $tempName)
     {
-        $requestUrl = $item->getDownloadlink();
-        $resource = fopen($tempName, 'w');
-        $this->lastDownloadLink = null;
-
         $requestParams = [
             //'cookies' => $this->cookieJar,
             'allow_redirects' => false,
@@ -155,16 +151,17 @@ class FranchisePoolProvider extends AbstractProvider implements PoolProviderInte
             ],
         ];
         do {
+            $resource = fopen($tempName, 'w');
+            $requestParams['sink'] = $resource;
             $response = $this->client->get(
-                $requestUrl,
+                $item->getDownloadlink(),
                 $requestParams
             );
             if ($requestUrl = $response->getHeaderLine('Location')) {
-                $requestParams['sink'] = $resource;
-                $fileName = (urldecode(basename(parse_url($requestUrl)['path'])));
                 $item->setDownloadlink($requestUrl);
                 $this->lastDownloadLink = $requestUrl;
             }
+            fclose($resource);
         } while ($response->hasHeader('Location'));
 
         return $response;
@@ -172,9 +169,10 @@ class FranchisePoolProvider extends AbstractProvider implements PoolProviderInte
 
     public function getDownloadedFileName(\Psr\Http\Message\ResponseInterface $response)
     {
-        $fileName = (urldecode(basename(parse_url($this->lastDownloadLink)['path'])));
+        $ctDisp = $response->getHeader('Content-Disposition')[0];
+        preg_match('/filename="+(?P<filename>.+)"+/', $ctDisp, $matches);
 
-        return $fileName;
+        return $fileName = $matches['filename'];
     }
 
     public function hasCorrectlyDownloaded(\Psr\Http\Message\ResponseInterface $response, $tempName)

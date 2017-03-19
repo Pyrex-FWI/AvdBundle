@@ -95,7 +95,7 @@ deejay_pool:
 
 -  deejay:discover                         (Discover prodivers)
 -  deejay:pool:status                      (Check account credentials)
-- -  php app/console deejay:pool:status franchise_pool_audio -vvv
+-  php app/console deejay:pool:status franchise_pool_audio -vvv
 -  deejay:pool:download                    (Download files from a specific provider)
  - download files 
  - search files
