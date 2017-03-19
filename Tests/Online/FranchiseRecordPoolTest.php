@@ -68,5 +68,6 @@ class FranchiseRecordPoolTest extends BaseTest
             $this->assertTrue(is_bool($item->getDownloaded()));
             $this->assertTrue(false !== filter_var($item->getDownloadlink(), FILTER_VALIDATE_URL));
         }
+        $franchisePoolProvider->downloadItem($item);
     }
 }
