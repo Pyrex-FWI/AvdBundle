@@ -16,13 +16,13 @@
         "doctrine/doctrine-fixtures-bundle"     : "~2.2",
         "doctrine/orm"                          : "~2.4",
         "james-heinrich/getid3"                 : "~1.9",
-        "symfony/monolog-bundle"                : "~2.4",
-        "symfony/framework-bundle"              : "^3.0.2",
-        "symfony/serializer"                    : "^2.7.2|~3.0",
+        "symfony/monolog-bundle"                : "~3.1",
+        "symfony/framework-bundle"              : "^3.2",
+        "symfony/serializer"                    : "~3.2",
         "friendsofphp/php-cs-fixer"             : "^2.0"
   },
   "require-dev": {
-    "symfony/symfony"                       : "3.1.*",
+    "symfony/symfony"                       : "~3.2",
     "phpunit/phpunit"                       : "~5.2",
     "behat/symfony2-extension"              : "~2.0",
     "symfony/var-dumper"                    : "~2.7",
@@ -43,7 +43,7 @@
     "doctrine:update": "php Tests/app/console.php doctrine:s:u --force",
     "doctrine:init": "composer doctrine:drop && composer doctrine:create && composer doctrine:update",
     "test": "composer doctrine:init && composer test:phpunit",
-    "get-plantuml": "[ -f /Tests/vendor/bin/plantuml.jar ] || wget http://downloads.sourceforge.net/project/plantuml/plantuml.jar -q -O Tests/vendor/bin/plantuml.jar",
+    "get-plantuml": "[ -f vendor/bin/plantuml.jar ] || wget http://downloads.sourceforge.net/project/plantuml/plantuml.jar -q -O vendor/bin/plantuml.jar",
     "generate-uml" : [
 
     ],
@@ -52,9 +52,9 @@
     ]
   },
   "autoload": {
-    "psr-4": { "DeejayPoolBundle\\": "" }
+    "psr-4": { "DeejayPoolBundle\\": "src" }
   },
   "config": {
-    "vendor-dir": "Tests/vendor"
+    "vendor-dir": "vendor"
   }
 }

@@ -2,10 +2,24 @@
 
 namespace DigitalDjPoolBundle\Utils;
 
+/**
+ * Class Version
+ *
+ * @package DigitalDjPoolBundle\Utils
+ * @author Christophe Pyree <yemistikris@hotmail.fr>
+ */
 class Version
 {
+    /**
+     * @var
+     */
     private $pattern;
 
+    /**
+     * Version constructor.
+     *
+     * @param string $pattern
+     */
     public function __construct($pattern)
     {
         $this->pattern = $pattern;

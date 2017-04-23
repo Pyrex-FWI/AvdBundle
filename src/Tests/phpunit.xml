@@ -29,13 +29,7 @@
                 <file>./BaseTest.php</file>
                 <file>./AppTestListener.php</file>
             </exclude>
-            <directory>../Command</directory>
-            <directory>../DependencyInjection</directory>
-            <directory>../Entity</directory>
-            <directory>../Exception</directory>
-            <directory>../Provider</directory>
-            <directory>../Serializer</directory>
-            <file>../DeejayPoolBundle.php</file>
+            <directory>../src</directory>
         </whitelist>
     </filter>
 </phpunit>
