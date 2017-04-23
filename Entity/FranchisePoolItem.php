@@ -8,21 +8,33 @@ namespace DeejayPoolBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
+/**
+ * Class FranchisePoolItem
+ *
+ * @package DeejayPoolBundle\Entity
+ * @author Christophe Pyree <yemistikris@hotmail.fr>
+ */
 class FranchisePoolItem implements ProviderItemInterface
 {
-    use ProviderItem;
+    use ProviderItemTrait;
 
+    /** @var bool  */
     protected $isVideo = false;
+    /** @var bool  */
     protected $isAudio = false;
+    /** @var mixed   */
     protected $type;
 
+    /**
+     * FranchisePoolItem constructor.
+     */
     public function __construct()
     {
         $this->relatedGenres = new ArrayCollection();
     }
 
     /**
-     * @param $true
+     * @param bool $true
      *
      * @return $this
      */
@@ -42,7 +54,7 @@ class FranchisePoolItem implements ProviderItemInterface
     }
 
     /**
-     * @param $true
+     * @param bool $true
      *
      * @return $this
      */

@@ -5,15 +5,17 @@ namespace DeejayPoolBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * SvGroup.
+ * Class SvItem
+ *
+ * @package DeejayPoolBundle\Entity
+ * @author Christophe Pyree <yemistikris@hotmail.fr>
  */
 class SvItem implements ProviderItemInterface
 {
-    use ProviderItem;
+    use ProviderItemTrait;
 
     const ADVISOR_DIRTY = 'DY';
     const ADVISOR_CLEAN = 'CN';
-
     const TYPE_ACAPELLA = 'AA';
     const TYPE_BLENDX = 'BX';
     const TYPE_BLENDX_IN = 'BN';
@@ -43,48 +45,148 @@ class SvItem implements ProviderItemInterface
     const TYPE_SE_ALTERNATE_VIDEO = 'SEAV';
     const TYPE_XV_ALTERNATE_VIDEO = 'XZAV';
 
+    /**
+     * @var
+     */
     protected $groupId;
+    /**
+     * @var
+     */
     protected $downloadId;
+    /**
+     * @var bool
+     */
     protected $isHD = false;
+    /**
+     * @var
+     */
     protected $completeVersion;
+    /**
+     * @var
+     */
     protected $videoId;
+    /**
+     * @var
+     */
     protected $videoFile;
+    /**
+     * @var array
+     */
     protected $videoFileProperties = [];
+    /**
+     * @var bool
+     */
     protected $single = false;
+    /**
+     * @var bool
+     */
     protected $xtend = false;
+    /**
+     * @var bool
+     */
     protected $snipz = false;
+    /**
+     * @var bool
+     */
     protected $transitionDown = false;
+    /**
+     * @var bool
+     */
     protected $transitionUp = false;
+    /**
+     * @var bool
+     */
     protected $ultimix = false;
+    /**
+     * @var bool
+     */
     protected $acapella = false;
+    /**
+     * @var bool
+     */
     protected $blendX = false;
+    /**
+     * @var bool
+     */
     protected $blendXIn = false;
+    /**
+     * @var bool
+     */
     protected $sex = false;
+    /**
+     * @var bool
+     */
     protected $club = false;
+    /**
+     * @var bool
+     */
     protected $dirty = false;
+    /**
+     * @var bool
+     */
     protected $clean = false;
+    /**
+     * @var bool
+     */
     protected $funckyMix = false;
+    /**
+     * @var bool
+     */
     protected $lyrics = false;
+    /**
+     * @var bool
+     */
     protected $synX = false;
+    /**
+     * @var bool
+     */
     protected $alerternateVideo = false;
+    /**
+     * @var bool
+     */
     protected $transition = false;
+    /**
+     * @var bool
+     */
     protected $intro = false;
-
+    /**
+     * @var bool
+     */
     protected $qHD = false;
+    /**
+     * @var bool
+     */
     protected $hd720 = false;
+    /**
+     * @var bool
+     */
     protected $hd1080 = false;
+    /**
+     * @var bool
+     */
     protected $parent = false;
+    /**
+     * @var
+     */
     protected $downloadable;
-
     /** @var ArrayCollection<SvItem> */
     protected $svItems;
+    /** @var   */
+    private $durationMode;
 
+    /**
+     * SvItem constructor.
+     */
     public function __construct()
     {
         $this->relatedGenres = new ArrayCollection();
         $this->svItems = new ArrayCollection();
     }
 
+    /**
+     * @param bool $boolValue
+     * @return $this
+     */
     public function setDownloadable($boolValue)
     {
         $this->downloadable = $boolValue;
@@ -92,6 +194,9 @@ class SvItem implements ProviderItemInterface
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
     public function getDownloadable()
     {
         return $this->downloadable;
@@ -150,7 +255,8 @@ class SvItem implements ProviderItemInterface
     /**
      * Set trackId.
      *
-     * @return SvGroup
+     * @param mixed $itemItd
+     * @return SvItem
      */
     public function setGroupId($itemItd)
     {
@@ -204,7 +310,7 @@ class SvItem implements ProviderItemInterface
     }
 
     /**
-     * @param $true
+     * @param true $true
      *
      * @return $this
      */
@@ -273,7 +379,7 @@ class SvItem implements ProviderItemInterface
     }
 
     /**
-     * @return $this|void
+     * @return mixed
      */
     public function updateInfoFromVideoFileProperties()
     {
@@ -287,10 +393,11 @@ class SvItem implements ProviderItemInterface
         if ($propertiesCount >= 5) {
             $this->setQualityFromVideoFileProperties();
         }
-
-        return $this;
     }
 
+    /**
+     * @return $this
+     */
     private function setAdvisorFromVideoFileProperties()
     {
         if (count($this->videoFileProperties) > 1 && in_array($this->videoFileProperties[3], self::getAllowedAdvisors())) {
@@ -305,6 +412,9 @@ class SvItem implements ProviderItemInterface
         return $this;
     }
 
+    /**
+     * @return $this
+     */
     private function setTypeFromVideoFileProperties()
     {
         if (count($this->videoFileProperties) > 2 && in_array($this->videoFileProperties[2], self::getAllowedTypes())) {
@@ -404,6 +514,9 @@ class SvItem implements ProviderItemInterface
         return $this;
     }
 
+    /**
+     * @return $this
+     */
     private function setQualityFromVideoFileProperties()
     {
         return $this;
@@ -555,11 +668,18 @@ class SvItem implements ProviderItemInterface
         return $this;
     }
 
+    /**
+     * @return bool
+     */
     public function isSnipz()
     {
         return $this->snipz;
     }
 
+    /**
+     * @param bool $value
+     * @return $this
+     */
     public function setSnipz($value)
     {
         $this->snipz = $value;
@@ -567,11 +687,18 @@ class SvItem implements ProviderItemInterface
         return $this;
     }
 
+    /**
+     * @return bool
+     */
     public function isSingle()
     {
         return $this->single;
     }
 
+    /**
+     * @param bool $value
+     * @return $this
+     */
     public function setSingle($value)
     {
         $this->single = $value;
@@ -579,13 +706,16 @@ class SvItem implements ProviderItemInterface
         return $this;
     }
 
+    /**
+     * @return bool
+     */
     public function isDirty()
     {
         return $this->dirty;
     }
 
     /**
-     * @param $value
+     * @param bool $value
      *
      * @return $this
      */
@@ -605,7 +735,7 @@ class SvItem implements ProviderItemInterface
     }
 
     /**
-     * @param $value
+     * @param bool $value
      *
      * @return $this
      */
@@ -616,6 +746,9 @@ class SvItem implements ProviderItemInterface
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function __clone()
     {
         $this->svItems = new ArrayCollection();

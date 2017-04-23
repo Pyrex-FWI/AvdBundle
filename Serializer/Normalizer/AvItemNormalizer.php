@@ -1,25 +1,29 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: chpyr
- * Date: 30/08/15
- * Time: 18:45.
- */
-
 namespace DeejayPoolBundle\Serializer\Normalizer;
 
 use DeejayPoolBundle\Entity\AvdItem;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 
+/**
+ * Class AvItemNormalizer
+ *
+ * @package DeejayPoolBundle\Serializer\Normalizer
+ * @author Christophe Pyree <yemistikris@hotmail.fr>
+ */
 class AvItemNormalizer extends AbstractNormalizer
 {
     const AVITEM = 'AvItem';
 
+    /**
+     * @var array|null|\Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactoryInterface
+     */
     protected $properties = [];
 
     /**
-     * @param $properties []
+     * AvItemNormalizer constructor.
+     *
+     * @param null|\Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactoryInterface $properties
      */
     public function __construct($properties)
     {
@@ -37,7 +41,7 @@ class AvItemNormalizer extends AbstractNormalizer
      *
      * @return AvdItem
      */
-    public function denormalize($data, $class, $format = null, array $context = array())
+    public function denormalize($data, $class, $format = null, array $context = [])
     {
         $data = array_map('trim', $data);
         $avdItem = new AvdItem();
@@ -85,7 +89,7 @@ class AvItemNormalizer extends AbstractNormalizer
      *
      * @return array|string|bool|int|float|null
      */
-    public function normalize($object, $format = null, array $context = array())
+    public function normalize($object, $format = null, array $context = [])
     {
         return;
     }

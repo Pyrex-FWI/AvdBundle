@@ -2,10 +2,24 @@
 
 namespace DigitalDjPoolBundle\Utils;
 
+/**
+ * Class TrackId
+ *
+ * @package DigitalDjPoolBundle\Utils
+ * @author Christophe Pyree <yemistikris@hotmail.fr>
+ */
 class TrackId
 {
+    /**
+     * @var
+     */
     private $pattern;
 
+    /**
+     * TrackId constructor.
+     *
+     * @param $pattern
+     */
     public function __construct($pattern)
     {
         $this->pattern = $pattern;

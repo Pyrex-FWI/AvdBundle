@@ -6,6 +6,12 @@ use DeejayPoolBundle\Entity\AvdItem;
 use DeejayPoolBundle\Entity\ProviderItemInterface;
 use Symfony\Component\EventDispatcher\Event;
 
+/**
+ * Class ItemDownloadEvent
+ *
+ * @package DeejayPoolBundle\Event
+ * @author Christophe Pyree <yemistikris@hotmail.fr>
+ */
 class ItemDownloadEvent extends Event
 {
     /** @var ProviderItemInterface */
@@ -14,7 +20,9 @@ class ItemDownloadEvent extends Event
     protected $message;
 
     /**
-     * @param AvdItem $item
+     * @param AvdItem|ProviderItemInterface $item
+     * @param null|string                   $fileName
+     * @param null|string                   $message
      */
     public function __construct(ProviderItemInterface $item, $fileName = null, $message = null)
     {

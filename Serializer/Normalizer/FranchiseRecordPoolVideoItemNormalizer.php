@@ -1,18 +1,17 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: chpyr
- * Date: 30/08/15
- * Time: 18:45.
- */
-
 namespace DeejayPoolBundle\Serializer\Normalizer;
 
 use DeejayPoolBundle\Entity\AvdItem;
 use DeejayPoolBundle\Entity\FranchisePoolItem;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 
+/**
+ * Class FranchiseRecordPoolVideoItemNormalizer
+ *
+ * @package DeejayPoolBundle\Serializer\Normalizer
+ * @author Christophe Pyree <yemistikris@hotmail.fr>
+ */
 class FranchiseRecordPoolVideoItemNormalizer extends AbstractNormalizer
 {
     const ITEM_VIDEO = 'FranchiseRecordPoolAudioItem';
@@ -27,7 +26,7 @@ class FranchiseRecordPoolVideoItemNormalizer extends AbstractNormalizer
      *
      * @return AvdItem
      */
-    public function denormalize($data, $class, $format = null, array $context = array())
+    public function denormalize($data, $class, $format = null, array $context = [])
     {
         $frpItem = new FranchisePoolItem();
         $frpItem->setItemId(intval(intval($data['id'])));

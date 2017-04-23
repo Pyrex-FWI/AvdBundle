@@ -5,15 +5,23 @@ namespace DeejayPoolBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * AvdItem.
+ * Class AvdItem
+ *
+ * @package DeejayPoolBundle\Entity
+ * @author Christophe Pyree <yemistikris@hotmail.fr>
  */
 class AvdItem implements ProviderItemInterface
 {
-    use ProviderItem;
+    use ProviderItemTrait;
 
+    /** @var  mixed */
     protected $downloadId;
+    /** @var bool  */
     protected $isHD = false;
 
+    /**
+     * AvdItem constructor.
+     */
     public function __construct()
     {
         $this->relatedGenres = new ArrayCollection();
@@ -36,7 +44,7 @@ class AvdItem implements ProviderItemInterface
     }
 
     /**
-     * @param $true
+     * @param bool $true
      *
      * @return $this
      */

@@ -2,8 +2,15 @@
 
 namespace DeejayPoolBundle\Event;
 
+use DeejayPoolBundle\Entity\ProviderItemInterface;
 use Symfony\Component\EventDispatcher\Event;
 
+/**
+ * Class PostItemsListEvent
+ *
+ * @package DeejayPoolBundle\Event
+ * @author Christophe Pyree <yemistikris@hotmail.fr>
+ */
 class PostItemsListEvent extends Event
 {
     /** @var ProviderItemInterface[] */
@@ -26,7 +33,7 @@ class PostItemsListEvent extends Event
     }
 
     /**
-     * @param ProviderItemInterface $items
+     * @param ProviderItemInterface[] $items
      */
     public function setItems($items)
     {

@@ -12,6 +12,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
  * This is the class that loads and manages your bundle configuration.
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
+ * @codeCoverageIgnore
  */
 class DeejayPoolExtension extends Extension
 {
@@ -57,7 +58,8 @@ class DeejayPoolExtension extends Extension
             );
             $container->setParameter(
                 sprintf('%s.credentials.login', $provider),
-                $config[$provider]['credentials']['login']);
+                $config[$provider]['credentials']['login']
+            );
             $container->setParameter(
                 sprintf('%s.credentials.password', $provider),
                 $config[$provider]['credentials']['password']

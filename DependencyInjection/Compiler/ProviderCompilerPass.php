@@ -1,18 +1,18 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: chpyr
- * Date: 06/09/15
- * Time: 13:08.
- */
-
 namespace DeejayPoolBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
+/**
+ * Class ProviderCompilerPass
+ *
+ * @package DeejayPoolBundle\DependencyInjection\Compiler
+ * @author Christophe Pyree <yemistikris@hotmail.fr>
+ * @codeCoverageIgnore
+ */
 class ProviderCompilerPass implements CompilerPassInterface
 {
     /**

@@ -2,7 +2,15 @@
 
 namespace DeejayPoolBundle\Entity;
 
-trait ProviderItem
+use Doctrine\Common\Collections\ArrayCollection;
+
+/**
+ * Class ProviderItem
+ *
+ * @package DeejayPoolBundle\Entity
+ * @author Christophe Pyree <yemistikris@hotmail.fr>
+ */
+trait ProviderItemTrait
 {
     /** @var string */
     protected $artist;
@@ -16,7 +24,7 @@ trait ProviderItem
     protected $itemId;
     /** @var string */
     protected $downloadlink;
-
+    /** @var  string */
     protected $downloadStatus;
     /** @var string */
     protected $fullPath;
@@ -40,6 +48,7 @@ trait ProviderItem
     /**
      * Set trackId.
      *
+     * @param mixed $itemItd
      * @return ProviderItemInterface
      */
     public function setItemId($itemItd)
@@ -49,6 +58,9 @@ trait ProviderItem
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function getDownloadStatus()
     {
         return $this->downloadStatus;
@@ -57,7 +69,7 @@ trait ProviderItem
     /**
      * @param type $downloadStatus
      *
-     * @return ProviderItemInterface
+     * @return ProviderItemInterface|ProviderItemTrait
      */
     public function setDownloadStatus($downloadStatus)
     {
@@ -81,7 +93,7 @@ trait ProviderItem
      *
      * @param string $title
      *
-     * @return ProviderItemInterface
+     * @return ProviderItemInterface|ProviderItemTrait
      */
     public function setTitle($title)
     {
@@ -105,7 +117,7 @@ trait ProviderItem
      *
      * @param string $artist
      *
-     * @return ProviderItemInterface
+     * @return ProviderItemInterface|ProviderItemTrait
      */
     public function setArtist($artist)
     {
@@ -129,7 +141,7 @@ trait ProviderItem
      *
      * @param bool $downloaded
      *
-     * @return ProviderItemInterface
+     * @return ProviderItemInterface|ProviderItemTrait
      */
     public function setDownloaded($downloaded)
     {
@@ -153,7 +165,7 @@ trait ProviderItem
      *
      * @param string $version
      *
-     * @return ProviderItemInterface
+     * @return ProviderItemInterface|ProviderItemTrait
      */
     public function setVersion($version)
     {
@@ -177,7 +189,7 @@ trait ProviderItem
      *
      * @param string $downloadlink
      *
-     * @return ProviderItemInterface
+     * @return ProviderItemInterface|ProviderItemTrait
      */
     public function setDownloadlink($downloadlink)
     {
@@ -201,7 +213,7 @@ trait ProviderItem
      *
      * @param int $bpm
      *
-     * @return ProviderItemInterface
+     * @return ProviderItemInterface|ProviderItemTrait
      */
     public function setBpm($bpm)
     {
@@ -225,7 +237,7 @@ trait ProviderItem
      *
      * @param \DateTime $releaseDate
      *
-     * @return ProviderItemInterface
+     * @return ProviderItemInterface|ProviderItemTrait
      */
     public function setReleaseDate(\DateTime $releaseDate)
     {
@@ -249,9 +261,9 @@ trait ProviderItem
     }
 
     /**
-     * @param  $genre
+     * @param  string $genre
      *
-     * @return ProviderItemInterface
+     * @return ProviderItemInterface|ProviderItemTrait
      */
     public function removeRelatedGenre($genre)
     {
@@ -277,7 +289,7 @@ trait ProviderItem
      *
      * @param string $fullPath
      *
-     * @return ProviderItemInterface
+     * @return ProviderItemInterface|ProviderItemTrait
      */
     public function setFullPath($fullPath)
     {

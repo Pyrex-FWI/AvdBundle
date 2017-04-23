@@ -28,7 +28,12 @@
     "symfony/var-dumper"                    : "~2.7",
     "fzaninotto/faker"                      : "~1.4",
     "mikey179/vfsStream"                    : "~1.6",
-    "escapestudios/symfony2-coding-standard": "~2.0"
+    "escapestudios/symfony2-coding-standard": "~2.0",
+        "pdepend/pdepend": "^2.5",
+        "sebastian/phpcpd": "^3.0",
+        "phpmd/phpmd": "^2.6",
+        "phploc/phploc": "^3.0",
+        "theseer/phpdox": "^0.9.0"
     },
   "scripts": {
     "test:phpunit": "Tests/vendor/bin/phpunit --coverage-html build/coverage",

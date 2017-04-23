@@ -127,9 +127,10 @@ Item events
 
 
 #### Run tests
-
-- vendor/bin/phpunit -c phpunit.xml --debug --verbose
-- vendor/bin/phpunit -c phpunit.xml --debug --verbose --coverage-html Tests/TestData/Coverage
+- ant install-deps
+- ant
+- vendor/bin/phpunit -c phpunit.xml --debug --verbose --exclude online
+- vendor/bin/phpunit -c phpunit.xml --debug --verbose --coverage-html Tests/TestData/Coverage --exclude online
 - vendor/bin/phpunit -c phpunit.xml --debug --verbose --coverage-html Tests/TestData/Coverage --debug --stop-on-error -v
 
 ### Run tests with real credentials

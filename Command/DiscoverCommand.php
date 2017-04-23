@@ -10,21 +10,15 @@ use Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceExce
 use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 
 /**
- * Class DiscoverCommand.
+ * Class DiscoverCommand
+ *
+ * @package DeejayPoolBundle\Command
+ * @author Christophe Pyree <yemistikris@hotmail.fr>
  */
 class DiscoverCommand extends ContainerAwareCommand
 {
     /** @var ProviderManager */
     private $manager;
-
-    /**
-     * DiscoverCommand constructor.
-     * {@inheritdoc}
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
 
     /**
      * {@inheritdoc}
@@ -56,7 +50,7 @@ EOF
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->manager = $this->getContainer()->get('deejay_provider_manager');
-        foreach ($this->manager->getProviers() as $key => $provider) {
+        foreach ($this->manager->getProviders() as $key => $provider) {
             $output->writeln($provider->getName());
         }
 

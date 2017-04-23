@@ -129,7 +129,7 @@ class ProvidersTest extends \DeejayPoolBundle\Tests\BaseTest
                         'Accept-Encoding' => 'gzip, deflate',
                         'Cookie' => '__utma=128985947.1677725527.1440829624.1444163357.1445063379.7; __utmz=128985947.1440829624.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); PHPSESSID=vvb2digh75a9fkgsfsaaqfj540; AWSELB=09BF17D502C3ACD85166C7A0FEA85C33693692075E1F20B2567A0661AA43F837B10AF505559079E941345CA4C459689F730415CE9C70FA4BBCCAB255E00E7D473C41A8F0DD; __utmb=128985947.2.10.1445063379; __utmc=128985947; __utmt=1; perveiousurl=http://www.franchiserecordpool.com/view-category',
                         'Referer' => 'http://www.franchiserecordpool.com/view-category',
-                        'User-Agent' => \DeejayPoolBundle\Provider\AbstractProvider::getDefaultUserAgent(),
+                        'User-Agent' => \DeejayPoolBundle\Provider\AbstractProvider::getRenderUserAgent(),
                     ],
                 ]
             );
@@ -230,7 +230,7 @@ class ProvidersTest extends \DeejayPoolBundle\Tests\BaseTest
         $this->assertTrue(is_bool($obj->getDownloaded()));
         $this->assertInstanceOf('\DateTime', $obj->getReleaseDate());
         $this->assertInstanceOf('\Doctrine\Common\Collections\ArrayCollection', $obj->getRelatedGenres());
-        $obj->getDownloadlink();
+        $obj->getDownloadLink();
     }
 
     public function sessionOpenErrorEvent(Event $event)
@@ -274,7 +274,7 @@ class ProvidersTest extends \DeejayPoolBundle\Tests\BaseTest
 
     public function sessionClosedEvent(Event $event)
     {
-        $this->assertTrue($this->provider->IsConnected() === false);
+        $this->assertTrue($this->provider->isConnected() === false);
     }
 
     /**

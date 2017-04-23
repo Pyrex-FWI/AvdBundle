@@ -9,13 +9,25 @@ use GuzzleHttp\Cookie\CookieJar;
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\Serializer\Serializer;
 
+/**
+ * Class DigitalDjPoolProvider
+ *
+ * @package DeejayPoolBundle\Provider
+ * @author Christophe Pyree <yemistikris@hotmail.fr>
+ */
 class DigitalDjPoolProvider extends AbstractProvider implements SearchablePoolProviderInterface
 {
+    /**
+     * @var array
+     */
     private $authCookieData = [];
 
     /** @var CookieJar */
     private $authCookie;
 
+    /**
+     * @return string
+     */
     public function getName()
     {
         return 'ddp';
@@ -29,11 +41,63 @@ class DigitalDjPoolProvider extends AbstractProvider implements SearchablePoolPr
         return false;
     }
 
+    /**
+     * @param ProviderItemInterface $item
+     * @return bool
+     */
     public function itemCanBeDownload(ProviderItemInterface $item)
     {
         return true;
     }
 
+    /**
+     * @return array
+     */
+    public function getAvailableCriteria()
+    {
+        return [
+            'sSearch',
+        ];
+    }
+
+    /**
+     * @param $filter
+     * @return mixed
+     */
+    public function getCriteria($filter)
+    {
+        return $filter;
+    }
+
+    /**
+     *
+     */
+    public function getMaxPage()
+    {
+        // TODO: Implement getMaxPage() method.
+    }
+
+    /**
+     *
+     */
+    public function getResultCount()
+    {
+        // TODO: Implement getResultCount() method.
+    }
+
+    /**
+     * @param array $filters
+     * @return SearchablePoolProviderInterface|void
+     */
+    public function search($filters = [])
+    {
+        // TODO: Implement search() method.
+    }
+    /**
+     * @param $login
+     * @param $password
+     * @return \Psr\Http\Message\ResponseInterface
+     */
     protected function getLoginResponse($login, $password)
     {
         $loginInput = $this->container->getParameter('ddp.configuration.login_form_name');
@@ -59,6 +123,10 @@ class DigitalDjPoolProvider extends AbstractProvider implements SearchablePoolPr
         );
     }
 
+    /**
+     * @param \Psr\Http\Message\ResponseInterface $response
+     * @return bool
+     */
     protected function hasCorrectlyConnected(\Psr\Http\Message\ResponseInterface $response)
     {
         if (in_array($response->getStatusCode(), [200, 302])) {
@@ -71,11 +139,16 @@ class DigitalDjPoolProvider extends AbstractProvider implements SearchablePoolPr
         return false;
     }
 
+    /**
+     * @param       $page
+     * @param array $filter
+     * @return \Psr\Http\Message\ResponseInterface
+     */
     protected function getItemsResponse($page, $filter = [])
     {
-        //var_dump($this->authCookie->toArray());
         return $response = $this->client->post(
-            $this->getConfValue('items_url'), [
+            $this->getConfValue('items_url'),
+            [
                 'allow_redirects' => false,
                 'cookies' => clone $this->authCookie,
                 'debug' => $this->getDebug(),
@@ -103,16 +176,20 @@ class DigitalDjPoolProvider extends AbstractProvider implements SearchablePoolPr
         );
     }
 
+    /**
+     * @param \Psr\Http\Message\ResponseInterface $response
+     * @return array
+     */
     protected function parseItemResponse(\Psr\Http\Message\ResponseInterface $response)
     {
         $itemsArray = [];
         $rep = $response->getBody().'';
         $crawler = new Crawler($rep);
         $rawItems = $crawler->filter('.ddjp-song');
-        $this->serializer = new Serializer([new DigitalDjPoolItemNormalizer()]);
+        $serializer = new Serializer([new DigitalDjPoolItemNormalizer()]);
         for ($i = 0; $i < count($rawItems); ++$i) {
             /** @var DdpItem $item */
-            $item = $this->serializer->denormalize($rawItems->eq($i)->html(), DigitalDjPoolItemNormalizer::DDPITEM);
+            $item = $serializer->denormalize($rawItems->eq($i)->html(), DigitalDjPoolItemNormalizer::DDPITEM);
             $item->setDownloadlink(sprintf('%s%s', 'https://digitaldjpool.com', $item->getDownloadlink()));
             $itemsArray[] = $item;
         }
@@ -120,12 +197,18 @@ class DigitalDjPoolProvider extends AbstractProvider implements SearchablePoolPr
         return $itemsArray;
     }
 
+    /**
+     * @param ProviderItemInterface $item
+     * @param string                $tempName
+     * @return \Psr\Http\Message\ResponseInterface
+     */
     protected function getDownloadResponse(ProviderItemInterface $item, $tempName)
     {
         $resource = fopen($tempName, 'w');
 
         return $response = $this->client->get(
-            $item->getDownloadlink(), [
+            $item->getDownloadLink(),
+            [
                 'allow_redirects' => false,
                 'debug' => $this->getDebug(),
                 'sink' => $resource,
@@ -141,6 +224,10 @@ class DigitalDjPoolProvider extends AbstractProvider implements SearchablePoolPr
         );
     }
 
+    /**
+     * @param \Psr\Http\Message\ResponseInterface $response
+     * @return mixed
+     */
     protected function getDownloadedFileName(\Psr\Http\Message\ResponseInterface $response)
     {
         $ctDisp = $response->getHeader('Content-Disposition')[0];
@@ -149,30 +236,4 @@ class DigitalDjPoolProvider extends AbstractProvider implements SearchablePoolPr
         return str_replace('"', '', $matches['filename']);
     }
 
-    public function getAvailableCriteria()
-    {
-        return [
-            'sSearch',
-        ];
-    }
-
-    public function getCriteria($filter)
-    {
-        return $filter;
-    }
-
-    public function getMaxPage()
-    {
-        // TODO: Implement getMaxPage() method.
-    }
-
-    public function getResultCount()
-    {
-        // TODO: Implement getResultCount() method.
-    }
-
-    public function search($filters = [])
-    {
-        // TODO: Implement search() method.
-    }
 }

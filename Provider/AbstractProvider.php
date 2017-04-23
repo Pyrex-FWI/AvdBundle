@@ -2,11 +2,18 @@
 
 namespace DeejayPoolBundle\Provider;
 
+use DeejayPoolBundle\Entity\ProviderItemInterface;
+use DeejayPoolBundle\Event\ItemDownloadEvent;
+use DeejayPoolBundle\Event\PostItemsListEvent;
 use DeejayPoolBundle\Event\ProviderEvents;
 use GuzzleHttp\Client;
 use GuzzleHttp\Cookie\CookieJar;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Log\LoggerInterface;
+use Psr\Log\NullLogger;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\EventDispatcher\Event;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * @author Pyrex-FWI <yemistikris@hotmail.fr>
@@ -39,7 +46,7 @@ abstract class AbstractProvider implements PoolProviderInterface
     protected $debug = false;
 
     /**
-     * @var \Psr\Log\LoggerInterface;
+     * @var LoggerInterface;
      */
     protected $logger;
 
@@ -51,28 +58,58 @@ abstract class AbstractProvider implements PoolProviderInterface
     /** @var string */
     protected $lastError;
 
+    /**
+     * @var int
+     */
     protected $maxPage = 0;
 
+    /**
+     * @var int
+     */
     protected $resultCount = 0;
 
+    /** @var EventDispatcherInterface  */
+    private $eventDispatcher;
+
     /**
-     * @param type                     $eventDispatcher
-     * @param \Psr\Log\LoggerInterface $logger
+     * AbstractProvider constructor.
+     *
+     * @param EventDispatcherInterface $eventDispatcher
+     * @param LoggerInterface|null     $logger
      */
-    public function __construct($eventDispatcher = null, \Psr\Log\LoggerInterface $logger = null)
+    public function __construct(EventDispatcherInterface $eventDispatcher = null, LoggerInterface $logger = null)
     {
         $this->cookieJar = new CookieJar();
         $this->client = new Client([
             'http_errors' => false,
             'cookies' => $this->cookieJar,
             'headers' => [
-                'User-Agent' => self::getDefaultUserAgent(),
+                'User-Agent' => self::getRenderUserAgent(),
             ],
         ]);
-        $this->logger = $logger ? $logger : new \Psr\Log\NullLogger();
+        $this->logger = $logger ? $logger : new NullLogger();
         $this->eventDispatcher = $eventDispatcher;
     }
 
+    /**
+     * @param null $login
+     * @param null $password
+     * @return bool
+     */
+    public function open($login = null, $password = null)
+    {
+        if ($this->hasCorrectlyConnected($this->getLoginResponse($login, $password))) {
+            $this->isConnected = true;
+            $this->logger->info(sprintf('Connection has openned successfuly on %s', $this->getName()), []);
+            $this->eventDispatcher->dispatch(ProviderEvents::SESSION_OPENED, new Event());
+        } else {
+            $this->isConnected = false;
+            $this->logger->warning(sprintf('Unable to connect on %s', $this->getName()), []);
+            $this->eventDispatcher->dispatch(ProviderEvents::SESSION_OPEN_ERROR, new Event());
+        }
+
+        return $this->isConnected();
+    }
     /**
      * Return debug val.
      *
@@ -86,9 +123,9 @@ abstract class AbstractProvider implements PoolProviderInterface
     /**
      * Set debug value.
      *
-     * @param $debug
+     * @param bool $debug
      *
-     * @return AvDistrictProvider
+     * @return $this
      */
     public function setDebug($debug)
     {
@@ -102,7 +139,7 @@ abstract class AbstractProvider implements PoolProviderInterface
      *
      * @return bool return true if connected elese false
      */
-    public function IsConnected()
+    public function isConnected()
     {
         return $this->isConnected;
     }
@@ -147,54 +184,16 @@ abstract class AbstractProvider implements PoolProviderInterface
     }
 
     /**
-     *  @return \Psr\Http\Message\ResponseInterface
-     */
-    abstract protected function getLoginResponse($login, $password);
-
-    /**
-     * @return bool
-     */
-    abstract protected function hasCorrectlyConnected(\Psr\Http\Message\ResponseInterface $response);
-
-    public function open($login = null, $password = null)
-    {
-        if ($this->hasCorrectlyConnected($this->getLoginResponse($login, $password))) {
-            $this->isConnected = true;
-            $this->logger->info(sprintf('Connection has openned successfuly on %s', $this->getName()), []);
-            $this->eventDispatcher->dispatch(ProviderEvents::SESSION_OPENED, new Event());
-        } else {
-            $this->isConnected = false;
-            $this->logger->warning(sprintf('Unable to connect on %s', $this->getName()), []);
-            $this->eventDispatcher->dispatch(ProviderEvents::SESSION_OPEN_ERROR, new Event());
-        }
-
-        return $this->IsConnected();
-    }
-
-    /**
-     *  @param int $$page page number
-     *
-     *  @return \Psr\Http\Message\ResponseInterface
-     */
-    abstract protected function getItemsResponse($page, $filter = []);
-
-    /**
-     * @return \DeejayPoolBundle\Entity\ProviderItemInterface[]
-     */
-    abstract protected function parseItemResponse(\Psr\Http\Message\ResponseInterface $response);
-
-    /**
-     * @param $page
-     * @param $filter
-     *
-     * @return \DeejayPoolBundle\Entity\ProviderItemInterface[]
+     * @param int   $page
+     * @param array $filter
+     * @return array|ProviderItemInterface[]
      */
     public function getItems($page, $filter = [])
     {
         try {
             $response = $this->getItemsResponse($page, $filter);
             $normalizedItems = $this->parseItemResponse($response);
-            $postItemsListEvent = new \DeejayPoolBundle\Event\PostItemsListEvent($normalizedItems);
+            $postItemsListEvent = new PostItemsListEvent($normalizedItems);
             $this->logger->info(sprintf('Page %s fetched successfuly with %s items', $page, count($normalizedItems)), []);
             $this->eventDispatcher->dispatch(ProviderEvents::ITEMS_POST_GETLIST, $postItemsListEvent);
 
@@ -207,40 +206,29 @@ abstract class AbstractProvider implements PoolProviderInterface
     }
 
     /**
-     *  @param ProviderItemInterface $item item
-     *  @param string $tempName page number
-     *
-     *  @return \Psr\Http\Message\ResponseInterface
-     */
-    abstract protected function getDownloadResponse(\DeejayPoolBundle\Entity\ProviderItemInterface $item, $tempName);
-
-    abstract protected function getDownloadedFileName(\Psr\Http\Message\ResponseInterface $response);
-
-    /**
-     * @param \Psr\Http\Message\ResponseInterface $response
-     * @param type                                $tempName
-     *
+     * @param ResponseInterface $response
+     * @param string            $tempName
      * @return bool
      */
-    public function hasCorrectlyDownloaded(\Psr\Http\Message\ResponseInterface $response, $tempName)
+    public function hasCorrectlyDownloaded(ResponseInterface $response, $tempName)
     {
         if (!in_array($response->getStatusCode(), [404, 500]) && file_exists($tempName) && filesize($tempName) > 150) {
             return true;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
-     * @param \DeejayPoolBundle\Entity\ProviderItemInterface $item
+     * @param ProviderItemInterface $item
      *
      * @throws \GuzzleHttp\Exception\RequestException
      *
      * @return bool
      */
-    public function downloadItem(\DeejayPoolBundle\Entity\ProviderItemInterface $item)
+    public function downloadItem(ProviderItemInterface $item)
     {
-        $downoaded = false;
+        $downloaded = false;
 
         $this->setLastError(null);
 
@@ -249,17 +237,17 @@ abstract class AbstractProvider implements PoolProviderInterface
             $this->logger->warning($this->getLastError(), [$item]);
             $this->raiseDownloadError($item);
 
-            return $downoaded;
+            return $downloaded;
         }
 
-        $idEvent = new \DeejayPoolBundle\Event\ItemDownloadEvent($item);
+        $idEvent = new ItemDownloadEvent($item);
         $this->eventDispatcher->dispatch(ProviderEvents::ITEM_PRE_DOWNLOAD, $idEvent);
 
         if ($idEvent->isPropagationStopped()) {
             $this->setLastError(sprintf('Propagation has stoped for %s %s %s.', $item->getItemId(), $item->getArtist(), $item->getTitle()));
             $this->raiseDownloadError($item);
 
-            return $downoaded;
+            return $downloaded;
         }
 
         $tempName = $this->getConfValue('root_path').DIRECTORY_SEPARATOR.$item->getItemId();
@@ -269,7 +257,7 @@ abstract class AbstractProvider implements PoolProviderInterface
             $this->logger->error($e->getMessage(), [$item]);
             $this->raiseDownloadError($item);
 
-            return $downoaded;
+            return $downloaded;
         }
 
         if ($this->hasCorrectlyDownloaded($response, $tempName)) {
@@ -277,8 +265,8 @@ abstract class AbstractProvider implements PoolProviderInterface
             rename($tempName, $newFileName);
             $item->setFullPath($newFileName);
             $this->logger->info(sprintf('%s %s %s has succesfully downloaded', $item->getItemId(), $item->getArtist(), $item->getTitle()), [$item]);
-            $this->eventDispatcher->dispatch(ProviderEvents::ITEM_SUCCESS_DOWNLOAD, new \DeejayPoolBundle\Event\ItemDownloadEvent($item, $this->getDownloadedFileName($response)));
-            $downoaded = true;
+            $this->eventDispatcher->dispatch(ProviderEvents::ITEM_SUCCESS_DOWNLOAD, new ItemDownloadEvent($item, $this->getDownloadedFileName($response)));
+            $downloaded = true;
         } else {
             $this->setLastError(sprintf('%s %s - %s has not correctly download', $item->getItemId(), $item->getArtist(), $item->getTitle()));
             $this->removeTmpFile($tempName);
@@ -286,31 +274,21 @@ abstract class AbstractProvider implements PoolProviderInterface
             $this->raiseDownloadError($item);
         }
 
-        return $downoaded;
+        return $downloaded;
     }
 
-    protected function raiseDownloadError(\DeejayPoolBundle\Entity\ProviderItemInterface $item)
-    {
-        $this->eventDispatcher->dispatch(ProviderEvents::ITEM_ERROR_DOWNLOAD, new \DeejayPoolBundle\Event\ItemDownloadEvent($item, null, $this->getLastError()));
-    }
-
-    private function removeTmpFile($tempName)
-    {
-        if (file_exists($tempName)) {
-            unlink($tempName);
-        }
-    }
-
-    public static function getDefaultUserAgent()
+    /**
+     * @return string
+     */
+    public static function getRenderUserAgent()
     {
         $uAgent = [
             'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36',
             'Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; AS; rv:11.0) like Gecko',
             'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.101 Safari/537.36',
         ];
-        shuffle($uAgent);
 
-        return $uAgent[0];
+        return $uAgent[rand(0, count($uAgent) -1)];
     }
 
     /**
@@ -337,13 +315,79 @@ abstract class AbstractProvider implements PoolProviderInterface
         return $this;
     }
 
+    /**
+     * @return int
+     */
     public function getMaxPage()
     {
         return $this->maxPage;
     }
 
+    /**
+     * @return int
+     */
     public function getResultCount()
     {
         return $this->resultCount;
     }
+
+    /**
+     *  @return ResponseInterface
+     */
+    abstract protected function getLoginResponse($login, $password);
+
+    /**
+     * @param ResponseInterface $response
+     * @return bool
+     */
+    abstract protected function hasCorrectlyConnected(ResponseInterface $response);
+
+    /**
+     * @param       $page
+     * @param array $filter
+     * @return ResponseInterface
+     * @internal param $int $$page page number
+     *
+     */
+    abstract protected function getItemsResponse($page, $filter = []);
+
+    /**
+     * @param ResponseInterface $response
+     * @return ProviderItemInterface[]
+     */
+    abstract protected function parseItemResponse(ResponseInterface $response);
+
+    /**
+     *  @param ProviderItemInterface $item item
+     *  @param string $tempName page number
+     *
+     *  @return ResponseInterface
+     */
+    abstract protected function getDownloadResponse(ProviderItemInterface $item, $tempName);
+
+    /**
+     * @param ResponseInterface $response
+     * @return mixed
+     */
+    abstract protected function getDownloadedFileName(ResponseInterface $response);
+
+
+    /**
+     * @param ProviderItemInterface $item
+     */
+    protected function raiseDownloadError(ProviderItemInterface $item)
+    {
+        $this->eventDispatcher->dispatch(ProviderEvents::ITEM_ERROR_DOWNLOAD, new ItemDownloadEvent($item, null, $this->getLastError()));
+    }
+
+    /**
+     * @param $tempName
+     */
+    private function removeTmpFile($tempName)
+    {
+        if (file_exists($tempName)) {
+            unlink($tempName);
+        }
+    }
+
 }

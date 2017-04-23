@@ -4,10 +4,16 @@ namespace DeejayPoolBundle\Serializer\Normalizer;
 
 use DeejayPoolBundle\Entity\AvdItem;
 use DeejayPoolBundle\Entity\DdpItem;
-use DigitalDjPoolBundle\Exception\DownloadLinkNotFound;
+use DigitalDjPoolBundle\Exception\DownloadLinkNotFoundException;
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 
+/**
+ * Class DigitalDjPoolItemNormalizer
+ *
+ * @package DeejayPoolBundle\Serializer\Normalizer
+ * @author Christophe Pyree <yemistikris@hotmail.fr>
+ */
 class DigitalDjPoolItemNormalizer extends AbstractNormalizer
 {
     const DDPITEM = 'DdpItem';
@@ -15,12 +21,12 @@ class DigitalDjPoolItemNormalizer extends AbstractNormalizer
     /**
      * Denormalizes data back into an object of the given class.
      *
-     * @param array  $data    data to restore
+     * @param array  $dataRaw data to restore
      * @param string $class   the expected class to instantiate
      * @param string $format  format the given data was extracted from
      * @param array  $context options available to the denormalizer
      *
-     * @throws DownloadLinkNotFound
+     * @throws DownloadLinkNotFoundException
      *
      * @return AvdItem
      */
@@ -30,7 +36,7 @@ class DigitalDjPoolItemNormalizer extends AbstractNormalizer
         $ddpItem = new DdpItem();
 
         if ($data->filter('a.ddjp-download')->count() === 0 || $data->filter('a.ddjp-download')->attr('href') == '#') {
-            throw new DownloadLinkNotFound();
+            throw new DownloadLinkNotFoundException();
         }
         $ddpItem->setDownloadlink($data->filter('a.ddjp-download')->attr('href'));
         if ($data->filter('input.hid-song-id')->count()) {

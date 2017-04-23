@@ -9,6 +9,13 @@ use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\ScalarNode;
 
+/**
+ * Class Configuration
+ *
+ * @package DeejayPoolBundle\DependencyInjection
+ * @author Christophe Pyree <yemistikris@hotmail.fr>
+ * @codeCoverageIgnore
+ */
 class Configuration implements ConfigurationInterface
 {
     const AVD_LOGIN_CHECK = 'http://www.avdistrict.net/Account/CheckLogin';
@@ -67,11 +74,19 @@ class Configuration implements ConfigurationInterface
         return $treeBuilder;
     }
 
+    /**
+     * @param string $v
+     * @return mixed
+     */
     public function isValidurl($v)
     {
         return filter_var($v, FILTER_VALIDATE_URL);
     }
 
+    /**
+     * @param string $v
+     * @return mixed
+     */
     public function isValidRegex($v)
     {
         return filter_var($v, FILTER_VALIDATE_REGEXP);
@@ -268,12 +283,14 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
+     * @param null $itemsUrl
+     * @param null $dlUrl
      * @return ArrayNodeDefinition
      */
-    public function getFrpConfigurationDefinition($items_url = null, $dlUrl = null)
+    public function getFrpConfigurationDefinition($itemsUrl = null, $dlUrl = null)
     {
-        if ($items_url == null) {
-            $items_url = 'http://www.franchiserecordpool.com/track/list';
+        if ($itemsUrl == null) {
+            $itemsUrl = 'http://www.franchiserecordpool.com/track/list';
         }
         if ($dlUrl == null) {
             $dlUrl = 'http://www.franchiserecordpool.com/download/track/';
@@ -327,7 +344,7 @@ class Configuration implements ConfigurationInterface
                 ->end()
                 ->scalarNode('items_url')
                     ->info('Items page')
-                    ->defaultValue($items_url)
+                    ->defaultValue($itemsUrl)
                     ->cannotBeEmpty()
                     ->validate()
                         ->ifTrue(function ($v) {
@@ -353,6 +370,7 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
+     * @param null $dlUrl
      * @return ArrayNodeDefinition
      */
     public function getSmashVisionConfigurationDefinition($dlUrl = null)

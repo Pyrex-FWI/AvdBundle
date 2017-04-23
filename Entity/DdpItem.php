@@ -5,15 +5,23 @@ namespace DeejayPoolBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * DdpItem.
+ * Class DdpItem
+ *
+ * @package DeejayPoolBundle\Entity
+ * @author Christophe Pyree <yemistikris@hotmail.fr>
  */
 class DdpItem implements ProviderItemInterface
 {
-    use ProviderItem;
+    use ProviderItemTrait;
 
+    /** @var  mixed */
     protected $downloadId;
+    /** @var bool  */
     protected $isHD = false;
 
+    /**
+     * DdpItem constructor.
+     */
     public function __construct()
     {
         $this->relatedGenres = new ArrayCollection();
@@ -36,7 +44,7 @@ class DdpItem implements ProviderItemInterface
     }
 
     /**
-     * @param $true
+     * @param bool $true
      *
      * @return $this
      */

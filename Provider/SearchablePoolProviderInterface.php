@@ -3,23 +3,31 @@
 namespace DeejayPoolBundle\Provider;
 
 /**
- * @author Pyrex-FWI <yemistikris@hotmail.fr>
+ * Interface SearchablePoolProviderInterface
  *
- * SearchablePoolProviderInterface
+ * @author Pyrex-FWI <yemistikris@hotmail.fr>
+ * @package DeejayPoolBundle\Provider
  */
 interface SearchablePoolProviderInterface
 {
-    //public function getItemsBy($queryParameters = [], $limit = null);
-
     /**
      * @return []
      */
     public function getAvailableCriteria();
 
+    /**
+     * @return mixed
+     */
     public function getMaxPage();
 
+    /**
+     * @return mixed
+     */
     public function getResultCount();
 
-    /** @return SearchablePoolProviderInterface */
+    /**
+     * @param array $filters
+     * @return mixed
+     */
     public function search($filters = []);
 }

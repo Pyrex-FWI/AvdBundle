@@ -12,9 +12,9 @@ use DeejayPoolBundle\Entity\ProviderItemInterface;
 interface PoolProviderInterface
 {
     /**
-     * This mathod must open new connection on
+     * This method must open new connection on
      * dedicated provider and return true if connection
-     * are successfuly openned.
+     * is successfully opened.
      *
      * @method open
      *
@@ -23,7 +23,7 @@ interface PoolProviderInterface
      *
      * @return bool result
      */
-    public function open($login, $password);
+    public function open($login = null, $password = null);
 
     /**
      * This method must turn off an openned connection
@@ -65,6 +65,9 @@ interface PoolProviderInterface
      */
     public function itemCanBeDownload(ProviderItemInterface $item);
 
+    /**
+     * @return mixed
+     */
     public function getName();
 
     /**

@@ -1,12 +1,5 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: chpyr
- * Date: 30/08/15
- * Time: 18:45.
- */
-
 namespace DeejayPoolBundle\Serializer\Normalizer;
 
 use DeejayPoolBundle\Entity\AvdItem;
@@ -14,6 +7,12 @@ use DeejayPoolBundle\Entity\FranchisePoolItem;
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 
+/**
+ * Class FranchiseRecordPoolItemNormalizer
+ *
+ * @package DeejayPoolBundle\Serializer\Normalizer
+ * @author Christophe Pyree <yemistikris@hotmail.fr>
+ */
 class FranchiseRecordPoolItemNormalizer extends AbstractNormalizer
 {
     const ITEM_AUDIO = 'FranchiseRecordPoolItem';
@@ -27,9 +26,9 @@ class FranchiseRecordPoolItemNormalizer extends AbstractNormalizer
      * @param string $format  format the given data was extracted from
      * @param array  $context options available to the denormalizer
      *
-     * @return AvdItem
+     * @return FranchisePoolItem
      */
-    public function denormalize($data, $class, $format = null, array $context = array())
+    public function denormalize($data, $class, $format = null, array $context = [])
     {
         $frpItem = new FranchisePoolItem();
         $frpItem->setItemId(intval(intval($data['id'])));
@@ -44,6 +43,11 @@ class FranchiseRecordPoolItemNormalizer extends AbstractNormalizer
         return $frpItem;
     }
 
+    /**
+     * @param string $html
+     * @param null   $filter
+     * @return string
+     */
     public function parseHtmlText($html, $filter = null)
     {
         $crawler = new Crawler($html);
@@ -83,7 +87,7 @@ class FranchiseRecordPoolItemNormalizer extends AbstractNormalizer
      *
      * @return array|string|bool|int|float|null
      */
-    public function normalize($object, $format = null, array $context = array())
+    public function normalize($object, $format = null, array $context = [])
     {
         return;
     }

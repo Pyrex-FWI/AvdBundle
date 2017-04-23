@@ -2,10 +2,15 @@
 
 namespace DeejayPoolBundle\Event;
 
-use DeejayPoolBundle\Entity\AvdItem;
 use DeejayPoolBundle\Entity\ProviderItemInterface;
 use Symfony\Component\EventDispatcher\Event;
 
+/**
+ * Class ItemLocalExistenceEvent
+ *
+ * @package DeejayPoolBundle\Event
+ * @author Christophe Pyree <yemistikris@hotmail.fr>
+ */
 class ItemLocalExistenceEvent extends Event
 {
     /** @var ProviderItemInterface */
@@ -14,7 +19,7 @@ class ItemLocalExistenceEvent extends Event
     private $forceDownload = false;
 
     /**
-     * @param AvdItem $item
+     * @param ProviderItemInterface $item
      */
     public function __construct(ProviderItemInterface $item)
     {
@@ -45,11 +50,18 @@ class ItemLocalExistenceEvent extends Event
         return $this->fileName;
     }
 
+    /**
+     * @return bool
+     */
     public function existLocaly()
     {
         return $this->existLocaly;
     }
 
+    /**
+     * @param bool $boolVal
+     * @return $this
+     */
     public function setExistLocaly($boolVal)
     {
         $this->existLocaly = boolval($boolVal);

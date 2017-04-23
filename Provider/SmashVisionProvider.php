@@ -9,6 +9,7 @@ use DeejayPoolBundle\Entity\SvItem;
 use DeejayPoolBundle\Serializer\Normalizer\SvItemNormalizer;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Promise;
+use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\Serializer\Serializer;
 
@@ -19,39 +20,30 @@ use Symfony\Component\Serializer\Serializer;
  */
 class SmashVisionProvider extends AbstractProvider implements PoolProviderInterface, SearchablePoolProviderInterface
 {
+    /**
+     * @var
+     */
     protected $noTracksFromPage;
 
+    /**
+     * @var array
+     */
     private $loginData = [];
 
     /** @var EventDispatcher */
     protected $eventDispatcher;
 
     /**
-     * Get all embed children video into Parent VideoGroup.
-     *
-     * @method getChild
-     *
-     * @param SvItem $svGroup Parent svItem
-     *
-     * @return SvItem[] List of available versions
+     * @param ProviderItemInterface|SvItem $item
+     * @param string                       $tempName
+     * @return ResponseInterface
      */
-    private function getChild(SvItem $svGroup)
-    {
-        $itemsArray = [];
-        if ($svGroup->isParent() && $svGroup->getSvItems()->count() > 0) {
-            return $svGroup->getSvItems()->toArray();
-        }
-
-        return $itemsArray;
-    }
-
-    public function getDownloadResponse(\DeejayPoolBundle\Entity\ProviderItemInterface $item, $tempName)
+    public function getDownloadResponse(ProviderItemInterface $item, $tempName)
     {
         $resource = fopen($tempName, 'w');
 
         return $this->client->get(
-        //$this->getConfValue('download_url'),
-            $item->getDownloadlink(),
+            $item->getDownloadLink(),
             [
                 //'cookies'         => $this->cookieJar,
                 'allow_redirects' => false,
@@ -85,86 +77,8 @@ class SmashVisionProvider extends AbstractProvider implements PoolProviderInterf
     }
 
     /**
-     * This Retreive all SPECIFIC video from groupID.
+     * @return string
      */
-    public function getAllVideos($datas)
-    {
-        $promises = [];
-
-        foreach ($datas as $index => $videoGroup) {
-            $uri = $this->getConfValue('items_versions_url').'/'.$this->loginData['id'].'?'.http_build_query([
-                    'cc' => 'eu',
-                    'rowId' => '',
-                    'groupId' => $videoGroup['groupId'],
-                    'title' => $videoGroup['title'],
-                    '_' => microtime(),
-                ]);
-            $promises[$index] = $this->client->getAsync(
-                $uri, [
-                    //'cookies'         => $this->cookieJar,
-                    'allow_redirects' => true,
-                    'debug' => $this->debug,
-                ]
-            );
-        }
-        $results = Promise\unwrap($promises);
-
-        foreach ($results as $index => $result) {
-            $datas[$index]['videos'] = [];
-            /* @var Response $result */
-            $datas[$index]['videos'] = json_decode($result->getBody()->__toString(), true);
-        }
-
-        return $datas;
-    }
-
-    /**
-     * Get download status from SmashVisionProvider to know if
-     * video is available for download.
-     * Return true is download is available else false.
-     *
-     * @method checkDownloadStatus
-     *
-     * @param SvItem $svItem video item
-     *
-     * @return bool result
-     */
-    protected function checkDownloadStatus(SvItem $svItem, $fg = true)
-    {
-        $videoCanBeDownloaded = false;
-        $this->logger->info(sprintf('get Download status for %s', $svItem->getItemId()));
-
-        $response = $this->client->post(
-            $this->getConfValue('check_download_status_url'), [
-                //'cookies'     => $this->cookieJar,
-                'debug' => $this->debug,
-                'form_params' => [
-                    'videoId' => $svItem->getVideoId(),
-                    'fromGrid' => $fg ? 'true' : 'false',
-                ],
-            ]
-        );
-
-        if ($response->getStatusCode() == 200) {
-            $responseString = json_decode($response->getBody()->__toString(), 1);
-            if (isset($responseString['haserrors']) && boolval($responseString['haserrors']) === false) {
-                $videoCanBeDownloaded = true;
-
-                $svItem->setDownloadlink($this->getConfValue('download_url').'?'.http_build_query([
-                        'id' => $svItem->getVideoId(),
-                        'fg' => $fg ? 'true' : 'false',
-                    ]));
-            }
-            $this->logger->info(sprintf('Download status for %s : %s', $svItem->getItemId(), $responseString['msg']));
-            $svItem->setDownloadStatus($responseString['msg']);
-        } else {
-            $svItem->setDownloadStatus(sprintf("Can't get download status for video #%s", $svItem->getItemId()));
-            $this->logger->error(sprintf("Can't get download status for video #%s", $svItem->getItemId()));
-        }
-
-        return $videoCanBeDownloaded;
-    }
-
     public function getName()
     {
         return 'smashvision';
@@ -188,15 +102,223 @@ class SmashVisionProvider extends AbstractProvider implements PoolProviderInterf
     }
 
     /**
+     * @param $datas
+     * @return mixed
+     */
+    public function getAllVideos($datas)
+    {
+        $promises = [];
+
+        foreach ($datas as $index => $videoGroup) {
+            $uri = $this->getConfValue('items_versions_url').'/'.$this->loginData['id'].'?'.http_build_query(
+                [
+                    'cc' => 'eu',
+                    'rowId' => '',
+                    'groupId' => $videoGroup['groupId'],
+                    'title' => $videoGroup['title'],
+                    '_' => microtime(),
+                ]
+            );
+            $promises[$index] = $this->client->getAsync(
+                $uri,
+                [
+                    //'cookies'         => $this->cookieJar,
+                    'allow_redirects' => true,
+                    'debug' => $this->debug,
+                ]
+            );
+        }
+        $results = Promise\unwrap($promises);
+
+        foreach ($results as $index => $result) {
+            $datas[$index]['videos'] = [];
+            /* @var Response $result */
+            $datas[$index]['videos'] = json_decode($result->getBody()->__toString(), true);
+        }
+
+        return $datas;
+    }
+
+    /**
+     * @param array $filter
+     * @return array
+     */
+    public function getCriteria($filter = [])
+    {
+        return array_merge(
+            [
+                'keywords' => '',
+                'genreId' => 1000, //all video
+                'hd' => -1,
+                'subGenreId' => 0,
+                'toolId' => '',
+                'featured' => 0,
+                'releaseyear' => '',
+            ],
+            (array) $filter
+        );
+    }
+
+    /**
+     * @return array
+     */
+    public function getAvailableCriteria()
+    {
+        return [
+            'keywords',
+            'releaseyear',
+            'genreId',
+            'subGenreId',
+            'hd',
+            //'cc'
+        ];
+    }
+
+    /**
+     * @param array $filters
+     *
+     * @return $this
+     */
+    public function search($filters = [])
+    {
+        $response = $this->getItemsResponse(1, $filters);
+        $responseArray = json_decode($response->getBody()->__toString(), true);
+        $this->setResultCount(intval($responseArray['records']));
+        $this->setMaxPage(intval($responseArray['pages']));
+
+        return $this;
+    }
+
+    /**
+     * @param $page
+     * @param $filter
+     *
+     * @return ResponseInterface
+     */
+    protected function getResponseByGetQuery($page, $filter)
+    {
+        $formParams = array_merge(
+            [
+                'rows' => $this->getConfValue('items_per_page'),
+                'page' => $page,
+                'cc' => 'eu',
+                'sort' => 'date',
+                'dir' => 'desc',
+                '_' => intval(microtime(true)),
+            ],
+            $this->getCriteria($filter)
+        );
+
+        $query = http_build_query($formParams);
+        $url = sprintf('%s/%s?%s', $this->getConfValue('items_url'), $this->loginData['id'], $query);
+        $params = [
+            //'cookies'         => $this->cookieJar,
+            'allow_redirects' => true,
+            'debug' => $this->debug,
+        ];
+
+        $response = $this->client->get(
+            $url,
+            $params
+        );
+
+        return $response;
+    }
+
+    /**
+     * @param $page
+     * @param $filter
+     *
+     * @return ResponseInterface
+     */
+    protected function getResponseByPostQuery($page, $filter)
+    {
+        $url = sprintf('%s', $this->getConfValue('items_url'));
+        $params = [
+            //'cookies'         => $this->cookieJar,
+            'allow_redirects' => true,
+            'debug' => $this->debug,
+            'form_params' => array_merge(
+                [
+                    'rows' => $this->getConfValue('items_per_page'),
+                    'page' => $page,
+                    'cc' => 'eu',
+                    'sort' => 'date',
+                    'dir' => 'desc',
+                    '_' => intval(microtime(true)),
+                ],
+                $this->getCriteria($filter)
+            ),
+        ];
+
+        $response = $this->client->post(
+            $url,
+            $params
+        );
+
+        return $response;
+    }
+
+    /**
+     * Get download status from SmashVisionProvider to know if
+     * video is available for download.
+     * Return true is download is available else false.
+     *
+     * {@inheritdoc}
+     */
+    protected function checkDownloadStatus(SvItem $svItem, $fg = true)
+    {
+        $videoCanBeDownloaded = false;
+        $this->logger->info(sprintf('get Download status for %s', $svItem->getItemId()));
+
+        $response = $this->client->post(
+            $this->getConfValue('check_download_status_url'),
+            [
+                //'cookies'     => $this->cookieJar,
+                'debug' => $this->debug,
+                'form_params' => [
+                    'videoId' => $svItem->getVideoId(),
+                    'fromGrid' => $fg ? 'true' : 'false',
+                ],
+            ]
+        );
+
+        if ($response->getStatusCode() == 200) {
+            $responseString = json_decode($response->getBody()->__toString(), 1);
+            if (isset($responseString['haserrors']) && boolval($responseString['haserrors']) === false) {
+                $videoCanBeDownloaded = true;
+
+                $svItem->setDownloadlink(
+                    $this->getConfValue('download_url').'?'.http_build_query(
+                        [
+                            'id' => $svItem->getVideoId(),
+                            'fg' => $fg ? 'true' : 'false',
+                        ]
+                    )
+                );
+            }
+            $this->logger->info(sprintf('Download status for %s : %s', $svItem->getItemId(), $responseString['msg']));
+            $svItem->setDownloadStatus($responseString['msg']);
+        } else {
+            $svItem->setDownloadStatus(sprintf("Can't get download status for video #%s", $svItem->getItemId()));
+            $this->logger->error(sprintf("Can't get download status for video #%s", $svItem->getItemId()));
+        }
+
+        return $videoCanBeDownloaded;
+    }
+
+
+    /**
      * @param type $login
      * @param type $password
      *
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
     protected function getLoginResponse($login, $password)
     {
         $response = $this->client->post(
-            $this->getConfValue('login_check'), [
+            $this->getConfValue('login_check'),
+            [
                 //'cookies'         => $this->cookieJar,
                 //'cookies'         => true,
                 'allow_redirects' => true,
@@ -216,7 +338,11 @@ class SmashVisionProvider extends AbstractProvider implements PoolProviderInterf
         return $response;
     }
 
-    protected function hasCorrectlyConnected(\Psr\Http\Message\ResponseInterface $response)
+    /**
+     * @param ResponseInterface $response
+     * @return bool
+     */
+    protected function hasCorrectlyConnected(ResponseInterface $response)
     {
         if ($response->getStatusCode() == 200) {
             $rep = json_decode($response->getBody(), true);
@@ -232,6 +358,11 @@ class SmashVisionProvider extends AbstractProvider implements PoolProviderInterf
         return false;
     }
 
+    /**
+     * @param       $page
+     * @param array $filter
+     * @return ResponseInterface
+     */
     protected function getItemsResponse($page, $filter = [])
     {
         $response = $this->getResponseByGetQuery($page, $filter);
@@ -239,7 +370,11 @@ class SmashVisionProvider extends AbstractProvider implements PoolProviderInterf
         return $response;
     }
 
-    protected function parseItemResponse(\Psr\Http\Message\ResponseInterface $response)
+    /**
+     * @param ResponseInterface $response
+     * @return array
+     */
+    protected function parseItemResponse(ResponseInterface $response)
     {
         $itemsArray = [];
         $rep = json_decode($response->getBody(), true);
@@ -254,6 +389,40 @@ class SmashVisionProvider extends AbstractProvider implements PoolProviderInterf
                 $itemsGroup = $this->filter($itemsGroup);
                 $itemsArray = array_merge($itemsArray, $itemsGroup);
             }
+        }
+
+        return $itemsArray;
+    }
+
+    /**
+     * @param ResponseInterface $response
+     * @return mixed
+     */
+    protected function getDownloadedFileName(ResponseInterface $response)
+    {
+        $ctDisp = str_replace('"', '', $response->getHeader('Content-Disposition')[0]);
+        preg_match('/filename="?(?P<filename>.+)$/', $ctDisp, $matches);
+        if (!isset($matches['filename'])) {
+            $this->logger->error('Error fileName: '.$response->getHeader('Content-Disposition')[0]);
+        }
+
+        return $matches['filename'];
+    }
+
+    /**
+     * Get all embed children video into Parent VideoGroup.
+     *
+     * @method getChild
+     *
+     * @param SvItem $svGroup Parent svItem
+     *
+     * @return SvItem[] List of available versions
+     */
+    private function getChild(SvItem $svGroup)
+    {
+        $itemsArray = [];
+        if ($svGroup->isParent() && $svGroup->getSvItems()->count() > 0) {
+            return $svGroup->getSvItems()->toArray();
         }
 
         return $itemsArray;
@@ -293,127 +462,4 @@ class SmashVisionProvider extends AbstractProvider implements PoolProviderInterf
         return $collection->getValues();
     }
 
-    protected function getDownloadedFileName(\Psr\Http\Message\ResponseInterface $response)
-    {
-        $ctDisp = str_replace('"', '', $response->getHeader('Content-Disposition')[0]);
-        preg_match('/filename="?(?P<filename>.+)$/', $ctDisp, $matches);
-        if (!isset($matches['filename'])) {
-            $this->logger->error('Error fileName: '.$response->getHeader('Content-Disposition')[0]);
-        }
-
-        return $matches['filename'];
-    }
-
-    public function getCriteria($filter = [])
-    {
-        return array_merge(
-            [
-                'keywords' => '',
-                'genreId' => 1000, //all video
-                'hd' => -1,
-                'subGenreId' => 0,
-                'toolId' => '',
-                'featured' => 0,
-                'releaseyear' => '',
-            ],
-            (array) $filter
-        );
-    }
-
-    public function getAvailableCriteria()
-    {
-        return [
-            'keywords',
-            'releaseyear',
-            'genreId',
-            'subGenreId',
-            'hd',
-            //'cc'
-        ];
-    }
-
-    /**
-     * @param array $filters
-     *
-     * @return $this
-     */
-    public function search($filters = [])
-    {
-        $response = $this->getItemsResponse(1, $filters);
-        $responseArray = json_decode($response->getBody()->__toString(), true);
-        $this->setResultCount(intval($responseArray['records']));
-        $this->setMaxPage(intval($responseArray['pages']));
-
-        return $this;
-    }
-
-    /**
-     * @param $page
-     * @param $filter
-     *
-     * @return \Psr\Http\Message\ResponseInterface
-     */
-    protected function getResponseByGetQuery($page, $filter)
-    {
-        $formParams = array_merge(
-            [
-                'rows' => $this->getConfValue('items_per_page'),
-                'page' => $page,
-                'cc' => 'eu',
-                'sort' => 'date',
-                'dir' => 'desc',
-                '_' => intval(microtime(true)),
-            ],
-            $this->getCriteria($filter)
-        );
-
-        $query = http_build_query($formParams);
-        $url = sprintf('%s/%s?%s', $this->getConfValue('items_url'), $this->loginData['id'], $query);
-        $params = [
-            //'cookies'         => $this->cookieJar,
-            'allow_redirects' => true,
-            'debug' => $this->debug,
-        ];
-
-        $response = $this->client->get(
-            $url,
-            $params
-        );
-
-        return $response;
-    }
-
-    /**
-     * @param $page
-     * @param $filter
-     *
-     * @return \Psr\Http\Message\ResponseInterface
-     */
-    protected function getResponseByPostQuery($page, $filter)
-    {
-        $url = sprintf('%s', $this->getConfValue('items_url'));
-        $params = [
-            //'cookies'         => $this->cookieJar,
-            'allow_redirects' => true,
-            'debug' => $this->debug,
-            'form_params' => array_merge(
-                [
-                    'rows' => $this->getConfValue('items_per_page'),
-                    'page' => $page,
-                    'cc' => 'eu',
-                    'sort' => 'date',
-                    'dir' => 'desc',
-                    '_' => intval(microtime(true)),
-                ],
-                $this->getCriteria($filter)
-            ),
-        ];
-
-        $response = $this->client->post(
-            $url,
-            $params
-        );
-
-        return $response;
-    }
 }

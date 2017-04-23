@@ -1,7 +1,6 @@
 <?php
 
 namespace DeejayPoolBundle\Serializer\Normalizer;
-
 use DeejayPoolBundle\Entity\SvGroup;
 use DeejayPoolBundle\Entity\SvItem;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
@@ -26,7 +25,7 @@ class SvItemNormalizer extends AbstractNormalizer
      * @param string $format  format the given data was extracted from
      * @param array  $context options available to the denormalizer
      *
-     * @return SvGroup
+     * @return SvItem
      */
     public function denormalize($data, $class, $format = null, array $context = array())
     {
@@ -64,6 +63,62 @@ class SvItemNormalizer extends AbstractNormalizer
         $svGroup->setParent(true);
 
         return $svGroup;
+    }
+
+    /**
+     * Checks whether the given class is supported for denormalization by this normalizer.
+     *
+     * @param mixed  $data   data to denormalize from
+     * @param string $type   the class to which the data should be denormalized
+     * @param string $format the format being deserialized from
+     *
+     * @return bool
+     */
+    public function supportsDenormalization($data, $type, $format = null)
+    {
+        return self::SVITEM === $type && is_array($data);
+    }
+
+    /**
+     * Normalizes an object into a set of arrays/scalars.
+     *
+     * @param object $object  object to normalize
+     * @param string $format  format the normalization result will be encoded as
+     * @param array  $context Context options for the normalizer
+     *
+     * @return array|string|bool|int|float|null
+     */
+    public function normalize($object, $format = null, array $context = array())
+    {
+        return;
+    }
+
+    /**
+     * Checks whether the given class is supported for normalization by this normalizer.
+     *
+     * @param mixed  $data   data to normalize
+     * @param string $format the format being (de-)serialized from or into
+     *
+     * @return bool
+     */
+    public function supportsNormalization($data, $format = null)
+    {
+        return false;
+    }
+
+
+    /**
+     * @param array $videoArray
+     * @return string
+     */
+    public function extractCompleteVersion(array $videoArray)
+    {
+        $duration = $this->exactDurationVersion($videoArray['title']);
+        if ($duration) {
+            return sprintf('%s/%s', $duration, $this->exactContentVersion($videoArray['title']));
+        } else {
+            return $this->exactContentVersion($videoArray['title']);
+        }
     }
 
     /**
@@ -114,56 +169,5 @@ class SvItemNormalizer extends AbstractNormalizer
         }
 
         return 0;
-    }
-
-    /**
-     * Checks whether the given class is supported for denormalization by this normalizer.
-     *
-     * @param mixed  $data   data to denormalize from
-     * @param string $type   the class to which the data should be denormalized
-     * @param string $format the format being deserialized from
-     *
-     * @return bool
-     */
-    public function supportsDenormalization($data, $type, $format = null)
-    {
-        return self::SVITEM === $type && is_array($data);
-    }
-
-    /**
-     * Normalizes an object into a set of arrays/scalars.
-     *
-     * @param object $object  object to normalize
-     * @param string $format  format the normalization result will be encoded as
-     * @param array  $context Context options for the normalizer
-     *
-     * @return array|string|bool|int|float|null
-     */
-    public function normalize($object, $format = null, array $context = array())
-    {
-        return;
-    }
-
-    /**
-     * Checks whether the given class is supported for normalization by this normalizer.
-     *
-     * @param mixed  $data   data to normalize
-     * @param string $format the format being (de-)serialized from or into
-     *
-     * @return bool
-     */
-    public function supportsNormalization($data, $format = null)
-    {
-        return false;
-    }
-
-    public function extractCompleteVersion($videoArray)
-    {
-        $duration = $this->exactDurationVersion($videoArray['title']);
-        if ($duration) {
-            return sprintf('%s/%s', $duration, $this->exactContentVersion($videoArray['title']));
-        } else {
-            return $this->exactContentVersion($videoArray['title']);
-        }
     }
 }

@@ -6,6 +6,12 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 
+/**
+ * Class StatusCommand
+ *
+ * @package DeejayPoolBundle\Command
+ * @author Christophe Pyree <yemistikris@hotmail.fr>
+ */
 class StatusCommand extends AbstractCommand
 {
     /**
@@ -28,13 +34,13 @@ EOF
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->init($input, $output);
-        $formatter = $this->getHelperSet()->get('formatter');
+        $formatter = $this->getFormatterHelper();
 
-        $errorMessages = array('Woooww!', sprintf('%s connection is NOT available, Check your credentials', $this->provider->getName()));
+        $errorMessages = ['Woooww!', sprintf('%s connection is NOT available, Check your credentials', $this->provider->getName())];
         $formattedBlock = $formatter->formatBlock($errorMessages, 'error', true);
 
         if ($this->provider->open()) {
-            $errorMessages = array('OK!', sprintf('%s connection is available', $this->provider->getName()));
+            $errorMessages = ['OK!', sprintf('%s connection is available', $this->provider->getName())];
             $formattedBlock = $formatter->formatBlock($errorMessages, 'info', true);
         }
         $output->writeln($formattedBlock);

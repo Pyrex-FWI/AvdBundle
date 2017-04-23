@@ -3,7 +3,10 @@
 namespace DeejayPoolBundle\Provider;
 
 /**
- * Class ProviderManager.
+ * Class ProviderManager
+ *
+ * @package DeejayPoolBundle\Provider
+ * @author Christophe Pyree <yemistikris@hotmail.fr>
  */
 class ProviderManager
 {
@@ -35,9 +38,9 @@ class ProviderManager
     }
 
     /**
-     * @return array
+     * @return PoolProviderInterface[]
      */
-    public function getProviers()
+    public function getProviders()
     {
         return $this->providers;
     }

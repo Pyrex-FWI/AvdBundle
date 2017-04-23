@@ -2,6 +2,12 @@
 
 namespace DeejayPoolBundle\Event;
 
+/**
+ * Class ProviderEvents
+ *
+ * @package DeejayPoolBundle\Event
+ * @author Christophe Pyree <yemistikris@hotmail.fr>
+ */
 final class ProviderEvents
 {
     const SESSION_OPENED = 'provider.session.opened';
