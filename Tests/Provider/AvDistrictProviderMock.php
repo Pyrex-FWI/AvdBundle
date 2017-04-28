@@ -969,7 +969,7 @@ class AvDistrictProviderMock extends \DeejayPoolBundle\Provider\AvDistrictProvid
     public function itemCanBeDownload(ProviderItemInterface $item)
     {
         if ($key = $this->getDownloadKey($item)) {
-            $item->setDownloadlink($this->getConfValue('download_url').'?key='.$key);
+            $item->setDownloadLink($this->getConfValue('download_url').'?key='.$key);
 
             return true;
         }

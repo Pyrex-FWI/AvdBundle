@@ -12,13 +12,13 @@
     <testsuites>
         <testsuite name="Test Suite">
             <directory>./</directory>
-            <exclude>./vendor</exclude>
+            <exclude>./../vendor</exclude>
         </testsuite>
     </testsuites>
     <filter>
         <blacklist>
             <directory suffix=".php">./</directory>
-            <directory suffix=".php">./vendor</directory>
+            <directory suffix=".php">./../vendor</directory>
         </blacklist>
         <whitelist>
         <!-- lib subfolders to include -->
@@ -29,19 +29,7 @@
                 <file>./BaseTest.php</file>
                 <file>./AppTestListener.php</file>
             </exclude>
-            <directory>../Command</directory>
-            <directory>../DependencyInjection</directory>
-            <directory>../Entity</directory>
-            <directory>../Exception</directory>
-            <directory>../Provider</directory>
-            <directory>../Serializer</directory>
-            <file>../DeejayPoolBundle.php</file>
+            <directory>../src</directory>
         </whitelist>
     </filter>
-    <logging>
-        <log type="coverage-html" target="../build/coverage"/>
-        <log type="coverage-clover" target="../build/logs/clover.xml"/>
-        <log type="coverage-crap4j" target="../build/logs/crap4j.xml"/>
-        <log type="junit" target="../build/logs/junit.xml" logIncompleteSkipped="false"/>
-    </logging>
 </phpunit>

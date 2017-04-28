@@ -9,7 +9,7 @@ before_script:
   - wget http://get.sensiolabs.org/php-cs-fixer.phar
   - mkdir -p Tests/TestData/root_path
   - rm -rf Tests/app/cache/*
-  - cat Tests/app/parameters_travis.yml > Tests/app/parameters.yml
+  - cat tests/app/parameters_travis.yml > tests/app/parameters.yml
   - mysql -e 'create database IF NOT EXISTS symfony_ddp;' -u travis
   - php Tests/app/console doctrine:s:create
 install:

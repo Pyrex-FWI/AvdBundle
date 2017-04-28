@@ -29,6 +29,10 @@ parameters:
     franchise_pool.credentials.login: toto
     franchise_pool.credentials.password: xxx
 
+    franchise_pool_audio.configuration.root_path: %kernel.root_dir%/../TestData/root_path
+    franchise_pool_audio.credentials.login: toto
+    franchise_pool_audio.credentials.password: xxx
+
     franchise_pool.provider.class: DeejayPoolBundle\Tests\Provider\FranchiseProviderMock
 
     franchise_pool_video.provider.class: DeejayPoolBundle\Tests\Provider\FranchiseVideoProviderMock
