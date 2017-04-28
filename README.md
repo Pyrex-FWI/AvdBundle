@@ -140,10 +140,10 @@ Item events
 - vendor/bin/phpunit -c phpunit.xml --group online --debug --verbose
 
 
-![Pseudoarchi](Resources/docs/plantuml/assets/archi.png)
+![Pseudoarchi](src/Resources/docs/plantuml/assets/archi.png)
 
 
-![Pseudoarchi](Resources/docs/plantuml/assets/diagram.png)
+![Pseudoarchi](src/Resources/docs/plantuml/assets/diagram.png)
 
 
 http://gnugat.github.io/2014/10/29/sf2-bundle-standalone.html
