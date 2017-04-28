@@ -10,4 +10,4 @@ before_script:
 
 test:Fonctionnel:
   script:
-  - Tests/vendor/bin/phpunit -c Tests/phpunit.xml --exclude-group online --coverage-text --colors=never --debug --verbose
+  - tests/vendor/bin/phpunit -c tests/phpunit.xml --exclude-group online --coverage-text --colors=never --debug --verbose

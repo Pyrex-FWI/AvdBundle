@@ -1,23 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="name-of-project" default="full-build-parallel">
     <!-- By default, we assume all tools to be on the $PATH -->
-    <property name="pdepend" value="Tests/vendor/bin/pdepend"/>
-    <property name="phpcpd"  value="Tests/vendor/bin/phpcpd"/>
-    <property name="phpcs"   value="Tests/vendor/bin/phpcs"/>
-    <property name="phpdox"  value="/Tests/vendor/bin/phpdox"/>
-    <property name="phploc"  value="Tests/vendor/bin/phploc"/>
-    <property name="phpmd"   value="Tests/vendor/bin/phpmd"/>
-    <property name="phpunit" value="Tests/vendor/bin/phpunit"/>
+    <property name="pdepend" value="vendor/bin/pdepend"/>
+    <property name="phpcpd"  value="vendor/bin/phpcpd"/>
+    <property name="phpcs"   value="vendor/bin/phpcs"/>
+    <property name="phploc"  value="vendor/bin/phploc"/>
+    <property name="phpmd"   value="vendor/bin/phpmd"/>
+    <property name="phpunit" value="vendor/bin/phpunit"/>
     <property name="composer" value="/usr/bin/composer"/>
+    <!--
     <property name="appDirectories" value="${basedir}/Command,${basedir}/DependencyInjection,${basedir}/Entity,${basedir}/Event,${basedir}/Exception,${basedir}/Provider,${basedir}/Serializer,${basedir}/Traits,${basedir}/Utils"/>
+    -->
+    <property name="appDirectories" value="${basedir}/src"/>
+    <!--
     <property name="appDirectoriesSpace" value="${basedir}/Command/ ${basedir}/DependencyInjection/ ${basedir}/Entity/ ${basedir}/Event/ ${basedir}/Exception/ ${basedir}/Provider/ ${basedir}/Serializer/ ${basedir}/Traits/ ${basedir}/Utils/"/>
+    -->
+    <property name="appDirectories" value="${basedir}/src"/>
 
     <target name="full-build"
-            depends="prepare,static-analysis,phpunit,phpdox,-check-failure"
+            depends="prepare,static-analysis,phpunit,-check-failure"
             description="Performs static analysis, runs the tests, and generates project documentation"/>
 
     <target name="full-build-parallel"
-            depends="prepare,static-analysis-parallel,phpunit,phpdox,-check-failure"
+            depends="prepare,static-analysis-parallel,phpunit,-check-failure"
             description="Performs static analysis (executing the tools in parallel), runs the tests, and generates project documentation"/>
 
     <target name="quick-build"
@@ -50,7 +55,6 @@
         <delete dir="${basedir}/build/coverage"/>
         <delete dir="${basedir}/build/logs"/>
         <delete dir="${basedir}/build/pdepend"/>
-        <delete dir="${basedir}/build/phpdox"/>
         <property name="clean.done" value="true"/>
     </target>
 
@@ -75,6 +79,7 @@
             <arg value="phploc/phploc"/>
             <arg value="pdepend/pdepend"/>
             <arg value="theseer/phpdox"/>
+            <arg value="qafoo/quality-analyzer"/>
         </exec>
     </target>
 
@@ -99,9 +104,9 @@
             <arg value="-l" />
             <fileset dir="${basedir}/">
                 <!--modified /-->  <!-- Search only for modified files -->
-                <include name="**/*.php" /> <!-- Search only for files with .php extension -->
-                <exclude name="**/Tests/vendor/**" /> <!-- Exclude vendor directory -->
-                <exclude name="**/Tests/app/cache/**" /> <!-- Exclude vendor directory -->
+                <include name="src/**/*.php" /> <!-- Search only for files with .php extension -->
+                <exclude name="vendor/**" /> <!-- Exclude vendor directory -->
+                <exclude name="app/cache/**" /> <!-- Exclude vendor directory -->
             </fileset>
         </apply>
         <property name="lint.done" value="true"/>
@@ -113,8 +118,8 @@
         <exec executable="${phploc}" taskname="phploc">
             <arg value="--count-tests" />
             <arg value="--exclude" />
-            <arg value="Tests/vendor" />
-            <arg path="${basedir}" />
+            <arg value="vendor" />
+            <arg path="${basedir}/src" />
         </exec>
         <property name="phploc.done" value="true"/>
     </target>
@@ -130,7 +135,7 @@
             <arg value="--log-xml" />
             <arg path="${basedir}/build/logs/phploc.xml" />
             <arg value="--exclude" />
-            <arg value="Tests/vendor" />
+            <arg value="vendor" />
             <arg path="${basedir}" />
         </exec>
         <property name="phploc.done" value="true"/>
@@ -235,10 +240,10 @@
             description="Run unit tests with PHPUnit">
         <exec executable="${phpunit}" resultproperty="result.phpunit" taskname="phpunit">
             <arg value="--configuration"/>
-            <arg path="${basedir}/Tests/phpunit.xml"/>
+            <arg path="${basedir}/src/Tests/phpunit.xml"/>
             <arg line="--exclude-group online"/>
             <arg value="--coverage-html"/>
-            <arg value="${basedir}/Tests/TestData/Coverage"/>
+            <arg value="${basedir}/src/Tests/TestData/Coverage"/>
         </exec>
 
         <property name="phpunit.done" value="true"/>
@@ -250,7 +255,7 @@
             description="Run unit tests with PHPUnit (without generating code coverage reports)">
         <exec executable="${phpunit}" failonerror="true" taskname="phpunit">
             <arg value="--configuration"/>
-            <arg path="${basedir}/Tests/phpunit.xml"/>
+            <arg path="${basedir}/src/Tests/phpunit.xml"/>
             <arg line="--exclude-group online"/>
             <arg value="--no-coverage"/>
         </exec>
@@ -258,16 +263,6 @@
         <property name="phpunit.done" value="true"/>
     </target>
 
-    <target name="phpdox"
-            unless="phpdox.done"
-            depends="phploc-ci,phpcs-ci,phpmd-ci"
-            description="Generate project documentation using phpDox">
-        <exec executable="${phpdox}" dir="${basedir}/build" taskname="phpdox">
-            <arg value="--file"/>
-            <arg path="${basedir}/phpdox.xml"/>
-        </exec>
-        <property name="phpdox.done" value="true"/>
-    </target>
 
     <target name="-check-failure">
         <fail message="PHPUnit did not finish successfully">
@@ -281,7 +276,7 @@
 
     <target name="remove-vendors"
             description="Cleanup vendor libraries">
-        <delete dir="${basedir}/Tests/vendor"/>
+        <delete dir="${basedir}/vendor"/>
     </target>
 </project>
 

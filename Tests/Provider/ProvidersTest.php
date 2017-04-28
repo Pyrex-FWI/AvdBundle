@@ -75,7 +75,6 @@ class ProvidersTest extends \DeejayPoolBundle\Tests\BaseTest
         $this->assertNotNull($itemToDownload->getFullPath());
 
         $downloadedFile = $this->container->getParameter($this->provider->getName().'.configuration.root_path').DIRECTORY_SEPARATOR.$downloadedFileName;
-        dump($downloadedFile);
         $this->assertTrue(file_exists($downloadedFile));
         if (file_exists($downloadedFile)) {
             unlink($downloadedFile);
