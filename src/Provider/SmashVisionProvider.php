@@ -102,7 +102,7 @@ class SmashVisionProvider extends AbstractProvider implements PoolProviderInterf
     }
 
     /**
-     * @param $datas
+     * @param array $datas
      * @return mixed
      */
     public function getAllVideos($datas)
@@ -461,5 +461,4 @@ class SmashVisionProvider extends AbstractProvider implements PoolProviderInterf
 
         return $collection->getValues();
     }
-
 }

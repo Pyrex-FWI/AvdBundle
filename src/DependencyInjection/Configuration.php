@@ -27,9 +27,9 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $digital_dj_poolRoot = $treeBuilder->root('deejay_pool');
+        $digitalDjPoolRoot = $treeBuilder->root('deejay_pool');
 
-        $digital_dj_poolRoot
+        $digitalDjPoolRoot
             ->children()
                 ->arrayNode(DeejayPoolBundle::PROVIDER_DPP)
                 ->addDefaultsIfNotSet()

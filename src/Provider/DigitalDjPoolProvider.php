@@ -61,7 +61,7 @@ class DigitalDjPoolProvider extends AbstractProvider implements SearchablePoolPr
     }
 
     /**
-     * @param $filter
+     * @param mixed $filter
      * @return mixed
      */
     public function getCriteria($filter)
@@ -235,5 +235,4 @@ class DigitalDjPoolProvider extends AbstractProvider implements SearchablePoolPr
 
         return str_replace('"', '', $matches['filename']);
     }
-
 }

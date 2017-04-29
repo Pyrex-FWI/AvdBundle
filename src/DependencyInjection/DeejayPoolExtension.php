@@ -105,6 +105,9 @@ class DeejayPoolExtension extends Extension
         );
     }
 
+    /**
+     * @return string
+     */
     public function getAlias()
     {
         return DeejayPoolBundle::BUNDLE_ALIAS;

@@ -9,6 +9,7 @@
     <property name="phpunit" value="vendor/bin/phpunit"/>
     <property name="composer" value="/usr/bin/composer"/>
     <property name="appDirectories" value="${basedir}/src"/>
+    <property name="appDirectoriesSpace" value="${basedir}/src"/>
 
     <target name="full-build"
             depends="prepare,static-analysis,phpunit,-check-failure"
@@ -178,8 +179,8 @@
     <target name="phpcs"
             unless="phpcs.done"
             description="Find coding standard violations using PHP_CodeSniffer and print human readable output. Intended for usage on the command line before committing.">
-        <exec executable="${phpcs}" taskname="phpcs">
-            <arg value="--standard=PSR2" />
+        <exec executable="${phpcs}" taskname="phpcs" failonerror="true">
+            <arg value="--standard=vendor/escapestudios/symfony2-coding-standard/Symfony2/ruleset.xml" />
             <arg value="--extensions=php" />
             <arg value="--ignore=autoload.php" />
             <arg line="${appDirectoriesSpace}" />
@@ -195,7 +196,7 @@
         <exec executable="${phpcs}" output="/dev/null" taskname="phpcs">
             <arg value="--report=checkstyle" />
             <arg value="--report-file=${basedir}/build/logs/checkstyle.xml" />
-            <arg value="--standard=PSR2" />
+            <arg value="--standard=vendor/escapestudios/symfony2-coding-standard/Symfony2/ruleset.xml" />
             <arg value="--extensions=php" />
             <arg value="--ignore=autoload.php" />
             <arg line="${appDirectoriesSpace}" />

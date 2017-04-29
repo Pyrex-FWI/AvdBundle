@@ -389,5 +389,4 @@ abstract class AbstractProvider implements PoolProviderInterface
             unlink($tempName);
         }
     }
-
 }

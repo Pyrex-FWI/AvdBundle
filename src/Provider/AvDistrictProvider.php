@@ -95,7 +95,8 @@ class AvDistrictProvider extends AbstractProvider implements PoolProviderInterfa
     }
 
     /**
-     * @param $filter
+     * @param mixed $filter
+     *
      * @return mixed
      */
     public function getCriteria($filter)

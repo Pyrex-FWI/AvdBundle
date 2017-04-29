@@ -1,6 +1,7 @@
 <?php
 
 namespace DeejayPoolBundle\Serializer\Normalizer;
+
 use DeejayPoolBundle\Entity\SvGroup;
 use DeejayPoolBundle\Entity\SvItem;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
@@ -13,7 +14,7 @@ use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 class SvItemNormalizer extends AbstractNormalizer
 {
     const SVITEM = 'SvItem';
-    const QUALITY_qHD = 1;          //groupId like "17991_qHD"
+    const QUALITY_QHD = 1;          //groupId like "17991_qHD"
     const QUALITY_HD_720 = 2;       //groupId like "17988_HD720"
     const QUALITY_HD_1080 = 3;      //groupId like "18018_HD1080"
 
@@ -42,7 +43,7 @@ class SvItemNormalizer extends AbstractNormalizer
         if (self::QUALITY_HD_1080 === $data['quality']) {
             $svGroup->set1080(true);
         }
-        if (self::QUALITY_qHD === $data['quality']) {
+        if (self::QUALITY_QHD === $data['quality']) {
             $svGroup->setQHD(true);
         }
 

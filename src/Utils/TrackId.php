@@ -18,7 +18,7 @@ class TrackId
     /**
      * TrackId constructor.
      *
-     * @param $pattern
+     * @param mixed $pattern
      */
     public function __construct($pattern)
     {

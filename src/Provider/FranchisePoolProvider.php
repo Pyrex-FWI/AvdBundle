@@ -229,5 +229,4 @@ class FranchisePoolProvider extends AbstractProvider implements PoolProviderInte
     {
         return $this->serializer->denormalize($avItemArray, FranchiseRecordPoolItemNormalizer::ITEM_AUDIO);
     }
-
 }
