@@ -8,13 +8,6 @@
     <property name="phpmd"   value="vendor/bin/phpmd"/>
     <property name="phpunit" value="vendor/bin/phpunit"/>
     <property name="composer" value="/usr/bin/composer"/>
-    <!--
-    <property name="appDirectories" value="${basedir}/Command,${basedir}/DependencyInjection,${basedir}/Entity,${basedir}/Event,${basedir}/Exception,${basedir}/Provider,${basedir}/Serializer,${basedir}/Traits,${basedir}/Utils"/>
-    -->
-    <property name="appDirectories" value="${basedir}/src"/>
-    <!--
-    <property name="appDirectoriesSpace" value="${basedir}/Command/ ${basedir}/DependencyInjection/ ${basedir}/Entity/ ${basedir}/Event/ ${basedir}/Exception/ ${basedir}/Provider/ ${basedir}/Serializer/ ${basedir}/Traits/ ${basedir}/Utils/"/>
-    -->
     <property name="appDirectories" value="${basedir}/src"/>
 
     <target name="full-build"
@@ -240,7 +233,7 @@
             description="Run unit tests with PHPUnit">
         <exec executable="${phpunit}" resultproperty="result.phpunit" taskname="phpunit">
             <arg value="--configuration"/>
-            <arg path="${basedir}/src/Tests/phpunit.xml"/>
+            <arg path="${basedir}/phpunit.xml"/>
             <arg line="--exclude-group online"/>
             <arg value="--coverage-html"/>
             <arg value="${basedir}/src/Tests/TestData/Coverage"/>
@@ -255,7 +248,7 @@
             description="Run unit tests with PHPUnit (without generating code coverage reports)">
         <exec executable="${phpunit}" failonerror="true" taskname="phpunit">
             <arg value="--configuration"/>
-            <arg path="${basedir}/src/Tests/phpunit.xml"/>
+            <arg path="${basedir}/phpunit.xml"/>
             <arg line="--exclude-group online"/>
             <arg value="--no-coverage"/>
         </exec>

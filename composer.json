@@ -55,7 +55,14 @@
   },
   "autoload": {
     "psr-4": {
-      "DeejayPoolBundle\\": "src" ,
+      "DeejayPoolBundle\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "classmap": [
+      "tests/app/AppKernel.php"
+      ],
+    "psr-4": {
       "DeejayPoolBundle\\Tests\\": "tests"
     }
   },

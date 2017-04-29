@@ -130,8 +130,8 @@ Item events
 - ant install-deps
 - ant
 - vendor/bin/phpunit -c phpunit.xml --debug --verbose --exclude online
-- vendor/bin/phpunit -c phpunit.xml --debug --verbose --coverage-html Tests/TestData/Coverage --exclude online
-- vendor/bin/phpunit -c phpunit.xml --debug --verbose --coverage-html Tests/TestData/Coverage --debug --stop-on-error -v
+- vendor/bin/phpunit -c phpunit.xml --debug --verbose --coverage-html tests/TestData/Coverage --exclude online
+- vendor/bin/phpunit -c phpunit.xml --debug --verbose --coverage-html tests/TestData/Coverage --debug --stop-on-error -v
 
 ### Run tests with real credentials
 
